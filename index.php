@@ -16,8 +16,8 @@
 <div id="caixa_login">
     <?php  if (isset($_POST['button'])) {
         # code...
-        $code= $_POST['code'];
-        $password=$_POST['password'];
+        $code=preg_replace('/[^[:alpha:]_]/', '',$_POST['code']);
+        $password=preg_replace('/[^[:alnum:]_]/', '',$_POST['password']);
         if ($code=="") {
             # code...
             echo "<h2>Por favor , digite o numero do cartão ou código de acesso!</h2>";
