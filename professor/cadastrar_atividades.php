@@ -27,6 +27,9 @@ $result_2 = mysqli_query($conexao, $sql_2);
 	while($res_2 = mysqli_fetch_assoc($result_2)){
 		$curso = $res_2['id_cursos'];
 		
+$verifica_busca="SELECT * FROM atividades_bimestrais where professor='$code' and id_curso='$curso' and bimestre='$bimestre' and ano_letivo='$ano_letivo'";
+$con_verifica=mysqli_query($conexao,$verifica_busca);
+if(mysqli_num_rows($con_verifica)==0){
 $sql_3 = "INSERT INTO atividades_bimestrais (data, status, professor,id_curso, id_disciplina, detalhes, bimestre,ano_letivo, data_aplicacao)
  VALUES ('$date', 'Ativo', '$code', '$curso', '$dis', '$detalhes', '$bimestre', '$ano_letivo','$aplicacao')";
 mysqli_query($conexao, $sql_3);
@@ -37,7 +40,10 @@ mysqli_query($conexao, $sql_4);
 echo "<script language='javascript'>window.alert('atividade cadastrada com sucesso! Click em OK para cadastrar outras!');window.location='cadastrar_atividades.php?tipo=atividade_bimestral';</script>";
 
 die;		
-
+}//fim if verifica
+else{
+echo "<script language='javascript'>window.alert('atividade ja existe! Click em OK para cadastrar outra!');window.location='cadastrar_coc.php?tipo=coc';</script>";
+}
 }}?>
 
  <form name="send" method="post" action="" enctype="multipart/form-data">	
