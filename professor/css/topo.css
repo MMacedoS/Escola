@@ -1,0 +1,382 @@
+body{
+	padding:0;
+	margin:0;
+	}
+	
+#box_topo{
+	width:900px;
+	height:150px;
+	margin:-10px auto;
+	}
+	
+#logo{
+	width:120px;
+	height:50px;
+	float:left;
+	margin:-10px 0 0 0;
+	}
+	
+#campo_busca{
+	width:450px;
+	height:80px;
+	float:right;
+	margin:60px 0 -12px 0;
+	}
+#campo_busca input{
+	float:left;
+	padding:10px;
+	width:300px;
+	height:39px;
+	border:1px solid #ccc;
+	
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	}
+#campo_busca .input{
+	float:left;
+	margin:0 0 0 10px;
+	background:url(../img/button.png) no-repeat;
+	width:100px;
+	height:63px;
+	border:0;
+	}
+	
+#mostra_login{
+	width:auto;
+	height:60px;
+	float:right;
+	margin:19px 0px 0px 0;
+	padding: 0px 1px 0px 361px
+	}
+#mostra_login h1{
+	float:left;
+	font:15px Arial, Helvetica, sans-serif;
+	}
+#mostra_login button{
+	margin:0 0 0 90px;
+	border-radius: 30%;
+	background-color: #930;
+	width: 100px;
+	height: 50px;	
+	color: #FFF;
+	font-size: 18px;
+	font-weight: bold;
+	}
+#mostra_login button:hover{
+	color:#999;
+	}
+#box_menu{
+	width:980px;
+	background:url(../img/menu_topo.png) repeat;
+	height:40px;
+	margin:-17px auto;
+	}
+#menu_topo{
+    width:900px;
+    height: 40px;
+    margin: -17px auto;
+	}
+#menu_topo ul{
+	list-style:none;
+	}
+#menu_topo ul li{
+	float:left;
+	display:inline;
+	}
+#menu_topo ol li{
+	float:left;
+	display:inline;
+	}
+#menu_topo ul li a{
+	float:left;
+	color:#FFF;
+	font:15px Arial, Helvetica, sans-serif;
+	margin:0px 80px 0 0;
+	padding:10px 0 10px 0;
+	text-transform:uppercase;
+	text-decoration:none;
+	}
+#menu_topo ul li .a{
+	margin:0px 0 0 -38px;
+	}
+#menu_topo ul li a:hover{
+	color:#FF0;
+	}
+#menu_topo img{
+	margin:-0px 0 0 0;
+	}	
+#menu_topo li ul{
+	display:none;
+	position:absolute;
+	top:190px;
+	width:160px;
+	}
+#menu_topo li:hover ul{
+	display:block;
+	}
+
+#menu_topo ul li:hover ol{
+	display:block;
+	}
+#menu_topo li ul a{
+	text-align:left;
+	width:160px;
+	background:#036;
+	text-transform:none;
+	padding:10px 10px 10px 10px;
+	margin:-16px 0px 17px -50px;
+	border-radius:3px;
+	}
+#menu_topo li ul a:hover{
+	background:#930;
+	color:#FF0;
+	}		
+
+
+/*======================================================trumas e alunos +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+#caixa_preta{
+	background:#000;
+	width:980px;
+	margin:18px auto;
+	height:15px;
+	}
+#box{
+	width:978px;
+	background:#666;
+	text-align:left;
+	height:auto;
+	margin:-20px auto;
+	border:1px solid #333;
+	}
+#box h1{
+	font:18px Arial, Helvetica, sans-serif;
+	margin:10px;
+	color:#FFF;
+	}
+#box table{
+	font:15px Arial, Helvetica, sans-serif;
+	margin:10px;
+	text-align:left;
+	background:#FFF;
+	padding:5px;
+	color:#039;
+	border-radius:2%;
+	}
+#box a{
+	font:12px Arial, Helvetica, sans-serif;
+	color:#F00;
+	text-decoration:none;
+	}
+#box a:hover{
+	text-decoration:underline;
+	}
+#button{
+	margin:0 0 0 90px;
+	border-radius: 10%;
+	background-color: rgb(0, 46, 153);
+	width: 100px;
+	height: 40px;	
+	color: #FFF;
+	font-size: 12px;
+	}
+
+#btn_alter{
+    margin:1px 0 0 90px;
+	border-radius: 100%;
+	height: 30px;
+	background-color: rgb(172, 5, 5);	
+	color: #FFF;
+	font-size: 14px;
+	font-weight: bold;
+}
+#h1_a{
+padding-left: 75%;
+}
+/*______________________________________trabalhos bimestrais--------------------------------*/
+
+#box{
+	width:978px;
+	background:#666;
+	text-align:left;
+	height:auto;
+	margin:-20px auto;
+	border:1px solid #333;
+	}
+#box .a2{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:10px 0 10px 10px;
+	color:#FFF;
+	background:#090;
+	text-decoration:none;
+	padding:10px;
+	border:1px solid #000;
+	}
+#box .a3{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:10px 0 10px 10px;
+	color:#FFF;
+	background:rgb(2, 4, 105);
+	text-decoration:none;
+	padding:10px;
+	border:1px solid #000;
+	}
+#box .a3:hover{
+	border:1px solid #0FF;
+	background:#030;
+	text-decoration:none;
+	}
+#box .a2:hover{
+	border:1px solid #0FF;
+	background:#030;
+	text-decoration:none;
+	}
+#box h1{
+	font:18px Arial, Helvetica, sans-serif;
+	margin:10px;
+	color:#FFF;
+	}
+#box h2{
+	font:15px Arial, Helvetica, sans-serif;
+	margin:10px;
+	color:#FF0;
+	}
+#box table{
+	font:15px Arial, Helvetica, sans-serif;
+	margin:10px;
+	text-align:left;
+	background:#FFF;
+	padding:5px;
+	color:#039;
+	}
+#box h3{
+	font:12px Arial, Helvetica, sans-serif;
+	color:#000;
+	margin:0;
+	}
+#box table h3{
+	font:14px Arial, Helvetica, sans-serif;
+	color:#000;
+	margin:0;
+	}
+#box a{
+	font:12px Arial, Helvetica, sans-serif;
+	color:#F00;
+	text-decoration:none;
+	}
+#box a:hover{
+	text-decoration:underline;
+	}
+/*-----------------------chamada_________________________________________________*/
+
+
+#box{
+	width:978px;
+	background:#666;
+	text-align:left;
+	height:auto;
+	margin:-20px auto;
+	border:1px solid #333;
+	}
+#box h1{
+	font:18px Arial, Helvetica, sans-serif;
+	margin:10px;
+	color:#FFF;
+	}
+	
+
+
+	
+#box h3{
+	font:11px Arial, Helvetica, sans-serif;
+	color:#000;
+	}
+#box table{
+	font:15px Arial, Helvetica, sans-serif;
+	margin:10px;
+	background:#FFF;
+	padding:5px;
+	color:#039;
+	}
+#box a{
+	font:12px Arial, Helvetica, sans-serif;
+	color:#F00;
+	text-decoration:none;
+	}
+#box a:hover{
+	text-decoration:underline;
+	}
+#row_button {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: 3px;
+}
+/* css select */
+/* The container must be positioned relative: */
+.custom-select {
+     position: relative;
+    /* position: fixed; */
+    bottom: 3px;
+    right: -93px;
+    width: 187px;
+    border: 3px solid #73AD21;
+    font-family: Arial
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+  background-color: DodgerBlue;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}

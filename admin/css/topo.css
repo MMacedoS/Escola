@@ -1,0 +1,685 @@
+body{
+	padding:0;
+	margin:0;
+	}
+#box_topo{
+	width:900px;
+	height:200px;
+	margin:10px auto;
+	}
+	
+#logo{
+	width:320px;
+	height:200px;
+	float:left;
+	margin:-10px 0 0 0;
+	}
+
+	
+#campo_busca{
+	width:450px;
+	height:80px;
+	float:right;
+	margin:60px 0 -12px 0;
+	}
+#campo_busca input{
+	float:left;
+	padding:10px;
+	width:300px;
+	height:39px;
+	border:1px solid #ccc;
+	
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	}
+#campo_busca .input{
+	float:left;
+	margin:0 0 0 10px;
+	background:url(../img/button.png) no-repeat;
+	width:100px;
+	height:63px;
+	border:0;
+	}
+	
+#mostra_login{
+	width:500px;
+	height:30px;
+	float:right;
+	margin:40px 0 -5px 0;
+	}
+#mostra_login h1{
+	float:left;
+	font:15px Arial, Helvetica, sans-serif;
+	}
+#mostra_login a{
+	margin:0 0 0 30px;
+	}
+#mostra_login a:hover{
+	color:#999;
+	}
+#box_menu{
+	width:auto;
+	/*background:url(../img/menu_topo.png) repeat; */
+	background: #FFd700;
+	height:40px;
+	margin:-17px auto;
+	}
+#menu_topo{
+	width:980px;
+	height:40px;
+	margin:auto;
+	}
+#menu_topo ul{
+	list-style:none;
+	}
+#menu_topo ul li{
+	float:left;
+	display:inline;
+	}
+#menu_topo ul li a{
+	float:left;
+	color:rgb(8, 8, 8);
+	font:14px Arial, Helvetica, sans-serif;
+	margin:0px 0 0 0;
+	padding:10px 6px 10px 6px;
+	text-transform:uppercase;
+	text-decoration:none;
+	font-weight: bold;
+	}
+#menu_topo ul li .a{
+	margin:0px 0 0 -38px;
+	}
+#menu_topo ul li a:hover{
+	background:rgb(34, 72, 241);
+	}
+#menu_topo img{
+	float:left;
+	margin:-0px 0 0 0;
+	}
+#menu_topo li ul{
+	display:none;
+	position:absolute;
+	top:241px;
+	width:160px;
+	}
+#menu_topo li:hover ul{
+	display:block;
+	}
+#menu_topo li ul a{
+	width:160px;
+	background:#800000;
+	text-transform:none;
+	padding:10px 10px 10px 10px;
+	margin:-16px 0px 17px -40px;
+	border-radius:3px;
+	}
+#menu_topo li ul a:hover{
+	background:#930;
+	color:#FF0;
+	}
+/*=========================   cursos_e_disciplina-===================================*/
+#caixa_preta{
+	background:#000;
+	width:978px;
+	margin:18px auto;
+	height:15px;
+	}
+
+/*=================================== CADASTRAR CURSOS ================================*/
+	
+#box_curso{
+width:978px;
+	height:auto;
+	margin:-20px auto;
+	border:1px solid #333;
+	
+	background:#E1E1C4;
+		
+	text-align:left;
+	}
+#box_curso .a2{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:30px 0 10px 37px;
+	color:#FFF;
+	background:#090;
+	text-decoration:none;
+	padding:10px;
+	border:1px solid #000;
+	}
+#box_curso .a2:hover{
+	border:1px solid #0FF;
+	background:#030;
+	}
+#box_curso h1{
+	font:20px Arial, Helvetica, sans-serif;
+	margin:15px 0 10px 37px;
+	color:#000;
+	}
+#box_curso h2{
+	font:15px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 37px;
+	color:rgb(9, 6, 197);
+	}
+#box_curso table{
+	border:1px solid #333;
+	padding:10px;
+	background:#FFF;
+	margin:0 0 10px 0;
+	margin:auto;
+	font:15px Arial, Helvetica, sans-serif;
+	text-align:left;
+	}
+#box_curso h3{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 0;
+	color:rgb(238, 255, 0);
+	}
+#box_curso select{
+	width:250px;
+	padding:5px;
+	height:30px;
+	color:#F60;
+	font:15px Arial, Helvetica, sans-serif;
+	}
+#box_curso input{
+	width:250px;
+	padding:5px;
+	height:17px;
+	color:#F60;
+	font:15px Arial, Helvetica, sans-serif;
+	}
+#box_curso .input{
+	width:100px;
+	padding:5px;
+	height:33px;
+	background:#090;
+	color:#FFF;
+	cursor:pointer;
+	border:1px solid #CCC;
+	}
+
+
+
+
+/*=================================== CADASTRAR MODULOS ================================*/
+	
+#box_disciplinas{
+	width:978px;
+	background:#E1E1C4;
+	height:auto;
+	float:left;
+	text-align:left;
+	margin:-20px 0 20px 190px;
+	border:1px solid #333;
+	}
+#box_disciplinas .a2{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:30px 0 10px 37px;
+	color:#FFF;
+	background:#090;
+	text-decoration:none;
+	padding:10px;
+	border:1px solid #000;
+	}
+#box_disciplinas .a2:hover{
+	border:1px solid #0FF;
+	background:#030;
+	}
+#box_disciplinas h1{
+	font:20px Arial, Helvetica, sans-serif;
+	margin:15px 0 10px 37px;
+	color:#000;
+	}
+#box_disciplinas h2{
+	font:15px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 37px;
+	color:#900;
+	}
+#box_disciplinas table{
+	border:1px solid #333;
+	padding:10px;
+	background:#FFF;
+	margin:0 0 10px 0;
+	margin:auto;
+	font:15px Arial, Helvetica, sans-serif;
+	text-align:left;
+	}
+#box_disciplinas em{
+	font:11px Arial, Helvetica, sans-serif;
+	color:#F90;
+	}
+#box_disciplinas h3{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 0;
+	color:#900;
+	}
+#box_disciplinas select{
+	width:160px;
+	padding:5px;
+	height:30px;
+	color:#F60;
+	margin:0 0 10px 0;
+	font:15px Arial, Helvetica, sans-serif;
+	}
+#box_disciplinas input{
+	width:150px;
+	margin:0 0 10px 0;
+	padding:5px;
+	height:17px;
+	color:#F60;
+	font:15px Arial, Helvetica, sans-serif;
+	}
+#box_disciplinas .input{
+	width:100px;
+	padding:5px;
+	height:33px;
+	background:#090;
+	color:#FFF;
+	cursor:pointer;
+	border:1px solid #CCC;
+	}
+
+
+
+
+
+/*=================================== CADASTRAR CURSOS ================================*/
+	
+#box_curso{
+	width:978px;
+	background:#E1E1C4;
+	height:auto;
+	float:left;
+	text-align:left;
+	margin:-20px 0 20px 190px;
+	border:1px solid #333;
+	}
+#box_curso .a2{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:30px 0 10px 37px;
+	color:#FFF;
+	background:#090;
+	text-decoration:none;
+	padding:10px;
+	border:1px solid #000;
+	}
+#box_curso .a2:hover{
+	border:1px solid #0FF;
+	background:#030;
+	}
+#box_curso h1{
+	font:20px Arial, Helvetica, sans-serif;
+	margin:15px 0 10px 37px;
+	color:#000;
+	}
+#box_curso h2{
+	font:15px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 37px;
+	color:#900;
+	}
+#box_curso table{
+	border:1px solid #333;
+	padding:10px;
+	background:#FFF;
+	margin:0 0 10px 0;
+	margin:auto;
+	font:15px Arial, Helvetica, sans-serif;
+	text-align:left;
+	}
+#box_curso h3{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 0;
+	color:#900;
+	}
+#box_curso select{
+	width:250px;
+	padding:5px;
+	height:30px;
+	color:#F60;
+	font:15px Arial, Helvetica, sans-serif;
+	}
+#box_curso input{
+	width:250px;
+	padding:5px;
+	height:17px;
+	color:#F60;
+	font:15px Arial, Helvetica, sans-serif;
+	}
+#box_curso .input{
+	width:100px;
+	padding:5px;
+	height:33px;
+	background:#090;
+	color:#FFF;
+	cursor:pointer;
+	border:1px solid #CCC;
+	}
+
+
+
+
+/*=================================== CURSOS E DISCIPLINAS ================================*/
+
+#box_curso_e_disciplinas{
+	width:978px;
+	background:#E1E1C4;
+	height:auto;
+	float:left;
+	text-align:left;
+	margin:-20px 0 20px 190px;
+	border:1px solid #333;
+	}
+#box_curso_e_disciplinas .a2{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:30px 0 10px 37px;
+	color:#FFF;
+	background:#090;
+	text-decoration:none;
+	padding:10px;
+	border:1px solid #000;
+	}
+#box_curso_e_disciplinas .a2:hover{
+	border:1px solid #0FF;
+	background:#030;
+	}
+#box_curso_e_disciplinas h1{
+	font:20px Arial, Helvetica, sans-serif;
+	margin:15px 0 10px 37px;
+	color:#000;
+	}
+#box_curso_e_disciplinas h2{
+	font:15px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 37px;
+	color:#900;
+	}
+#box_curso_e_disciplinas table{
+	border:1px solid #333;
+	padding:10px;
+	background:#FFF;
+	margin:0 0 10px 0;
+	margin:auto;
+	font:15px Arial, Helvetica, sans-serif;
+	text-align:left;
+	}
+#box_curso_e_disciplinas h3{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 0;
+	color:#900;
+	}
+#box_curso_e_disciplinas textarea{
+	width:900px;
+	padding:5px;
+	height:80px;
+	color:#F60;
+	font:15px Arial, Helvetica, sans-serif;
+	}
+/*=================================== CADASTRAR CURSOS ================================*/
+	
+.box_professores{
+    width: 978px;
+    height: auto;
+    margin: -20px auto;
+    border: 1px solid #333;
+    background: #E1E1C4;
+    text-align: left;
+	}
+.box_professores .a2{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:30px 0 10px 37px;
+	color:#FFF;
+	background:#090;
+	text-decoration:none;
+	padding:10px;
+	border:1px solid #000;
+	}
+.box_professores .a2:hover{
+	border:1px solid #0FF;
+	background:#030;
+	}
+.box_professores h1{
+	font:20px Arial, Helvetica, sans-serif;
+	margin:15px 0 10px 37px;
+	color:#000;
+	}
+.box_professores h2{
+	font:15px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 37px;
+	color:#900;
+	}
+.box_professores table{
+	border:1px solid #333;
+	padding:10px;
+	background:#FFF;
+	margin:0 0 10px 0;
+	margin:auto;
+	font:15px Arial, Helvetica, sans-serif;
+	text-align:left;
+	}
+.box_professores h3{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 0;
+	color:#900;
+	}
+.box_professores .a{
+	margin:0 5px 0 0;
+	}
+
+
+/*=================================== CADASTRAR PROFESSOR ================================*/
+#cadastra_professores{
+	width: 978px;
+    height: auto;
+    margin: -20px auto;
+    border: 1px solid #333;
+    background: rgb(218, 218, 103);
+    text-align: left;
+	}
+#cadastra_professores .a2{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:30px 0 10px 37px;
+	color:#FFF;
+	background:#090;
+	text-decoration:none;
+	padding:10px;
+	border:1px solid #000;
+	}
+#cadastra_professores .a2:hover{
+	border:1px solid #0FF;
+	background:#030;
+	}
+#cadastra_professores h1{
+	font:20px Arial, Helvetica, sans-serif;
+	margin:15px 0 10px 37px;
+	color:#000;
+	}
+#cadastra_professores h2{
+	font:15px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 37px;
+	color:#900;
+	}
+#cadastra_professores table{
+	border:1px solid #333;
+	padding:10px;
+	background:#FFF;
+	margin:0 0 10px 0;
+	margin:auto;
+	font:15px Arial, Helvetica, sans-serif;
+	text-align:left;
+	}
+#cadastra_professores input{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:2px 0 15px 0;
+	padding:5px;
+	width:270px;
+	color:#F90;
+	}
+#cadastra_professores select{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:2px 0 15px 0;
+	padding:5px;
+	height:30px;
+	width:283px;
+	color:#F90;
+	}
+#cadastra_professores .input{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 0;
+	padding:5px;
+	width:100px;
+	background:#039;
+	height:40px;
+	color:#FFF;
+	}
+#cadastra_professores h3{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 0;
+	color:#900;
+	}
+#cadastra_professores .a{
+	margin:0 5px 0 0;
+	}
+/*=================================== Aluno ================================*/
+	
+#box_aluno{
+	width: 978px;
+    height: auto;
+    margin: -20px auto;
+    border: 1px solid #333;
+    background: rgb(218, 172, 103);
+    text-align: left;
+	}
+#box_aluno .a2{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:30px 0 10px 37px;
+	color:#FFF;
+	background:#F90;
+	text-decoration:none;
+	padding:10px;
+	border:1px solid #000;
+	}
+#box_aluno .a2:hover{
+	border:1px solid #0FF;
+	background:#F60;
+	}
+#box_aluno h1{
+	font:20px Arial, Helvetica, sans-serif;
+	margin:15px 0 10px 37px;
+	color:#FFF;
+	}
+#box_aluno h2{
+	font:15px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 37px;
+	color:#FF0;
+	}
+#box_aluno table{
+	border:1px solid #333;
+	padding:10px;
+	background:#FFF;
+	margin:0 0 10px 0;
+	margin:auto;
+	font:15px Arial, Helvetica, sans-serif;
+	text-align:left;
+	}
+#box_aluno h3{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 0;
+	color:#900;
+	}
+#box_aluno .a{
+	margin:0 5px 0 0;
+	}
+
+
+/*=================================== CADASTRAR Aluno ================================*/
+	
+#cadastra_estudante{
+	width:978px;
+	background:#06C;
+	height:auto;
+	float:left;
+	text-align:left;
+	margin:-20px 0 20px 182px;
+	border:1px solid #333;
+	}
+#cadastra_estudante .a2{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:30px 0 10px 37px;
+	color:#FFF;
+	background:#090;
+	text-decoration:none;
+	padding:10px;
+	border:1px solid #000;
+	}
+#cadastra_estudante .a2:hover{
+	border:1px solid #0FF;
+	background:#030;
+	}
+#cadastra_estudante h1{
+	font:20px Arial, Helvetica, sans-serif;
+	margin:15px 0 10px 37px;
+	color:#FFF;
+	}
+#cadastra_estudante h2{
+	font:15px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 37px;
+	color:#900;
+	}
+#cadastra_estudante table{
+	border:1px solid #333;
+	padding:10px;
+	background:#FFF;
+	margin:0 0 10px 0;
+	margin:auto;
+	font:15px Arial, Helvetica, sans-serif;
+	text-align:left;
+	}
+#cadastra_estudante input{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:2px 0 15px 0;
+	padding:5px;
+	width:270px;
+	color:#F90;
+	}
+#cadastra_estudante select{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:2px 0 15px 0;
+	padding:5px;
+	height:30px;
+	width:283px;
+	color:#F90;
+	}
+#cadastra_estudante textarea{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:2px 0 15px 0;
+	padding:5px;
+	height:60px;
+	width:800px;
+	color:#F90;
+	}
+#cadastra_estudante .input{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 0;
+	padding:5px;
+	width:100px;
+	background:#039;
+	height:40px;
+	color:#FFF;
+	}
+#cadastra_estudante h3{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:2px 0 0 0;
+	color:#900;
+	}
+#cadastra_estudante .a{
+	margin:0 5px 0 0;
+	}
+#cadastra_estudante h4{
+	font:12px Arial, Helvetica, sans-serif;
+	margin:0 0 10px 10px;
+	color:#900;
+	width:900px;
+	height:auto;
+	padding:10px;
+	background:#FFF;
+	}

@@ -1,0 +1,40 @@
+
+.table{
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(162, 164, 164, 0.3);
+    width: max-content;
+}
+.table thead{
+    background-color: #f7f6fb;
+}
+.table-title{
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+}
+.table-col-title{
+    font-family: "Nunito", sans-serif;
+    font-size: 1px;
+    color: #787878;
+}
+.nome{
+font-family: "Nunito", sans-serif;
+    font-size: 7px;
+    color: #787878;
+    
+}
+.at{
+font-family: "Nunito", sans-serif;
+    font-size: 5px;
+    color: #787878;
+    width: 0;
+}
+.table tbody{
+   
+    font-family: "Nunito",sans-serif;
+    color: #787878;
+    font-size: 8px;
+}
+.table-title input{
+    width: 40%;
+}

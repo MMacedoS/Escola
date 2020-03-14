@@ -1,0 +1,59 @@
+#menu_topo {
+    width: auto;
+    height: 40px;
+    margin: -12px 82px;
+    margin-left: 148px;
+    margin-right: 130px;
+    display: inline-table;
+}
+#box_menu {
+    width: auto;
+    background: url(../img/menu_topo.png) repeat;
+    height: 40px;
+    margin: -17px auto;
+    display: table-header-group;
+    margin-left: 0px;
+    margin-right: 20px;
+}
+#menu_topo ul li a {
+    float: left;
+    color: #FFF;
+    font: 15px Arial, Helvetica, sans-serif;
+    margin: 0px 50px -1px -12px;
+    padding: 9px 0px 16px 7px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+}
+#box_rodape {
+    width: auto;
+    margin: 50px auto;
+}
+#box_topo {
+    width: auto;
+    height: 150px;
+    margin: -10px auto;
+}
+#logo {
+    width: 120px;
+    height: 50px;
+    float: left;
+    margin: -10px 0 0 0;
+}
+
+#mostra_login {
+    width: 450px;
+    height: 30px;
+    float: right;
+    margin: 40px 0 -5px 0;
+}
+#mostra_login h1 {
+    float: left;
+    font: 15px Arial, Helvetica, sans-serif;
+    margin: 9px 0px 0px 117px;
+}
+#mostra_login h1 {
+    float: left;
+    font: 15px Arial, Helvetica, sans-serif;
+    margin: 9px 0px 0px 117px;
+}
