@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/distribuicao.css">
     
     <title>Historico Professor</title>
-    <?php require_once("../control/conexao.php"); ?>
+    <?php include_once("../control/conexao.php"); ?>
 </head>
 <body>
 <div id="box">
