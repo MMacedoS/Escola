@@ -7,7 +7,7 @@
     <title>Sistema Escolar</title>
     <link rel="stylesheet" type="text/css" href="css/estilo.css">
     <link rel="shortcut icon" href="image/icone.png">
-    <?php require "Control/conexao.php"?>
+    <?php require_once "Control/conexao.php"?>
 </head>
 <body>
 <div id="logo">
