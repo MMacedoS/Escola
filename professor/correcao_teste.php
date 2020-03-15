@@ -104,6 +104,7 @@ $bimestre = $_GET['bimestre'];
 $disciplina = $_GET['disciplina'];
 $prova = $_FILES['prova']['name'];
 $date=Date('Y');
+$selec=$_GET['selec'];
 
 if(($nota>3)){
   ?>
@@ -126,7 +127,7 @@ if(file_exists("../trabalhos_alunos/$prova")){
 mysqli_query($conexao, $sql_4);
  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
  
- echo "<script language='javascript'>window.location='correcao_teste.php?pg=teste&id=$id';</script>";
+ echo "<script language='javascript'>window.location='correcao_teste.php?pg=teste&selec=$selec&id=$id';</script>";
 
 }
 }?> 
