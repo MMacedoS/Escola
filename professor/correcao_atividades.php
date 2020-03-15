@@ -77,13 +77,13 @@ if(mysqli_num_rows($result_2) == ''){
     <td><h3><?php echo $bimestre = $res_1['bimestre']; ?>º</h3></td>
     
     <?php
-    $sql_4 = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_atividade='$id'";
+  $sql_4 = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_atividade='$id'";
 	$result_4 = mysqli_query($conexao, $sql_4);
 	if(mysqli_num_rows($result_4) == ''){
 	?>
     <td><input type="file" name="prova" size="5" /></td>
     <td><input name="nota" type="text" id="textfield" size="6"></td>
-    <td><input type="submit" name="button" id="button" value="Concretizar"></td>
+    <td><input type="submit" name="button" id="button" value="Concretizar" onclick="alert('Nota Inserida')"></td>
 
     <?php }else{ while($res_4 = mysqli_fetch_assoc($result_4 )){ ?>
     <td><a target="_blank" href="../trabalhos_alunos/<?php echo $res_4['prova']; ?>">Ver prova</a></td>
@@ -111,7 +111,9 @@ if(file_exists("../trabalhos_alunos/$prova")){
   }
   	$prova = "[".$a."]".$prova;
  }
-
+ $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina'";
+$result_verifica = mysqli_query($conexao, $sql_4);
+if(mysqli_num_rows($result_verifica)==0){
  $sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,prova) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', $id,'$prova')";
  mysqli_query($conexao, $sql_3);
 $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades estão sendo divulgadas','tarefas')";
@@ -119,7 +121,11 @@ mysqli_query($conexao, $sql_4);
  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
  
  echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
-
+}else{
+    ?>
+    <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+    <?php
+}
 }?> 
 
 <?php require "rodape.php"; ?>

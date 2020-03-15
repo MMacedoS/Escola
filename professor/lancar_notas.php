@@ -20,7 +20,7 @@ $con_busca=mysqli_query($conexao,$busca_prova);
 while($res_busca=mysqli_fetch_assoc($con_busca)){
 $disciplina=$res_busca['id_disciplinas'];}?>
 <?php 
-$buscaDis="SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos WHERE d.id_disciplinas='$disciplina'";
+$buscaDis="SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos WHERE d.id_disciplinas='$id'";
 $conDis=mysqli_query($conexao,$buscaDis);
 while($resDis=mysqli_fetch_assoc($conDis)){
   $disc=$resDis['disciplina'];

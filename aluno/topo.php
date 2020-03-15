@@ -19,6 +19,7 @@ $result = mysqli_query($conexao, $sql_aluno);
 	
 ?>
 <title> Portal do aluno</title>
+<link rel="shortcut icon" href="../image/icone.png">
 <link href="css/topo.css" rel="stylesheet" type="text/css" />
 <script language="javascript" src="../js/jquery-1.7.2.min.js"></script>
 <script src="../js/lightbox.js"></script>

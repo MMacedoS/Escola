@@ -7,6 +7,7 @@ $painel_atual="admin";?>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <? require "../config.php"; ?>
+<link rel="shortcut icon" href="../image/icone.png">
 <link href="css/topo.css" rel="stylesheet" type="text/css" />
 <script language="javascript" src="../js/jquery-1.7.2.min.js"></script>
 <script src="../js/lightbox.js"></script>

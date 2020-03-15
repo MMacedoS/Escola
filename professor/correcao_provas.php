@@ -83,7 +83,7 @@ if(mysqli_num_rows($result_2) == ''){
 	?>
     <td><input type="file" name="prova" size="5" /></td>
     <td><input name="nota" type="text" id="textfield" size="6"></td>
-    <td><input type="submit" name="button" id="button" value="Concretizar"></td>
+    <td><input type="submit" name="button" id="button" value="Concretizar"onclick=" alert('Nota Inserida')"></td>
 
     <?php }else{ while($res_4 = mysqli_fetch_assoc($result_4 )){ ?>
     <td><a target="_blank" href="../trabalhos_alunos/<?php echo $res_4['prova']; ?>">Ver prova</a></td>
