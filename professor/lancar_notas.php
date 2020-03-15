@@ -10,7 +10,7 @@
 if(isset($_GET['id'])){
   $id=$_GET['id'];
   $selec=$_GET['selec'];
-
+  $professor=$code;
 }
 else{
   $id=$_POST['id'];
@@ -52,7 +52,7 @@ while($resDis=mysqli_fetch_assoc($conDis)){
       <?php
       }
   ?>
-
+    
   <option value="">Selecione uma bimestre</option>
     
   <?php   
@@ -138,7 +138,9 @@ if(mysqli_num_rows($result) == ''){
     <td width="200">Disciplinas:</td>
     <td width="144">Bimestre:</td>
     <td width="200">Nota do Bimestre</td>
-    <td width="156">Conselho:</td>
+    <td width="100">Ponto Extra</td>
+    <td width="100">Conselho:</td>
+    
   </tr>
   <tr>
     <td><h3><?php
@@ -147,6 +149,7 @@ if(mysqli_num_rows($result) == ''){
       $con_aluno=mysqli_query($conexao,$busca_aluno);
       while($res_aluno=mysqli_fetch_assoc($con_aluno)){
        echo $res_aluno['nome'];
+       
 
       }?></h3></td>
     <td><h3><?php $disc=$res_2['id_disciplinas'];
@@ -175,8 +178,9 @@ if(mysqli_num_rows($result) == ''){
    <?php }else{?>
     <td bgcolor="#FA5858" align="center"><font><h3><?php echo $res_4['nota']; ?></h3></font></td>
    <?php } ?>
-    <td><a target="_blank" href="../trabalhos_alunos/<?php echo $res_4['prova']; ?>">Ver prova</a></td>
-   <td><a href="alterar_nota_trabalho.php?pg=atividade_bimestral&id=<?php echo $res_4['id_atividade'];?>&aluno=<?php echo $res_2['matricula']; ?>&disciplina=<?php echo $res_1['id_disciplina']; ?>&bimestre=<?php echo $res_1['bimestre'];  ?>&professor=<?php echo $res_1['professor'];  ?>&nota=<?php echo $res_4['nota']; ?>" rel="superbox[iframe][400x100]"><img src="../image/ico-editar.png" border="0" title="Alterar a nota" /></a></td>
+   <td align="center"><a href="alterar_nota_trabalho.php?pg=ponto_extra&id=<?php echo $res_4['id_disciplinas'];?>&aluno=<?php echo $res_2['code']; ?>&disciplina=<?php echo $res_2['id_disciplinas']; ?>&bimestre=<?php echo $res_2['bimestre'];  ?>&professor=<?php echo $code;  ?>&nota=<?php echo $res_4['nota']; ?>" rel="superbox[iframe][400x100]"><img src="../image/ico-editar.png" border="0" title="Alterar a nota" /></a></td>
+    <td><a target="_blank" href="../trabalhos_alunos/<?php echo $res_4['code']; ?>">Inserir conselho</a></td>
+   
     <?php }} ?>
   </tr>
 </table>

@@ -9,10 +9,10 @@ body{
 	}
 	
 #logo{
-	width:320px;
-	height:200px;
-	float:left;
-	margin:-10px 0 0 0;
+	width: 209px;
+    height: 100px;
+    float: left;
+    margin: -17px 0px 0px 44px;
 	}
 
 	
@@ -59,11 +59,11 @@ body{
 	color:#999;
 	}
 #box_menu{
-	width:auto;
-	/*background:url(../img/menu_topo.png) repeat; */
-	background: #FFd700;
-	height:40px;
-	margin:-17px auto;
+	width: auto;
+    /* background: url(../img/menu_topo.png) repeat; */
+    background: #FFd700;
+    height: 40px;
+    margin: -40px auto;
 	}
 #menu_topo{
 	width:980px;

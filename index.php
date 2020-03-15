@@ -16,9 +16,9 @@
 <div id="caixa_login">
     <?php  if (isset($_POST['button'])) {
         # code...
-        $code=preg_replace('/[^[:alnum:]_]/', '',$_POST['code']);
+        $nome=$_POST['nome'];
          $password=preg_replace('/[^[:alnum:]_]/', '',$_POST['password']);
-        if ($code=="") {
+        if ($nome=="") {
             # code...
             echo "<h2>Por favor , digite o numero do cartão ou código de acesso!</h2>";
         } else if ($password==""){
@@ -27,7 +27,7 @@
 
         }else {
             # code...
-            $sql= "select * from login where code= '$code'
+            $sql= "select * from login where nome= '$nome'
             and senha='$password'";
 
             $resultado=mysqli_query($conexao, $sql);
@@ -77,6 +77,12 @@
 
                 }
                
+            }else{
+            ?>
+                <script>
+                    alert('Usuario ou senha errada');
+                </script>
+            <?php
             } 
             
         }
@@ -92,7 +98,7 @@
         </td>
         </tr>
         <tr>
-        <td><input type="text" name="code"></td>
+        <td><input type="email" name="nome"></td>
         </tr>
         <tr>
         <td> <h1>Senha</h1>

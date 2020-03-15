@@ -66,24 +66,31 @@ if(mysqli_num_rows($consulta) == ''){
         <td></td>
         <td>
         <a class="a" href="estudantes.php?pg=todos&func=deleta&id=<?php 
-        echo $res_1['id_estudantes'];?>&code=<?php echo $res_1['code']; ?>">
+        echo $res_1['id_estudantes'];?>&code=<?php echo $res_1['matricula']; ?>">
         <img title="Excluir Aluno(a)" src="img/deleta.jpg" width="18" height="18" border="0"></a>
         <?php if($res_1['status'] == 'Inativo'){ ?>
         <a class="a" href="estudantes.php?pg=todos&func=ativa&id=<?php 
-        echo $res_1['id_estudantes']; ?>&code=<?php echo $res_1['code']; ?>">
+        echo $res_1['id_estudantes']; ?>&code=<?php echo $res_1['matricula']; ?>">
         <img title="Ativar novamente Aluno(a)" src="../image/correto.jpg" width="20" height="20" border="0"></a>
         <?php } ?>
         <?php if($res_1['status'] == 'Ativo'){?>
         <a class="a" href="estudantes.php?pg=todos&func=inativa&id=<?php 
-        echo $res_1['id_estudantes']; ?>&code=<?php echo $res_1['code']; ?>">
+        echo $res_1['id_estudantes']; ?>&code=<?php echo $res_1['matricula']; ?>">
         <img title="Inativar Aluno(a)" src="../image/ico_bloqueado.png" width="18" height="18" border="0"></a>
         <?php } ?>
         <a class="a" href="estudantes.php?pg=cadastra&edita=1&id=<?php echo $res_1['id_estudantes'];?>"><img title="Editar dados Cadastrais"
          src="../image/ico-editar.png" width="18" height="18" border="0" alt=""></a>
+         <?php 
+          $busca_est="SELECT id_cursos FROM cursos_estudantes where id_estudantes=".$res_1['id_estudantes'];
+          $con_estudante=mysqli_query($conexao,$busca_est);
+          while($res_estudantes=mysqli_fetch_assoc($con_estudante)){
+         ?>
         <a class="a" rel='superbox[iframe][800x600]' href="mostrar_resultado.php?q=<?php
-        echo $res_1['code']; ?>&s=aluno&curso=<?php echo $res_1['serie']; ?>">
+        echo $res_1['matricula']; ?>&s=aluno&curso=<?php echo $res_estudantes['id_cursos']; ?>">
         <img title="Informações detalhada deste aluno(a)" src="../image/visualizar16.gif" width="18" height="18" border="0"></a>
+        <?php } ?>
         </td>
+        
       </tr>
       <?php } ?>
     </table>
@@ -159,7 +166,7 @@ echo "<script language='javascript'>window.location='estudantes.php?pg=todos';</
 <?php  if(isset($_POST['button'])){
 
 $code = $_POST['code'];
-$nome = $_POST['nome'];
+$nome = $_POST['nome']." ".$_POST['sobrenome'];
 $cpf = $_POST['cpf'];
 $rg = $_POST['rg'];
 $nascimento = $_POST['nascimento'];
@@ -173,17 +180,25 @@ $complemento = $_POST['complemento'];
 $tel_residencial = $_POST['tel_residencial'];
 $cep = $_POST['cep'];
 $celular = $_POST['celular'];
-$tel_amigo = $_POST['tel_amigo'];
+$usuario = str_replace(' ','',$_POST['nome'])."@alunoist";
 
-$sql_2 = "INSERT INTO estudantes (matricula, status, nome, cpf, rg, nascimento, mae, pai, estado, cidade, bairro, endereco, complemento, cep, tel_residencial, celular, tel_amigo) VALUES ('$code', 'Ativo', '$nome', '$cpf', '$rg', '$nascimento', '$mae', '$pai', '$estado', '$cidade', '$bairro', '$endereco', '$complemento', '$cep', '$tel_residencial', '$celular', '$tel_amigo')";
+$sql_2 = "INSERT INTO estudantes (matricula, status, nome, cpf, rg, nascimento, mae, pai, estado, cidade, bairro, endereco, complemento, cep, tel_residencial, celular) VALUES ('$code', 'Ativo', '$nome', '$cpf', '$rg', '$nascimento', '$mae', '$pai', '$estado', '$cidade', '$bairro', '$endereco', '$complemento', '$cep', '$tel_residencial', '$celular')";
 
-$sql_login = "INSERT INTO login (status, code, senha, nome, painel) VALUES ('Ativo', '$code', '$cpf', '$nome', 'Aluno')";
+$sql_login = "INSERT INTO login (status, code, senha, nome, painel) VALUES ('Ativo', '$code', '$cpf', '$usuario', 'Aluno')";
 
 $cadastra = mysqli_query($conexao, $sql_2);
+if($cadastra){
 $cadastra_login = mysqli_query($conexao, $sql_login);
 
 echo "<script language='javascript'>window.alert('Dados cadastrados com sucesso! Click em OK para avançar');window.location='estudantes.php?pg=cadastra&bloco=2&code=$code';</script>";
-
+}else{
+  ?>
+    <script>
+    alert('erro ao cadastrar');
+    </script>
+  
+  <?php
+}
 }?> 
  
 <form name="form1" method="post" action="">
@@ -216,57 +231,63 @@ echo "<script language='javascript'>window.alert('Dados cadastrados com sucesso!
     </tr>    
     <tr>
       <td>Nome:</td>
+      <td>Sobrenome:</td>
       <td>CPF:</td>
-      <td>RG:</td>
+     
     </tr>
       <td><label for="celular"></label>
       <input type="text" name="nome" id="textfield2"></td>
+      <td><label for="celular"></label>
+      <input type="text" name="sobrenome" id="textfield2"></td>
       <td><label for="tel_amigo"></label>
       <input type="text" name="cpf" id="textfield3"></td>
-      <td><label for="tel_amigo"></label>
-      <input type="text" name="rg" id="textfield3"></td>
+      
     </tr>
     <tr>
+      <td>RG:</td>
       <td>Data de nascimento:</td>
       <td>Nome da mãe:</td>
-      <td>Nome do Pai:</td>
     </tr>
     <tr>
+      <td><label for="tel_amigo"></label>
+      <input type="text" name="rg" id="textfield3"></td>
       <td><label for="nascimento"></label>
       <input type="date" name="nascimento" id="textfield4"></td>
       <td><label for="select"></label>
       <input type="text" name="mae" id="textfield12"></td>
-      <td><input type="text" name="pai" id="textfield5"></td>
+     
     </tr>
     <tr>
-      <td>Estado:</td>
+
+      <td>Pai:</td>
       <td>Cidade:</td>
       <td>Bairro:</td>
     </tr>
     <tr>
-      <td><input type="text" name="estado" id="textfield6"></td>
+       <td><input type="text" name="pai" id="textfield5"></td>
       <td><input type="text" name="cidade" id="textfield7"></td>
       <td><input type="text" name="bairro" id="textfield8"></td>
     </tr>
     <tr>
+      <td>Estado:</td>
       <td>Endereço:</td>
       <td>Complemento:</td>
-      <td>Cep:</td>
+      
     </tr>
     <tr>
+      <td><input type="text" name="estado" id="textfield5"></td>
       <td><input type="text" name="endereco" id="textfield8"></td>
       <td><input type="text" name="complemento" id="textfield8"></td>
-      <td><input type="text" name="cep" id="textfield8"></td>
     </tr>
     <tr>
+    <td>CEP:</td>
       <td>Telefone residencial:</td>
       <td>Telefone Celular:</td>
-      <td>Telefone de um amigo:</td>
     </tr>
     <tr>
+      <td><input type="text" name="cep" id="textfield8"></td>
       <td><input type="text" name="tel_residencial" id="textfield9"></td>
       <td><input type="text" name="celular" id="textfield10"></td>
-      <td><input type="text" name="tel_amigo" id="textfield11"></td>
     </tr>
     <tr>
       <td><input class="input" type="submit" name="button" id="button" value="Avançar"></td>
@@ -443,23 +464,23 @@ $complemento = $_POST['complemento'];
 $tel_residencial = $_POST['tel_residencial'];
 $cep = $_POST['cep'];
 $celular = $_POST['celular'];
-$tel_amigo = $_POST['tel_amigo'];
 $status=$_POST['status'];
 
 $sql_2 = "update estudantes set status='$status', nome='$nome',
  cpf='$cpf', rg='$rg', nascimento='$nascimento', mae='$mae', pai='$pai', estado='$estado',
   cidade='$cidade', bairro='$bairro', endereco='$endereco', complemento='$complemento',
-   cep='$cep', tel_residencial='$tel_residencial', celular='$celular', tel_amigo='$tel_amigo' 
+   cep='$cep', tel_residencial='$tel_residencial', celular='$celular' 
    where id_estudantes='$id'";
 
-$sql_login = "update login set status='$status',senha='$cpf', nome='$nome', painel='estudante'
- where code'$code'=";
+$sql_login = "update login set status='$status',painel='Aluno'
+ where code='$code'";
 
 $cadastra = mysqli_query($conexao, $sql_2);
-$cadastra_login = mysqli_query($conexao, $sql_login);
 if($cadastra == ''){
  echo "<script language='javascript'>window.alert('Ocorreu um erro tente novamente!');window.location='';</script>";
 }else{
+
+$cadastra_login = mysqli_query($conexao, $sql_login);
 echo "<script language='javascript'>window.alert('Dados atualizados com sucesso! Click em OK para avançar');window.location='estudantes.php?pg=cadastra&edita=2&code=$code&id=$id';</script>";
 
 }}?> 
@@ -528,12 +549,12 @@ echo "<script language='javascript'>window.alert('Dados atualizados com sucesso!
     <tr>
       <td>Telefone residencial:</td>
       <td>Telefone Celular:</td>
-      <td>Telefone de um amigo:</td>
+     
     </tr>
     <tr>
       <td><input type="text" name="tel_residencial" id="textfield9" value="<?php echo $res_1['tel_residencial'];?>"></td>
       <td><input type="text" name="celular" id="textfield10" value="<?php echo $res_1['celular'];?>"></td>
-      <td><input type="text" name="tel_amigo" id="textfield11" value="<?php echo $res_1['tel_amigo'];?>"></td>
+      <!-- <td><input type="text" name="tel_amigo" id="textfield11" value="<?php echo $res_1['tel_amigo'];?>"></td> -->
     </tr>
     <tr>
         <td>Status:</td>
@@ -578,7 +599,7 @@ echo "<script language='javascript'>window.alert('Dados atualizados com sucesso!
                         while($res_2=mysqli_fetch_assoc($edit)){
                         ?>
 <?php if(isset($_POST['button'])){
-$id_estuda=$_GET['id'];
+$id_estuda=$res_2['id_estudantes'];
 $code = $_GET['code'];
 $serie = $_POST['serie'];
 $cuidado_especial = $_POST['cuidado_especial'];
@@ -595,21 +616,43 @@ $a = date("Y");
 $code_cobranca = $code*2;
 
 
-$sql_cursos_est="UPDATE `cursos_estudantes` set cursos_id='$serie', ano='$a' where id_estudantes='$id_estuda'";
-mysqli_query($conexao,$sql_cursos_est);
+$sql_cursos_est="UPDATE `cursos_estudantes` set id_cursos='$serie', ano_letivo='$a' where id_estudantes='$id_estuda'";
+$cadastra=mysqli_query($conexao,$sql_cursos_est);
+if($cadastra){
 $sql_3 = "UPDATE estudantes SET  atendimento_especial = '$cuidado_especial', mensalidade = '$mensalidade', vencimento = '$vencimento', tel_cobranca = '$tel_cobranca', obs = '$obs' WHERE matricula = '$code'";
 
-mysqli_query($conexao, $sql_3);
+$cadastra=mysqli_query($conexao, $sql_3);
 
-
+if($cadastra){
 
 $sql_mensal = "UPDATE mensalidades SET d_cobranca='$d/$m/$a', vencimento='$vencimento/$m/$a', valor='$mensalidade', status='Aguarda Pagamento', dia='$d', mes='$m', ano='$a' 
 where code='$code_cobranca'";
 
-mysqli_query($conexao, $sql_mensal);
-
+$cadastra=mysqli_query($conexao, $sql_mensal);
+if($cadastra){
 echo "<script language='javascript'>window.location='estudantes.php?pg=cadastra&edita=3';</script>";
-
+}//update mensalidades
+else{?>
+  <script>
+    alert('erro ao inserir mensalidades');
+  </script>
+<?php
+}
+}else{?>
+    <script>
+      alert('Erro ao inserir atendimento especial');
+    </script>
+<?php
+}//update atendimento especial
+}//update cursos estudantes
+else{
+?>
+<script>
+  alert('Erro ao cadastrar o curso para este estudante');
+</script>
+<?php
+echo $sql_cursos_est;
+}
 }?> 
  
 <form name="form1" method="post" action="">

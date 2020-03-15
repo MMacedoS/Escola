@@ -275,7 +275,7 @@ die;
 <?php }?>
 <!-- fim provas -->
 
-<?php if($_GET['pg'] == 'prova_bimestral'){ ?>
+<?php if($_GET['pg'] == 'ponto_extra'){ ?>
 
 <?php if(isset($_POST['send'])){
 
@@ -283,21 +283,30 @@ $nota = $_POST['nota'];
 $id=$_GET['id'];
 $bimestre = $_GET['bimestre'];
 $professor = $_GET['professor'];
-$disciplina = $_GET['disciplina'];
+$disciplina = $_GET['id'];
 $code_aluno = $_GET['aluno'];
-
-$sql = "UPDATE notas_provas SET nota = '$nota' WHERE code = '$code_aluno' AND bimestre = '$bimestre' AND disciplina = '$disciplina' and id='$id'";
-
+$notaAntiga=7-$_GET['nota'];
+if($nota>$notaAntiga){?>
+<script>
+    alert('Nota Maxima <?php echo $notaAntiga; ?> para esta paralela');
+  </script>
+  <?php
+}else{
+$sql = "UPDATE notas_ava_teste set nota=nota+'$nota' where id_disciplina='$disciplina' AND code='$code_aluno' AND bimestre='$bimestre'";
 mysqli_query($conexao, $sql);
 
-echo "A nota deste aluno foi alterada com sucesso!!!";
+echo "A nota deste aluno foi alterada com sucesso!!!";}
 die;
 	
 }?>
 
-<em>Digite abaixo qual vai ser a nova nota</em>
+<em>Nota abaixo corresponde ao restante para atingir a média do bimestre, será add em Nota do teste</em>
 <form name="" method="post" action="" enctype="multipart/form-data">
- <input type="text" size="4" maxlength="7" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
+<?php if($_GET['nota']>=7){?>
+	<h2>média atingida</h2>
+<?php }else{?> 
+ <input type="text" size="4" maxlength="7" name="nota" value="<?php echo $nota=7-$_GET['nota']; ?>" /><input type="submit" name="send" value="Inserir" />
+ <?php }?>
 </form>
 
 <?php } ?>

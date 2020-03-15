@@ -1,5 +1,5 @@
 <?php 
-require "../config.php";
+require_once "../config.php";
 $painel_atual="admin";?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="pt-br">
@@ -47,16 +47,10 @@ $painel_atual="admin";?>
  <div id="logo">
   <img src="img/logo.png" />
  </div><!-- logo -->
- 
- <div id="campo_busca">
 
-  <form name="" method="post" action="" enctype="multipart/form-data">
-   <input type="text" name="key" /><input class="input" type="submit" name="search" value="" />
-  </form>
- </div><!-- campo_busca -->
  
  <div id="mostra_login">
-  <h1><strong>Seja Bem Vindo - Seu código de acesso é: <? echo @$code; ?></strong> <strong><a href="../config.php?acao=quebra">Sair</a></strong></h1>
+  <h1><strong>Seja Bem Vindo  <?php echo @$nome; ?> - Seu código de acesso é: <?php echo @$code; ?></strong> <strong><a href="../config.php?acao=quebra">Sair</a></strong></h1>
  </div><!-- mostra_login -->
 </div><!-- box_topo -->
 

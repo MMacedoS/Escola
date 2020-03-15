@@ -1,5 +1,5 @@
 <?php
-require "Control/conexao.php";
+require_once "Control/conexao.php";
 
 @session_start();
 $code =$_SESSION['code'];
