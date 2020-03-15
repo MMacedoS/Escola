@@ -9,7 +9,9 @@
 </head>
 
 <body>
-<?php require "topo.php"; ?>
+<?php require "topo.php"; 
+$ano=Date('Y');
+?>
 
 <div id="caixa_preta">
 </div><!-- caixa_preta -->
@@ -19,9 +21,9 @@
  
    <ul>
     <h1><strong>Frequência Escolar</strong> </h1>
-    <li><strong>Presenças:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE code_aluno = '$code' AND presente = 'SIM'")); ?></li>
-    <li><strong>Faltas justificadas:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE code_aluno = '$code' AND presente = 'JUSTIFICADA'")) / 3; ?></li>
-    <li><strong>Faltas não justificada:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE code_aluno = '$code' AND presente = 'NÃO'")) / 3; ?></li>
+    <li><strong>Presenças:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE matricula = '$code' AND presente = 'SIM' and ano_letivo='$ano'")); ?></li>
+    <li><strong>Faltas justificadas:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE  matricula = '$code' AND presente = 'JUSTIFICADA' and ano_letivo='$ano'")); ?></li>
+    <li><strong>Faltas não justificada:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE  matricula = '$code' AND presente = 'NAO' and ano_letivo='$ano'")) / 3; ?></li>
    </ul>
    
   
@@ -48,7 +50,7 @@
   <div id="avisos_notificacoes">
    <ul>
    <?php
-   $sql_1 = mysqli_query($conexao, "SELECT * FROM mural_aluno WHERE curso = '$serie'");
+   $sql_1 = mysqli_query($conexao, "SELECT * FROM mural_aluno WHERE id_cursos = '$serie' order by id_mural_aluno desc");
    	while($res_1 = mysqli_fetch_assoc($sql_1)){
    ?>
     <li><h1><?php echo $res_1['titulo']; ?></h1></li>

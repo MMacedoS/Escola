@@ -154,7 +154,7 @@ if(mysqli_num_rows($result)==''){
     <td><a rel="superbox[iframe][850x350]" href="editar_atividade.php?id=<?php echo $res_1['id_ativ_bim']; ?>&code=<?php echo $code; ?>">Editar</a></td>
     <td colspan="3"><a href="correcao_atividades.php?pg=atividade_bimestral&selec=<?php echo $_GET['selec']; ?>&id=<?php echo $res_1['id_ativ_bim']; ?>">Fazer correção</a></td>
     <td></td>
-    <td><a href="todas_as_atividades.php?pg=excluir&id=<?php echo $res_1['id']; ?>&code=<?php echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td>
+    <td><a href="todas_as_atividades.php?pg=excluir&id=<?php echo $res_1['id']; ?>&selec=<?php echo $_GET['selec']; ?>&code=<?php echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td>
   </tr>  
   </table> 
  
@@ -165,10 +165,10 @@ if($_GET['pg'] == 'excluir'){
 $id = $_GET['id'];
 $code = $_GET['code'];
 
-$sql_2 = "DELETE FROM atividades_bimestrais WHERE id = '$id'";
-mysqli_query($conexao, $sql_2);
+// $sql_2 = "DELETE FROM atividades_bimestrais WHERE id = '$id'";
+// mysqli_query($conexao, $sql_2);
 
-echo "<script language='javascript'>window.location='todas_as_atividades.php?pg=atividades_bimestrais';</script>";
+echo "<script language='javascript'>window.location='todas_ativ_tarefas.php?pg=atividades_bimestrais'&selec=".$_GET['selec']."';</script>";
 
 }?> 
 </div><!-- box-->

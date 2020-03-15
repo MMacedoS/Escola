@@ -4,16 +4,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php require "../config.php";
+$ano=Date('Y');
 
-
-$sql_aluno = "SELECT * FROM estudantes WHERE code = '$code'";
+$sql_aluno = "SELECT cat.categoria,c.curso,e.matricula,e.nome,e.cpf,e.id_estudantes,ce.ano_letivo,ce.id_cursos FROM estudantes e 
+INNER JOIN cursos_estudantes ce on ce.id_estudantes=e.id_estudantes 
+INNER JOIN cursos c on ce.id_cursos=c.id_cursos 
+INNER JOIN categoria cat on c.id_categoria=cat.id_categoria
+ WHERE e.matricula ='$code' and ce.ano_letivo='$ano'";
 $result = mysqli_query($conexao, $sql_aluno);
 	while($r_aluno = mysqli_fetch_assoc($result)){
 		$nome = $r_aluno['nome'];
-		$serie = $r_aluno['serie'];
-		$turno = $r_aluno['turno'];
+		$serie = $r_aluno['id_cursos'];
 		$cpf = $r_aluno['cpf'];
-	}
+	
 ?>
 <title> Portal do aluno</title>
 <link href="css/topo.css" rel="stylesheet" type="text/css" />
@@ -53,7 +56,7 @@ $result = mysqli_query($conexao, $sql_aluno);
 <div id="box_topo">
  
  <div id="logo">
-  <img src="../img/logo.png" width="300" />
+  <img src="../image/logo.png" width="250" />
  </div><!-- logo -->
  
  <div id="dados_aluno">
@@ -73,20 +76,65 @@ $result = mysqli_query($conexao, $sql_aluno);
   <ul>
    <li><a href="index.php">HOME</a></li>
    <li><a href="minhas_notas.php?pg=bimestrais">MINHAS NOTAS</a>
+    <?php if($r_aluno['categoria']=="ensino-medio-inicial"){?>
     <ul>
-     <li><a href="minhas_notas.php?pg=trabalhos">Notas de Trabalhos</a></li>
-     <li><a href="minhas_notas.php?pg=provas">Notas das Provas</a></li>
-     <li><a href="minhas_notas.php?pg=observacao">Notas de Observação</a></li>
-     <li><a href="minhas_notas.php?pg=bimestrais">Notas Bimestrais</a></li>
-     <li><a href="minhas_notas.php?pg=distribuicao">Distribuição das Notas</a></li>
+     <li><a href="minhas_notas.php?pg=trabalhos" align="center">Atividade/tarefas</a></li>
+     <li><a href="minhas_notas.php?pg=inter" align="center">Proj.Interdisciplinar</a></li>
+     <li><a href="minhas_notas.php?pg=coc" align="center" >Avaliações COC</a></li>
+     <li><a href="minhas_notas.php?pg=trans" align="center">Proj.Transversal</a></li>
+     <li><a href="minhas_notas.php?pg=teste" align="center">Teste</a></li>
+     <li><a href="minhas_notas.php?pg=provas" align="center">Provas</a></li>
+     <li><a href="minhas_notas.php?pg=bimestrais" align="center">Bimestrais</a></li>
+     <li><a href="minhas_notas.php?pg=distribuicao" align="center">Distribuição das Notas</a></li>
     </ul>
+    <?php }elseif($r_aluno['categoria']=="ensino-medio-final"){
+    ?>
+    <ul>
+     <li><a href="minhas_notas.php?pg=trabalhos" align="center">Atividade/tarefas</a></li>
+     <li><a href="minhas_notas.php?pg=provas" align="center">Proj.Interdisciplinar</a></li>
+     <li><a href="minhas_notas.php?pg=observacao" align="center" >Avaliações COC</a></li>
+     <li><a href="minhas_notas.php?pg=provas" align="center">Proj.Transversal</a></li>
+     <li><a href="minhas_notas.php?pg=observacao" align="center">Teste</a></li>
+     <li><a href="minhas_notas.php?pg=provas" align="center">Provas</a></li>
+     <li><a href="minhas_notas.php?pg=bimestrais" align="center">Bimestrais</a></li>
+     <li><a href="minhas_notas.php?pg=distribuicao" align="center">Distribuição das Notas</a></li>
+    </ul>
+    <?php
+    }elseif($r_aluno['categoria']=="fundamental-inicial"){
+    ?>
+    <ul>
+     <li><a href="minhas_notas.php?pg=trabalhos" align="center">Atividade/tarefas</a></li>
+     <li><a href="minhas_notas.php?pg=provas" align="center">Proj.Interdisciplinar</a></li>
+     <li><a href="minhas_notas.php?pg=observacao" align="center" >Avaliações COC</a></li>
+     <li><a href="minhas_notas.php?pg=provas" align="center">Proj.Transversal</a></li>
+     <li><a href="minhas_notas.php?pg=observacao" align="center">Teste</a></li>
+     <li><a href="minhas_notas.php?pg=provas" align="center">Provas</a></li>
+     <li><a href="minhas_notas.php?pg=bimestrais" align="center">Bimestrais</a></li>
+     <li><a href="minhas_notas.php?pg=distribuicao" align="center">Distribuição das Notas</a></li>
+    </ul>
+    <?php
+    }elseif($r_aluno['categoria']=="fundamental-final"){
+    ?>
+    <ul>
+     <li><a href="minhas_notas.php?pg=trabalhos" align="center">Atividade/tarefas</a></li>
+     <li><a href="minhas_notas.php?pg=provas" align="center">Proj.Interdisciplinar</a></li>
+     <li><a href="minhas_notas.php?pg=observacao" align="center" >Avaliações COC</a></li>
+     <li><a href="minhas_notas.php?pg=provas" align="center">Proj.Transversal</a></li>
+     <li><a href="minhas_notas.php?pg=observacao" align="center">Teste</a></li>
+     <li><a href="minhas_notas.php?pg=provas" align="center">Provas</a></li>
+     <li><a href="minhas_notas.php?pg=bimestrais" align="center">Bimestrais</a></li>
+     <li><a href="minhas_notas.php?pg=distribuicao" align="center">Distribuição das Notas</a></li>
+    </ul>
+    <?php
+    }
+    }?>
    </li>
-   <li><a href="">TRABALHOS</a>
+   <!-- <li><a href="">TRABALHOS</a>
     <ul>
      <li><a href="trabalhos.php?pg=trabalhos_bimestrais">Trabalhos bimestrais</a></li>
      <li><a href="trabalhos.php?pg=trabalhos_extras">Trabalhos extras</a></li>
     </ul>
-   </li>    
+   </li>     -->
    <li><a href="presencas.php">FREQUENCIA ESCOLAR</a></li>
    <li><a href="setor_financeiro.php">SETOR FINANCEIRO</a></li>
    <li><a href="suporte_tecnico.php">SUPORTE ESCOLAR</a></li>

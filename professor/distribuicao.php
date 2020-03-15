@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/distribuicao.css">
     
-    <title>Historico Professor</title>
+    <title>Distribuição de Notas</title>
     <?php require "../config.php"; ?>
 </head>
 <body>

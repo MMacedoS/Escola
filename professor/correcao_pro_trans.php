@@ -103,6 +103,8 @@ $nota = $_GET['nota'];
 $bimestre = $_GET['bimestre'];
 $disciplina = $_GET['disciplina'];
 $prova = $_FILES['prova']['name'];
+$date=Date('Y');
+
 if(($nota>1)){
   ?>
   <script>
@@ -120,6 +122,8 @@ if(file_exists("../trabalhos_alunos/$prova")){
 
  $sql_3 = "INSERT INTO notas_pro_transversal (code, bimestre, id_disciplina, nota, id_atividade,prova) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', $id,'$prova')";
  mysqli_query($conexao, $sql_3);
+ $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades Transversal estão sendo divulgadas','transversal')";
+mysqli_query($conexao, $sql_4);
  
  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
  

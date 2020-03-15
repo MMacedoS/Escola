@@ -155,7 +155,7 @@ if(mysqli_num_rows($result)==''){
     <td><a rel="superbox[iframe][850x350]" href="editar_coc.php?id=<?php echo $res_1['id_ava_coc']; ?>&code=<?php echo $code; ?>">Editar</a></td>
     <td colspan="3"><a href="correcao_coc.php?pg=coc&selec=<?php echo $_GET['selec']; ?>&id=<?php echo $res_1['id_ava_coc']; ?>">Fazer correção</a></td>
     <td></td>
-    <td><a href="todas_coc.php?pg=excluir&id=<?php echo $res_1['id_ava_coc']; ?>&code=<?php echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td>
+    <td><a href="todas_coc.php?pg=excluir&id=<?php echo $res_1['id_ava_coc']; ?>&selec=<?php echo $_GET['selec']; ?>&code=<?php echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td>
   </tr>  
   </table> 
  
@@ -166,10 +166,10 @@ if($_GET['pg'] == 'excluir'){
 $id = $_GET['id'];
 $code = $_GET['code'];
 
-$sql_2 = "DELETE FROM avaliacao_coc WHERE id_ava_coc = '$id'";
-mysqli_query($conexao, $sql_2);
+// $sql_2 = "DELETE FROM avaliacao_coc WHERE id_ava_coc = '$id'";
+// mysqli_query($conexao, $sql_2);
 
-echo "<script language='javascript'>window.location='todas_coc.php?pg=coc';</script>";
+echo "<script language='javascript'>window.location='todas_coc.php?pg=coc&selec=".$_GET['selec']."';</script>";
 
 }?> 
 </div><!-- box-->
