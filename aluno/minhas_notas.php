@@ -14,7 +14,7 @@
 
 <div id="box">
 <?php if($_GET['pg'] == 'trabalhos'){ ?>
-<h1><strong>Notas de seus trabalhos em cada bimestre</strong></h1>
+<h1><strong>Notas de Atividades e tarefas em cada bimestre</strong></h1>
 <table width="900" border="0">
   <tr>
     <td width="317"><strong>DISCIPLINA<br /><br /></strong></td>
@@ -236,7 +236,7 @@ $result_5 = mysqli_query($conexao, $sql_5);
 
 
 <?php if($_GET['pg'] == 'inter'){ ?>
-<h1><strong>Notas de observação dada pelo professor em cada bimestre</strong></h1>
+<h1><strong>Notas dos Projetos Transversal dada pelo professor em cada bimestre</strong></h1>
 <table width="900" border="0">
   <tr>
     <td width="317"><strong>DISCIPLINA<br /><br /></strong></td>
@@ -339,15 +339,338 @@ $result_5 = mysqli_query($conexao, $sql_5);
 </table>
 <h4>OBS: Esta nota é dada pelo seu professor de cada disciplina!</h4>
 <?php } ?>
+
+<!-- projeto Trans -->
+	<?php if($_GET['pg'] == 'trans'){ ?>
+<h1><strong>Notas projetos Transversal dada pelo professor em cada bimestre</strong></h1>
+<table width="900" border="0">
+  <tr>
+    <td width="317"><strong>DISCIPLINA<br /><br /></strong></td>
+    <td width="150"><strong>1º Bimestre</strong></td>
+    <td width="150"><strong>2º Bimestre</strong></td>
+    <td width="150"><strong>3º Bimestre</strong></td>
+    <td width="150"><strong>4º Bimestre</strong></td>
+  </tr>
+<?php
+$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie'";
+$result_1 = mysqli_query($conexao, $sql_1);		
+	while($res_1 = mysqli_fetch_assoc($result_1)){
+		$disciplina = $res_1['disciplina'];
+		$id_disc=$res_1['id_disciplinas'];
+		
+$sql_2 = "SELECT * FROM notas_pro_transversal WHERE code = '$code' AND id_disciplina = '$id_disc' AND bimestre = '1'";
+$result_2 = mysqli_query($conexao, $sql_2);
+		
+$sql_3 = "SELECT * FROM notas_pro_transversal WHERE code = '$code' AND id_disciplina = '$id_disc' AND bimestre = '2'";	
+$result_3 = mysqli_query($conexao, $sql_3);
+	
+$sql_4 = "SELECT * FROM notas_pro_transversal WHERE code = '$code' AND id_disciplina = '$id_disc' AND bimestre ='3'";
+$result_4 = mysqli_query($conexao, $sql_4);
+		
+$sql_5 = "SELECT * FROM notas_pro_transversal WHERE code = '$code' AND id_disciplina = '$id_disc' AND bimestre = '4'";
+$result_5 = mysqli_query($conexao, $sql_5);
+		
+?>  
+  <tr>
+    <td><?php echo $disciplina; ?></td>
+    <td>
+    <?php
+    if(mysqli_num_rows($result_2) == ''){
+		echo "<h2>Aguarde</h2>";
+	}else{
+		while($res_2 = mysqli_fetch_assoc($result_2)){
+			$nota = $res_2['nota'];
+			
+			if($nota >= 7){
+				echo "<h2><strong>".$res_2['nota']."</strong></h2>";
+			}else{
+				echo "<h3><strong>".$res_2['nota']."</strong></h3>";			
+			}
+			
+		}}?>
+    </td>
+    <td>
+    <?php
+    if(mysqli_num_rows($result_3) == ''){
+		echo "<h2>Aguarde</h2>";
+	}else{
+		while($res_3 = mysqli_fetch_assoc($result_3)){
+			$nota = $res_3['nota'];
+			
+			if($nota >= 7){
+				echo "<h2><strong>".$res_3['nota']."</strong></h2>";
+			}else{
+				echo "<h3><strong>".$res_3['nota']."</strong></h3>";			
+			}
+			
+		}}?>
+    </td>
+    <td>
+    <?php
+    if(mysqli_num_rows($result_4) == ''){
+		echo "<h2>Aguarde</h2>";
+	}else{
+		while($res_4 = mysqli_fetch_assoc($result_4)){
+			$nota = $res_4['nota'];
+			
+			if($nota >= 7){
+				echo "<h2><strong>".$res_4['nota']."</strong></h2>";
+			}else{
+				echo "<h3><strong>".$res_4['nota']."</strong></h3>";			
+			}
+			
+		}}?>
+    </td>
+    <td>
+    <?php
+    if(mysqli_num_rows($result_5) == ''){
+		echo "<h2>Aguarde</h2>";
+	}else{
+		while($res_5 = mysqli_fetch_assoc($result_5)){
+			$nota = $res_5['nota'];
+			
+			if($nota >= 7){
+				echo "<h2><strong>".$res_5['nota']."</strong></h2>";
+			}else{
+				echo "<h3><strong>".$res_5['nota']."</strong></h3>";			
+			}
+			
+	}}?>
+    </td>        
+  </tr>
+<?php } ?>  
+  <tr>
+    <td colspan="6"><img src="img/menu_topo.png" width="900" height="1"></td>
+  </tr>
+</table>
+<h4>OBS: Esta nota é dada pelo seu professor de cada disciplina!</h4>
+<?php } ?>
+<!-- fim nota  -->
+<!-- coc -->
+<?php if($_GET['pg'] == 'coc'){ ?>
+<h1><strong>Notas do COC dada pelo professor em cada bimestre</strong></h1>
+<table width="900" border="0">
+  <tr>
+    <td width="317"><strong>DISCIPLINA<br /><br /></strong></td>
+    <td width="150"><strong>1º Bimestre</strong></td>
+    <td width="150"><strong>2º Bimestre</strong></td>
+    <td width="150"><strong>3º Bimestre</strong></td>
+    <td width="150"><strong>4º Bimestre</strong></td>
+  </tr>
+<?php
+$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie'";
+$result_1 = mysqli_query($conexao, $sql_1);		
+	while($res_1 = mysqli_fetch_assoc($result_1)){
+		$disciplina = $res_1['disciplina'];
+		$id_disc=$res_1['id_disciplinas'];
+		
+$sql_2 = "SELECT * FROM notas_ava_coc WHERE code = '$code' AND id_disciplina = '$id_disc' AND bimestre = '1'";
+$result_2 = mysqli_query($conexao, $sql_2);
+		
+$sql_3 = "SELECT * FROM notas_ava_coc WHERE code = '$code' AND id_disciplina = '$id_disc' AND bimestre = '2'";	
+$result_3 = mysqli_query($conexao, $sql_3);
+	
+$sql_4 = "SELECT * FROM notas_ava_coc WHERE code = '$code' AND id_disciplina = '$id_disc' AND bimestre ='3'";
+$result_4 = mysqli_query($conexao, $sql_4);
+		
+$sql_5 = "SELECT * FROM notas_ava_coc WHERE code = '$code' AND id_disciplina = '$id_disc' AND bimestre = '4'";
+$result_5 = mysqli_query($conexao, $sql_5);
+		
+?>  
+  <tr>
+    <td><?php echo $disciplina; ?></td>
+    <td>
+    <?php
+    if(mysqli_num_rows($result_2) == ''){
+		echo "<h2>Aguarde</h2>";
+	}else{
+		while($res_2 = mysqli_fetch_assoc($result_2)){
+			$nota = $res_2['nota'];
+			
+			if($nota >= 7){
+				echo "<h2><strong>".$res_2['nota']."</strong></h2>";
+			}else{
+				echo "<h3><strong>".$res_2['nota']."</strong></h3>";			
+			}
+			
+		}}?>
+    </td>
+    <td>
+    <?php
+    if(mysqli_num_rows($result_3) == ''){
+		echo "<h2>Aguarde</h2>";
+	}else{
+		while($res_3 = mysqli_fetch_assoc($result_3)){
+			$nota = $res_3['nota'];
+			
+			if($nota >= 7){
+				echo "<h2><strong>".$res_3['nota']."</strong></h2>";
+			}else{
+				echo "<h3><strong>".$res_3['nota']."</strong></h3>";			
+			}
+			
+		}}?>
+    </td>
+    <td>
+    <?php
+    if(mysqli_num_rows($result_4) == ''){
+		echo "<h2>Aguarde</h2>";
+	}else{
+		while($res_4 = mysqli_fetch_assoc($result_4)){
+			$nota = $res_4['nota'];
+			
+			if($nota >= 7){
+				echo "<h2><strong>".$res_4['nota']."</strong></h2>";
+			}else{
+				echo "<h3><strong>".$res_4['nota']."</strong></h3>";			
+			}
+			
+		}}?>
+    </td>
+    <td>
+    <?php
+    if(mysqli_num_rows($result_5) == ''){
+		echo "<h2>Aguarde</h2>";
+	}else{
+		while($res_5 = mysqli_fetch_assoc($result_5)){
+			$nota = $res_5['nota'];
+			
+			if($nota >= 7){
+				echo "<h2><strong>".$res_5['nota']."</strong></h2>";
+			}else{
+				echo "<h3><strong>".$res_5['nota']."</strong></h3>";			
+			}
+			
+	}}?>
+    </td>        
+  </tr>
+<?php } ?>  
+  <tr>
+    <td colspan="6"><img src="img/menu_topo.png" width="900" height="1"></td>
+  </tr>
+</table>
+<h4>OBS: Esta nota é dada pelo seu professor de cada disciplina!</h4>
+<?php } ?>
+<!-- fim coc -->
+<!-- teste -->
+<?php if($_GET['pg'] == 'teste'){ ?>
+<h1><strong>Notas dos Teste dada pelo professor em cada bimestre</strong></h1>
+<table width="900" border="0">
+  <tr>
+    <td width="317"><strong>DISCIPLINA<br /><br /></strong></td>
+    <td width="150"><strong>1º Bimestre</strong></td>
+    <td width="150"><strong>2º Bimestre</strong></td>
+    <td width="150"><strong>3º Bimestre</strong></td>
+    <td width="150"><strong>4º Bimestre</strong></td>
+  </tr>
+<?php
+$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie'";
+$result_1 = mysqli_query($conexao, $sql_1);		
+	while($res_1 = mysqli_fetch_assoc($result_1)){
+		$disciplina = $res_1['disciplina'];
+		$id_disc=$res_1['id_disciplinas'];
+		
+$sql_2 = "SELECT * FROM notas_ava_teste WHERE code = '$code' AND id_disciplina = '$id_disc' AND bimestre = '1'";
+$result_2 = mysqli_query($conexao, $sql_2);
+		
+$sql_3 = "SELECT * FROM notas_ava_teste WHERE code = '$code' AND id_disciplina = '$id_disc' AND bimestre = '2'";	
+$result_3 = mysqli_query($conexao, $sql_3);
+	
+$sql_4 = "SELECT * FROM notas_ava_teste WHERE code = '$code' AND id_disciplina = '$id_disc' AND bimestre ='3'";
+$result_4 = mysqli_query($conexao, $sql_4);
+		
+$sql_5 = "SELECT * FROM notas_ava_teste WHERE code = '$code' AND id_disciplina = '$id_disc' AND bimestre = '4'";
+$result_5 = mysqli_query($conexao, $sql_5);
+		
+?>  
+  <tr>
+    <td><?php echo $disciplina; ?></td>
+    <td>
+    <?php
+    if(mysqli_num_rows($result_2) == ''){
+		echo "<h2>Aguarde</h2>";
+	}else{
+		while($res_2 = mysqli_fetch_assoc($result_2)){
+			$nota = $res_2['nota'];
+			
+			if($nota >= 7){
+				echo "<h2><strong>".$res_2['nota']."</strong></h2>";
+			}else{
+				echo "<h3><strong>".$res_2['nota']."</strong></h3>";			
+			}
+			
+		}}?>
+    </td>
+    <td>
+    <?php
+    if(mysqli_num_rows($result_3) == ''){
+		echo "<h2>Aguarde</h2>";
+	}else{
+		while($res_3 = mysqli_fetch_assoc($result_3)){
+			$nota = $res_3['nota'];
+			
+			if($nota >= 7){
+				echo "<h2><strong>".$res_3['nota']."</strong></h2>";
+			}else{
+				echo "<h3><strong>".$res_3['nota']."</strong></h3>";			
+			}
+			
+		}}?>
+    </td>
+    <td>
+    <?php
+    if(mysqli_num_rows($result_4) == ''){
+		echo "<h2>Aguarde</h2>";
+	}else{
+		while($res_4 = mysqli_fetch_assoc($result_4)){
+			$nota = $res_4['nota'];
+			
+			if($nota >= 7){
+				echo "<h2><strong>".$res_4['nota']."</strong></h2>";
+			}else{
+				echo "<h3><strong>".$res_4['nota']."</strong></h3>";			
+			}
+			
+		}}?>
+    </td>
+    <td>
+    <?php
+    if(mysqli_num_rows($result_5) == ''){
+		echo "<h2>Aguarde</h2>";
+	}else{
+		while($res_5 = mysqli_fetch_assoc($result_5)){
+			$nota = $res_5['nota'];
+			
+			if($nota >= 7){
+				echo "<h2><strong>".$res_5['nota']."</strong></h2>";
+			}else{
+				echo "<h3><strong>".$res_5['nota']."</strong></h3>";			
+			}
+			
+	}}?>
+    </td>        
+  </tr>
+<?php } ?>  
+  <tr>
+    <td colspan="6"><img src="img/menu_topo.png" width="900" height="1"></td>
+  </tr>
+</table>
+<h4>OBS: Esta nota é dada pelo seu professor de cada disciplina!</h4>
+<?php } ?>
+<!-- fim teste -->
 <?php if($_GET['pg'] == 'distribuicao'){ ?>
 <h1><strong>Suas notas bimestrais</strong></h1>
 <table width="900" border="0">
   <tr>
     <td width="317"><strong>DISCIPLINA<br /><br /></strong></td>
-    <td width="120"><strong>Atividade Complementar</strong></td>
-    <td width="120"><strong>Trabalhos</strong></td>
-    <td width="120"><strong>Atividade Avaliativa</strong></td>
+    <td width="120"><strong>Atividade</strong></td>
+    <td width="120"><strong>Projetos Interdisciplinar</strong></td>	
+    <td width="120"><strong>Projetos transversal</strong></td>
+    <td width="120"><strong>Avaliação COC</strong></td>
+    <td width="120"><strong>Teste</strong></td>
     <td width="120"><strong>Prova</strong></td>
+    <td width="120"><strong>Media</strong></td>	
+    <td width="120"><strong>Situação</strong></td>
     <td width="150"><strong>Resultado</strong></td>
   </tr>
 <?php
