@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Cadastro de Provas</title>
+<link rel="shortcut icon" href="../image/logo_ist.gif">
 <link rel="stylesheet" type="text/css" href="css/cadastrar_prova.css"/>
 <?php require "../config.php"; $code; ?>
 </head>

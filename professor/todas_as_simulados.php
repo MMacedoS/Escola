@@ -3,6 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="css/todas_as_avaliacoes.css"/>
+
+<link rel="shortcut icon" href="../image/logo_ist.gif">
 <title>Trabalhos</title>
 </head>
 

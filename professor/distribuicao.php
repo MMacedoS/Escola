@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/distribuicao.css">
-    
+    <link rel="shortcut icon" href="../image/logo_ist.gif">
     <title>Distribuição de Notas</title>
     <?php require "../config.php"; ?>
 </head>
@@ -14,7 +14,7 @@
 
     
   <div align="center">
-<H1>Distribuição de Notas</H1>
+<H1><a href="index.php?selec='<?php echo $_GET['selec'];?>'">Distribuição de Notas</a> </H1>
 
 <table class="table"  border="1" cellpadding="5" cellspacing="4" bgcolor="#FFF4EA">
 <tr>

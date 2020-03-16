@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php require "../config.php";
+<?php require_once "../config.php";
 $ano=Date('Y');
 
 $sql_aluno = "SELECT cat.categoria,c.curso,e.matricula,e.nome,e.cpf,e.id_estudantes,ce.ano_letivo,ce.id_cursos FROM estudantes e 
