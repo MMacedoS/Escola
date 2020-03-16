@@ -111,7 +111,7 @@ if(file_exists("../trabalhos_alunos/$prova")){
   }
   	$prova = "[".$a."]".$prova;
  }
-
+if($nota<=1){
  $sql_3 = "INSERT INTO notas_pro_inter (code, bimestre, id_disciplina, nota, id_atividade,prova) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', $id,'$prova')";
  mysqli_query($conexao, $sql_3);
  $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades Interdisciplinares estão sendo divulgadas','inter')";
@@ -120,7 +120,15 @@ mysqli_query($conexao, $sql_4);
  
  echo "<script language='javascript'>window.location='correcao_pro_inter.php?pg=projetos_interdisciplinar&selec=$selec&id=$id';</script>";
 
-}?> 
+}
+}else{
+?>
+  <script>
+    alert('nota acima do valor do projeto');
+  </script>
+<?php
+}
+?> 
 
 <?php require "rodape.php"; ?>
 
