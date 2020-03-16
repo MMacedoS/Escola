@@ -145,8 +145,9 @@
                             $mestrado=$_POST['mestrado'];
                             $doutorado=$_POST['doutorado'];
                             $salario=$_POST['salario'];
+                            $usuario=$_POST['usuario'];
 
-
+                              if($usuario==""){
                             $sql_2="update professores set nome='$nome',cpf='$cpf',nascimento='$nascimento',
                             formacao='$formacao', graduacao='$graduacao', pos_graduacao='$pos_graduacao', mestrado='$mestrado',
                             doutorado='$doutorado', salario='$salario' where id_professores='$id'";
@@ -156,41 +157,45 @@
                                 }else{
                                     echo "<script language='javascript'>window.alert('Atualização realizada com sucesso!');window.location='professores.php?pg=todos';</script>";
 
-                                }}?>
+                                }
+                                }else{?> <script>alert('não pode alterar o login!!');</script><?php }
+                                }
+                                
+                                ?>
                     <form name="form1" action="" method="post" enctype="multipart/form-data">
                         <table width="900" border="0">
                             <tr>
-                                <th>NOME:</th>
-                                <th>CPF</th>
-                                <th>SALÁRIO</th>
+                                <td>NOME:</td>
+                                <td>CPF</td>
+                                <td>SALÁRIO</td>
                             </tr>
                             <tr>
-                                <th><label for="textfield2"></label>
-                                <input type="text" name="nome" id="textfield2" value="<?php 
+                                <td><label for="textfield2"></label>
+                                <input type="text" class="form-control" name="nome" id="textfield2" value="<?php 
                                 echo $res_1['nome'];?>">
-                                </th>
-                                <th><label for="textfield3"></label>
-                                <input type="text" name="cpf" id="textfield3" value="<?php
-                                 echo $res_1['cpf'];?>"></th>
-                                 <th>
-                                    <input type="text" name="salario" id="textfield8" value="<?php
+                                </td>
+                                <td><label for="textfield3"></label>
+                                <input type="text" class="form-control" name="cpf" id="textfield3" value="<?php
+                                 echo $res_1['cpf'];?>"></td>
+                                 <td>
+                                    <input type="text" class="form-control" name="salario" id="textfield8" value="<?php
                                      echo $res_1['salario'];?>">
-                                 </th>
+                                 </td>
 
                             </tr>
                             <tr>
-                                <th>Data de nascimento:</th>
-                                <th>Formação academica:</th>
-                                <th>graduacão(ões):</th>
+                                <td>Data de nascimento:</td>
+                                <td>Formação academica:</td>
+                                <td>graduacão(ões):</td>
                             </tr>
                             <tr>
-                                <th><label for="textfield4"></label>
-                                    <input type="text" name="nascimento" id="textfield4" value="<?php
+                                <td><label for="textfield4"></label>
+                                    <input type="text" class="form-control" name="nascimento" id="textfield4" value="<?php
                                      echo $res_1['nascimento'];?>">
-                                </th>
-                                <th>
+                                </td>
+                                <td>
                                     <label for="select"></label>
-                                    <select name="formacao" id="select" size="1">
+                                    <select name="formacao" class="form-control" id="select" size="1">
                                         <option value="<?php echo $res_1['formacao'];?>">
                                         <?php echo $res_1['formacao'];?>
                                         </option>
@@ -201,26 +206,34 @@
                                         <option value="Superior Completo">Superior Completo</option>
 
                                     </select>
-                                </th>
-                                <th><input type="text" name="graduacao" id="textfield5" 
-                                value="<?php echo $res_1['graduacao'];?>"></th>
+                                </td>
+                                <td><input type="text" class="form-control" name="graduacao" id="textfield5" 
+                                value="<?php echo $res_1['graduacao'];?>"></td>
                             </tr>
                             <tr>
-                                <th>Pos-Graduação(ões):</th>
-                                <th>Mestrado(s):</th>
-                                <th>Doutorado(s):</th>
+                                <td>Pos-Graduação(ões):</td>
+                                <td>Mestrado(s):</td>
+                                <td>Doutorado(s):</td>
                             </tr>
+                            
                             <tr>
-                                <td><input type="text" name="pos_graduacao" id="textfield6" value="<?php echo 
+                                <td><input type="text" class="form-control" name="pos_graduacao" id="textfield6" value="<?php echo 
                                 $res_1['pos_graduacao']; ?>"></td>
-                                <td><input type="text" name="mestrado" id="textfield6" value="<?php echo 
+                                <td><input type="text" class="form-control" name="mestrado" id="textfield6" value="<?php echo 
                                 $res_1['mestrado']; ?>"></td>
-                                <td><input type="text" name="doutorado" id="textfield6" value="<?php echo 
+                                <td><input type="text" class="form-control" name="doutorado" id="textfield6" value="<?php echo 
                                 $res_1['doutorado']; ?>"></td>
                                 
                             </tr>
                             <tr>
-                                <td><input class="input" type="submit" name="button" id="button" value="Atualizar"></td>
+                              <td>Usuario:</td>
+                            </tr>
+                              <tr>
+                                <td><input type="teste" class="form-control" name="usuario" id=""></td>
+                                
+                              </tr>
+                            <tr>
+                                <td><input class="button" type="submit" name="button" id="button" value="Atualizar"></td>
                                 <td>&nbsp</td>
                                 <td>&nbsp</td>
                             </tr>
@@ -251,7 +264,8 @@ $graduacao = $_POST['graduacao'];
 $pos_graduacao = $_POST['pos_graduacao'];
 $mestrado = $_POST['mestrado'];
 $doutorado = $_POST['doutorado'];
-$salario = $_POST['salario'];
+$salario = $_POST['salario']."@professorist";
+$usuario=str_replace(' ','',$_POST['usuario']);
 
 $sql_2 = "INSERT INTO professores (code, status, nome, cpf, nascimento, formacao, graduacao, pos_graduacao, mestrado, doutorado, salario) VALUES ('$code', 'Ativo', '$nome', '$cpf', '$nascimento', '$formacao', '$graduacao', '$pos_graduacao', '$mestrado', '$doutorado', '$salario')";
 $cadastra = mysqli_query($conexao, $sql_2);
@@ -259,7 +273,7 @@ if($cadastra == ''){
 	echo "<script language='javascript'>window.alert('Ocorreu um erro ao cadastrar!');</script>";
 }else{
 	
-$sql_3 = "INSERT INTO login (status, code, senha, nome, painel) VALUES ('Ativo', '$code', '$cpf', '$nome', 'professor')";
+$sql_3 = "INSERT INTO login (status, code, senha, nome, painel) VALUES ('Ativo', '$code', '$cpf', '$usuario', 'professor')";
 $cadastra_login = mysqli_query($conexao, $sql_3);
 
 	echo "<script language='javascript'>window.alert('Professor cadastrado com sucesso!');window.location='professores.php?pg=todos';</script>";
@@ -297,9 +311,9 @@ $cadastra_login = mysqli_query($conexao, $sql_3);
         </td>
       <?php }} ?>
       <td>
-      <input type="text" name="nome" id="textfield2"></td>
+      <input type="text" class="form-control" name="nome" id="textfield2"></td>
       <td>
-      <input type="text" name="cpf" id="textfield3"></td>
+      <input type="text" class="form-control"name="cpf" id="textfield3"></td>
     </tr>
     <tr>
       <td>Data de nascimento:</td>
@@ -308,15 +322,15 @@ $cadastra_login = mysqli_query($conexao, $sql_3);
     </tr>
     <tr>
       <td><label for="textfield4"></label>
-      <input type="date" name="nascimento" id="textfield4"></td>
+      <input type="date" class="form-control" name="nascimento" id="textfield4"></td>
       <td><label for="select"></label>
-        <select name="formacao" size="1" id="select">
+        <select class="form-control" name="formacao" size="1" id="select">
           <option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
           <option value="Ensino Médio Completo">Ensino Médio Completo</option>
           <option value="Superior Incompleto">Superior Incompleto</option>
           <option value="Superior Completo">Superior Completo</option>
       </select></td>
-      <td><input type="text" name="graduacao" id="textfield5"></td>
+      <td><input type="text" class="form-control" name="graduacao" id="textfield5"></td>
     </tr>
     <tr>
       <td>Pos-graduação(ões):</td>
@@ -324,15 +338,17 @@ $cadastra_login = mysqli_query($conexao, $sql_3);
       <td>Doutorado(s):</td>
     </tr>
     <tr>
-      <td><input type="text" name="pos_graduacao" id="textfield6"></td>
-      <td><input type="text" name="mestrado" id="textfield7"></td>
-      <td><input type="text" name="doutorado" id="textfield8"></td>
+      <td><input type="text" class="form-control" name="pos_graduacao" id="textfield6"></td>
+      <td><input type="text" class="form-control" name="mestrado" id="textfield7"></td>
+      <td><input type="text" class="form-control" name="doutorado" id="textfield8"></td>
     </tr>
     <tr>
       <td>Salário:</td>
+      <td>Login:</td>
     </tr>
     <tr>
-      <td><input type="text" name="salario" id="textfield8"></td>
+      <td><input type="number" class="form-control" name="salario" id="textfield8"></td>
+      <td><input type="text" name="usuario" class="form-control" id="textfield8"></td>
     </tr>
     <tr>
       <td><input class="input" type="submit" name="button" id="button" value="Cadastrar"></td>
