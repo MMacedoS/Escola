@@ -112,7 +112,7 @@ if(file_exists("../trabalhos_alunos/$prova")){
   	$prova = "[".$a."]".$prova;
  }
 
- if($nota){
+ if($nota<=1){
  $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina'";
 $result_verifica = mysqli_query($conexao, $sql_4);
 if(mysqli_num_rows($result_verifica)==0){
