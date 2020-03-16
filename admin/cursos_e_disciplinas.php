@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Administração</title>
     <link rel="stylesheet" href="css/cursos_e_disciplinas.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 </head>
 <body>
 <?php
@@ -354,7 +355,7 @@
              <?php
              die;}}
              ?>
-  <!--visualizar cursos cadastrados -->  
+  --visualizar cursos cadastrados -->  
         <?php 
             $sql_1="select * from categoria";
             $result=mysqli_query($conexao,$sql_1);
@@ -400,7 +401,7 @@
              <br/><br/>
   <?php } ?>
 
-<!-- <?php } ?> --> -->
+<!-- <?php } ?> -->
 
 <!-- fim de categoria -->
   <!________________________________CADASTRAR DISCIPLINAS______________________________________________________________________________>
@@ -723,7 +724,7 @@ if(mysqli_num_rows($result_ced) == ''){
   </tr>
   <tr>
     <td>
-    <textarea disabled="disabled" name="textarea" id="textarea" cols="100" rows="5">
+    <textarea disabled="disabled" name="textarea"  cols="70" rows="5">
     <?php
      $sql_ced_prof = "SELECT * FROM disciplinas WHERE id_cursos = '$cursos_id'";
 	 $result_ced_prof = mysqli_query($conexao,  $sql_ced_prof);

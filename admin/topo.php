@@ -9,6 +9,7 @@ $painel_atual="admin";?>
 <? require "../config.php"; ?>
 <link rel="shortcut icon" href="../image/logo_ist.gif">
 <link href="css/topo.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">>
 <script language="javascript" src="../js/jquery-1.7.2.min.js"></script>
 <script src="../js/lightbox.js"></script>
 <link href="../css/lightbox.css" rel="stylesheet" />

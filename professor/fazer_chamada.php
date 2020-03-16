@@ -31,7 +31,7 @@
         echo $resDisc['disciplina'];
    }
    ?>
-     <a background-color="blue" id="h1_a" rel="superbox[iframe][900x500]" href="fazer_rapida.php?curso=<?php echo $_GET['curso'];?>&dis=<?php echo $_GET['dis'];?>&turno=<?php echo $_GET['turno'];?>"><img title="chamada rapida" border="0" src="../image/confirma.png" width="50" /></a></h1>
+     <!-- <a background-color="blue" id="h1_a" rel="superbox[iframe][900x500]" href="fazer_rapida.php?curso=<?php echo $_GET['curso'];?>&dis=<?php echo $_GET['dis'];?>&turno=<?php echo $_GET['turno'];?>"><img title="chamada rapida" border="0" src="../image/confirma.png" width="50" /></a></h1> -->
     <?php
 
 $date = date("d/m/Y H:i:s");

@@ -96,7 +96,7 @@ if(mysqli_num_rows($consulta) == ''){
     </table>
     <br /> 
 <?php } // aqui fecha a consulta ?>
-</div><!-- box_aluno -->
+
 
 
 
@@ -160,6 +160,7 @@ echo "<script language='javascript'>window.location='estudantes.php?pg=todos';</
 
 <?php  if(@$_GET['pg'] == 'cadastra'){ ?> 
 <?php  if(@$_GET['bloco'] == '1'){ ?>
+<div id="box_aluno">
 <div id="cadastra_estudante">
  <h1>1º Passo - Cadastre os dados pessoais</h1>
 
@@ -297,9 +298,10 @@ echo "<script language='javascript'>window.alert('Dados cadastrados com sucesso!
   </table>
 </form>
 <br /> 
- 
-</div><!-- cadastra_estudante -->
 
+</div><!-- cadastra_estudante -->
+</div>
+<!-- box aluno -->
 <?php } // aqui fecha o bloco 1 ?>
 
 
@@ -308,6 +310,7 @@ echo "<script language='javascript'>window.alert('Dados cadastrados com sucesso!
 <!CADASTRO DOS ESTUDANTES - ETAPA 2>
 
 <?php if(@$_GET['bloco'] == '2'){ ?>
+<div id="box_aluno">
 <div id="cadastra_estudante">
  <h1>2º Passo - Finalizar preenchimento de dados</h1>
 
@@ -444,6 +447,7 @@ else{?>
 </table>
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 </div><!-- cadastra_estudante -->
+</div><!-- box aluno -->
 
 
 <?php }// aqui fecha o bloco 3 ?>
@@ -456,6 +460,7 @@ else{?>
 
 <?php  if(@$_GET['pg'] == 'cadastra'){ ?> 
 <?php  if(@$_GET['edita'] == '1'){ ?>
+<div id="box_aluno">
 <div id="cadastra_estudante">
  <h1>1º Passo - Atualiza os dados pessoais</h1>
     <?php 
@@ -598,8 +603,9 @@ echo "<script language='javascript'>window.alert('Dados atualizados com sucesso!
   <?php }?>
 </form>
 <br /> 
- 
+
 </div><!-- cadastra_estudante -->
+</div><!-- box aluno-->
 <?php }?>
 <?php } // aqui fecha o bloco 1 ?>
 
@@ -607,6 +613,7 @@ echo "<script language='javascript'>window.alert('Dados atualizados com sucesso!
 <!ATUALIZANDO DOS ESTUDANTES - ETAPA 2>
 
 <?php if(@$_GET['edita'] == '2'){ ?>
+<div id="box_aluno">
 <div id="cadastra_estudante">
  <h1>2º Passo - Finalizar preenchimento de dados</h1>
     <?php 
@@ -752,12 +759,14 @@ echo $sql_cursos_est;
 <br />
  
 </div><!-- cadastra_estudante -->
-
+</div>
+<!-- box aluno -->
 
 <?php }// aqui fecha o bloco 2 ?>
 
 
 <?php if(@$_GET['edita'] == '3'){ ?>
+<div id="box_aluno">
 <div id="cadastra_estudante">
  <h1>3º Passo - Mensagem de confirmação</h1>
  <table>
@@ -775,7 +784,7 @@ echo $sql_cursos_est;
 </table>
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 </div><!-- cadastra_estudante -->
-
+</div><!-- box_aluno -->
 
 <?php }// aqui fecha o bloco 3 ?>
 
