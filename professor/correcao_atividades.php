@@ -83,7 +83,7 @@ if(mysqli_num_rows($result_2) == ''){
 	?>
     <td><input type="file" name="prova" size="5" /></td>
     <td><input name="nota" type="text" id="textfield" size="6"></td>
-    <td><input type="submit" name="button" id="button" value="Concretizar" onclick="alert('Nota Inserida')"></td>
+    <td><input type="submit" name="button" id="button" value="Concretizar" onclick="alert('Insirindo nota ')"></td>
 
     <?php }else{ while($res_4 = mysqli_fetch_assoc($result_4 )){ ?>
     <td><a target="_blank" href="../trabalhos_alunos/<?php echo $res_4['prova']; ?>">Ver prova</a></td>
@@ -112,7 +112,13 @@ if(file_exists("../trabalhos_alunos/$prova")){
   	$prova = "[".$a."]".$prova;
  }
 
- if($nota<=1){
+if(($nota>1)){
+  ?>
+  <script>
+    alert('Nota Maxima 1.0 para este trabalho');
+  </script>
+  <?php
+}else{
  $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina'";
 $result_verifica = mysqli_query($conexao, $sql_4);
 if(mysqli_num_rows($result_verifica)==0){
@@ -129,13 +135,6 @@ mysqli_query($conexao, $sql_4);
     <?php
 }
 }
-
-}else{
-?>
-  <script>
-    alert('nota acima do valor do projeto');
-  </script>
-<?php
 }
 ?> 
 
