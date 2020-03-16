@@ -76,11 +76,11 @@ if(mysqli_num_rows($resultado) == ''){
         <label for="radio">FALTA JUSTIFICADA </label>
        <label for="fileField"></label>
        </td><?php   
-       if(isset($_POST['inserir'])=='Guardar'&& isset($_POST['presenca'])=='JUSTIFICADA' || isset($_POST['presenca'])=='FALTA'){
+       if(isset($_GET['inserir'])=='Guardar'&& isset($_GET['presenca'])=='JUSTIFICADA' || isset($_GET['presenca'])=='FALTA'){
            
-           $code_aluno = $_POST['code_aluno'];	
-                $nome = $_POST['nome'];	
-                @$presensa = $_POST['presenca'];
+           $code_aluno = $_GET['code_aluno'];	
+                $nome = $_GET['nome'];	
+                @$presensa = $_GET['presenca'];
                 $sql_ver_falta= "SELECT * FROM chamadas_em_sala WHERE date_day = '$date_hoje' AND matricula ='$code_aluno'";
                  
                 $con_ver_falta = mysqli_query($conexao, $sql_ver_falta);
