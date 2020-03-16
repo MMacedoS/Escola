@@ -17,11 +17,14 @@
  <h1>Abaixo está mostrando todos os alunos do(a) <strong>
  <?php $curso = base64_decode($_GET['curso']); 
  $buscaCurso="SELECT * from cursos where id_cursos='$curso'";
- $conCurso=mysqli_query($conexao,$buscaCurso);
+ $busca=$conCurso=mysqli_query($conexao,$buscaCurso);
+ if($busca){
  while($resCurso=mysqli_fetch_assoc($conCurso)){
       $cursos=$resCurso['curso'];
       $turno=$resCurso['turno'];
- };echo $cursos.'  '."".$turno;
+ };echo $cursos.'  '."".$turno;}else{
+        ?><script>alert('erro ao buscar os cursos');</script><?php
+  }
   ?></strong> 
  Data de Hoje <strong><?php echo date("d/m/Y"); ?></strong></h1>
    <h1>disciplina: <?php $dis=base64_decode($_GET['dis']);
@@ -46,7 +49,7 @@ if(mysqli_num_rows($resultado) == ''){
  while($res_1 = mysqli_fetch_assoc($resultado)){
 	 $code_aluno = $res_1['matricula'];
 ?> 
-<form name="button" method="post" enctype="multipart/form-data" action="">
+<form name="button" method="GET" enctype="multipart/form-data" action="">
 <table width="950" border="0">
   <tr>
     <th width="94"><strong>Código:</strong></th>
@@ -54,6 +57,8 @@ if(mysqli_num_rows($resultado) == ''){
     <th colspan="2"><strong>Este aluno está presente?</strong></th>
     <th></th>
   </tr>
+  <input type="hidden" name="curso" value="<?php echo  base64_encode($curso); ?>">
+  <input type="hidden" name="dis" value="<?php echo  base64_encode($dis); ?>">
   <tr>
       <td> <?php echo $res_1['matricula']; ?><input type="hidden" name="code_aluno" value="<?php echo $res_1['matricula']; ?>" /></td>
       <th> <?php echo $res_1['nome']; ?><input type="hidden" name="nome" value="<?php echo $res_1['nome']; ?>" /></th>
@@ -96,7 +101,7 @@ if(mysqli_num_rows($resultado) == ''){
                }?>
         <?php             
        }else{ ?>
-       <td width="62"><input type="submit" name="inserir" id="button" value="Guardar"></td>
+       <td width="62"><input type="submit" name="inserir" id="button" value="Guardar" onclick="alert('chamada realizada');"></td>
          <?php }
           }//fechamento do if falta
          else{?>
@@ -118,12 +123,12 @@ if(mysqli_num_rows($resultado) == ''){
 ?>
 
 <?php 
-  if(isset($_POST['inserir'])=='Guardar'){
+  if(isset($_GET['inserir'])=='Guardar'){
 
-$code_aluno = $_POST['code_aluno'];	
-$nome = $_POST['nome'];	
+$code_aluno = $_GET['code_aluno'];	
+$nome = $_GET['nome'];	
 $curso = $_GET['curso'];
-@$presensa = $_POST['presenca'];
+@$presensa = $_GET['presenca'];
 
 $disc=($_GET['dis']);
 
@@ -131,16 +136,24 @@ if($presensa == ''){
 	echo "<script language='javascript'>window.alert('Por favor, informe se este aluno está presente ou não na sala de aula!');</script>";
 }else if($presensa=='SIM'){
 $sql_4 = "INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas, matricula, presente) VALUES ('$date', '$date_hoje','$dis', '$code_aluno', '$presensa')";	
-mysqli_query($conexao, $sql_4);
+$insere=mysqli_query($conexao, $sql_4);
+if($insere){
 	echo "<script language='javascript'>window.location='fazer_chamada.php?curso=$curso&dis=$disc; ?>';</script>";
 
+  }else{
+  ?> 
+    <script>
+    alert('Erro ao inserir a chamada');
+    </script>
+  <?php
   }
+}
   }
  ?>
 <?php 
-  if(isset($_POST['alterar'])=='alterar'){
+  if(isset($_GET['alterar'])=='alterar'){
 
-$code_aluno = $_POST['code_aluno'];	
+$code_aluno = $_GET['code_aluno'];	
 $curso = $_GET['curso'];
 
 $sql_alterar = "delete from chamadas_em_sala where date_day='$date_hoje' and matricula='$code_aluno' and id_disciplinas='$dis'";	

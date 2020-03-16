@@ -225,8 +225,8 @@ echo "<script language='javascript'>window.alert('Dados cadastrados com sucesso!
 	 	while($res_1 = mysqli_fetch_assoc($con_est)){
 			$novo_code = $res_1['matricula']+741+$res_1['id_estudantes'];
 	 ?>
-      <td><input type="text" name="code" id="textfield" disabled="disabled" value="<?php echo $novo_code; ?>"></td>
-      <input type="hidden" name="code" value="<?php echo $novo_code; ?>" />
+      <td><input type="text" class="form-control" name="code" id="textfield" disabled="disabled" value="<?php echo $novo_code; ?>"></td>
+      <input type="hidden" class="form-control" name="code" value="<?php echo $novo_code; ?>" />
      <?php } } ?>
      <td></td>
     </tr>    
@@ -237,11 +237,11 @@ echo "<script language='javascript'>window.alert('Dados cadastrados com sucesso!
      
     </tr>
       <td><label for="celular"></label>
-      <input type="text" name="nome" id="textfield2"></td>
+      <input type="text" name="nome" class="form-control" id="textfield2"></td>
       <td><label for="celular"></label>
-      <input type="text" name="sobrenome" id="textfield2"></td>
+      <input type="text" name="sobrenome" class="form-control" id="textfield2"></td>
       <td><label for="tel_amigo"></label>
-      <input type="text" name="cpf" id="textfield3"></td>
+      <input type="text" name="cpf" class="form-control cpf-mask" placeholder="Ex.: 000.000.000-00">
       
     </tr>
     <tr>
@@ -251,11 +251,11 @@ echo "<script language='javascript'>window.alert('Dados cadastrados com sucesso!
     </tr>
     <tr>
       <td><label for="tel_amigo"></label>
-      <input type="text" name="rg" id="textfield3"></td>
+      <input type="text" class="form-control" name="rg" id="textfield3"></td>
       <td><label for="nascimento"></label>
-      <input type="date" name="nascimento" id="textfield4"></td>
+      <input type="date"  class="form-control" name="nascimento" id="textfield4"></td>
       <td><label for="select"></label>
-      <input type="text" name="mae" id="textfield12"></td>
+      <input type="text" class="form-control" name="mae" id="textfield12"></td>
      
     </tr>
     <tr>
@@ -265,9 +265,9 @@ echo "<script language='javascript'>window.alert('Dados cadastrados com sucesso!
       <td>Bairro:</td>
     </tr>
     <tr>
-       <td><input type="text" name="pai" id="textfield5"></td>
-      <td><input type="text" name="cidade" id="textfield7"></td>
-      <td><input type="text" name="bairro" id="textfield8"></td>
+       <td><input type="text" class="form-control" name="pai" id="textfield5"></td>
+      <td><input type="text" class="form-control" name="cidade" id="textfield7"></td>
+      <td><input type="text" class="form-control" name="bairro" id="textfield8"></td>
     </tr>
     <tr>
       <td>Estado:</td>
@@ -276,9 +276,9 @@ echo "<script language='javascript'>window.alert('Dados cadastrados com sucesso!
       
     </tr>
     <tr>
-      <td><input type="text" name="estado" id="textfield5"></td>
-      <td><input type="text" name="endereco" id="textfield8"></td>
-      <td><input type="text" name="complemento" id="textfield8"></td>
+      <td><input type="text"  class="form-control" name="estado" id="textfield5"></td>
+      <td><input type="text" class="form-control" name="endereco" id="textfield8"></td>
+      <td><input type="text" class="form-control" name="complemento" id="textfield8"></td>
     </tr>
     <tr>
     <td>CEP:</td>
@@ -286,9 +286,9 @@ echo "<script language='javascript'>window.alert('Dados cadastrados com sucesso!
       <td>Telefone Celular:</td>
     </tr>
     <tr>
-      <td><input type="text" name="cep" id="textfield8"></td>
-      <td><input type="text" name="tel_residencial" id="textfield9"></td>
-      <td><input type="text" name="celular" id="textfield10"></td>
+      <td><input type="text" class="form-control" name="cep" id="textfield8" placeholder="ex. 00000-000"></td>
+      <td><input type="phone" class="form-control" name="tel_residencial" id="textfield9" placeholder="ex. (00) 0000-0000"></td>
+      <td><input type="number" class="form-control" name="celular" id="textfield10" placeholder="ex. (00) 00000-0000"></td>
     </tr>
     <tr>
       <td><input class="input" type="submit" name="button" id="button" value="Avançar"></td>
