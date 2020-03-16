@@ -88,13 +88,13 @@ if(mysqli_num_rows($resultado) == ''){
                 ?>
                   <td colspan="3">
                   <h3><strong>Este aluno possui presença em outra disciplina hoje, tem certeza que ele não está na sala de aula?</strong></h3>
-                  <a href="fazer_chamada.php?curso=<?php echo $_GET['curso']; ?>&dis=<?php echo $_GET['dis']; ?>&confirmar_falta=sim&code_aluno=<?php echo $code_aluno; ?>&tipo=<?php echo $_POST['presenca']; ?>">CONFIRMAR FALTA</a> | <a href="">CANCELAR</a>
+                  <a href="fazer_chamada.php?curso=<?php echo $_GET['curso']; ?>&dis=<?php echo $_GET['dis']; ?>&confirmar_falta=sim&code_aluno=<?php echo $code_aluno; ?>&tipo=<?php echo $_GET['presenca']; ?>">CONFIRMAR FALTA</a> | <a href="">CANCELAR</a>
                   </td>
                <?php } else if (mysqli_num_rows($con_ver_falta)==0 && $presensa == 'FALTA' || $presensa == 'JUSTIFICADA'){
                  ?>
                  <td colspan="3">
                   <h3><strong>Este aluno NÃO possui presença em outras disciplinas hoje, tem certeza que ele não está na sala de aula?</strong></h3>
-                  <a href="fazer_chamada.php?curso=<?php echo $_GET['curso']; ?>&dis=<?php echo $_GET['dis']; ?>&confirmar_falta=sim&code_aluno=<?php echo $code_aluno; ?>&tipo=<?php echo $_POST['presenca']; ?>">CONFIRMAR FALTA</a> | <a href="">CANCELAR</a>
+                  <a href="fazer_chamada.php?curso=<?php echo $_GET['curso']; ?>&dis=<?php echo $_GET['dis']; ?>&confirmar_falta=sim&code_aluno=<?php echo $code_aluno; ?>&tipo=<?php echo $_GET['presenca']; ?>">CONFIRMAR FALTA</a> | <a href="">CANCELAR</a>
                   </td>
                  
                  <?php
