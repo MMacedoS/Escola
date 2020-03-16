@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sistema Escolar</title>
     <link rel="stylesheet" type="text/css" href="css/estilo.css">
-    <link rel="shortcut icon" href="image/icone.png">
+    <link rel="shortcut icon" href="image/logo_ist.gif">
     <?php require_once "Control/conexao.php"?>
 </head>
 <body>
 <div id="logo">
- <img src="image/logo.png">   
+ <img src="image/logo_ist.gif">   
 </div>
 <div id="caixa_login">
     <?php  if (isset($_POST['button'])) {

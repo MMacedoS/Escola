@@ -4,7 +4,7 @@ body{
 	}
 #box_topo{
 	width:900px;
-	height:200px;
+	height:155px;
 	margin:10px auto;
 	}
 	
@@ -63,7 +63,7 @@ body{
     /* background: url(../img/menu_topo.png) repeat; */
     background: #FFd700;
     height: 40px;
-    margin: -40px auto;
+    margin: -20px auto;
 	}
 #menu_topo{
 	width:980px;
@@ -100,7 +100,7 @@ body{
 #menu_topo li ul{
 	display:none;
 	position:absolute;
-	top:241px;
+	top:205px;
 	width:160px;
 	}
 #menu_topo li:hover ul{

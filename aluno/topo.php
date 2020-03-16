@@ -19,7 +19,7 @@ $result = mysqli_query($conexao, $sql_aluno);
 	
 ?>
 <title> Portal do aluno</title>
-<link rel="shortcut icon" href="../image/icone.png">
+<link rel="shortcut icon" href="../image/logo_ist.gif">
 <link href="css/topo.css" rel="stylesheet" type="text/css" />
 <script language="javascript" src="../js/jquery-1.7.2.min.js"></script>
 <script src="../js/lightbox.js"></script>
@@ -57,7 +57,8 @@ $result = mysqli_query($conexao, $sql_aluno);
 <div id="box_topo">
  
  <div id="logo">
-  <img src="../image/logo.png" width="250" />
+  <!-- <img src="../image/logo.png" width="250" /> -->
+   <img src="image/logo_ist.gif">  
  </div><!-- logo -->
  
  <div id="dados_aluno">

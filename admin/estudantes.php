@@ -326,24 +326,42 @@ $a = date("Y");
 $code_cobranca = $code*2;
 ///buscando estudante para armazenar nas tabela cursos_estudantes
 $sql_busca_est="select id_estudantes from estudantes where matricula='$code'";
-$con_busca_est=mysqli_query($conexao,$sql_busca_est);
+$cadastra=$con_busca_est=mysqli_query($conexao,$sql_busca_est);
 
 while($res_busca_est=mysqli_fetch_assoc($con_busca_est)){
 $estudante=$res_busca_est['id_estudantes'];}
 
-$sql_cursos_est="INSERT INTO `cursos_estudantes` (`id_cursos`, `id_estudantes`, `ano`) VALUES ('$serie', '$estudante', '$a');";
-mysqli_query($conexao,$sql_cursos_est);
+$sql_cursos_est="INSERT INTO `cursos_estudantes` (`id_cursos`, `id_estudantes`, `ano_letivo`) VALUES ('$serie', '$estudante', '$a');";
+$cadastra=mysqli_query($conexao,$sql_cursos_est);
+if($cadastra){
+
 $sql_3 = "UPDATE estudantes SET  atendimento_especial = '$cuidado_especial', mensalidade = '$mensalidade', vencimento = '$vencimento', tel_cobranca = '$tel_cobranca', obs = '$obs' WHERE matricula = '$code'";
 
-mysqli_query($conexao, $sql_3);
-
+$cadastra=mysqli_query($conexao, $sql_3);
+if($cadastra){
 
 
 $sql_mensal = "INSERT INTO mensalidades (code, matricula, d_cobranca, vencimento, valor, status, dia, mes, ano) VALUES ('$code_cobranca', '$code', '$d/$m/$a', '$vencimento/$m/$a', '$mensalidade', 'Aguarda Pagamento', '$d', '$m', '$a')";
 
-mysqli_query($conexao, $sql_mensal);
-
+$cadastra=mysqli_query($conexao, $sql_mensal);
+if($cadastra){
 echo "<script language='javascript'>window.location='estudantes.php?pg=cadastra&bloco=3';</script>";
+}else{
+  ?><script>alert('erro ao inserir mensalidades');</script>
+  <?php
+}//mensalidades
+
+}///upadate atendimento especial
+else{?>
+  <script>
+    alert('erro ao atualizar atendimento especial');
+  </script>
+<?php }//update atendimento especial
+}else{?>
+    <script>
+      alert('erro ao inserir o cursos e estudante ');
+    </script>
+<?php }
 
 }?> 
  
