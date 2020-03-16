@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/historico_do_professor.css">
     
     <title>Historico Professor</title>
+    
+<link rel="shortcut icon" href="../image/logo_ist.gif">
     <?php require_once("../control/conexao.php"); ?>
 </head>
 <body>

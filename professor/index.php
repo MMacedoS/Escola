@@ -27,7 +27,7 @@
     
     
      echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM disciplinas WHERE id_professores = '$id_professor'")); ?></li>
-    <li><strong>Você minista aula para
+    <li><strong>Você ministra aula para
     
     <?php
     

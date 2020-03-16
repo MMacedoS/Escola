@@ -78,7 +78,12 @@ $id = $_GET['id'];
 $dis = $_GET['disciplina'];
 $bimestre = $_GET['bimestre'];
 
-
+if($nota>1){?>
+<script>
+    alert('Nota Maxima 1.0 para esta paralela');
+  </script>
+  <?php
+}else{
 $sql_6 = "UPDATE notas_atividades SET nota = '$nota' WHERE code = '$aluno' AND id_disciplina = '$dis' AND bimestre = '$bimestre' and id_atividade='$id'";
 
 mysqli_query($conexao, $sql_6);
@@ -90,7 +95,7 @@ while($res_busca=mysqli_fetch_assoc($con_busca)){
 echo "A nota deste aluno foi alterada com sucesso!!! ".$res_busca['nome']."  clique fora e atualize a pagina";
 
 
-}
+}}
 
 die;
 
@@ -111,7 +116,12 @@ $id = $_GET['id'];
 $dis = $_GET['disciplina'];
 $bimestre = $_GET['bimestre'];
 
-
+if($nota>1){?>
+<script>
+    alert('Nota Maxima 1.0 para esta paralela');
+  </script>
+  <?php
+}else{
 $sql_6 = "UPDATE notas_pro_inter SET nota = '$nota' WHERE code = '$aluno' AND id_disciplina = '$dis' AND bimestre = '$bimestre' and id_atividade='$id'";
 
 mysqli_query($conexao, $sql_6);
@@ -124,7 +134,7 @@ echo "A nota deste aluno foi alterada com sucesso!!! ".$res_busca['nome']."  cli
 
 
 }
-
+}
 die;
 
 }?>
@@ -147,7 +157,12 @@ $id = $_GET['id'];
 $dis = $_GET['disciplina'];
 $bimestre = $_GET['bimestre'];
 
-
+if($nota>1 && $bimestre!=3){?>
+<script>
+    alert('Nota Maxima 1.0 para esta atividade neste bimestre');
+  </script>
+  <?php
+}else{
 $sql_6 = "UPDATE notas_pro_transversal SET nota = '$nota' WHERE code = '$aluno' AND id_disciplina = '$dis' AND bimestre = '$bimestre' and id_atividade='$id'";
 
 mysqli_query($conexao, $sql_6);
@@ -160,7 +175,7 @@ echo "A nota deste aluno foi alterada com sucesso!!! ".$res_busca['nome']."  cli
 
 
 }
-
+}
 die;
 
 }?>
@@ -181,6 +196,12 @@ $id = $_GET['id'];
 $dis = $_GET['disciplina'];
 $bimestre = $_GET['bimestre'];
 
+if($nota>1){?>
+<script>
+    alert('Nota Maxima 1.0 para esta atividade');
+  </script>
+  <?php
+}else{
 
 $sql_6 = "UPDATE notas_ava_coc SET nota = '$nota' WHERE code = '$aluno' AND id_disciplina = '$dis' AND bimestre = '$bimestre' and id_atividade='$id'";
 
@@ -193,7 +214,7 @@ while($res_busca=mysqli_fetch_assoc($con_busca)){
 echo "A nota deste aluno foi alterada com sucesso!!! ".$res_busca['nome']."  clique fora e atualize a pagina";
 
 
-}
+}}
 
 die;
 
@@ -215,7 +236,12 @@ $aluno = $_GET['aluno'];
 $id = $_GET['id'];
 $dis = $_GET['disciplina'];
 $bimestre = $_GET['bimestre'];
-
+if($nota>3){?>
+<script>
+    alert('Nota Maxima 3.0 para esta atividade');
+  </script>
+  <?php
+}else{
 
 $sql_6 = "UPDATE notas_ava_teste SET nota = '$nota' WHERE code = '$aluno' AND id_disciplina = '$dis' AND bimestre = '$bimestre' and id_atividade='$id'";
 
@@ -229,7 +255,7 @@ echo "A nota deste aluno foi alterada com sucesso!!! ".$res_busca['nome']."  cli
 
 
 }
-
+}
 die;
 
 }?>
@@ -250,7 +276,12 @@ $aluno = $_GET['aluno'];
 $id = $_GET['id'];
 $dis = $_GET['disciplina'];
 $bimestre = $_GET['bimestre'];
-
+if($nota>3){?>
+<script>
+    alert('Nota Maxima 3.0 para esta atividade');
+  </script>
+  <?php
+}else{
 
 $sql_6 = "UPDATE notas_ava_prova SET nota = '$nota' WHERE code = '$aluno' AND id_disciplina = '$dis' AND bimestre = '$bimestre' and id_atividade='$id'";
 
@@ -262,7 +293,7 @@ $con_busca=mysqli_query($conexao,$sql_busca);
 while($res_busca=mysqli_fetch_assoc($con_busca)){
 echo "A nota deste aluno foi alterada com sucesso!!! ".$res_busca['nome']."  clique fora e atualize a pagina";
 
-
+}
 }
 
 die;

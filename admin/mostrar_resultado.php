@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/mostrar_resultado.css">
     <?php require_once('../Control/conexao.php');?>
     <title>Detalhes do Estudante</title>
+    
+<link rel="shortcut icon" href="../image/logo_ist.gif">
 </head>
 <body>
     

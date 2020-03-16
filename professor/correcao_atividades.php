@@ -120,10 +120,10 @@ if(($nota>1)){
   </script>
   <?php
 }else{
- $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina'";
+ $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'";
 $result_verifica = mysqli_query($conexao, $sql_4);
 if(mysqli_num_rows($result_verifica)==0){
- $sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,prova) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', $id,'$prova')";
+ $sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,prova,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', $id,'$prova','$date')";
  mysqli_query($conexao, $sql_3);
 $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades estão sendo divulgadas','tarefas')";
 mysqli_query($conexao, $sql_4);

@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="../image/logo_ist.gif">
     <title>Administração</title>
+    
+<link rel="shortcut icon" href="../image/logo_ist.gif">
 </head>
 <body>
 <?php  require_once("topo.php"); ?>

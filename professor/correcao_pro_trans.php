@@ -121,7 +121,7 @@ if(file_exists("../trabalhos_alunos/$prova")){
   	$prova = "[".$a."]".$prova;
  }
 
- $sql_3 = "INSERT INTO notas_pro_transversal (code, bimestre, id_disciplina, nota, id_atividade,prova) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', $id,'$prova')";
+ $sql_3 = "INSERT INTO notas_pro_transversal (code, bimestre, id_disciplina, nota, id_atividade,prova,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', $id,'$prova','$date')";
  mysqli_query($conexao, $sql_3);
  $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades Transversal estão sendo divulgadas','transversal')";
 mysqli_query($conexao, $sql_4);

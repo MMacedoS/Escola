@@ -7,16 +7,16 @@
     <link rel="stylesheet" href="css/distribuicao.css">
     <link rel="shortcut icon" href="../image/logo_ist.gif">
     <title>Distribuição de Notas</title>
-    <?php require "../config.php"; ?>
+    <?php require_once "../config.php"; ?>
 </head>
 <body>
 <div id="box">
 
     
   <div align="center">
-<H1><a href="index.php?selec='<?php echo $_GET['selec'];?>'">Distribuição de Notas</a> </H1>
+<H1><a href="index.php?selec=<?php echo $_GET['selec'];?>">Distribuição de Notas</a> </H1>
 
-<table class="table"  border="1" cellpadding="5" cellspacing="4" bgcolor="#FFF4EA">
+<table class="table-responsive"  border="1" cellpadding="5" cellspacing="4" bgcolor="#FFF4EA">
 <tr>
 <td rowspan="2" class="nome" bgcolor="#efefef"><strong>Alunos</strong></td>
 <?php $select="select * from unidades ";
