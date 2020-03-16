@@ -264,8 +264,8 @@ $graduacao = $_POST['graduacao'];
 $pos_graduacao = $_POST['pos_graduacao'];
 $mestrado = $_POST['mestrado'];
 $doutorado = $_POST['doutorado'];
-$salario = $_POST['salario']."@professorist";
-$usuario=str_replace(' ','',$_POST['usuario']);
+$salario = $_POST['salario'];
+$usuario=str_replace(' ','',$_POST['usuario']."@professorist");
 
 $sql_2 = "INSERT INTO professores (code, status, nome, cpf, nascimento, formacao, graduacao, pos_graduacao, mestrado, doutorado, salario) VALUES ('$code', 'Ativo', '$nome', '$cpf', '$nascimento', '$formacao', '$graduacao', '$pos_graduacao', '$mestrado', '$doutorado', '$salario')";
 $cadastra = mysqli_query($conexao, $sql_2);
