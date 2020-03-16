@@ -6,7 +6,7 @@ $painel_atual="admin";?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<? require "../config.php"; ?>
+<? require_once "../config.php"; ?>
 <link rel="shortcut icon" href="../image/logo_ist.gif">
 <link href="css/topo.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">>
