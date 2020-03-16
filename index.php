@@ -56,7 +56,7 @@
                 
                                 if($painel=='admin'){
                                     echo "<script language='javascript'> window.location='admin'; </script>";
-                                } else if($painel=='aluno'){
+                                } else if($painel=='Aluno'){
                                     echo "<script language='javascript'> window.location='aluno'; </script>";
                 
                                 }else if($painel=='professor'){

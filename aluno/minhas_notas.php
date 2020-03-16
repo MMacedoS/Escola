@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Minhas Notas</title>
 <link rel="stylesheet" type="text/css" href="css/minhas_notas.css"/>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
 </head>
 
 <body>
@@ -660,42 +661,49 @@ $result_5 = mysqli_query($conexao, $sql_5);
 <!-- fim teste -->
 <?php if($_GET['pg'] == 'distribuicao'){ ?>
 <h1><strong>Suas notas bimestrais</strong></h1>
-<table width="900" border="0">
+<div class="table-responsive">
+<table	 border="0">
   <tr>
-    <td width="317"><strong>DISCIPLINA<br /><br /></strong></td>
-    <td width="120"><strong>Atividade</strong></td>
-    <td width="120"><strong>Projetos Interdisciplinar</strong></td>	
-    <td width="120"><strong>Projetos transversal</strong></td>
-    <td width="120"><strong>Avaliação COC</strong></td>
-    <td width="120"><strong>Teste</strong></td>
-    <td width="120"><strong>Prova</strong></td>
-    <td width="120"><strong>Media</strong></td>	
-    <td width="120"><strong>Situação</strong></td>
-    <td width="150"><strong>Resultado</strong></td>
+    <td><strong>DISCIPLINA<br /><br /></strong></td>
+    <td><strong>A</strong></td>
+    <td><strong>PI</strong></td>	
+    <td><strong>PT</strong></td>
+    <td><strong>COC</strong></td>
+    <td><strong>T</strong></td>
+    <td><strong>P</strong></td>
+    <td><strong>Media</strong></td>	
+    <td><strong>Situação</strong></td>
+    <td><strong>Resultado</strong></td>
   </tr>
 <?php
-$sql_1 = "SELECT * FROM disciplinas WHERE curso = '$serie'";
+$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie'";
 $result_1 = mysqli_query($conexao, $sql_1);
 	while($res_1 = mysqli_fetch_assoc($result_1)){
-		$disciplina = $res_1['disciplina'];
+		$disciplina = $res_1['id_disciplinas'];
 
-$sql_2 = "SELECT * FROM notas_observacao WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '1'";
+$sql_2 = "SELECT * FROM notas_atividades WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1'";
 $result_2 = mysqli_query($conexao, $sql_2);
 		
-$sql_3 = "SELECT * FROM notas_trabalhos WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '1'";
+$sql_3 = "SELECT * FROM notas_pro_inter WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1'";
 $result_3 = mysqli_query($conexao, $sql_3);	
 
-$sql_4 = "SELECT * FROM notas_atividades WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '1'";
+$sql_4 = "SELECT * FROM notas_pro_transversal WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1'";
 $result_4 = mysqli_query($conexao, $sql_4);
 		
-$sql_5 = "SELECT * FROM notas_provas WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '1'";	
+$sql_5 = "SELECT * FROM notas_ava_coc WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1'";	
 $result_5 = mysqli_query($conexao, $sql_5);
+
+$sql_6 = "SELECT * FROM notas_ava_teste WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1'";	
+$result_6 = mysqli_query($conexao, $sql_6);
+
+$sql_7 = "SELECT * FROM notas_ava_prova WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1'";	
+$result_7 = mysqli_query($conexao, $sql_7);
 	
 
 		
 ?>  
   <tr>
-    <td><?php echo $disciplina; ?></td>  
+    <td><?php echo $res_1['disciplina'];; ?></td>  
     <td>
     <?php
     if(mysqli_num_rows($result_2) == ''){
@@ -765,37 +773,82 @@ $result_5 = mysqli_query($conexao, $sql_5);
 	}?>
     </td>    
     <td>
+	<?php
+    if(mysqli_num_rows($result_6) == ''){
+		echo "<h2>Aguarde</h2>";
+	}else{
+		while($res_6 = mysqli_fetch_assoc($result_6)){
+				$nota = number_format($res_6['nota'],2);
+				
+				if($nota >= 7){
+					echo "<h2><strong>$nota</strong></h2>";
+				}else{
+					echo "<h3><strong>$nota</strong></h3>";
+				}
+				
+			}
+	}?>
+    </td>    
+    <td>
+	<?php
+    if(mysqli_num_rows($result_7) == ''){
+		echo "<h2>Aguarde</h2>";
+	}else{
+		while($res_7 = mysqli_fetch_assoc($result_7)){
+				$nota = number_format($res_7['nota'],2);
+				
+				if($nota >= 7){
+					echo "<h2><strong>$nota</strong></h2>";
+				}else{
+					echo "<h3><strong>$nota</strong></h3>";
+				}
+				
+			}
+	}?>
+    </td>    
+    <td>
 <?php
-if(mysqli_num_rows($result_5) == ''){
+if(mysqli_num_rows($result_7) == ''){
 	echo "Aguarde";
 }else{
-$sql_2 = "SELECT * FROM notas_observacao WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '1'";		
-$result_2 = mysqli_query($conexao, $sql_2);
 
-$sql_3 = "SELECT * FROM notas_trabalhos WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '1'";	
-$result_3 = mysqli_query($conexao, $sql_3);
-	
-$sql_4 = "SELECT * FROM notas_atividades WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '1'";
+$sql_2 = "SELECT * FROM notas_atividades WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1'";
+$result_2 = mysqli_query($conexao, $sql_2);
+		
+$sql_3 = "SELECT * FROM notas_pro_inter WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1'";
+$result_3 = mysqli_query($conexao, $sql_3);	
+
+$sql_4 = "SELECT * FROM notas_pro_transversal WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1'";
 $result_4 = mysqli_query($conexao, $sql_4);
-	
-$sql_5 = "SELECT * FROM notas_provas WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '1'";	
+		
+$sql_5 = "SELECT * FROM notas_ava_coc WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1'";	
 $result_5 = mysqli_query($conexao, $sql_5);
+
+$sql_6 = "SELECT * FROM notas_ava_teste WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1'";	
+$result_6 = mysqli_query($conexao, $sql_6);
+
+$sql_7 = "SELECT * FROM notas_ava_prova WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1'";	
+$result_7 = mysqli_query($conexao, $sql_7);
+	
+
 
 
 while($res_2 = mysqli_fetch_assoc($result_2)){
 while($res_3 = mysqli_fetch_assoc($result_3)){
 while($res_4 = mysqli_fetch_assoc($result_4)){
 while($res_5 = mysqli_fetch_assoc($result_5)){
+while($res_6 = mysqli_fetch_assoc($result_6)){
+while($res_7 = mysqli_fetch_assoc($result_7)){
 	
 
-	$media = ($res_2['nota']+$res_3['nota']+$res_4['nota']+$res_5['nota'])/4;
+	$media = ($res_2['nota']+$res_3['nota']+$res_4['nota']+$res_5['nota']+$res_6['nota']+$res_7['nota'])/4;
 	
 	if($media >=7){
 		echo "<h2><strong>".number_format($media,2)." - Aprovado</strong></h2>";
 	}else{
 		echo "<h3><strong>".number_format($media,2)." - Reprovado</strong></h3>";
 	
-	}}}}}}
+	}}}}}}}}
 ?>    
     </td>
   </tr>
@@ -804,6 +857,7 @@ while($res_5 = mysqli_fetch_assoc($result_5)){
     <td colspan="6"><img src="img/menu_topo.png" width="900" height="1"></td>
   </tr>
 </table>
+</div>
 <h4>OBS: </h4>
 <h4>OBS 2: </h4>
 <?php } ?>
@@ -820,21 +874,21 @@ while($res_5 = mysqli_fetch_assoc($result_5)){
     <td width="150"><strong>Resultado</strong></td>
   </tr>
 <?php
-$sql_1 = "SELECT * FROM disciplinas WHERE curso = '$serie'";
+$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie'";
 $result_1 = mysqli_query($conexao, $sql_1);
 	while($res_1 = mysqli_fetch_assoc($result_1)){
-		$disciplina = $res_1['disciplina'];
+		$disciplina = $res_1['id_disciplinas'];
 		
-$sql_2 = "SELECT * FROM notas_bimestrais WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '1'";
+$sql_2 = "SELECT * FROM notas_bimestres WHERE code = '$code' AND id_disciplinas = '$disciplina' AND bimestre = '1'";
 $result_2 = mysqli_query($conexao, $sql_2);
 		
-$sql_3 = "SELECT * FROM notas_bimestrais WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '2'";	
+$sql_3 = "SELECT * FROM notas_bimestres WHERE code = '$code' AND id_disciplinas = '$disciplina' AND bimestre = '2'";	
 $result_3 = mysqli_query($conexao, $sql_3);
 	
-$sql_4 = "SELECT * FROM notas_bimestrais WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '3'";
+$sql_4 = "SELECT * FROM notas_bimestres WHERE code = '$code' AND id_disciplinas = '$disciplina' AND bimestre = '3'";
 $result_4 = mysqli_query($conexao, $sql_4);
 		
-$sql_5 = "SELECT * FROM notas_bimestrais WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '4'";
+$sql_5 = "SELECT * FROM notas_bimestres WHERE code = '$code' AND id_disciplinas = '$disciplina' AND bimestre = '4'";
 $result_5 = mysqli_query($conexao, $sql_5);
 		
 ?>  
@@ -913,16 +967,16 @@ $result_5 = mysqli_query($conexao, $sql_5);
 if(mysqli_num_rows($result_5) == ''){
 	echo "Aguarde";
 }else{
-$sql_2 = "SELECT * FROM notas_bimestrais WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '1'";		
+$sql_2 = "SELECT * FROM notas_bimestres WHERE code = '$code' AND id_disciplinas = '$disciplina' AND bimestre = '1'";		
 $result_2 = mysqli_query($conexao, $sql_2);
 
-$sql_3 = "SELECT * FROM notas_bimestrais WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '2'";	
+$sql_3 = "SELECT * FROM notas_bimestres WHERE code = '$code' AND id_disciplinas = '$disciplina' AND bimestre = '2'";	
 $result_3 = mysqli_query($conexao, $sql_3);
 	
-$sql_4 = "SELECT * FROM notas_bimestrais WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '3'";	
+$sql_4 = "SELECT * FROM notas_bimestres WHERE code = '$code' AND id_disciplinas = '$disciplina' AND bimestre = '3'";	
 $result_4 = mysqli_query($conexao, $sql_4);
 	
-$sql_5 = "SELECT * FROM notas_bimestrais WHERE code = '$code' AND disciplina = '$disciplina' AND bimestre = '4'";	
+$sql_5 = "SELECT * FROM notas_bimestres WHERE code = '$code' AND id_disciplinas = '$disciplina' AND bimestre = '4'";	
 $result_5 = mysqli_query($conexao, $sql_5);
 
 
