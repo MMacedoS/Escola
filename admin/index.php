@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php 
+$painel_atual="admin";
+require_once "../config.php";
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
