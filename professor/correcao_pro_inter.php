@@ -15,6 +15,18 @@ if(isset($_GET['id'])){
 else{
   
 }
+
+
+
+if(isset($_GET['deleta']) && ($_GET['deleta']=='sim')){
+$idnota=$_GET['idNota'];
+$deleta_nota="DELETE FROM notas_pro_inter where id_notas_pro_inter='$idnota'";
+$deleta_nota=mysqli_query($conexao,$deleta_nota);
+if($deleta_nota){
+ echo "<script language='javascript'>window.location='correcao_pro_inter.php?pg=projetos-interdisciplinar&selec=$selec&id=$id';</script>";
+
+}//fim se deleta
+}
 $busca_prova="SELECT id_disciplina from projetos_interdisciplinar where id_pro_inter='$id'";
 $con_busca=mysqli_query($conexao,$busca_prova);
 while($res_busca=mysqli_fetch_assoc($con_busca)){
@@ -89,7 +101,10 @@ if(mysqli_num_rows($result_2) == ''){
     <?php }else{ while($res_4 = mysqli_fetch_assoc($result_4 )){ ?>
     <td><a target="_blank" href="../trabalhos_alunos/<?php echo $res_4['prova']; ?>">Ver prova</a></td>
     <td><h3><?php echo $res_4['nota']; ?></h3></td>
-   <td><a href="alterar_nota_trabalho.php?pg=projetos_interdisciplinar&id=<?php echo $res_4['id_atividade'];?>&aluno=<?php echo $res_2['matricula']; ?>&disciplina=<?php echo $res_1['id_disciplina']; ?>&bimestre=<?php echo $res_1['bimestre'];  ?>&professor=<?php echo $res_1['professor'];  ?>&nota=<?php echo $res_4['nota']; ?>" rel="superbox[iframe][400x100]"><img src="../image/ico-editar.png" border="0" title="Alterar a nota" /></a></td>
+   <td><a href="alterar_nota_trabalho.php?pg=projetos_interdisciplinar&id=<?php echo $res_4['id_atividade'];?>&aluno=<?php echo $res_2['matricula']; ?>&disciplina=<?php echo $res_1['id_disciplina']; ?>&bimestre=<?php echo $res_1['bimestre'];  ?>&professor=<?php echo $res_1['professor'];  ?>&nota=<?php echo $res_4['nota']; ?>" rel="superbox[iframe][400x100]"><img src="../image/ico-editar.png" border="0" width="30" title="Alterar a nota" /></a></td>
+   <td>&nbsp;</td>
+   <td>&nbsp;</td>
+   <td><a href="correcao_pro_inter.php?pg=projetos_interdisciplinar&id=<?php echo $id; ?>&selec=<?php echo $selec; ?>&idNota=<?php echo $res_4['id_notas_pro_inter'];?>&deleta=sim"><img src="../image/deleta.png" width="30" border="0" title="deleta nota" /></a></td>
     <?php }} ?>
   </tr>
 </table>
