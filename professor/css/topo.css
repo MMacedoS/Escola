@@ -131,8 +131,7 @@ body{
 #menu_topo li ul a:hover{
 	background:#930;
 	color:#FF0;
-	}		
-
+	}	
 
 /*======================================================trumas e alunos +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
@@ -273,7 +272,7 @@ padding-left: 75%;
 
 #box{
 	width:978px;
-	background:#666;
+	background:rgb(248, 248, 248);
 	text-align:left;
 	height:auto;
 	margin:-20px auto;
@@ -282,7 +281,7 @@ padding-left: 75%;
 #box h1{
 	font:18px Arial, Helvetica, sans-serif;
 	margin:10px;
-	color:#FFF;
+	color:rgb(8, 8, 8);
 	}
 	
 
@@ -380,3 +379,81 @@ padding-left: 75%;
 .select-items div:hover, .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
 }
+	
+/* home */
+#caixa_preta{
+	background:#000;
+	width:980px;
+	margin:18px auto;
+	height:15px;
+	}
+#box{
+	width:978px;
+	height:370px;
+	margin:-20px auto;
+	border:1px solid rgb(255, 252, 252);
+	
+	}
+#relatorios{
+	float:left;
+	width:auto;
+	height:auto;
+	background: rgb(141, 140, 140);
+	}
+#relatorios ul{
+	text-align:left;
+	margin:10px 0 0 0;
+	list-style-image:url(../img/seta.png);
+	}
+#relatorios ul h1{
+	font:20px Arial, Helvetica, sans-serif;
+	margin:0 0 10px -22px;
+	}
+#relatorios ul li{
+	margin:0 0 8px 0;
+	font:12px Arial, Helvetica, sans-serif;
+	color:rgb(245, 245, 248);
+	}
+#relatorios .ul{
+	list-style:inside;
+	}
+#relatorios ul .li{
+	margin:0 0 8px 0;
+	font:12px Arial, Helvetica, sans-serif;
+	color:#666;
+	}
+	
+#relatorios .card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #535151;
+    background-clip: border-box;
+    border: 1px solid rgba(128,120,128,.125);
+    border-radius: .25rem;
+    margin: 18px;
+    padding: 1px 0px 1px 1px;
+}	
+#notificacoes{
+	float: left;
+	width:auto;
+	margin:0 100px 0 30px;
+	text-align:left;
+	height:auto;
+	}
+#h1title{
+	font:18px Arial, Helvetica, sans-serif;
+	color:#000;
+	}
+#avisos_notificacoes{
+	border: 1px solid rgb(255, 255, 255);
+    float: left;
+    width: 550px;
+    margin: 0 10px 0 0;
+    height: 300px;
+    border: 1px solid #CCC;
+	}
