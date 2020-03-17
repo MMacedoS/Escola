@@ -4,7 +4,6 @@ require_once "Control/conexao.php";
 if(session_status()== PHP_SESSION_NONE){}
 @session_start();
 $code =$_SESSION['code'];
-$senha =$_SESSION['senha'];
 $nome =$_SESSION['nome'];
 $painel =$_SESSION['painel'];
 
