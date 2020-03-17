@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="shortcut icon" href="../image/logo_ist.gif">
 <title>Painél do Professor</title>
+<link rel="stylesheet" type="text/css" href="css/index.css"/>
 </head>
 
 <body>
@@ -72,7 +73,7 @@
  </div><!-- relatorios -->
  
  <div id="notificacoes">
-  <h1 id=""> Notificações</h1>
+  <h1>Notificações</h1>
   <div id="avisos_notificacoes">
      <ul>
    <?php
