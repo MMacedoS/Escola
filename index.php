@@ -51,7 +51,6 @@
                                 session_start();
                                 $_SESSION['code']=$code;
                                 $_SESSION['nome']=$nome;
-                                $_SESSION['senha']=md5($senha);
                                 $_SESSION['painel']=$painel;
                 
                                 if($painel=='admin'){

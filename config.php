@@ -18,9 +18,6 @@ if (empty($code)) {
     # code...
     echo "<script language='javascript'> window.location='../index.php'; </script>";
          session_destroy();
-}else if(empty($senha)){
-     session_destroy();
-    echo "<script language='javascript'> window.location='../index.php'; </script>";
 }else if(empty($painel)){
      session_destroy();
     echo "<script language='javascript'> window.location='../index.php'; </script>";
@@ -38,7 +35,6 @@ if (empty($code)) {
     if(@$_GET['acao']=='quebra'){
         session_destroy();
         $_SESSION['code'];
-        $_SESSION['senha'];
         $_SESSION['nome'];
         $_SESSION['painel'];
         echo "<script language='javascript'> window.location='index.php'; </script>";
