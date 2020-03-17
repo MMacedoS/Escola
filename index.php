@@ -20,7 +20,7 @@
          $password=preg_replace('/[^[:alnum:]_]/', '',$_POST['password']);
         if ($nome=="") {
             # code...
-            echo "<h2>Por favor , digite o numero do cartão ou código de acesso!</h2>";
+            echo "<h2>email de acesso invalido!</h2>";
         } else if ($password==""){
             # code...
             echo "<h2>Por favor , digite a senha!</h2>";
@@ -51,7 +51,7 @@
                                 session_start();
                                 $_SESSION['code']=$code;
                                 $_SESSION['nome']=$nome;
-                                $_SESSION['senha']=$senha;
+                                $_SESSION['senha']=md5($senha);
                                 $_SESSION['painel']=$painel;
                 
                                 if($painel=='admin'){

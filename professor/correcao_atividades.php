@@ -40,10 +40,14 @@ while($resDis=mysqli_fetch_assoc($conDis)){
   $curso=$resDis['curso'];
 }
  ?>
-
+<script type="text/javascript">
+function setFocus() {
+  document.getElementById("button").focus(); 
+}
+</script> 
 <div id="caixa_preta">
 </div><!-- caixa_preta -->
-<div id="box">
+<div id="box"  onLoad="setFocus()">
 <br>
 <h1><a class="a3" rel="stylesheet" href="correcao_atividades.php?pg=atividade_bimestral&selec=<?php echo $selec; ?>&id=<?php echo $id; ?>">Atualizar Pagina</a></h1>
 <br>
