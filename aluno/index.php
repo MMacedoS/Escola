@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 
-<link rel="shortcut icon" href="../image/logo_ist.png">
+<link rel="shortcut icon" href="../image/logo_ist.gif">
 <title>Painél do Aluno</title>
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
 </head>

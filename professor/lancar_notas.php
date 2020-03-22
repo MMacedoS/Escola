@@ -100,7 +100,7 @@ $(document).ready(function(){
 
 
 </script>
- <h1>Abaixo segue a lista dos alunos desta disciplina:  <?php echo $disc."  ".$curso;?>.       <h1>LANÇAR NOTA TAREFAS/ATIVIDADES:</h1></h1>
+ <h1>Abaixo segue a lista das Medias dos alunos desta disciplina:  <?php echo $disc."  ".$curso;?>. </h1>
 <?php $res='<div id="resultado"/>';?>
  
 <?php
@@ -121,7 +121,7 @@ $result = mysqli_query($conexao, $sql_1);
 // $sql_2 = "SELECT e.nome,e.matricula,c.curso,d.disciplina,d.id_disciplinas FROM estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes inner JOIN cursos c on c.id_cursos=ce.id_cursos INNER JOIN disciplinas d on d.id_cursos=c.id_cursos WHERE d.id_disciplinas ='$disciplinas' and ce.ano_letivo='$ano' and e.status='Ativo'";
 // $result_2 = mysqli_query($conexao, $sql_2);
 if(mysqli_num_rows($result) == ''){
-	echo "<h2>Nem um aluno cadastrado neste curso</h2>";
+	echo "<h3>Nenhuma média disponível neste curso</h3>";
 }else{
 		while($res_2 = mysqli_fetch_assoc($result)){
 ?> 
@@ -134,20 +134,27 @@ if(mysqli_num_rows($result) == ''){
 <input type="hidden" name="selec" value="<?php echo $selec; ?>" />
 <table width="955" border="0">
   <tr>
-     <td width="302">Nome do aluno:</td>
-    <td width="200">Disciplinas:</td>
-    <td width="144">Bimestre:</td>
-    <td width="200">Nota do Bimestre</td>
-    <td width="100">Ponto Extra</td>
-    <td width="100">Conselho:</td>
-    
-  </tr>
-  <tr>
-    <td><h3><?php
+      <!-- while estudante -->
+      <?php
       $code_aluno = $res_2['code'];
       $busca_aluno="SELECT nome, matricula FROM estudantes WHERE matricula='$code_aluno' and status='Ativo'";
       $con_aluno=mysqli_query($conexao,$busca_aluno);
       while($res_aluno=mysqli_fetch_assoc($con_aluno)){
+        
+        ?>
+
+
+     <td width="302">Nome do aluno:</td>
+    <td width="200">Disciplinas:</td>
+    <td width="144">Bimestre:</td>
+    <td width="200">Nota do Bimestre</td>
+    <td width="100">Paralela</td>
+    <td width="100">Conselho:</td>
+    
+  </tr>
+  <tr>
+    <td><h3>
+        <?php
        echo $res_aluno['nome'];
        
 
@@ -165,27 +172,26 @@ if(mysqli_num_rows($result) == ''){
     <?php
     $sql_4 = "SELECT * FROM notas_bimestres WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplinas='$id'";
 	$result_4 = mysqli_query($conexao, $sql_4);
-	if(mysqli_num_rows($result_4) == ''){
-	?>
-    <!-- <td><input type="file" name="prova" size="5" /></td>
-    <td><input name="nota" type="text" id="textfield" size="6"></td>
-    <td><input type="submit" name="button" id="button" value="Concretizar"></td> -->
-    <h1>As notas de todas as atividades não foram inseridas!!</h1>
-
-    <?php }else{ while($res_4 = mysqli_fetch_assoc($result_4 )){ ?>
+	 while($res_4 = mysqli_fetch_assoc($result_4 )){ ?>
     <?php if($res_4['nota']>=7){ ?>
     <td bgcolor="#58FA58" align="center"><font><h3><?php echo $res_4['nota']; ?></h3></font></td>
+    <td bgcolor="#58FA58" align="center"></td>
+    <td bgcolor="#58FA58" align="center"></td>
    <?php }else{?>
     <td bgcolor="#FA5858" align="center"><font><h3><?php echo $res_4['nota']; ?></h3></font></td>
-   <?php } ?>
+    <?php if($res_4['bimestre']==4){
+    }else{ ?>
    <td align="center"><a href="alterar_nota_trabalho.php?pg=ponto_extra&id=<?php echo $res_4['id_disciplinas'];?>&aluno=<?php echo $res_2['code']; ?>&disciplina=<?php echo $res_2['id_disciplinas']; ?>&bimestre=<?php echo $res_2['bimestre'];  ?>&professor=<?php echo $code;  ?>&nota=<?php echo $res_4['nota']; ?>" rel="superbox[iframe][400x100]"><img src="../image/ico-editar.png" border="0" title="Alterar a nota" /></a></td>
     <td><a target="_blank" href="../trabalhos_alunos/<?php echo $res_4['code']; ?>">Inserir conselho</a></td>
    
-    <?php }} ?>
+    <?php } //if bimestre
+  }// if nota
+  }/// while result
+  }/// if result  ?>
   </tr>
 </table>
 </form>
-<?php }} ?>
+<?php } ?>
 </div><!-- box -->
 
 <?php if(isset($_GET['button'])){

@@ -11,17 +11,29 @@
 
 </head>
 <body>
-<!Buscando estudante do banco >
+<!--Buscando estudante do banco -->
 <div id="caixa_preta">
-</div><!-- caixa_preta -->
+</div>
+
+<!-- caixa_preta -->
 <?php if(@$_GET['pg'] == 'todos'){ ?>
 <div id="box_aluno">
  <br /><br />
- <a class="a2" href="estudantes.php?pg=cadastra&bloco=1">Cadastrar novo aluno</a>
+ <div class="row" >
+ <a class="a2" href="estudantes.php?pg=cadastra&bloco=1">Cadastrar novo aluno </a>
+ <form class="form" method="post" action="estudantes.php?pg=todos">
+  <input type="text" name="nome" value="" placeholder="pesquise o aluno...">
+  <input type="submit" value="Pesquisar">
+</form>
+ </div>
  <h1>Alunos que estão cadastrados</h1>
-
 <?php
-$sql_1 = "SELECT * FROM estudantes WHERE  nome != '' and status != 'encerrado'";
+if(isset($_POST['nome'])){
+  $pesquisa=$_POST['nome'];
+  $sql_1 = "SELECT * FROM estudantes WHERE  nome like '%".$pesquisa."%'  and status != 'encerrado'";
+}else{
+  $sql_1 = "SELECT * FROM estudantes WHERE  nome != '' and status != 'encerrado'";
+}
 $consulta = mysqli_query($conexao, $sql_1);
 if(mysqli_num_rows($consulta) == ''){
 	echo "<h2>Não exisite nenhum aluno cadastrado no momento</h2>";
@@ -106,7 +118,7 @@ if(mysqli_num_rows($consulta) == ''){
 
 
 
-<! Exclusão, ativação e Desativação>
+<!-- Exclusão, ativação e Desativação-->
 
 <?php if(@$_GET['func'] == 'deleta'){
 
@@ -157,7 +169,7 @@ echo "<script language='javascript'>window.location='estudantes.php?pg=todos';</
 
 
 
-<!CADASTRO DOS ESTUDANTES - ETAPA 1>
+<!--CADASTRO DOS ESTUDANTES - ETAPA 1-->
 
 
 <?php  if(@$_GET['pg'] == 'cadastra'){ ?> 
@@ -309,7 +321,7 @@ echo "<script language='javascript'>window.alert('Dados cadastrados com sucesso!
 
 
 
-<!CADASTRO DOS ESTUDANTES - ETAPA 2>
+<!--CADASTRO DOS ESTUDANTES - ETAPA 2-->
 
 <?php if(@$_GET['bloco'] == '2'){ ?>
 <div id="box_aluno">
@@ -457,7 +469,7 @@ else{?>
 
 <?php }// aqui fecha a PG cadastra ?>
 
-<!ATUALIZAÇÃO DOS ESTUDANTES - ETAPA 1>
+<!--ATUALIZAÇÃO DOS ESTUDANTES - ETAPA 1-->
 
 
 <?php  if(@$_GET['pg'] == 'cadastra'){ ?> 

@@ -7,7 +7,7 @@
 <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="css/topo.css" rel="stylesheet" type="text/css" />
 <title>To Learn - Administração do Professor</title>
-<link rel="shortcut icon" href="../image/logo_ist.png">
+<link rel="shortcut icon" href="../image/logo_ist.gif">
 <script language="javascript" src="../js/jquery-1.7.2.min.js"></script>
 <script src="../js/lightbox.js"></script>
 <link href="../css/lightbox.css" rel="stylesheet" />

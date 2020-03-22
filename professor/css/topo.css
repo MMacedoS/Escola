@@ -385,13 +385,13 @@ padding-left: 75%;
 	margin:18px auto;
 	height:15px;
 	}
-#box{
+/* #box{
 	width:978px;
-	height:370px;
+	height:auto;
 	margin:-20px auto;
 	border:1px solid rgb(255, 252, 252);
 	
-	}
+	} */
 #relatorios{
 	float:left;
 	width:auto;
