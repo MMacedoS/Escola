@@ -158,7 +158,7 @@ if(mysqli_num_rows($result)==''){
   </tr>
   <tr>
     <td><a rel="superbox[iframe][850x350]" href="editar_pro_trans.php?id=<?php echo $res_1['id_pro_transversal']; ?>&code=<?php echo $code; ?>">Editar</a></td>
-    <td colspan="3"><a href="correcao_pro_trans.php?pg=projetos-transversal&selec=<?php echo $_GET['selec']; ?>&id=<?php echo $res_1['id_pro_transversal']; ?>">Fazer correção</a></td>
+    <td colspan="3"><a href="correcao_pro_trans.php?pg=projetos-transversal&selec=<?php echo $_GET['selec']; ?>&id=<?php echo $res_1['id_pro_transversal']; ?>">Lançar notas</a></td>
     <td></td>
     <td><a href="todas_pro_trans.php?pg=excluir&id=<?php echo $res_1['id_pro_transversal']; ?>&selec=<?php echo $_GET['selec']; ?>&code=<?php echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td>
   </tr>  

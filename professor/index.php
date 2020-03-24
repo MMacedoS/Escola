@@ -14,7 +14,9 @@
 
 <div id="caixa_preta">
 </div><!-- caixa_preta -->
-
+<?php if (!isset($_GET['selec'])) {
+  ?><script>alert('Escolha uma modalidade no botão acima');</script><?php
+}?>
 <div id="box">
 
  <div id="relatorios">

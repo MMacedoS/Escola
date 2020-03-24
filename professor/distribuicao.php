@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php $painel_atual = "professor"; ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
