@@ -58,7 +58,7 @@ $result = mysqli_query($conexao, $sql_aluno);
  
  <div id="logo">
   <!-- <img src="../image/logo.png" width="250" /> -->
-   <img src="image/logo_ist.gif">  
+   <img src="../image/logo_ist.gif">  
  </div><!-- logo -->
  
  <div id="dados_aluno">

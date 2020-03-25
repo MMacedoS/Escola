@@ -4,7 +4,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Editar Prova</title>
-<?php require "../control/conexao.php"; $date = date("d/m/Y H:i:s"); $code = $_GET['code']; $id = $_GET['id']; ?>
+<?php require_once "../config.php"; ?>
+<?php $date = date("d/m/Y H:i:s"); $code = $_GET['code']; $id = $_GET['id']; ?>
 <link rel="stylesheet" type="text/css" href="css/cadastrar_prova.css"/>
 </head>
 

@@ -39,9 +39,9 @@ $ano=Date('Y');
  <div class="card">
    <ul>
     <h1><strong>Suporte Escolar</strong></h1>
-    <li><strong>Caixa de entrada:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem WHERE emissor = '$code'")); ?></li>
-    <li><strong>Mensagens ainda não respondidas:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem WHERE emissor = '$code' AND status = 'Aguarda resposta'")); ?></li>
-    <li><strong>Mensagens respondidas:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem WHERE emissor = '$code' AND status = 'Respondida'")); ?></li>
+    <li><strong>Caixa de entrada:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem WHERE receptor = '$code'")); ?></li>
+    <li><strong>Mensagens ainda não respondidas:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem WHERE emissor = '$code' AND status = 'Aguarde resposta'")); ?></li>
+    <li><strong>Mensagens respondidas:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem WHERE receptor = '$code' AND status = 'Respondida'")); ?></li>
    </ul> 
  </div>
  
