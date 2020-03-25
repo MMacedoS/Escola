@@ -16,7 +16,25 @@
     
   <div align="center">
 <H1><a href="index.php?selec=<?php echo $_GET['selec'];?>">Distribuição de Notas</a> </H1>
+<form action="distribuicao.php?pg=notas" method="get">
+Selecione uma disciplina:
+<select name="disciplina" id=""><?php 
+$code=$_GET['code'];
+$sql_disc="SELECT d.id_disciplinas,d.disciplina,c.curso from disciplinas d INNER JOIN professores p on d.id_professores=p.id_professores INNER JOIN cursos c on c.id_cursos=d.id_cursos where p.code='$code'";
+$con_disc=mysqli_query($conexao,$sql_disc);
+while($res_dis=mysqli_fetch_assoc($con_disc)){
+?>
+        <option value="<?php echo $res_dis['id_disciplinas'];?>"><?php echo $res_dis['disciplina']." ";?><?php echo $res_dis['curso']?></option>
+<?php }?>
+    </select>
+    <input type="hidden" name="selec" value="<?php echo $_GET['selec'];?>">
+    <input type="hidden" name="code" value="<?php echo $_GET['code'];?>">
+    <input type="submit" name="button" value="buscar">
+    </form>
 
+<?php if(isset($_GET['button'])){ 
+    $disciplina=$_GET['disciplina'];
+    ?>
 <table class="table-responsive"  border="1" cellpadding="5" cellspacing="4" bgcolor="#FFF4EA">
 <tr>
 <td rowspan="2" class="nome" bgcolor="#efefef"><strong>Alunos</strong></td>
@@ -97,7 +115,7 @@ $mediaFinal=0;
 <!-- tarefas -->
 <?php 
     
-    $sqlTrans="select nota from notas_atividades where bimestre='1' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_atividades where bimestre='1' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
         $media1=0;
@@ -118,7 +136,7 @@ $mediaFinal=0;
 <!-- inter -->
 <?php 
     
-    $sqlinter="select nota from notas_pro_inter where bimestre='1' and code=".$res['matricula'];
+    $sqlinter="select nota from notas_pro_inter where bimestre='1' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $coninter=mysqli_query($conexao,$sqlinter);
     if(mysqli_num_rows($coninter)==""){
         ?>
@@ -138,7 +156,7 @@ $mediaFinal=0;
 <!-- transversal -->
 <?php 
     
-    $sqlTrans="select nota from notas_pro_transversal where bimestre='1' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_pro_transversal where bimestre='1' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -158,7 +176,7 @@ $mediaFinal=0;
 <!-- teste -->
 <?php 
     
-    $sqlTrans="select nota from notas_ava_teste where bimestre='1' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_ava_teste where bimestre='1' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -178,7 +196,7 @@ $mediaFinal=0;
 <!-- coc -->
 <?php 
     
-    $sqlTrans="select nota from notas_ava_coc where bimestre='1' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_ava_coc where bimestre='1' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -198,7 +216,7 @@ $mediaFinal=0;
 <!-- prova -->
 <?php 
     
-    $sqlTrans="select nota from notas_ava_prova where bimestre='1' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_ava_prova where bimestre='1' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
    if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -228,7 +246,7 @@ $mediaFinal=$media1;
 <!-- tarefas -->
 <?php 
     
-    $sqlTrans="select nota from notas_atividades where bimestre='2' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_atividades where bimestre='2' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -248,7 +266,7 @@ $mediaFinal=$media1;
 <!-- inter -->
 <?php 
     
-    $sqlinter="select nota from notas_pro_inter where bimestre='2' and code=".$res['matricula'];
+    $sqlinter="select nota from notas_pro_inter where bimestre='2' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $coninter=mysqli_query($conexao,$sqlinter);
     if(mysqli_num_rows($coninter)==""){
         ?>
@@ -268,7 +286,7 @@ $mediaFinal=$media1;
 <!-- transversal -->
 <?php 
     
-    $sqlTrans="select nota from notas_pro_transversal where bimestre='2' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_pro_transversal where bimestre='2' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -288,7 +306,7 @@ $mediaFinal=$media1;
 <!-- teste -->
 <?php 
     
-    $sqlTrans="select nota from notas_ava_teste where bimestre='2' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_ava_teste where bimestre='2' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -308,7 +326,7 @@ $mediaFinal=$media1;
 <!-- coc -->
 <?php 
     
-    $sqlTrans="select nota from notas_ava_coc where bimestre='2' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_ava_coc where bimestre='2' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
     
@@ -329,7 +347,7 @@ $mediaFinal=$media1;
 <!-- prova -->
 <?php 
     
-    $sqlTrans="select nota from notas_ava_prova where bimestre='2' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_ava_prova where bimestre='2' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
    if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -360,7 +378,7 @@ $mediaFinal=$mediaFinal+$media2;
 <!-- tarefas -->
 <?php 
     
-    $sqlTrans="select nota from notas_atividades where bimestre='3' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_atividades where bimestre='3' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -380,7 +398,7 @@ $mediaFinal=$mediaFinal+$media2;
 <!-- inter -->
 <?php 
     
-    $sqlinter="select nota from notas_pro_inter where bimestre='3' and code=".$res['matricula'];
+    $sqlinter="select nota from notas_pro_inter where bimestre='3' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $coninter=mysqli_query($conexao,$sqlinter);
     if(mysqli_num_rows($coninter)==""){
         ?>
@@ -400,7 +418,7 @@ $mediaFinal=$mediaFinal+$media2;
 <!-- transversal -->
 <?php 
     
-    $sqlTrans="select nota from notas_pro_transversal where bimestre='3' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_pro_transversal where bimestre='3' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -420,7 +438,7 @@ $mediaFinal=$mediaFinal+$media2;
 <!-- teste -->
 <?php 
     
-    $sqlTrans="select nota from notas_ava_teste where bimestre='3' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_ava_teste where bimestre='3' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -440,7 +458,7 @@ $mediaFinal=$mediaFinal+$media2;
 <!-- coc -->
 <?php 
     
-    $sqlTrans="select nota from notas_ava_coc where bimestre='3' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_ava_coc where bimestre='3' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -460,7 +478,7 @@ $mediaFinal=$mediaFinal+$media2;
 <!-- prova -->
 <?php 
     
-    $sqlTrans="select nota from notas_ava_prova where bimestre='3' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_ava_prova where bimestre='3' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
    if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -490,7 +508,7 @@ $mediaFinal+=$media3;
 <!-- tarefas -->
 <?php 
     
-    $sqlTrans="select nota from notas_atividades where bimestre='4' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_atividades where bimestre='4' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
         $med
@@ -511,7 +529,7 @@ $mediaFinal+=$media3;
 <!-- inter -->
 <?php 
     
-    $sqlinter="select nota from notas_pro_inter where bimestre='4' and code=".$res['matricula'];
+    $sqlinter="select nota from notas_pro_inter where bimestre='4' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $coninter=mysqli_query($conexao,$sqlinter);
     if(mysqli_num_rows($coninter)==""){
         ?>
@@ -531,7 +549,7 @@ $mediaFinal+=$media3;
 <!-- transversal -->
 <?php 
     
-    $sqlTrans="select nota from notas_pro_transversal where bimestre='4' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_pro_transversal where bimestre='4' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -551,7 +569,7 @@ $mediaFinal+=$media3;
 <!-- teste -->
 <?php 
     
-    $sqlTrans="select nota from notas_ava_teste where bimestre='4' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_ava_teste where bimestre='4' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -571,7 +589,7 @@ $mediaFinal+=$media3;
 <!-- coc -->
 <?php 
     
-    $sqlTrans="select nota from notas_ava_coc where bimestre='4' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_ava_coc where bimestre='4' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
     if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -591,7 +609,7 @@ $mediaFinal+=$media3;
 <!-- prova -->
 <?php 
     
-    $sqlTrans="select nota from notas_ava_prova where bimestre='4' and code=".$res['matricula'];
+    $sqlTrans="select nota from notas_ava_prova where bimestre='4' and id_disciplina='$disciplina' and code=".$res['matricula'];
     $conTrans=mysqli_query($conexao,$sqlTrans);
    if(mysqli_num_rows($conTrans)==""){
         ?>
@@ -650,7 +668,7 @@ $resFinal=$mediaFinal+0.4;
 <td bgcolor="#FFFFFF" align="center"><font color="#003399"><strong>7,25</strong></font></td> -->
 </tr>
 </table>
-
+<?php }?>
 </div>
 
 </div><!-- box -->
