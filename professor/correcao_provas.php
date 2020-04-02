@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Correçao de Provas</title>
+<title>Provas</title>
 <link rel="shortcut icon" href="../image/logo_ist.gif">
 <link rel="stylesheet" type="text/css" href="css/correcao_prova.css"/>
 </head>
@@ -122,13 +122,20 @@ $disciplina = $_GET['disciplina'];
 $prova = $_FILES['prova']['name'];
 $date=Date('Y');
 
-if(($nota>3)){
+if(($nota>3 && $_GET['selec']!="fundamental-inicial")){
   ?>
   <script>
     alert('Nota Maxima 3.0 para este trabalho');
-  </script>
+  </script>  
   <?php
-}else{
+  echo "<script language='javascript'>window.location='correcao_provas.php?pg=provas&selec=$selec&id=$id';</script>";
+}elseif($nota>5 && $_GET['selec']=="fundamental-inicial"){ ?>
+  <script>
+    alert('Nota Maxima 5.0 para esta atividade');
+  </script>
+    <?php
+    echo "<script language='javascript'>window.location='correcao_provas.php?pg=provas&selec=$selec&id=$id';</script>";
+  }else{
 if(file_exists("../trabalhos_alunos/$prova")){
 	$a = 1;
 	while(file_exists("../trabalhos_alunos/[$a]$prova")){

@@ -15,7 +15,7 @@
 </div><!-- caixa_preta -->
 
 <div id="box">
-<?php if($_GET['pg'] == 'atividades_pesquisa'){ ?>
+<?php if($_GET['pg'] == 'simulados'){ ?>
 <div class="row" id="row_button">
 <br /><a class="a2" rel="superbox[iframe][850x350]" href="cadastrar_trabalho.php?tipo=atividade_pesquisa&code=<?php echo $code; ?>">Cadastrar Pesquisa</a>
 <br /><a class="a3" rel="stylesheet" href="todas_as_trabalhos.php?pg=atividades_pesquisa">Atualizar Pagina</a>

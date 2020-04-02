@@ -78,10 +78,11 @@ $aluno = $_GET['aluno'];
 $id = $_GET['id'];
 $dis = $_GET['disciplina'];
 $bimestre = $_GET['bimestre'];
+$selec=$_GET['selec'];
 
 if($nota>1){?>
 <script>
-    alert('Nota Maxima 1.0 para esta paralela');
+    alert('Nota Maxima 1.0 para esta atividade, delete a nota caso tenha inserido errada!');
   </script>
   <?php
 }else{
@@ -119,7 +120,7 @@ $bimestre = $_GET['bimestre'];
 
 if($nota>1){?>
 <script>
-    alert('Nota Maxima 1.0 para esta paralela');
+    alert('Nota Maxima 1.0 para esta atividade');
   </script>
   <?php
 }else{
@@ -313,6 +314,7 @@ die;
 
 $nota = $_POST['nota'];
 $id=$_GET['id'];
+$selec=$_GET['selec'];
 $bimestre = $_GET['bimestre'];
 $professor = $_GET['professor'];
 $disciplina = $_GET['id'];
@@ -323,11 +325,16 @@ if($nota>$notaAntiga){?>
     alert('Nota Maxima <?php echo $notaAntiga; ?> para esta paralela');
   </script>
   <?php
-}else{
+}elseif($selec=="fundamental-inicial"){
+$sql = "UPDATE notas_ava_coc set nota=nota+'$nota' where id_disciplina='$disciplina' AND code='$code_aluno' AND bimestre='$bimestre'";
+mysqli_query($conexao, $sql);
+
+echo "A nota deste aluno foi alterada com sucesso!!!";}else{
 $sql = "UPDATE notas_ava_teste set nota=nota+'$nota' where id_disciplina='$disciplina' AND code='$code_aluno' AND bimestre='$bimestre'";
 mysqli_query($conexao, $sql);
 
-echo "A nota deste aluno foi alterada com sucesso!!!";}
+echo "A nota deste aluno foi alterada com sucesso!!!";
+}
 die;
 	
 }?>

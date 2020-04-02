@@ -12,7 +12,9 @@
 <body>
 
 <div id="box">
-<?php if($_GET['tipo'] == 'teste'){ ?>
+<?php if($_GET['tipo'] == 'teste'){ 
+  if(isset($_GET['selec'])){$selec=$_GET['selec'];}
+  ?>
 
 
 <?php if(isset($_POST['button'])){
@@ -68,7 +70,7 @@ echo "<script language='javascript'>window.alert('atividade ja existe! Click em 
        $ano_letivo=date("Y");
        }
 
-      $sql_1 = "SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos WHERE id_professores='$id_professor'";
+       $sql_1 = "SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner JOIN categoria cat on c.id_categoria=cat.id_categoria WHERE id_professores='$id_professor' and cat.categoria='$selec'";
 	  $result = mysqli_query($conexao, $sql_1);
 	  	while($res_1 = mysqli_fetch_assoc($result)){
 	  ?>

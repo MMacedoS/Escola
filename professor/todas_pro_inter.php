@@ -19,7 +19,7 @@
     $selec=$_GET['selec'];
  ?>
 <div class="row" id="row_button">
-<br /><a class="a2" rel="superbox[iframe][850x350]" href="cadastrar_pro_inter.php?tipo=projetos_interdisciplinar&code=<?php echo $id_professor; ?>">Cadastrar Atividade</a>
+<br /><a class="a2" rel="superbox[iframe][850x350]" href="cadastrar_pro_inter.php?tipo=projetos_interdisciplinar&selec=<?php echo $selec;?>&code=<?php echo $id_professor; ?>">Cadastrar Atividade</a>
 <br /><a class="a3" rel="stylesheet" href="todas_pro_inter.php?pg=projetos-interdisciplinar&selec=<?php echo $selec; ?>">Atualizar Pagina</a>
 </div>
 <script language="JavaScript">

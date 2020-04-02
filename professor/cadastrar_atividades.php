@@ -12,7 +12,14 @@
 <body>
 
 <div id="box">
-<?php if($_GET['tipo'] == 'atividade_bimestral'){ ?>
+<?php if($_GET['tipo'] == 'atividade_bimestral'){
+  if (isset($_GET['selec'])) {?>
+  
+  
+  <?php
+    $selec=$_GET['selec'];
+  }
+  ?>
 
 
 <?php if(isset($_POST['button'])){
@@ -51,7 +58,7 @@ echo "<script language='javascript'>window.alert('atividade ja existe! Click em 
  <form name="send" method="post" action="" enctype="multipart/form-data">	
 	
 <table border="0">
-  <tr>
+  <tr> 
     <td width="272">Disciplina</td>
     <td>Bimestre:</td>
     <td width="216">Data de aplicação da atividade</td>
@@ -68,7 +75,7 @@ echo "<script language='javascript'>window.alert('atividade ja existe! Click em 
        $ano_letivo=date("Y");
        }
 
-      $sql_1 = "SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos WHERE id_professores='$id_professor'";
+     $sql_1 = "SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner JOIN categoria cat on c.id_categoria=cat.id_categoria WHERE id_professores='$id_professor' and cat.categoria='$selec'";
 	  $result = mysqli_query($conexao, $sql_1);
 	  	while($res_1 = mysqli_fetch_assoc($result)){
 	  ?>
@@ -90,7 +97,7 @@ echo "<script language='javascript'>window.alert('atividade ja existe! Click em 
     <td>Informações adicionais:</td>
   </tr>
   <tr>
-    <td colspan="3"><textarea name="detalhes" cols="" rows=""></textarea></td>
+    <td colspan="3"><textarea name="detalhes" cols="" rows="" value="<?php echo $sql_1;?>"></textarea></td>
   </tr>
   <tr>
     <td><input class="input" type="submit" name="button" id="button" value="Cadastrar"></td>

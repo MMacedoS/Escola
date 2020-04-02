@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Correçao de Prova</title>
+<title>Atividades</title>
 <link rel="shortcut icon" href="../image/logo_ist.gif">
 <link rel="stylesheet" type="text/css" href="css/correcao_prova.css"/>
 </head>
@@ -106,7 +106,7 @@ if(mysqli_num_rows($result_2) == ''){
     <?php }else{ while($res_4 = mysqli_fetch_assoc($result_4 )){ ?>
     <td><a target="_blank" href="../trabalhos_alunos/<?php echo $res_4['prova']; ?>">Ver prova</a></td>
     <td><h3><?php echo $res_4['nota']; ?></h3></td>
-   <td><a href="alterar_nota_trabalho.php?pg=atividade_bimestral&id=<?php echo $res_4['id_atividade'];?>&aluno=<?php echo $res_2['matricula']; ?>&disciplina=<?php echo $res_1['id_disciplina']; ?>&bimestre=<?php echo $res_1['bimestre'];  ?>&professor=<?php echo $res_1['professor'];  ?>&nota=<?php echo $res_4['nota']; ?>" rel="superbox[iframe][400x100]"><img src="../image/ico-editar.png" width="30" border="0" title="Alterar a nota" /></a></td>
+   <td><a href="alterar_nota_trabalho.php?pg=atividade_bimestral&id=<?php echo $res_4['id_atividade'];?>&aluno=<?php echo $res_2['matricula']; ?>&disciplina=<?php echo $res_1['id_disciplina']; ?>&bimestre=<?php echo $res_1['bimestre'];  ?>&professor=<?php echo $res_1['professor'];  ?>&nota=<?php echo $res_4['nota']; ?>&selec=<?php echo $_GET['selec'];?>" rel="superbox[iframe][400x100]"><img src="../image/ico-editar.png" width="30" border="0" title="Alterar a nota" /></a></td>
    <td>&nbsp;</td>
    <td>&nbsp;</td>
    <td><a href="correcao_atividades.php?pg=atividade_bimestral&id=<?php echo $id; ?>&selec=<?php echo $selec; ?>&idNota=<?php echo $res_4['id_notas_atividades'];?>&deleta=sim"><img src="../image/deleta.png" width="30" border="0" title="deleta nota" /></a></td>
@@ -133,13 +133,20 @@ if(file_exists("../trabalhos_alunos/$prova")){
   	$prova = "[".$a."]".$prova;
  }
 
-if(($nota>1)){
+if(($nota>1 && $_GET['selec']!="fundamental-inicial")){
   ?>
   <script>
     alert('Nota Maxima 1.0 para este trabalho');
   </script>
   <?php
-}else{
+  echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
+}elseif($nota>2 && $_GET['selec']=="fundamental-inicial"){ ?>
+  <script>
+    alert('Nota Maxima 2.0 para esta atividade');
+  </script>
+  <?php
+  echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
+  }else{
  $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'";
 $result_verifica = mysqli_query($conexao, $sql_verifica);
 if(mysqli_num_rows($result_verifica)==0){

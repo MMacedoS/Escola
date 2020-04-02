@@ -15,7 +15,7 @@
 </div><!-- caixa_preta -->
 
 <div id="box">
-<?php if($_GET['pg'] == 'notas'){
+<?php if(isset($_GET['pg']) && $_GET['pg'] == 'notas'){
     $selec=$_GET['selec'];
  ?>
 <!-- <div class="row" id="row_button">
@@ -42,11 +42,11 @@ if(isset($_GET['busca'])){
   $sql_1  = "SELECT DISTINCT * FROM disciplinas d INNER JOIN cursos c ON c.id_cursos=d.id_cursos INNER JOIN categoria cat on cat.id_categoria=c.id_categoria INNER JOIN professores p on p.id_professores=d.id_professores where p.code='$code' ";
 
 }else{
- $sql_1  = "SELECT DISTINCT * FROM disciplinas d INNER JOIN cursos c ON c.id_cursos=d.id_cursos INNER JOIN categoria cat on cat.id_categoria=c.id_categoria INNER JOIN professores p on p.id_professores=d.id_professores where p.code='$code' ";
+ $sql_1  = "SELECT DISTINCT * FROM disciplinas d INNER JOIN cursos c ON c.id_cursos=d.id_cursos INNER JOIN categoria cat on cat.id_categoria=c.id_categoria INNER JOIN professores p on p.id_professores=d.id_professores where p.code='$code' and cat.categoria='$ensino' ";
 }// fim if busca
  }else{
 
- $sql_1 = "SELECT DISTINCT * FROM disciplinas d INNER JOIN cursos c ON c.id_cursos=d.id_cursos INNER JOIN categoria cat on cat.id_categoria=c.id_categoria INNER JOIN professores p on p.id_professores=d.id_professores where p.code='$code'";
+ $sql_1 = "SELECT DISTINCT * FROM disciplinas d INNER JOIN cursos c ON c.id_cursos=d.id_cursos INNER JOIN categoria cat on cat.id_categoria=c.id_categoria INNER JOIN professores p on p.id_professores=d.id_professores where p.code='$code' and cat.categoria='$ensino'";
  }
 $result = mysqli_query($conexao, $sql_1);
 
@@ -66,7 +66,7 @@ if(mysqli_num_rows($result)==''){
     <td><h3><?php echo $res_1['disciplina']; ?></h3></td>
     <td><h3><?php echo $res_1['curso']; ?></h3></td>
     <td><h3><?php $DIS=$res_1['id_cursos'];
-    $buscaDisc="SELECT * from estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes where ce.id_cursos='$DIS'";
+    $buscaDisc="SELECT * from estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes where ce.id_cursos='$DIS' and e.status='ativo'";
     $conDisc=mysqli_query($conexao,$buscaDisc);
     echo mysqli_num_rows($conDisc);
     ?></h3></td>
@@ -77,7 +77,7 @@ if(mysqli_num_rows($result)==''){
  
 <?php }}}
 
-if($_GET['pg'] == 'excluir'){
+if(isset($_GET['pg']  ) && $_GET['pg'] == 'excluir'){
 	
 $id = $_GET['id'];
 $code = $_GET['code'];

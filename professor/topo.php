@@ -111,9 +111,10 @@ function refresh()
     ?>
     <ul>
      <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>">Atividades/tarefas</a></li>
-     <li><a href="todas_as_trabalhos.php?pg=atividades_pesquisa&selec=<?php echo $_GET['selec']; ?>">Trabalhos/Atividades Praticas</a></li>
-     <li><a href="todas_as_avaliacoes.php?pg=provas_bimestrais&selec=<?php echo $_GET['selec']; ?>">Provas</a></li>
-     <li><a href="distribuicao.php?pg=observacoes">Distribuição das Notas</a></li>
+     <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<?php echo $_GET['selec']; ?>">Trabalhos/Atividades Praticas</a></li>
+     <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec']; ?>">Provas</a></li>
+     <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Lançar Nota Bimestre</a></li>
+     <li><a href="distribuicao.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
     </ul>
      <?php 
      } elseif((isset($_GET['selec']))&&(($_GET['selec']=="ensino-medio-inicial")||($_GET['selec']=="fundamental-final"))){ ?>      
@@ -131,11 +132,12 @@ function refresh()
       <?php }elseif((isset($_GET['selec']))&&($_GET['selec']=='ensino-medio-final')){ ?>
       
       <ul>
-     <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais">Atividades/tarefas</a></li>
-     <li><a href="todas_as_simulados.php?pg=provas_bimestrais">Simulados</a></li>
-     <li><a href="todas_as_trabalhos.php?pg=atividades_pesquisa">Trabalho_Individual</a></li>
-     <li><a href="todas_os_testes.php?pg=observacoes">Teste</a></li>
-     <li><a href="todas_as_avaliacoes.php?pg=provas_bimestrais">Prova</a></li>
+     <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>">Atividades/tarefas</a></li>
+     <li><a href="todas_simulados.php?pg=simulados&selec=<?php echo $_GET['selec'];?>">Simulados</a></li>
+     <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<?php echo $_GET['selec'];?>">Trabalho_Individual</a></li>
+     <li><a href="todas_teste.php?pg=teste&selec=<?php echo $_GET['selec'];?>">Teste</a></li>
+     <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec'];?>">Prova</a></li>
+     <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Lançar Nota Bimestre</a></li>
      <li><a href="todas_as_observacoes.php?pg=observacoes">Distribuição das Notas</a></li>
     </ul>
       

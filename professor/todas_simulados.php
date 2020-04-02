@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="css/todas_as_avaliacoes.css"/>
-<title>Teste</title>
+<title>Simulados</title>
 
 <link rel="shortcut icon" href="../image/logo_ist.gif">
 </head>
@@ -15,17 +15,17 @@
 </div><!-- caixa_preta -->
 
 <div id="box">
-<?php if($_GET['pg'] == 'teste'){
+<?php if($_GET['pg'] == 'simulados'){
     $selec=$_GET['selec'];
  ?>
 <div class="row" id="row_button">
-<br /><a class="a2" rel="superbox[iframe][850x350]" href="cadastrar_teste.php?tipo=teste&selec=<?php echo $selec;?>&code=<?php echo $id_professor; ?>">Cadastrar Atividade</a>
-<br /><a class="a3" rel="stylesheet" href="todas_teste.php?pg=teste&selec=<?php echo $selec;?>">Atualizar Pagina</a>
+<br /><a class="a2" rel="superbox[iframe][850x350]" href="cadastrar_pro_trans.php?tipo=projetos_transversal&selec=<?php echo $selec;?>&code=<?php echo $id_professor; ?>">Cadastrar Atividade</a>
+<br /><a class="a3" rel="stylesheet" href="todas_simulados.php?pg=simulados&selec=<?php echo $selec; ?>">Atualizar Pagina</a>
 </div>
 <script language="JavaScript">
 function refresh() 
 {     <!--  nome_do_form.action -->
-    incluir.action="todas_teste.php";      <!-- Deve ser o nome deste arquivo, refresh para esta mesma página  -->
+    incluir.action="todos_simulados.php";      <!-- Deve ser o nome deste arquivo, refresh para esta mesma página  -->
     incluir.submit();
 }
 </script>
@@ -41,7 +41,7 @@ function refresh()
              ?>
               <option value="<?php echo $_GET['busca']; ?>"><?php 
                $busca=$_GET['busca'];
-               $sql_select="SELECT DISTINCT c.id_cursos,c.curso FROM avaliacao_teste ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and c.id_cursos='$busca' and ati.ano_letivo=2020 ORDER BY ati.id_ava_teste DESC";
+               $sql_select="SELECT DISTINCT c.id_cursos,c.curso FROM projetos_transversal ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and c.id_cursos='$busca' and ati.ano_letivo=2020 ORDER BY ati.id_pro_transversal DESC";
             $result1=mysqli_query($conexao,$sql_select);   
             
             while($mos_rs1=mysqli_fetch_assoc($result1)){
@@ -49,7 +49,7 @@ function refresh()
               
               }?></option> 
             <?php
-             $sql_select="SELECT DISTINCT c.id_cursos,c.curso FROM avaliacao_teste ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.categoria='$selec' and ati.ano_letivo=2020 ORDER BY ati.id_ava_teste DESC";
+             $sql_select="SELECT DISTINCT c.id_cursos,c.curso FROM projetos_transversal ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.categoria='ensino-medio-inicial' and ati.ano_letivo=2020 ORDER BY ati.id_pro_transversal DESC";
             $result1=mysqli_query($conexao,$sql_select);   
             
             while($mos_rs1=mysqli_fetch_assoc($result1)){
@@ -61,7 +61,7 @@ function refresh()
               </option>
               <?php }
               }else{ 
-              $sql_select="SELECT DISTINCT c.id_cursos,c.curso FROM avaliacao_teste ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.categoria='$selec' and ati.ano_letivo=2020 ORDER BY ati.id_ava_teste DESC";
+              $sql_select="SELECT DISTINCT c.id_cursos,c.curso FROM projetos_transversal ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.categoria='ensino-medio-inicial' and ati.ano_letivo=2020 ORDER BY ati.id_pro_transversal DESC";
             $result1=mysqli_query($conexao,$sql_select);   
             
             ?><option value="0">Todas</option><?php
@@ -75,7 +75,7 @@ function refresh()
 <?php     
     }} ?>
 </select>
-<input type="hidden" name="pg" value="teste">
+<input type="hidden" name="pg" value="projetos-transversal">
 </h1>
 <p></p>
 <script>
@@ -105,7 +105,8 @@ $(document).ready(function(){
   })
 })
 </script>
- <h1>Abaixo segue seu histórico de <strong>Teste</strong> de suas turmas!</h1>
+
+ <h1>Abaixo segue seu histórico de <strong> Simulados </strong> de suas turmas!</h1>
  <?php $res='<div id="resultado"/>';?>
 <?php
 
@@ -114,15 +115,17 @@ $ensino=$_GET['selec'];
 
 if(isset($_GET['busca'])){
   $res=$_GET['busca'];
-  $sql_1  = "SELECT ati.*, cat.categoria FROM avaliacao_teste ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.categoria='$ensino' and ati.id_curso='$res' and ano_letivo=2020 ORDER BY id_ava_teste DESC";
+  $sql_1  = "SELECT ati.*, cat.categoria FROM projetos_transversal ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.categoria='$ensino' and ati.id_curso='$res' and ano_letivo=2020 ORDER BY id_pro_transversal DESC";
 
 }else{
-  $sql_1  = "SELECT ati.*, cat.categoria FROM avaliacao_teste ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.categoria='$ensino' and ano_letivo=2020 ORDER BY id_ava_teste DESC";
-}//fim if busca
- }else{
+  $sql_1  = "SELECT ati.*, cat.categoria FROM projetos_transversal ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.categoria='$ensino' and ano_letivo=2020 ORDER BY id_pro_transversal DESC";
 
-  $sql_1 = "SELECT ati.*, cat.categoria FROM avaliacao_teste ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor=$code and ano_letivo='2020' ORDER BY id_ava_teste DESC";
- }
+} //ffim if busca
+}
+ else{
+
+  $sql_1 = "SELECT ati.*, cat.categoria FROM projetos_transversal ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor=$code and ano_letivo='2020' ORDER BY id_pro_transversal DESC";
+}
 $result = mysqli_query($conexao, $sql_1);
 
 if(mysqli_num_rows($result)==''){
@@ -140,7 +143,7 @@ if(mysqli_num_rows($result)==''){
     <td width="200">Bimestre</td>
   </tr>
   <tr>
-    <td><h3><?php echo $res_1['id_ava_teste']; ?></h3></td>
+    <td><h3><?php echo $res_1['id_pro_transversal']; ?></h3></td>
     <td><h3><?php echo $res_1['status']; ?></h3></td>
     <td><h3><?php echo $res_1['data']; ?></h3></td>
     <td><h3><?php echo $res_1['data_aplicacao']; ?></h3></td>
@@ -154,10 +157,10 @@ if(mysqli_num_rows($result)==''){
      <td><h3><?php echo $res_1['bimestre']; ?></h3></td>
   </tr>
   <tr>
-    <td><a rel="superbox[iframe][850x350]" href="editar_teste.php?id=<?php echo $res_1['id_ava_teste']; ?>&code=<?php echo $code; ?>">Editar</a></td>
-    <td colspan="3"><a href="correcao_teste.php?pg=teste&selec=<?php echo $_GET['selec']; ?>&id=<?php echo $res_1['id_ava_teste']; ?>">Lançar notas</a></td>
+    <td><a rel="superbox[iframe][850x350]" href="editar_pro_trans.php?id=<?php echo $res_1['id_pro_transversal']; ?>&code=<?php echo $code; ?>">Editar</a></td>
+    <td colspan="3"><a href="correcao_pro_trans.php?pg=projetos-transversal&selec=<?php echo $_GET['selec']; ?>&id=<?php echo $res_1['id_pro_transversal']; ?>">Lançar notas</a></td>
     <td></td>
-    <td><a href="todas_teste.php?pg=excluir&id=<?php echo $res_1['id_ava_teste']; ?>&selec=<?php echo $_GET['selec']; ?>&code=<?php echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td>
+    <td><a href="todas_pro_trans.php?pg=excluir&id=<?php echo $res_1['id_pro_transversal']; ?>&selec=<?php echo $_GET['selec']; ?>&code=<?php echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td>
   </tr>  
   </table> 
  
@@ -168,10 +171,10 @@ if($_GET['pg'] == 'excluir'){
 $id = $_GET['id'];
 $code = $_GET['code'];
 
-// $sql_2 = "DELETE FROM avaliacao_teste WHERE id_ava_teste = '$id'";
+// $sql_2 = "DELETE FROM projetos_transversal WHERE id_pro_transversal = '$id'";
 // mysqli_query($conexao, $sql_2);
 
-echo "<script language='javascript'>window.location='todas_teste.php?pg=teste&selec=".$_GET['selec']."';</script>";
+echo "<script language='javascript'>window.location='todos_simulados.php?pg=simulados&selec=$selec'';</script>";
 
 }?> 
 </div><!-- box-->

@@ -181,7 +181,7 @@ if(mysqli_num_rows($result) == ''){
     <td bgcolor="#FA5858" align="center"><font><h3><?php echo $res_4['nota']; ?></h3></font></td>
     <?php if($res_4['bimestre']==4){
     }else{ ?>
-   <td align="center"><a href="alterar_nota_trabalho.php?pg=ponto_extra&id=<?php echo $res_4['id_disciplinas'];?>&aluno=<?php echo $res_2['code']; ?>&disciplina=<?php echo $res_2['id_disciplinas']; ?>&bimestre=<?php echo $res_2['bimestre'];  ?>&professor=<?php echo $code;  ?>&nota=<?php echo $res_4['nota']; ?>" rel="superbox[iframe][400x100]"><img src="../image/ico-editar.png" border="0" title="Alterar a nota" /></a></td>
+   <td align="center"><a href="alterar_nota_trabalho.php?pg=ponto_extra&selec=<?php echo $selec;?>&id=<?php echo $res_4['id_disciplinas'];?>&aluno=<?php echo $res_2['code']; ?>&disciplina=<?php echo $res_2['id_disciplinas']; ?>&bimestre=<?php echo $res_2['bimestre'];  ?>&professor=<?php echo $code;  ?>&nota=<?php echo $res_4['nota']; ?>" rel="superbox[iframe][400x100]"><img src="../image/ico-editar.png" border="0" title="Alterar a nota" /></a></td>
     <td><a target="_blank" href="../trabalhos_alunos/<?php echo $res_4['code']; ?>">Inserir conselho</a></td>
    
     <?php } //if bimestre
