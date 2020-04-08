@@ -1,9 +1,9 @@
 <?php
 
 function connectar(){
-    $servidor ="mysql873.umbler.com";
-    $usuario="kamaur";
-    $senha="kamaur2711";
+    $servidor ="localhost";
+    $usuario="root";
+    $senha="";
     $bd="ist";
 
     $con= new mysqli($servidor,$usuario,$senha,$bd);

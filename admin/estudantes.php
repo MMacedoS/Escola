@@ -183,7 +183,7 @@ echo "<script language='javascript'>window.location='estudantes.php?pg=todos';</
 $code = $_POST['code'];
 $nome = $_POST['nome']." ".$_POST['sobrenome'];
 $cpf = $_POST['cpf'];
-$rg = $_POST['rg'];
+$email = $_POST['email'];
 $nascimento = $_POST['nascimento'];
 $mae = $_POST['mae'];
 $pai = $_POST['pai'];
@@ -197,7 +197,7 @@ $cep = $_POST['cep'];
 $celular = $_POST['celular'];
 $usuario = str_replace(' ','',$_POST['nome'])."@alunoist";
 
-$sql_2 = "INSERT INTO estudantes (matricula, status, nome, cpf, rg, nascimento, mae, pai, estado, cidade, bairro, endereco, complemento, cep, tel_residencial, celular) VALUES ('$code', 'Ativo', '$nome', '$cpf', '$rg', '$nascimento', '$mae', '$pai', '$estado', '$cidade', '$bairro', '$endereco', '$complemento', '$cep', '$tel_residencial', '$celular')";
+$sql_2 = "INSERT INTO estudantes (matricula, status, nome, cpf, email, nascimento, mae, pai, estado, cidade, bairro, endereco, complemento, cep, tel_residencial, celular) VALUES ('$code', 'Ativo', '$nome', '$cpf', '$email', '$nascimento', '$mae', '$pai', '$estado', '$cidade', '$bairro', '$endereco', '$complemento', '$cep', '$tel_residencial', '$celular')";
 
 $sql_login = "INSERT INTO login (status, code, senha, nome, painel) VALUES ('Ativo', '$code', '$cpf', '$usuario', 'Aluno')";
 
@@ -259,13 +259,13 @@ echo "<script language='javascript'>window.alert('Dados cadastrados com sucesso!
       
     </tr>
     <tr>
-      <td>RG:</td>
+      <td>Email:</td>
       <td>Data de nascimento:</td>
       <td>Nome da mãe:</td>
     </tr>
     <tr>
       <td><label for="tel_amigo"></label>
-      <input type="text" class="form-control" name="rg" id="textfield3"></td>
+      <input type="email" class="form-control" name="email" id="textfield3"></td>
       <td><label for="nascimento"></label>
       <input type="date"  class="form-control" name="nascimento" id="textfield4"></td>
       <td><label for="select"></label>

@@ -663,7 +663,7 @@ $result_5 = mysqli_query($conexao, $sql_5);
 <?php if($_GET['pg'] == 'distribuicao'){ ?>
 <h1><strong>Suas notas bimestrais</strong></h1>
 <div class="table-responsive">
-<table	 border="0">
+<table	class="table-responsive" border="0">
   <tr>
     <td><strong>DISCIPLINA<br /><br /></strong></td>
     <td><strong>A</strong></td>
@@ -674,7 +674,7 @@ $result_5 = mysqli_query($conexao, $sql_5);
     <td><strong>P</strong></td>
     <td><strong>Media</strong></td>	
     <td><strong>Situação</strong></td>
-    <td><strong>Resultado</strong></td>
+	
   </tr>
 <?php
 $sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie'";
@@ -700,7 +700,9 @@ $result_6 = mysqli_query($conexao, $sql_6);
 $sql_7 = "SELECT * FROM notas_ava_prova WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1' and ano_letivo='$data'";	
 $result_7 = mysqli_query($conexao, $sql_7);
 	
-
+$sql_8 = "SELECT * FROM notas_bimestres WHERE code = '$code' AND id_disciplinas = '$disciplina' AND bimestre = '1' and ano_letivo='$data'";	
+$result_8 = mysqli_query($conexao, $sql_8);
+	
 		
 ?>  
   <tr>
@@ -807,13 +809,29 @@ $result_7 = mysqli_query($conexao, $sql_7);
 			}
 	}?>
     </td>    
-    <td>
-
-    </td>
+    
+	<td>
+	<?php
+    if(mysqli_num_rows($result_8) == ''){
+		echo "<h2>Aguarde</h2>";
+	}else{
+		while($res_8 = mysqli_fetch_assoc($result_8)){
+				$nota = number_format($res_8['nota'],2);
+				
+				if($nota >= 7){
+					echo "<h2><strong>$nota</strong></h2>";
+				}else{
+					echo "<h3><strong>$nota</strong></h3>";
+				}
+				
+			}
+	}?>
+    </td>    
+	 
   </tr>
 <?php } ?>  
   <tr>
-    <td colspan="6"><img src="img/menu_topo.png" width="900" height="1"></td>
+    
   </tr>
 </table>
 </div>

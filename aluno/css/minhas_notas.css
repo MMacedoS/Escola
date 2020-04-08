@@ -32,6 +32,11 @@
 		background:#FFF;
 		border:2px solid #0CF;
 		}
+td {
+    width: 100px;
+    padding: 2px 20px;
+    box-shadow: inset -2px -1px 0px black;
+}
 #box table img{
 	width:940px;
 	}

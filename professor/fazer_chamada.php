@@ -131,13 +131,13 @@ $code_aluno = $_GET['code_aluno'];
 $nome = $_GET['nome'];	
 $curso = $_GET['curso'];
 @$presensa = $_GET['presenca'];
-
+$ano=Date('Y');
 $disc=($_GET['dis']);
 
 if($presensa == ''){
 	echo "<script language='javascript'>window.alert('Por favor, informe se este aluno está presente ou não na sala de aula!');</script>";
 }else if($presensa=='SIM'){
-$sql_4 = "INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas, matricula, presente) VALUES ('$date', '$date_hoje','$dis', '$code_aluno', '$presensa')";	
+$sql_4 = "INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas, matricula, presente, ano_letivo) VALUES ('$date', '$date_hoje','$dis', '$code_aluno', '$presensa','$ano')";	
 $insere=mysqli_query($conexao, $sql_4);
 if($insere){
 	echo "<script language='javascript'>window.location='fazer_chamada.php?curso=$curso&dis=$disc; ?>';</script>";
@@ -157,8 +157,8 @@ if($insere){
 
 $code_aluno = $_GET['code_aluno'];	
 $curso = $_GET['curso'];
-
-$sql_alterar = "delete from chamadas_em_sala where date_day='$date_hoje' and matricula='$code_aluno' and id_disciplinas='$dis'";	
+$ano=Date('Y');
+$sql_alterar = "delete from chamadas_em_sala where date_day='$date_hoje' and matricula='$code_aluno' and id_disciplinas='$dis' and ano_letivo='$ano'";	
 
 mysqli_query($conexao, $sql_alterar);
 $disc=($_GET['dis']);
@@ -170,8 +170,8 @@ $disc=($_GET['dis']);
 
 $code_aluno = $_GET['code_aluno'];
 $presensa = $_GET['tipo'];
-
-$sql_5 = "INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas,matricula, presente) VALUES ('$date', '$date_hoje', '$dis', '$code_aluno', '$presensa')";	
+$ano=Date('Y');
+$sql_5 = "INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas,matricula, presente, ano_letivo) VALUES ('$date', '$date_hoje', '$dis', '$code_aluno', '$presensa', '$ano')";	
 mysqli_query($conexao, $sql_5);
 $curso = $_GET['curso'];
 $disc=($_GET['dis']);

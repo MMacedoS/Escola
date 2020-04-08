@@ -107,7 +107,8 @@
         <td><input type="password" name="password"></td>
         </tr>
         <tr>
-        <td><input class="input"type="submit" name="button" value="Entrar"></td>
+        <td><input class="input"type="submit" name="button" value="Entrar"><p align="right"><a href="recuperar_senha.php">Esqueceu a senha? Recupere já!</a></p></td>
+        
         </tr>
         </table>
     </form>

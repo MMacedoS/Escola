@@ -15,7 +15,8 @@ $result = mysqli_query($conexao, $sql_aluno);
 	while($r_aluno = mysqli_fetch_assoc($result)){
 		$nome = $r_aluno['nome'];
 		$serie = $r_aluno['id_cursos'];
-		$cpf = $r_aluno['cpf'];
+    $cpf = $r_aluno['cpf'];
+    $code=$r_aluno['matricula'];
 	
 ?>
 <title> Portal do aluno</title>

@@ -30,40 +30,41 @@
     <td width="119"><strong>Resultado</strong></td>
   </tr>
 <?php
-$sql_1 = "SELECT * FROM disciplinas WHERE curso = '$serie'";
+$ano=Date('Y');
+$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie'";
 $result_1 = mysqli_query($conexao, $sql_1);
 	while($res_1 = mysqli_fetch_assoc($result_1)){
-
+  
 ?>  
   <tr>
     <td><?php echo $disciplina = $res_1['disciplina']; ?></td>
     <td><?php 
-	$sql_2 = "SELECT * FROM chamadas_em_sala WHERE curso = '$serie' AND disciplina = '$disciplina' AND code_aluno = '$code' AND presente = 'SIM'";
+	$sql_2 = "SELECT * FROM chamadas_em_sala WHERE id_disciplinas = ".$res_1['id_disciplinas']." AND matricula = '$code' and ano_letivo='$ano' AND presente = 'SIM'";
 	$result_2 = mysqli_query($conexao, $sql_2);
 	$ver_result_2 = mysqli_num_rows($result_2);
 	echo $ver_result_2; ?></td>
-    <td><?php $sql_3 = "SELECT * FROM chamadas_em_sala WHERE curso = '$serie' AND disciplina = '$disciplina' AND code_aluno = '$code' AND presente = 'NÃO'"; 
+    <td><?php  $sql_3 = "SELECT * FROM chamadas_em_sala WHERE id_disciplinas = ".$res_1['id_disciplinas']." AND matricula = '$code' and ano_letivo='$ano' AND presente = 'FALTA'"; 
 	$result_3 = mysqli_query($conexao, $sql_3);
 	$ver_result_3 = mysqli_num_rows($result_3);
 	echo $ver_result_3;
 	?></td>
-    <td><?php $sql_4 = "SELECT * FROM chamadas_em_sala WHERE curso = '$serie' AND disciplina = '$disciplina' AND code_aluno = '$code' AND presente = 'JUSTIFICADA'"; 
+    <td><?php $sql_4 = "SELECT * FROM chamadas_em_sala WHERE id_disciplinas = ".$res_1['id_disciplinas']." AND matricula = '$code' and ano_letivo='$ano' AND presente = 'JUSTIFICADA'"; 
 	$result_4 = mysqli_query($conexao, $sql_4);
 	$ver_result_4 = mysqli_num_rows($result_4);
 	echo $ver_result_4;
 	?></td>
     <td>
     <?php
-	$sql_5 = "SELECT * FROM chamadas_em_sala WHERE curso = '$serie' AND disciplina = '$disciplina'";
+	$sql_5 = "SELECT * FROM chamadas_em_sala WHERE matricula='$code' and ano_letivo='$ano' and presente!='FALTA' and id_disciplinas =".$res_1['id_disciplinas'];
 	$result_5 = mysqli_query($conexao, $sql_5);
 	$conta_sql_5 = mysqli_num_rows($result_5);
 	
 	$total = ($conta_sql_5*25)/100;
 	
-	if($ver_result_3 > $total){
-		echo "Reprovado";
+	if($ver_result_3 >= $total){
+		echo "Frequência baixa";
 	}else{
-		echo "Aprovado";
+		echo "Frequência OK";
 		}
 	
 	?>    
