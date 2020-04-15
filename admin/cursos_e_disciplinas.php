@@ -55,22 +55,25 @@
                     }
                 } ?>
                 <form name="form1" method="post" action="">
-                    <table width="900" border="0">
-                        <tr>
-                            <td width="134">Curso</td>
-                            <td width="134">Turno</td>
-                            <td width="134">Categoria</td>
+                    <table class="users" id="table-responsive" border="0">
+                    <thead>    
+                    <tr>
+                            <td class="row-1 row-cur">Curso</td>
+                            <td class="row-1 row-cur">Turno</td>
+                            <td class="row-1 row-cur">Categoria</td>
                         </tr>
+                        </thead>
+                        <tbody>
                         <tr>
-                            <td><input type="text" name="curso"  id="textfield" value=""></td>
-                            <td>
+                            <td class="row-1 row-cur"><input type="text" name="curso"  width="40px" value=""></td>
+                            <td class="row-1 row-cur">
                                 <select name="turno" size="1" id="turno">
                                     <option value="Matutino">Matutino</option>
                                     <option value="Vespertino">Vespertino</option>
                                     <option value="Noturno">Noturno</option>
                                 </select>
                             </td>
-                            <td>
+                            <td class="row-1 row-cur">
                                 <select name="categoria" size="1" id="categoria">
                                     <?php 
                                     $sql_cat="select * from categoria";
@@ -82,8 +85,9 @@
                                     <?php } ?>
                                 </select>
                             </td>
-                            <td><input class="input" type="submit" name="cadastra" id="button" value="Cadastrar"></td>
+                            <td class="row-1 row-cur"><input class="input" type="submit" name="cadastra" id="button" value="Cadastrar"></td>
                         </tr>
+                        </tbody>
                     </table>
                 </form>
                     <br/>
@@ -122,15 +126,18 @@
                 }
                 } ?>
                 <form name="form1" method="post" action="">
-                    <table width="900" border="0">
-                        <tr>
-                            <td width="134">Curso</td>
-                            <td width="134">Turno</td>
-                            <td width="134">Categoria</td>
+                <table class="users" id="table-responsive" border="0">
+                <thead>    
+                    <tr>
+                            <td class="row-1 row-cur">Curso</td>
+                            <td class="row-1 row-cur">Turno</td>
+                            <td class="row-1 row-cur">Categoria</td>
                         </tr>
+                        </thead>
+                        <tbody>
                         <tr>
-                            <td><input type="text" name="curso"  id="textfield" value="<?php echo $edit_curso['curso'];?>"></td>
-                            <td>
+                            <td class="row-1 row-cur"><input type="text" name="curso"  id="textfield" value="<?php echo $edit_curso['curso'];?>"></td>
+                            <td class="row-1 row-cur">
                                 <select name="turno" size="1" id="turno">
                                     <option value="<?php echo $edit_curso['turno'];?>"><?php echo $edit_curso['turno'];?></option>
                                     <option value="Matutino">Matutino</option>
@@ -138,7 +145,7 @@
                                     <option value="Noturno">Noturno</option>
                                 </select>
                             </td>
-                            <td>
+                            <td class="row-1 row-cur">
                                 <select name="categoria" size="1" id="categoria">
                                    
                                    <?php 
@@ -161,9 +168,9 @@
                                 </select>
                             
                             </td>
-                            <td><input class="input" type="submit" name="atualiza" id="button" value="Atualizar"></td>
+                            <td class="row-1 row-cur"><input class="input" type="submit" name="atualiza" id="button" value="Atualizar"></td>
                         </tr>
-
+                        </tbody>
                     </table>
                     <?php } ?>
                 </form>
@@ -184,28 +191,31 @@
          ?>
          <br/><br/>
          <h1>Turmas</h1>
-            <table width="900" border="0">
+         <table class="users" id="table-responsive" border="0">
+                <thead>
                 <tr>
-                    <td><strong>Turmas:</strong></td>
-                    <td><strong>Total de disciplinas desta Turma:</strong></td>
-                    <td> <strong> Categoria:</strong></td>
-                    <td>&nbsp;</td>
+                    <td class="row-1 row-ID"><strong>Turmas:</strong></td>
+                    <td class="row-2 row-ID"><strong>Total de disciplinas desta Turma:</strong></td>
+                    <td class="row-3 row-ID"> <strong> Categoria:</strong></td>
+                    <td class="row-4 row-ID">&nbsp;</td>
                 </tr>
+                </thead>
+                <tbody>
                 <?php while($res_1 = mysqli_fetch_assoc($result)){
                     $cursos_id=$res_1['id_cursos'];
                 ?>
 
                 <tr>
-                    <td><h3>
+                    <td class="row-cur"><h3>
                         <?php echo $curso = $res_1['curso'].' || '.$res_1['turno'];
                         
                         ?>
                     </h3></td>
-                    <td><h3><?php $sql_2="select * from disciplinas where id_cursos='$cursos_id'";
+                    <td class="row-name"><h3><?php $sql_2="select * from disciplinas where id_cursos='$cursos_id'";
                     $result2=mysqli_query($conexao,$sql_2);
                     echo mysqli_num_rows($result2); ?>                
                     </h3></td>
-                    <td> <h3>
+                    <td class="row-cod"> <h3>
                         
                         <?php 
                             $categoria=$res_1['id_categoria'];
@@ -217,16 +227,17 @@
                          ?>
                     </h3>
                     </td>
-                    <td>
+                    <td class="">
                     <a class="a" href="cursos_e_disciplinas.php?pg=curso&deleta=cur&id=<?php echo @$res_1['id_cursos'];?>">
                     <img title="Excluir curso" src="img/deleta.jpg" width="18" heigth="18" border="0" alt=""></a>
                     </td>
-                    <td>
+                    <td class="row-ID">
                     <a class="a" href="cursos_e_disciplinas.php?pg=curso&cadastra=nao&id=<?php echo $res_1['id_cursos'];?>"><img title="Editar dados Cadastrais"
                      src="../image/ico-editar.png" width="18" height="18" border="0" ></a>
                     </td>
                 </tr>
                 <?php }?>
+                </tbody>
             </table>
              <br/><br/>
   <?php } ?>
@@ -456,15 +467,18 @@
             ?>
 
         <form name="form1" method="post">
-            <table width="900" border="0">
+        <table class="users" id="table-responsive" border="0">
+                <thead>
                 <tr>
-                    <td width="134">Turma:</td>
-                    <td width="213">Disciplina:</td>
-                    <td>Professor:</td>
-                    <td width="128"> Sala: <em>Apenas o numero</em></td>
-                    <td width="126">&nbsp</td>
-                    <td width="0" colspan="2"></td>
+                    <td class="row-1 row-cod">Turma:</td>
+                    <td class="row-2 row-name">Disciplina:</td>
+                    <td class="row-3 row-name">Professor:</td>
+                    <td class="row-4 row-ID"> Sala: <em>Apenas o numero</em></td>
+                    <td class="row-1 row-ID">&nbsp</td>
+                    <td colspan="2"></td>
                 </tr>
+                </thead>
+                <tbody>
                 <tr>
                     <td>
                     <select name="curso">
@@ -493,10 +507,11 @@
                          
                         </select>
                     </td>
-                    <td><input type="text" name="sala" id="textfield"></td>
+                    <td><input type="text" name="sala" id="sala" maxlength="4" size="4"></td>
                     
-                    <td><input class="input" type="submit" name="cadastra" id="button" value="Cadastrar"></td>
+                    <td><input class="btn btn-success" type="submit" name="cadastra" id="button" value="Cadastrar"></td>
                 </tr>
+                </tbody>
             </table>
         </form>
        <br/><br/><br/>
@@ -551,15 +566,18 @@
             ?>
 
         <form name="form1" method="post">
-            <table width="900" border="0">
-                <tr>
-                    <td width="134">Turma:</td>
-                    <td width="213">Disciplina:</td>
-                    <td>Professor:</td>
-                    <td width="128"> Sala: <em>Apenas o numero</em></td>
-                    <td width="126">&nbsp</td>
-                    <td width="0" colspan="2"></td>
+            <table class="users" id="table-responsive" border="0">
+            <thead>    
+            <tr>
+            <td class="row-1 row-cod">Turma:</td>
+                    <td class="row-2 row-name">Disciplina:</td>
+                    <td class="row-3 row-name">Professor:</td>
+                    <td class="row-4 row-ID"> Sala: <em>Apenas o numero</em></td>
+                    <td class="row-1 row-ID">&nbsp</td>
+                    <td colspan="2"></td>
                 </tr>
+                </thead>
+                <tbody>
                 <tr>
                     <td>
                     <select name="curso">
@@ -607,10 +625,11 @@
                          
                         </select>
                     </td>
-                    <td><input type="text" name="sala" id="textfield" value="<?php echo $edit_disc['sala'];?>"></td>
+                    <td><input type="text" name="sala" id="textfield" maxlength="4" size="4" value="<?php echo $edit_disc['sala'];?>"></td>
                     
-                    <td><input class="input" type="submit" name="atualiza" id="button" value="Atualizar"></td>
+                    <td><input class="btn btn-danger" type="submit" name="atualiza" id="button" value="Atualizar"></td>
                 </tr>
+                </tbody>
             </table>
                     <?php } ?>
         </form>
@@ -627,17 +646,22 @@
                     echo "<h2>No momento não existe nenhuma disciplina cadastrada!</h2><br><br>";
                 }else{
                 ?>
-                <table width="900" border="0">
+               <table class="users" id="table-responsive" border="0">
+                  <thead>
                     <tr>
-                        <td><strong>Curso:</strong></td>
-                        <td><strong>Turno:</strong></td>
-                         <td><strong>Disciplina:</strong></td>
-                          <td width="200"><strong>Professor:</strong></td>
-                           <td><strong>Sala:</strong></td>
+                        <td class="row-1 row-name"><strong>Curso:</strong></td>
+                        <td class="row-2 row-name"><strong>Turno:</strong></td>
+                        <td class="row-3 row-ID"><strong>Disciplina:</strong></td>
+                        <td class="row-4 row-name" ><strong>Professor:</strong></td>
+                        <td class="row-2 row-name"><strong>Sala:</strong></td>
+                        <td class="row-1 row-ID">&nbsp</td>
+                        <td class="row-1 row-ID">&nbsp</td>
                     </tr>
+                    </thead>
+                    <tbody>
                     <?php while($res_busca=mysqli_fetch_assoc($result_buscar_disc)){?>
                     <tr>
-                        <td><h3>
+                        <td class="row-name"><h3>
                           
                             <?php 
                             $turma=$res_busca['id_cursos'];
@@ -649,12 +673,12 @@
                         <?php echo $res_busca_turma['curso'];;?>
                         </h3></td>
                         
-                        <td><h3>
+                        <td class="row-name"><h3>
                         <?php echo $res_busca_turma['turno'];?>
                         </h3></td>
                         <?php }?>
-                        <td><h3><?php echo $res_busca['disciplina']?></h3></td>
-                        <td>
+                        <td class="row-ID"><h3><?php echo $res_busca['disciplina']?></h3></td>
+                        <td class="row-name">
                             <h3>
                                 <?php
                                     $professor=$res_busca['id_professores'];
@@ -668,16 +692,17 @@
 
                             </h3>
                         </td>
-                        <td><h3><?php echo $res_busca['sala'];?></h3></td>
-                        <td><a class="a"
+                        <td class="row-name"><h3><?php echo $res_busca['sala'];?></h3></td>
+                        <td class="row-cod" ><a class="a"
                          href="cursos_e_disciplinas.php?pg=disciplina&deleta=sim&id=<?php echo $res_busca['id_disciplinas']; ?>"><img title="Excluir Disciplina" src="img/deleta.jpg" width="18" 
                         height="18" border="0" alt=""></a></td>
-                        <td>
+                        <td class="row-cod">
                             <a class="a" href="cursos_e_disciplinas.php?pg=disciplina&cadastra=nao&id=<?php echo $res_busca['id_disciplinas'];?>"><img title="Editar dados Cadastrais"
                             src="../image/ico-editar.png" width="18" height="18" border="0" ></a>
                         </td>
                     </tr>
                     <?php }?>
+                    </tbody>
                 </table>
                 <?php } ?>
 
@@ -717,16 +742,16 @@ if(mysqli_num_rows($result_ced) == ''){
 	echo "Não existe nenhum curso cadastrado no momento!";
 }else{
 ?>
-<table width="620" border="0">
+  <table class="users" id="table-responsive" border="0">
 <?php while($rs_ced = mysqli_fetch_assoc($result_ced)){
     $cursos_id=$rs_ced['id_cursos'];$turno=$rs_ced['turno'];
  ?>
   <tr>
-    <td width="614">Turma: <?php echo $curso = $rs_ced['curso'].     '  |  Turno:'.$turno; ?></td>
+    <td>Turma: <?php echo $curso = $rs_ced['curso'].     '  |  Turno:'.$turno; ?></td>
   </tr>
   <tr>
     <td>
-    <textarea disabled="disabled" name="textarea"  cols="70" rows="5">
+    <textarea disabled="disabled" name="textarea"  cols="100"  rows="5">
     <?php
      $sql_ced_prof = "SELECT * FROM disciplinas WHERE id_cursos = '$cursos_id'";
 	 $result_ced_prof = mysqli_query($conexao,  $sql_ced_prof);

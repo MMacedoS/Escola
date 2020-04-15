@@ -17,16 +17,16 @@
 <div id="box">
 <?php if($_GET['pg'] == 'trabalhos'){ ?>
 <h1><strong>Notas de Atividades e tarefas em cada bimestre</strong></h1>
-<table width="900" border="0">
+<table class="table table-responsive" height="400" border="0">
   <tr>
-    <td width="317"><strong>DISCIPLINA<br /><br /></strong></td>
-    <td width="150"><strong>1º Bimestre</strong></td>
-    <td width="150"><strong>2º Bimestre</strong></td>
-    <td width="150"><strong>3º Bimestre</strong></td>
-    <td width="150"><strong>4º Bimestre</strong></td>
+    <td ><strong>DISCIPLINA<br /><br /></strong></td>
+    <td ><strong>1º Bimestre</strong></td>
+    <td ><strong>2º Bimestre</strong></td>
+    <td ><strong>3º Bimestre</strong></td>
+    <td ><strong>4º Bimestre</strong></td>
   </tr>
 <?php
-$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie'";
+$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie' ORDER BY disciplina ASC";
 $result_1 = mysqli_query($conexao, $sql_1);
 	while($res_1 = mysqli_fetch_assoc($result_1)){
 		$disciplina = $res_1['id_disciplinas'];
@@ -109,9 +109,7 @@ $result_5 = mysqli_query($conexao, $sql_5);
 	}?>
     </td>
     </tr>
-  <tr>
-    <td colspan="6"><img src="img/menu_topo.png" width="900" height="1"></td>
-  </tr>
+  
 <?php } ?>
 </table>
 <h4>OBS: Esta nota é obtida através das atividades que o professor passou em aula !</h4>
@@ -120,16 +118,16 @@ $result_5 = mysqli_query($conexao, $sql_5);
 
 <?php if($_GET['pg'] == 'provas'){ ?>
 <h1><strong>Notas de suas provas em cada bimestre</strong></h1>
-<table width="900" border="0">
+<table class="table table-responsive" height="400" border="0">
   <tr>
-    <td width="317"><strong>DISCIPLINA<br /><br /></strong></td>
-    <td width="150"><strong>1º Bimestre</strong></td>
-    <td width="150"><strong>2º Bimestre</strong></td>
-    <td width="150"><strong>3º Bimestre</strong></td>
-    <td width="150"><strong>4º Bimestre</strong></td>
+    <td ><strong>DISCIPLINA<br /><br /></strong></td>
+    <td ><strong>1º Bimestre</strong></td>
+    <td ><strong>2º Bimestre</strong></td>
+    <td ><strong>3º Bimestre</strong></td>
+    <td ><strong>4º Bimestre</strong></td>
   </tr>
 <?php
-$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie'";
+$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie' ORDER BY disciplina ASC";
 $result_1 = mysqli_query($conexao, $sql_1);
 	while($res_1 = mysqli_fetch_assoc($result_1)){
 		$disciplina = $res_1['disciplina'];
@@ -229,9 +227,7 @@ $result_5 = mysqli_query($conexao, $sql_5);
     </td>        
   </tr>
 <?php } ?>  
-  <tr>
-    <td colspan="6"><img src="img/menu_topo.png" width="900" height="1"></td>
-  </tr>
+  
 </table>
 <h4>OBS: Esta nota que você tirou em cada prova de cada bimestre!</h4>
 <?php } ?>
@@ -239,16 +235,16 @@ $result_5 = mysqli_query($conexao, $sql_5);
 
 <?php if($_GET['pg'] == 'inter'){ ?>
 <h1><strong>Notas dos Projetos Interdisciplinar dada pelo professor em cada bimestre</strong></h1>
-<table width="900" border="0">
+<table class="table table-responsive" height="400" border="0">
   <tr>
-    <td width="317"><strong>DISCIPLINA<br /><br /></strong></td>
-    <td width="150"><strong>1º Bimestre</strong></td>
-    <td width="150"><strong>2º Bimestre</strong></td>
-    <td width="150"><strong>3º Bimestre</strong></td>
-    <td width="150"><strong>4º Bimestre</strong></td>
+    <td ><strong>DISCIPLINA<br /><br /></strong></td>
+    <td ><strong>1º Bimestre</strong></td>
+    <td ><strong>2º Bimestre</strong></td>
+    <td ><strong>3º Bimestre</strong></td>
+    <td ><strong>4º Bimestre</strong></td>
   </tr>
 <?php
-$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie'";
+$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie' ORDER BY disciplina ASC";
 $result_1 = mysqli_query($conexao, $sql_1);		
 	while($res_1 = mysqli_fetch_assoc($result_1)){
 		$disciplina = $res_1['disciplina'];
@@ -335,9 +331,7 @@ $result_5 = mysqli_query($conexao, $sql_5);
     </td>        
   </tr>
 <?php } ?>  
-  <tr>
-    <td colspan="6"><img src="img/menu_topo.png" width="900" height="1"></td>
-  </tr>
+  
 </table>
 <h4>OBS: Esta nota é dada pelo seu professor de cada disciplina!</h4>
 <?php } ?>
@@ -345,16 +339,16 @@ $result_5 = mysqli_query($conexao, $sql_5);
 <!-- projeto Trans -->
 	<?php if($_GET['pg'] == 'trans'){ ?>
 <h1><strong>Notas projetos Transversal dada pelo professor em cada bimestre</strong></h1>
-<table width="900" border="0">
+<table class="table table-responsive" height="400" border="0">
   <tr>
-    <td width="317"><strong>DISCIPLINA<br /><br /></strong></td>
-    <td width="150"><strong>1º Bimestre</strong></td>
-    <td width="150"><strong>2º Bimestre</strong></td>
-    <td width="150"><strong>3º Bimestre</strong></td>
-    <td width="150"><strong>4º Bimestre</strong></td>
+    <td ><strong>DISCIPLINA<br /><br /></strong></td>
+    <td ><strong>1º Bimestre</strong></td>
+    <td ><strong>2º Bimestre</strong></td>
+    <td ><strong>3º Bimestre</strong></td>
+    <td ><strong>4º Bimestre</strong></td>
   </tr>
 <?php
-$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie'";
+$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie' ORDER BY disciplina ASC";
 $result_1 = mysqli_query($conexao, $sql_1);		
 	while($res_1 = mysqli_fetch_assoc($result_1)){
 		$disciplina = $res_1['disciplina'];
@@ -441,9 +435,7 @@ $result_5 = mysqli_query($conexao, $sql_5);
     </td>        
   </tr>
 <?php } ?>  
-  <tr>
-    <td colspan="6"><img src="img/menu_topo.png" width="900" height="1"></td>
-  </tr>
+  
 </table>
 <h4>OBS: Esta nota é dada pelo seu professor de cada disciplina!</h4>
 <?php } ?>
@@ -451,16 +443,16 @@ $result_5 = mysqli_query($conexao, $sql_5);
 <!-- coc -->
 <?php if($_GET['pg'] == 'coc'){ ?>
 <h1><strong>Notas do COC dada pelo professor em cada bimestre</strong></h1>
-<table width="900" border="0">
+<table class="table table-responsive" height="400" border="0">
   <tr>
-    <td width="317"><strong>DISCIPLINA<br /><br /></strong></td>
-    <td width="150"><strong>1º Bimestre</strong></td>
-    <td width="150"><strong>2º Bimestre</strong></td>
-    <td width="150"><strong>3º Bimestre</strong></td>
-    <td width="150"><strong>4º Bimestre</strong></td>
+    <td ><strong>DISCIPLINA<br /><br /></strong></td>
+    <td ><strong>1º Bimestre</strong></td>
+    <td ><strong>2º Bimestre</strong></td>
+    <td ><strong>3º Bimestre</strong></td>
+    <td ><strong>4º Bimestre</strong></td>
   </tr>
 <?php
-$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie'";
+$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie' ORDER BY disciplina ASC";
 $result_1 = mysqli_query($conexao, $sql_1);		
 	while($res_1 = mysqli_fetch_assoc($result_1)){
 		$disciplina = $res_1['disciplina'];
@@ -547,9 +539,7 @@ $result_5 = mysqli_query($conexao, $sql_5);
     </td>        
   </tr>
 <?php } ?>  
-  <tr>
-    <td colspan="6"><img src="img/menu_topo.png" width="900" height="1"></td>
-  </tr>
+  
 </table>
 <h4>OBS: Esta nota é dada pelo seu professor de cada disciplina!</h4>
 <?php } ?>
@@ -557,16 +547,16 @@ $result_5 = mysqli_query($conexao, $sql_5);
 <!-- teste -->
 <?php if($_GET['pg'] == 'teste'){ ?>
 <h1><strong>Notas dos Teste dada pelo professor em cada bimestre</strong></h1>
-<table width="900" border="0">
+<table class="table table-responsive" height="400" border="0">
   <tr>
-    <td width="317"><strong>DISCIPLINA<br /><br /></strong></td>
-    <td width="150"><strong>1º Bimestre</strong></td>
-    <td width="150"><strong>2º Bimestre</strong></td>
-    <td width="150"><strong>3º Bimestre</strong></td>
-    <td width="150"><strong>4º Bimestre</strong></td>
+    <td ><strong>DISCIPLINA<br /><br /></strong></td>
+    <td ><strong>1º Bimestre</strong></td>
+    <td ><strong>2º Bimestre</strong></td>
+    <td ><strong>3º Bimestre</strong></td>
+    <td ><strong>4º Bimestre</strong></td>
   </tr>
 <?php
-$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie'";
+$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie' ORDER BY disciplina ASC";
 $result_1 = mysqli_query($conexao, $sql_1);		
 	while($res_1 = mysqli_fetch_assoc($result_1)){
 		$disciplina = $res_1['disciplina'];
@@ -653,9 +643,7 @@ $result_5 = mysqli_query($conexao, $sql_5);
     </td>        
   </tr>
 <?php } ?>  
-  <tr>
-    <td colspan="6"><img src="img/menu_topo.png" width="900" height="1"></td>
-  </tr>
+  
 </table>
 <h4>OBS: Esta nota é dada pelo seu professor de cada disciplina!</h4>
 <?php } ?>
@@ -677,7 +665,7 @@ $result_5 = mysqli_query($conexao, $sql_5);
 	
   </tr>
 <?php
-$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie'";
+$sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie' ORDER BY disciplina ASC";
 $result_1 = mysqli_query($conexao, $sql_1);
 	while($res_1 = mysqli_fetch_assoc($result_1)){
 		$disciplina = $res_1['id_disciplinas'];

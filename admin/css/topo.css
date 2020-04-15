@@ -125,6 +125,9 @@ body{
 	margin:18px auto;
 	height:15px;
 	}
+#sala{
+
+}
 
 /*=================================== CADASTRAR CURSOS ================================*/
 	
@@ -595,6 +598,7 @@ width:978px;
 	margin:auto;
 	font:15px Arial, Helvetica, sans-serif;
 	text-align:left;
+	margin-bottom: 10px;
 	}
 #box_aluno h3{
 	font:12px Arial, Helvetica, sans-serif;
@@ -697,3 +701,80 @@ width:978px;
 	padding:10px;
 	background:#FFF;
 	}
+	
+/* topo para tabelas */
+#table-responsive {
+	width: 98%;
+	max-height: 500px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+	
+}
+
+.users {
+	table-layout: fixed;
+	width: 100%;
+	white-space: nowrap;
+  }
+  /* Column widths are based on these cells */
+  .row-ID {
+	width: 10%;
+  }
+  .row-name {
+	width: 20%;
+  }
+  .row-job {
+	width: 10%;
+  }
+  .row-email {
+	width: 10%;
+  }
+  .row-cod {
+	width: 30%;
+  }
+  .row-cur {
+	width: 44%;
+  }
+  .row-text{
+	  width: 70%;
+	  
+  }
+
+.row-executar {
+  width: 40%;
+  text-align: center;
+}
+  .users td {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+  }
+table tbody,
+table thead {
+  display: block;
+}
+table tbody {
+	overflow: auto;
+	width: 100%;
+	max-height: 500px;
+  }
+  .users th {
+	background: darkblue;
+	color: white;
+  }
+  .users td,
+  .users th {
+	text-align: left;
+	padding: 5px 10px;
+  }
+  .users tr:nth-child(even) {
+	background: lightblue;
+  }
+  .truncate {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;  
+	width: 250px;
+  }

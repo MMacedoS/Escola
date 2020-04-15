@@ -81,9 +81,9 @@ require_once "../config.php";
    <img src="img/separador_menu.png" />
    <li><a href="">RELATÓRIOS</a>
     <ul>
-     <li><a href="">Alunos</a></li>
-     <li><a href="">Professores</a></li>
-     <li><a href="">Fluxo de caixa</a></li>
+     <li><a href="relatorios.php?tipo=alunos&s=<?php echo base64_encode("pesquisa");?>">Alunos</a></li>
+     <li><a href="relatorios.php?tipo=professores&s=<?php echo base64_encode("pesquisa");?>">Professores</a></li>
+     <li><a href="fluxo_de_caixa.php?tipo=fluxo&s=<?php echo base64_encode("pesquisa");?>">Fluxo de caixa</a></li>
     </ul>
    </li>
    <img src="img/separador_menu.png" />

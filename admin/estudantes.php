@@ -30,35 +30,38 @@
 <?php
 if(isset($_POST['nome'])){
   $pesquisa=$_POST['nome'];
-  $sql_1 = "SELECT * FROM estudantes WHERE  nome like '%".$pesquisa."%'  and status != 'encerrado'";
+  $sql_1 = "SELECT * FROM estudantes WHERE  nome like '%".$pesquisa."%'  and status != 'encerrado' order by nome asc";
 }else{
-  $sql_1 = "SELECT * FROM estudantes WHERE  nome != '' and status != 'encerrado'";
+  $sql_1 = "SELECT * FROM estudantes WHERE  nome != '' and status != 'encerrado' order by nome asc";
 }
 $consulta = mysqli_query($conexao, $sql_1);
 if(mysqli_num_rows($consulta) == ''){
 	echo "<h2>Não exisite nenhum aluno cadastrado no momento</h2>";
 }else{
 ?>
-
-    <table width="900" border="0">
-      <tr>
-        <td><strong>Status:</strong></td>
-        <td><strong>Código:</strong></td>
-        <td><strong>Nome:</strong></td>
-        <td><strong>Turma(ano):</strong></td>
-        <td><strong>Turno:</strong></td>
-        <td><strong>Mensalidade:</strong></td>
-        <td></td>
+    
+    <table class="users" id="table-responsive"  border="0">
+    <thead>  
+    <tr>
+        <th class="row-1 row-email"><strong>Status:</strong></th>
+        <th class="row-1 row-email"><strong>Código:</strong></th>
+        <th class="row-2 row-name"><strong>Nome:</strong></th>
+        <th class="row-3 row-email"><strong>Turma(ano):</strong></th>
+        <th class="row-4 row-email"><strong>Turno:</strong></th>
+        <th class="row-2 row-email"><strong>Mensalidade:</strong></th>
+        <th class="row-2 row-executar"  colspan="4">Executar</td>
       </tr>
+      </thead>
+      <tbody>
       <?php while($res_1 = mysqli_fetch_assoc($consulta)){ ?>
       <tr>
-        <td><h3><?php echo $res_1['status']; ?></h3></td>
+        <td class="row-email"><h3><?php echo $res_1['status']; ?></h3></td>
 
-        <td><h3><?php echo $res_1['matricula']; ?></h3></td>
+        <td class="row-email"><h3><?php echo $res_1['matricula']; ?></h3></td>
 
-        <td><h3><?php echo $res_1['nome']; ?></h3></td>
+        <td class="row-name"><h3><?php echo $res_1['nome']; ?></h3></td>
 
-        <td>
+        <td class="row-email">
           <h3>
                 <?php 
                   $id_aluno=$res_1['id_estudantes'];
@@ -71,14 +74,14 @@ if(mysqli_num_rows($consulta) == ''){
                     echo $res_curso['curso']; ?>
           </h3>
         </td>
-        <td><h3>
+        <td class="row-email"><h3>
              <?php echo $res_curso['turno']; ?>
             </h3>
         </td>
 
-        <td><h3>R$ <?php echo $res_1['mensalidade']; ?></h3></td>
-        <td></td>
-        <td>
+        <td class="row-job"><h3>R$ <?php echo $res_1['mensalidade']; ?></h3></td>
+        <td class="row-ID"></td>
+        <td class="row-executar">
         <a class="a" href="estudantes.php?pg=todos&func=deleta&id=<?php 
         echo $res_1['id_estudantes'];?>&code=<?php echo $res_1['matricula']; ?>">
         <img title="Excluir Aluno(a)" src="img/deleta.jpg" width="18" height="18" border="0"></a>
@@ -106,8 +109,11 @@ if(mysqli_num_rows($consulta) == ''){
         </td>
         
       </tr>
+      
       <?php } ?>
+      </tbody>
     </table>
+    
     <br /> 
 <?php } // aqui fecha a consulta ?>
 
@@ -489,7 +495,7 @@ $id=$_GET['id'];
 $code = $_POST['code'];
 $nome = $_POST['nome'];
 $cpf = $_POST['cpf'];
-$rg = $_POST['rg'];
+$email = $_POST['email'];
 $nascimento = $_POST['nascimento'];
 $mae = $_POST['mae'];
 $pai = $_POST['pai'];
@@ -504,7 +510,7 @@ $celular = $_POST['celular'];
 $status=$_POST['status'];
 
 $sql_2 = "update estudantes set status='$status', nome='$nome',
- cpf='$cpf', rg='$rg', nascimento='$nascimento', mae='$mae', pai='$pai', estado='$estado',
+ cpf='$cpf', email='$email', nascimento='$nascimento', mae='$mae', pai='$pai', estado='$estado',
   cidade='$cidade', bairro='$bairro', endereco='$endereco', complemento='$complemento',
    cep='$cep', tel_residencial='$tel_residencial', celular='$celular' 
    where id_estudantes='$id'";
@@ -540,7 +546,7 @@ echo "<script language='javascript'>window.alert('Dados atualizados com sucesso!
     <tr>
       <td>Nome:</td>
       <td>CPF:</td>
-      <td>RG:</td>
+      <td>E-mail:</td>
       
     </tr>
       <td><label for="celular"></label>
@@ -548,7 +554,7 @@ echo "<script language='javascript'>window.alert('Dados atualizados com sucesso!
       <td><label for="tel_amigo"></label>
       <input type="text" name="cpf" id="textfield3" value="<?php echo $res_1['cpf'];?>"></td>
       <td><label for="tel_amigo"></label>
-      <input type="text" name="rg" id="textfield3" value="<?php echo $res_1['rg'];?>"></td>
+      <input type="text" name="email" id="textfield3" value="<?php echo $res_1['email'];?>"></td>
       
     </tr>
     <tr>

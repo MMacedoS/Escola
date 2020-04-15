@@ -81,11 +81,11 @@ body{
 	list-style:none;
 	}
 #menu_topo ul li{
-	float:left;
+	
 	display:inline;
 	}
 #menu_topo ol li{
-	float:left;
+	
 	display:inline;
 	}
 #menu_topo ul li a{
@@ -110,7 +110,8 @@ body{
 	display:none;
 	position:absolute;
 	top:190px;
-	width:160px;
+	width: 100px;
+    margin-left: 360px;
 	}
 #menu_topo li:hover ul{
 	display:block;
