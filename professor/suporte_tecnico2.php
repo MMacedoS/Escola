@@ -16,8 +16,8 @@
 
 <div id="box">
  <h1><strong>Histórico de chamados</strong></h1>
- <a href="suporte_tecnico.php?acao=abrir_chamado" class="btn btn-danger">Abrir chamado</a>
-<table class="users" id="table-responsive" border="0">
+ <a href="suporte_tecnico.php?acao=abrir_chamado" class="a_1">Abrir chamado</a>
+<table width="832" border="0">
 <?php if(@$_GET['acao'] == 'abrir_chamado'){ ?>
 
 
@@ -41,18 +41,17 @@
                 
        <option value=""><strong> ALUNOS DE CLASSE</strong></option>
        <?php
-       $sql_3 = "SELECT DISTINCT e.matricula,e.nome, c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and e.status='ativo'";
+       $sql_3 = "SELECT DISTINCT e.matricula,e.nome, c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and p.code='$code' and e.status='ativo'";
 	   $result_3 = mysqli_query($conexao, $sql_3);
 	   	while($res_3 = mysqli_fetch_assoc($result_3)){
 	   ?>
         <option value="<?php echo $res_3['matricula']; ?>" style="background-color:#58FAF4;"><?php echo $res_3['nome']." "; ?>--<?php echo " ".$res_3['curso']?></option>
         <?php } ?>
      </select>
-     <hr>
-    
-     <hr>
+     Caso tenha algum anexo escolha o arquivo abaixo<br />
+     <input name="anexo" type="file" />
      <br />Digite sua mensagem
-     <textarea class="row-text" name="mensagem"></textarea>
+     <textarea name="mensagem"></textarea>
 	 <input class="input" type="submit" name="enviar_mensagem" value="Enviar" />
      </form>
      <hr>
@@ -68,26 +67,26 @@
   <tr>
     <td align="center">
     <?php
-   $sql_5 = "SELECT * FROM central_mensagem WHERE emissor = 'COORDENAÇÃO' or receptor='COORDENAÇÃO' order by id desc";
+   $sql_5 = "SELECT * FROM central_mensagem WHERE emissor = '$code' or receptor='$code' order by id desc";
 	$result_5 = mysqli_query($conexao, $sql_5);
 	if(mysqli_num_rows($result_5) == ''){
 		echo "Não existe nenhuma mensagem";
 	}else{
 	?>
-     <table id="table_st" border="0">
+     <table class="users" id="table_st" border="0">
       <tr>
-      <td width="100"><strong>Emissor:</strong></td>
-        <td width="120"><strong>Receptor:</strong></td>
-        <td width="150"><strong>Status:</strong></td>
-        <td width="150"><strong>Data:</strong></td>
+        <td width="50"><strong>Recptor:</strong></td>
+        <td width="70"><strong>Status:</strong></td>
+        <td width="70"><strong>Data:</strong></td>
+        <td width="100"><strong>Anexo:</strong></td>
         <td width="100"><strong>Data da resposta:</strong></td>
       <?php while($res_5 = mysqli_fetch_assoc($result_5)){ ?>
       <tr>
-        <td><?php echo $res_5['emissor']; ?></td>
+      <td><?php echo $res_5['emissor']; ?></td>
         <td><?php echo $res_5['receptor']; ?></td>
         <td><?php echo $res_5['status']; ?></td>
         <td><?php echo $res_5['date']; ?></td>
-        
+        <td><a target="_blank" href="../anexos/<?php echo $res_5['anexo']; ?>">Baixar</a></td>
         <td><?php echo $res_5['data_resposta']; ?></td>
         <td width="80">
         <a href="suporte_tecnico.php?acao=responder&id=<?php echo $res_5['id']; ?>"><img src="../image/confirma.png" width="22" border="0" title="responder" /></a>
@@ -113,10 +112,10 @@
 			
 				 $date = $res_resp['date'];
 				 $resposta = $res_resp['resposta'];
-				 
+				 $anexo_res = $res_resp['anexo_resp'];
 				 $mensagem = $res_resp['mensagem'];
 			 echo "<h1 class='h1'><strong>Sua mensagem:</strong><br><br>$mensagem</h1>";
-       echo "<h1 class='h2'><strong>Data:</strong>$date | </a><br><br>$resposta</h1>";			
+       echo "<h1 class='h2'><strong>Data:</strong>$date | <strong>Anexo:</strong> <a href='../anexos/$anexo_res' target='_blank'> $anexo_res</a><br><br>$resposta</h1>";			
        
 			
 		?>
@@ -142,7 +141,7 @@
 if(@$_GET['acao'] == 'responder'){
   $id=$_GET['id'];
   if(isset($_GET['novaresposta'])){$sql_1 = "SELECT * FROM central_mensagem WHERE id='$id'";}else{
-$sql_1 = "SELECT * FROM central_mensagem WHERE id='$id' and receptor='COORDENAÇÃO' and resposta=''";}
+$sql_1 = "SELECT * FROM central_mensagem WHERE id='$id' and receptor='$code'";}
 $result = mysqli_query($conexao, $sql_1);
 	while($res_1 = mysqli_fetch_assoc($result)){
 ?>
@@ -152,11 +151,12 @@ $result = mysqli_query($conexao, $sql_1);
   <tr>
     <td><strong>Data:</strong></td>
     <td><strong>Nº de matricula do aluno:</strong></td>
+    <td><strong>Anexo:</strong></td>
   </tr>
   <tr>
     <td><?php echo $res_1['date']; ?></td>
     <td><?php echo $res_1['emissor']; ?></td>
-    
+    <td><a target="_blank" href="../anexos/<?php echo $res_1['anexo']; ?>"><?php echo $res_1['anexo']; ?></a></td>
   </tr>
   <tr>
     <td><strong>Mensagem:</strong></td>
@@ -170,10 +170,14 @@ $result = mysqli_query($conexao, $sql_1);
     <td colspan="3"><label for="textarea"></label>
     <textarea name="resp" id="textarea" cols="110" rows="5"></textarea></td>
   </tr>
-  
+  <tr>
+    <td colspan="3"><strong>Escolha o arquivo para anexar abaixo</strong></td>
+  </tr>
+  <tr>
+    <td colspan="3"><input name="anexo" type="file" /></td>
+  </tr>
   <input type="hidden" name="id" value="<?php echo $id; ?>" />
-  <input type="hidden" name="emissor" value="<?php echo $res_1['emissor']; ?>" />
-  <input type="hidden" name="receptor" value="<?php echo $res_1['receptor']; ?>" />
+  <input type="hidden" name="receptor" value="<?php echo $res_1['emissor']; ?>" />
   <?php if(isset($_GET['novaresposta'])){?>
   <input type="hidden" name="nova" value="" />
   <?php } ?> 
@@ -193,30 +197,22 @@ $result = mysqli_query($conexao, $sql_1);
 $resp = $_GET['resp'];
 $id = $_GET['id'];
 $date = date("d/m/Y H:i:s");
+$anexo = $_FILES['anexo']['name'];
 $receptor=$_GET['receptor'];
-$emissor=$_GET['emissor'];
 
-if(isset($_GET['nova'])){
-  
-  switch ($receptor) {
-    case $receptor=="COORDENAÇÃO":
-      $sql_2 = "UPDATE central_mensagem SET status = 'Aguarde resposta', data_resposta = '', mensagem = '$resp', resposta='', emissor='$receptor',receptor='$emissor' WHERE id = '$id' ";
-      
-
-      break;
-    
-    default:
-    $sql_2 = "UPDATE central_mensagem SET status = 'Aguarde resposta', data_resposta = '', mensagem = '$resp', resposta='', emissor='$emissor',receptor='$receptor' WHERE id = '$id' ";
-      break;
-  }
-  }else{	
-
-
-
-$sql_2 = "UPDATE central_mensagem SET status = 'Respondida', data_resposta = '$date', resposta = '$resp'  WHERE id = '$id' ";}
+if(file_exists("../anexos/$anexo")){
+		 $a = 1;
+		 while(file_exists("../anexos/[$a]$anexo")){
+			 $a++;
+			 }
+			 
+		$anexo = "[".$a."]".$anexo;	 
+	}
+if(isset($_GET['nova']) && $receptor!=$code){$sql_2 = "UPDATE central_mensagem SET status = 'Aguarde resposta', data_resposta = '', mensagem = '$resp', resposta='', anexo = '$anexo', emissor='$code',receptor='$receptor' WHERE id = '$id' ";}else{	
+$sql_2 = "UPDATE central_mensagem SET status = 'Respondida', data_resposta = '$date', resposta = '$resp', anexo_resp = '$anexo' WHERE id = '$id' ";}
 mysqli_query($conexao, $sql_2);
 
-
+(move_uploaded_file($_FILES['anexo']['tmp_name'], "../anexos/".$anexo));
 
 echo "<script language='javascript'>window.alert('Mensagem respondida com sucesso!');window.location='suporte_tecnico.php';</script>";
 
@@ -224,20 +220,28 @@ echo "<script language='javascript'>window.alert('Mensagem respondida com sucess
 }?>
 <!-- envio de mensagem -->
 
-<?php if(isset($_POST['enviar_mensagem'])){
+<?php if(isset($_GET['enviar_mensagem'])){
 
-$setor = $_POST['setor'];
-$mensagem = $_POST['mensagem'];
+$setor = $_GET['setor'];
+$mensagem = $_GET['mensagem'];
+$anexo = $_FILES['anexo']['name'];
 $date = date("d/m/Y H:i:s");
 
-if($setor==""){?> <script>alert("Erro ao enviar mensagem"); echo "<script language='javascript'>window.alert('Ocorreu um erro!');window.location='suporte_tecnico.php';</script>";</script>   <?php }else{	
-$sql_4 = "INSERT INTO central_mensagem (date, status, emissor, receptor, mensagem) VALUES ('$date', 'Aguarde resposta', 'COORDENAÇÃO', '$setor', '$mensagem')";
+if(file_exists("../anexos/$anexo")){
+		$a = 1;
+		while(file_exists("../anexos/[$a]$anexo")){
+			$a++;
+			}
+		$anexo = "[".$a."]".$anexo;
+	}
+	
+$sql_4 = "INSERT INTO central_mensagem (date, status, emissor, receptor, mensagem, anexo) VALUES ('$date', 'Aguarde resposta', '$code', '$setor', '$mensagem', '$anexo')";
 $result_4 = mysqli_query($conexao, $sql_4);
 if($result_4 == ''){
 	echo "<script language='javascript'>window.alert('Ocorreu um erro!');window.location='suporte_tecnico.php';</script>";
 }else{
 
-
+(move_uploaded_file($_FILES['anexo']['tmp_name'],"../anexos/".$anexo));	
 
 
 
@@ -258,10 +262,13 @@ $sql_66 = "INSERT INTO mural_professor (date, status, curso, titulo) VALUES ('$d
 mysqli_query($conexao, $sql_66);
 }
 
-	echo "<script language='javascript'> window.location='suporte_tecnico.php';</script>";
-}
+	echo "<script language='javascript'>window.alert('Mensagem enviada com sucesso!');window.location='suporte_tecnico.php';</script>";
+
+
+	
 
 }
+
 
 }?>
 <!-- fim de envio -->

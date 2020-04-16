@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<?php $painel_atual = "Aluno"; ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -25,15 +26,11 @@ if(file_exists("../trabalhos_alunos/$trabalho")){
 }
 
 $date = date("d/m/Y H:i:s");
-$id = $_GET['id'];
-$dis = $_GET['dis'];
-$code  =$_GET['aluno'];
 
-$sql_1 = "INSERT INTO envio_de_trabalhos_bimestrais (date, status, id_trabalho, disciplina, trabalho, aluno) VALUES ('$date', 'Aguarda', '$id', '$dis', '$trabalho', '$code')";
-mysqli_query($conexao, $sql_1);
 
-(move_uploaded_file($_FILES['trabalho']['tmp_name'], "../trabalhos_alunos/".$trabalho));
 
+
+(move_uploaded_file($_FILES['trabalho']['tmp_name'], "../anexos/".$trabalho));
 	echo "<h1>Trabalho enviado com sucesso!<br>Aperte F5 em seu teclado para atualizar a página.</h1>";
 	die;
 
