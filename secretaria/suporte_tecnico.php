@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="with=device-width,initial-scale=1">
 <title>Suporte Escolar</title>
 <link rel="shortcut icon" href="../image/logo_ist.gif">
 <link rel="stylesheet" type="text/css" href="css/suporte_tecnico.css"/>
@@ -148,7 +149,7 @@ $result = mysqli_query($conexao, $sql_1);
 ?>
  
 <form name="button" method="get" action="" enctype="multipart/form-data">
-<table width="950" border="0">
+<table class="users" id="table-responsive" border="0">
   <tr>
     <td><strong>Data:</strong></td>
     <td><strong>Nº de matricula do aluno:</strong></td>

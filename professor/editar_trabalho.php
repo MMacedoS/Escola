@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="with=device-width,initial-scale=1">
 <title>Editar Prova</title>
 <?php require "../control/conexao.php"; $date = date("d/m/Y H:i:s"); $code = $_GET['code']; $id = $_GET['id']; ?>
 <link rel="stylesheet" type="text/css" href="css/cadastrar_prova.css"/>

@@ -528,10 +528,10 @@ padding-left: 75%;
 	  }
 @media(max-width:1200px){
 	#logo {
-		width: 110px;
+		width: 100px;
 		height: 24px;
 		float: left;
-		margin: 9px 0 0 -2px;
+		margin: -60px 0 0px 0;
 	}
 	#box_rodape {
 		width: auto;
@@ -539,15 +539,25 @@ padding-left: 75%;
 	}
 	#box_topo {
 		width: auto;
-		height: 150px;
-		margin: -10px auto;
+		height: 182px;
+		margin: 50px auto;
 	}
 	#mostra_login {
-		width: auto;
+		width: 100px;
 		height: 50px;
 		float: right;
-		margin: 0px 0px 0px 0px;
+		margin: 60px 200px 0px 0;
 		padding: 1px 1px 0px 100px;
+	}
+	.custom-select {
+		position: relative;
+		/* position: fixed; */
+		bottom: 3px;
+		right: -93px;
+		width: 187px;
+		margin: 3px 0 0 -160px;
+		border: 3px solid #73AD21;
+		font-family: Arial;
 	}
 	#caixa_preta {
 		background: #000;
@@ -574,7 +584,7 @@ padding-left: 75%;
 
 	#notificacoes {
 		float: left;
-		width: 0;
+		width: auto;
 		margin: 0px 0px 0 16px;
 		text-align: left;
 		height: auto;
@@ -587,5 +597,13 @@ padding-left: 75%;
 		margin: -8px 10px 0px -12px;
 		height: 300px;
 		border: 1px solid #CCC;
+	}
+	#box table {
+		font: 15px Arial, Helvetica, sans-serif;
+		margin: 10px;
+		background: #FFF;
+		padding: 5px;
+		color: #039;
+		position: absolute;
 	}
 }

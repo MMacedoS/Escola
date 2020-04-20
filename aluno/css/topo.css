@@ -44,14 +44,8 @@ body{
 #mostra_login a:hover{
 	color:#999;
 	}
-	@media(min-width: 768px){
-    #box_menu{
-	width:100%;
-	background:url(../img/menu_topo.png) repeat;
-	height:40px;
-	margin:-17px auto;
-	}
-}
+	
+
 
 #box_menu{
 	width:980px;
@@ -68,7 +62,7 @@ body{
 	list-style:none;
 	}
 #menu_topo ul li{
-	float:left;
+	float:none;
 	display:inline;
 	}
 #menu_topo ul li a{
@@ -194,7 +188,7 @@ table tbody {
 	text-overflow: ellipsis;  
 	width: 250px;
   }
-	@media(max-width:800px){
+	@media only screen and (max-width:800px){
 	
 		#box_topo {
 			width: auto;
@@ -203,10 +197,10 @@ table tbody {
 		}
 	
 		#logo {
-			width: 200px;
+			width: 100px;
 			height: 100px;
 			float: left;
-			margin: 20px 0 0 0;
+			margin: 0px -70px 0 0;
 		}
 		#dados_aluno {
 			width: 281px;
@@ -248,8 +242,8 @@ table tbody {
 		}
 		#avisos_notificacoes {
 			float: left;
-			width: auto;
-			margin: 0 10px 0 0;
+			width: 300px;
+			margin: 0 -25px 10px 0px;
 			overflow: auto;
 			font: 12px Arial, Helvetica, sans-serif;
 			color: #999;
@@ -259,6 +253,16 @@ table tbody {
 		#box_rodape {
 			width: auto;
 			margin: 500px auto;
+		}
+		#table-responsive {
+			width: 98%;
+			max-height: 500px;
+			overflow-x: auto;
+			position: absolute;
+			-webkit-overflow-scrolling: touch;
+			-ms-overflow-style: -ms-autohiding-scrollbar;
+			background: #FFF;
+			border: 2px solid #0CF;
 		}
 		
 	

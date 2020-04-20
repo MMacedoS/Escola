@@ -3,6 +3,7 @@
 <?php $painel_atual = "professor"; ?>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="with=device-width,initial-scale=1">
 <title>Editar Nota</title>
 <?php require "../config.php"; ?>
 </head>

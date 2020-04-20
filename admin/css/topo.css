@@ -74,7 +74,7 @@ body{
 	list-style:none;
 	}
 #menu_topo ul li{
-	float:left;
+	float: none;;
 	display:inline;
 	}
 #menu_topo ul li a{
@@ -927,18 +927,27 @@ table tbody {
 	color:#666;
 	}
 @media(max-width:900px){	
+	#box_topo {
+		width: 100%;
+		height: 140px;
+		margin: 0px 84px 0px 0px;
+	}
+	#box_rodape {
+		width: auto;
+		margin: 692px auto 0;
+	}
 	#logo {
-		width: 130px;
+		width: 100px;
 		height: 100px;
 		float: left;
-		margin: -12px 0px 0px 0px;
+		margin: 2px -35px 0px -6px;
 	}
-#mostra_login {
-    width: 290px;
-    height: 30px;
-    float: right;
-    margin: 40px 0 -5px 0;
-}
+	#mostra_login {
+		width: 100px;
+		height: 30px;
+		float: right;
+		margin: 7px 20px;
+	}
 #caixa_preta {
 background: #000;
 width: auto;
@@ -946,34 +955,31 @@ margin: 20px auto;
 height: 15px;
 margin-top: -58px;
 }
-#box_rodape {
-width: auto;
-margin: 50px auto;
-}
+
 
 
 #box {
 width: auto;
-height: 700px;
+height: auto;
 margin: -20px auto;
 border: 1px solid #333;
 }
 #notificacoes {
-float: right;
-width: 187px;
-margin: 0 3px 0 0;
-text-align: left;
-height: 615px;
+    float: right;
+    width: 190px;
+    margin: 41px 160px 0 0;
+    text-align: left;
+    height: 400px;
 }
 #avisos_notificacoes {
-float: left;
-width: auto;
-margin: 0 10px 0 0;
-overflow: auto;
-font: 12px Arial, Helvetica, sans-serif;
-color: #999;
-height: 566px;
-border: 1px solid #CCC;
+    float: left;
+    width: 350px;
+    margin: 0 10px 0 0;
+    overflow: auto;
+    font: 12px Arial, Helvetica, sans-serif;
+    color: #999;
+    height: 350px;
+    border: 1px solid #CCC;
 }
 #relatorios ul {
 	text-align: left;
@@ -982,9 +988,9 @@ border: 1px solid #CCC;
 }
 #relatorios {
     float: left;
-    width: 400px;
+    width: 379px;
     height: 490px;
-    margin: 0px -20px 0 30px;
+    margin: -1px -20px 0 -46px;
 }
 /*  */
 .box_professores {
@@ -1026,4 +1032,14 @@ border: 1px solid #CCC;
     text-align: left;
     border: 1px solid #333;
 }
+#box_funcionarios{
+	width:auto;
+	background:#E1E1C4;
+	height:auto;
+	float:none;
+	text-align:left;
+	margin:-20px auto;
+	border:1px solid #333;
+
+	}
 	}

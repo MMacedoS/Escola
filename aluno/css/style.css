@@ -73,7 +73,7 @@ label[for="bt_menu"]{
 label[for="bt_menu"]{
     display: none;
 }
-@media(max-width:1200px){
+@media only screen and (max-width:1200px){
     label[for="bt_menu"]{
         display: block;
     }
@@ -102,7 +102,7 @@ label[for="bt_menu"]{
         max-height: 500px;
     }
    
-}@media(max-width:1000){
+}@media only screen and (max-width:1000){
     #logo {
         width: 200px;
         height: 100px;

@@ -8,6 +8,7 @@ require "../gerador_cobranca.php";
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="with=device-width,initial-scale=1">
 
 <link rel="shortcut icon" href="../image/logo_ist.gif">
 <link href="css/topo.css" rel="stylesheet" type="text/css" />

@@ -6,6 +6,7 @@ $painel_atual= "tesouraria";
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="with=device-width,initial-scale=1">
 
 <title>To Learn - Tesouraria - <?php $nome = $_SESSION['nome']; echo $nome; ?> </title>
 <link href="css/index.css" rel="stylesheet" type="text/css" />
