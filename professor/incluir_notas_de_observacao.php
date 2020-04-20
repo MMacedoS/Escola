@@ -107,7 +107,7 @@ $sql_1 = "SELECT * FROM notas_de_observacoes WHERE id = ".$_GET['id']."";
 <input type="hidden" name="code_aluno" value="<?php echo $res_2['code']; ?>" />
 <input type="hidden" name="bimestre" value="<?php echo $res_1['bimestre']; ?>" />
 <input type="hidden" name="disciplina" value="<?php echo $res_1['disciplina']; ?>" />
-<table width="955" border="0">
+<table class="users" id="table-responsive" border="0">
   <tr>
     <td width="107"><strong>Código:</strong></td>
     <td width="302"><strong>Nome do aluno:</strong></td>

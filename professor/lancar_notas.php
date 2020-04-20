@@ -132,7 +132,7 @@ if(mysqli_num_rows($result) == ''){
 <input type="hidden" name="code_aluno" value="<?php echo $res_2['code']; ?>" />
 <input type="hidden" name="id" value="<?php echo $id; ?>" />
 <input type="hidden" name="selec" value="<?php echo $selec; ?>" />
-<table width="955" border="0">
+<table class="users" id="table-responsive" border="0">
   <tr>
       <!-- while estudante -->
       <?php

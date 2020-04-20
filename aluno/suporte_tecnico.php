@@ -17,7 +17,7 @@
 <div id="box">
  <h1><strong>Histórico de chamados</strong></h1>
  <a href="suporte_tecnico.php?acao=abrir_chamado" class="a_1">Abrir chamado</a>
-<table width="832" border="0">
+<table class="users" id="table-responsive" border="0">
 <?php if(@$_GET['acao'] == 'abrir_chamado'){ ?>
 
 <?php if(isset($_POST['enviar_mensagem'])){
@@ -32,33 +32,37 @@ $result_4 = mysqli_query($conexao, $sql_4);
 if($result_4 == ''){
 	echo "<script language='javascript'>window.alert('Ocorreu um erro!');window.location='suporte_tecnico.php';</script>";
 }else{
-
- $sql_1 = "SELECT DISTINCT p.nome from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and e.matricula=587418";
+  switch ($setor) {
+    case 'COORDENAÇÃO':
+      $sql_1 = "SELECT DISTINCT c.id_cursos,c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and e.matricula='$code'";
 	   $result_1 = mysqli_query($conexao, $sql_1);
 	   	while($res_1 = mysqli_fetch_assoc($result_1)){
-			$professor = $res_1['nome'];
+      
+      $turma=$res_1['curso'];
+      $id=$res_1['id_cursos'];
 		}
-
-if($setor == 'COORDENAÇÃO'){
-$sql_5 = "INSERT INTO mural_coordenacao (date, status, curso, titulo) VALUES ('$date', 'Ativo', 'Não informado', 'Existe uma nova mensagem enviada pelo aluno para ser respondida')";
-mysqli_query($conexao, $sql_5);
-}
-
-
-else if($setor == $professor){
-$sql_66 = "INSERT INTO mural_professor (date, status, curso, titulo) VALUES ('$date', 'Ativo', 'Não informado', 'Existe uma nova mensagem enviada pelo aluno para ser respondida')";
-mysqli_query($conexao, $sql_66);
-}
-
-	echo "<script language='javascript'>window.alert('Mensagem enviada com sucesso!');window.location='suporte_tecnico.php';</script>";
-
-
-	
-
-}
-
-
-}?>
+    echo $sql_5 = "INSERT INTO mural_coordenacao (date, status, curso, id_cursos, titulo) VALUES ('$date', 'Ativo','$turma','$id', 'Existe uma nova mensagem enviada pelo aluno para ser respondida')";
+    mysqli_query($conexao, $sql_5);
+    echo "<script language='javascript'>window.alert('Mensagem enviada com sucesso!');window.location='suporte_tecnico.php';</script>";
+   
+  break;
+    
+    default:
+    $sql_1 = "SELECT DISTINCT p.nome,c.id_cursos,c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and p.code='$setor' and e.matricula='$code';";
+    $result_1 = mysqli_query($conexao, $sql_1);
+      while($res_1 = mysqli_fetch_assoc($result_1)){
+     $professor = $res_1['nome'];
+     $turma=$res_1['curso'];
+     $id=$res_1['id_cursos'];
+     $sql_66 = "INSERT INTO mural_professor (date, status, id_cursos, titulo) VALUES ('$date', 'Ativo', '$id', 'Existe uma nova mensagem enviada pelo aluno para ser respondida')";
+      mysqli_query($conexao, $sql_66);
+      echo "<script language='javascript'>window.alert('Mensagem enviada com sucesso!');window.location='suporte_tecnico.php';</script>";
+      break;
+  }//fim while
+ 
+  }//switch
+  }/// if insert mensagem
+  } //primeiro if do enviar?>
 
 
   <tr>
@@ -111,7 +115,7 @@ mysqli_query($conexao, $sql_66);
 		echo "Não existe nenhuma mensagem";
 	}else{
 	?>
-     <table id="table_st" border="0">
+     <table class="users" id="table_st" border="0">
       <tr>
         <td width="100"><strong>Emissor:</strong></td>
         <td width="120"><strong>Receptor:</strong></td>

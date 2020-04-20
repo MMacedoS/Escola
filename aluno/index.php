@@ -63,6 +63,6 @@ $ano=Date('Y');
  
  
 </div><!-- box -->
-
+<?php require_once("rodape.php");?>
 </body>
 </html>

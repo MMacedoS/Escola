@@ -15,19 +15,17 @@
 
 <div id="box">
  <h1><strong>Frequência Escolar</strong></h1>
-<table width="900" border="0">
+<table class="users" id="table-responsive" border="1">
   <tr>
     <td align="center" colspan="5">Frequência geral nas disciplinas e nos bimestres</td>
   </tr>
+  
   <tr>
-    <td align="center" colspan="5"><hr></td>
-  </tr>
-  <tr>
-    <td width="242"><strong>DISCIPLINA</strong></td>
-    <td width="179"><strong>Total de presença</strong></td>
-    <td width="152"><strong>Total de faltas</strong></td>
-    <td width="192"><strong>Falta(s) Justificada</strong></td>
-    <td width="119"><strong>Resultado</strong></td>
+    <td><strong>DISCIPLINA</strong></td>
+    <td><strong>Total de presença</strong></td>
+    <td><strong>Total de faltas</strong></td>
+    <td><strong>Falta(s) Justificada</strong></td>
+    <td><strong>Resultado</strong></td>
   </tr>
 <?php
 $ano=Date('Y');
@@ -70,9 +68,7 @@ $result_1 = mysqli_query($conexao, $sql_1);
 	?>    
     </td>
   </tr>
-  <tr>
-    <td colspan="5"><img src="img/menu_topo.png" width="900" height="1"></td>
-  </tr>
+  
 <?php } ?>  
 </table> 
 

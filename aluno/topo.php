@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php require_once "../config.php";
+<?php require_once "../config.php";require "../gerador_cobranca.php";
 $ano=Date('Y');
-
+ 
 $sql_aluno = "SELECT cat.categoria,c.curso,e.matricula,e.nome,e.cpf,e.id_estudantes,ce.ano_letivo,ce.id_cursos FROM estudantes e 
 INNER JOIN cursos_estudantes ce on ce.id_estudantes=e.id_estudantes 
 INNER JOIN cursos c on ce.id_cursos=c.id_cursos 
@@ -22,6 +22,7 @@ $result = mysqli_query($conexao, $sql_aluno);
 <title> Portal do aluno</title>
 <link rel="shortcut icon" href="../image/logo_ist.gif">
 <link href="css/topo.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="css/style.css">
 <script language="javascript" src="../js/jquery-1.7.2.min.js"></script>
 <script src="../js/lightbox.js"></script>
 <link href="../css/lightbox.css" rel="stylesheet" />
@@ -72,11 +73,11 @@ $result = mysqli_query($conexao, $sql_aluno);
   <h1><strong>Olá :</strong> <?php echo $nome; ?> <strong><a href="../config.php?acao=quebra">Sair</a></strong></h1>
  </div><!-- mostra_login -->
 </div><!-- box_topo -->
-
-<div id="box_menu">
- 
- <div id="menu_topo">
-  <ul>
+<div id="menu">
+<input type="checkbox" id="bt_menu" />
+    <label for="bt_menu">&#9776;</label>
+    <nav class="menu">
+    <ul>
    <li><a href="index.php">HOME</a></li>
    <li><a href="minhas_notas.php?pg=bimestrais">MINHAS NOTAS</a>
     <?php if($r_aluno['categoria']=="ensino-medio-inicial"){?>
@@ -142,7 +143,10 @@ $result = mysqli_query($conexao, $sql_aluno);
    <li><a href="setor_financeiro.php">SETOR FINANCEIRO</a></li>
    <li><a href="suporte_tecnico.php">SUPORTE ESCOLAR</a></li>
   </ul>
- </div><!-- menu_topo -->
+        
+
+    </nav>
+  
 
 </div><!-- box_menu -->
 </body>

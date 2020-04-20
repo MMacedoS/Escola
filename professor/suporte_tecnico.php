@@ -17,8 +17,7 @@
 <div id="box">
  <h1><strong>Histórico de chamados</strong></h1>
  <a href="suporte_tecnico.php?acao=abrir_chamado" class="a_1">Abrir chamado</a>
-<table width="832" border="0">
-
+ <table class="users" id="table-responsive" border="0">
 <?php if(@$_GET['acao'] == 'abrir_chamado'){ ?>
 
   <tr>
@@ -57,7 +56,7 @@
   </tr>
 <?php } ?>
   <tr>
-    <td width="826" align="left">Abaixo segue seu ralatório de chamadas</td>
+    <td  align="left">Abaixo segue seu ralatório de chamadas</td>
   </tr>
   <tr>
     <td align="center"><hr></td>
@@ -71,13 +70,13 @@
 		echo "Não existe nenhuma mensagem";
 	}else{
 	?>
-     <table id="table_st" border="0">
+     <table class="users" id="table-responsive" border="0">
       <tr>
-      <td width="100"><strong>Emissor:</strong></td>
-        <td width="120"><strong>Receptor:</strong></td>
-        <td width="150"><strong>Status:</strong></td>
-        <td width="150"><strong>Data:</strong></td>
-        <td width="100"><strong>Data da resposta:</strong></td>
+      <td ><strong>Emissor:</strong></td>
+        <td ><strong>Receptor:</strong></td>
+        <td ><strong>Status:</strong></td>
+        <td ><strong>Data:</strong></td>
+        <td ><strong>Data da resposta:</strong></td>
       <?php while($res_5 = mysqli_fetch_assoc($result_5)){ ?>
       <tr>
       <td><?php $you=$res_5['emissor']; if($you==$code){ echo "VOCÊ";}else{echo $you;}; ?></td>
@@ -143,7 +142,7 @@ $result = mysqli_query($conexao, $sql_1);
 ?>
  
 <form name="button" method="post" action="" enctype="multipart/form-data">
-<table width="950" border="0">
+<table class="users" id="table-responsive" border="0">
   <tr>
     <td><strong>Data:</strong></td>
     <td><strong>Nº de matricula do aluno:</strong></td>
@@ -211,11 +210,33 @@ $sql_4 = "INSERT INTO central_mensagem (date, status, emissor, receptor, mensage
 $result_4 = mysqli_query($conexao, $sql_4);
 if($result_4 == ''){
 	echo "<script language='javascript'>window.alert('Ocorreu um erro!');window.location='suporte_tecnico.php';</script>";
+}else{
+  switch ($setor) {
+    case 'COORDENAÇÃO':
+      $sql_1 = "SELECT DISTINCT c.id_cursos,c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and p.code='$code'";
+	   $result_1 = mysqli_query($conexao, $sql_1);
+	   	while($res_1 = mysqli_fetch_assoc($result_1)){
+      
+      $turma=$res_1['curso'];
+      $id=$res_1['id_cursos'];
+		}
+    echo $sql_5 = "INSERT INTO mural_coordenacao (date, status, curso, id_cursos, titulo) VALUES ('$date', 'Ativo','$turma','$id', 'Existe uma nova mensagem enviada pelo aluno para ser respondida')";
+    mysqli_query($conexao, $sql_5);
+    echo "<script language='javascript'>window.alert('Mensagem enviada com sucesso!');window.location='suporte_tecnico.php';</script>";
+   
+  break;
+    
+    default:
+    
+     $sql_66 = "INSERT INTO mural_professor (date, status, id_cursos, titulo) VALUES ('$date', 'Ativo', '1', 'Existe uma nova mensagem enviada pelo aluno para ser respondida')";
+      mysqli_query($conexao, $sql_66);
+      echo "<script language='javascript'>window.alert('Mensagem enviada com sucesso!');window.location='suporte_tecnico.php';</script>";
+      break;
+  }//fim while
+ 
+  }//switch}
 }
-
-	echo "<script language='javascript'>window.alert('Mensagem enviada com sucesso!');window.location='suporte_tecnico.php';</script>";
-
-}?>
+?>
 <!-- fechar  -->
 
 

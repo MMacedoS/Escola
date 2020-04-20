@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<?php require_once "../config.php"; $code; ?>
+<?php require_once "../config.php";require_once "../gerador_cobranca.php"; $code; ?>
 <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="css/topo.css" rel="stylesheet" type="text/css" />
 <title>To Learn - Administração do Professor</title>
@@ -11,6 +11,7 @@
 <script language="javascript" src="../js/jquery-1.7.2.min.js"></script>
 <script src="../js/lightbox.js"></script>
 <link href="../css/lightbox.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css">
 
 
 <link rel="stylesheet" href="../jquery.superbox.css" type="text/css" media="all" />
@@ -96,16 +97,20 @@ function refresh()
 
  </div><!-- mostra_login -->
 </div><!-- box_topo -->
-
-<div id="box_menu">
- 
- <div id="menu_topo">
-  <ul>
-   <li><a href="index.php">HOME</a></li>
-   <li><a href="turmas_e_alunos.php">TURMAS & ALUNOS</a></li>
-
-   <?php  $selectado=isset($_GET['selec']);?>
-   <li><a href="">TODAS AS AVALIAÇÕES</a>
+<div id="menu">
+<input type="checkbox" id="bt_menu" />
+    <label for="bt_menu">&#9776;</label>
+    <nav class="menu">
+        <ul>
+        <li><a href="index.php">HOME</a></li>
+        
+                
+            </li>
+              
+            <li> <a href="turmas_e_alunos.php">Turmas e Alunos</a>
+                
+            </li>
+            <li><a href="">Todas as Avaliações</a>
     <?php 
      if((isset($_GET['selec'])&& $_GET['selec']=='fundamental-inicial')){
     ?>
@@ -148,15 +153,12 @@ function refresh()
     alert("<?php echo $_GET['selec'];?>");
     </script>
     <?php }  ?>
-      
-      
-      
- 
    </li>
    <li><a href="suporte_tecnico.php">Suporte Escolar</a></li>
-  </ul>
- </div><!-- menu_topo -->
+        </ul>
+        
 
-</div><!-- box_menu -->
+    </nav>
+    </div>
 </body>
 </html>

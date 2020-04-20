@@ -63,8 +63,8 @@
                                     echo "<script language='javascript'> window.location='professor'; </script>";
                 
                                 }
-                                else if($painel=='portaria'){
-                                    echo "<script language='javascript'> window.location='portaria'; </script>";
+                                else if($painel=='secretaria'){
+                                    echo "<script language='javascript'> window.location='secretaria'; </script>";
                 
                                 }
                                 else if($painel=='tesouraria'){

@@ -1,6 +1,7 @@
+
 body{
-	padding:0;
-	margin:0;
+	padding:auto;
+	margin:auto;
 	}
 #box_topo{
 	width:900px;
@@ -27,11 +28,11 @@ body{
 	margin:58px 0 0 93px;
 	}
 	
-#mostra_login{
-	width:450px;
-	height:30px;
-	float:right;
-	margin:40px 0 -5px 0;
+	#mostra_login {
+		width: 450px;
+		height: 30px;
+		float: right;
+		margin: 0px 0 -5px 0;
 	}
 #mostra_login h1{
 	float:left;
@@ -51,6 +52,7 @@ body{
 	margin:-17px auto;
 	}
 }
+
 #box_menu{
 	width:980px;
 	background:url(../img/menu_topo.png) repeat;
@@ -108,4 +110,156 @@ body{
 #menu_topo li ul a:hover{
 	background:#930;
 	color:#FF0;
+	}
+	#box_rodape {
+		width: auto;
+		margin: 23px auto;
+	}
+
+/* topo para tabelas */
+#table-responsive {
+	width: 98%;
+	max-height: 500px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+	background:#FFF;
+	border:2px solid #0CF;
+	
+}
+
+.users {
+	table-layout: fixed;
+	width: 100%;
+	white-space: nowrap;
+  }
+  /* Column widths are based on these cells */
+  .row-ID {
+	width: 10%;
+  }
+  .row-name {
+	width: 20%;
+  }
+  .row-job {
+	width: 10%;
+  }
+  .row-email {
+	width: 10%;
+  }
+  .row-cod {
+	width: 30%;
+  }
+  .row-cur {
+	width: 44%;
+  }
+  .row-text{
+	  width: 70%;
+	  
+  }
+
+.row-executar {
+  width: 40%;
+  text-align: center;
+}
+  .users td {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+  }
+table tbody,
+table thead {
+  display: block;
+}
+table tbody {
+	overflow: auto;
+	width: 100%;
+	max-height: 500px;
+  }
+  .users th {
+	background: darkblue;
+	color: white;
+  }
+  .users td,
+  .users th {
+	text-align: left;
+	padding: 5px 10px;
+  }
+  .users tr:nth-child(even) {
+	background: lightblue;
+  }
+  .truncate {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;  
+	width: 250px;
+  }
+	@media(max-width:800px){
+	
+		#box_topo {
+			width: auto;
+			height: 200px;
+			margin: -10px auto;
+		}
+	
+		#logo {
+			width: 200px;
+			height: 100px;
+			float: left;
+			margin: 20px 0 0 0;
+		}
+		#dados_aluno {
+			width: 281px;
+			background: url(../img/dados_aluno.png);
+			height: 145px;
+			float: right;
+			margin: 10px -1px -50px 0px;
+		}
+		#mostra_login {
+			width: 300px;
+			height: 30px;
+			float: right;
+			margin: 58px 0 -5px 0;
+		}
+		#caixa_preta {
+			background: #000;
+			width: auto;
+			margin: 18px auto;
+			height: 15px;
+		}
+		#box {
+			width: auto;
+			height: auto;
+			margin: -20px auto;
+			border: 1px solid #333;
+		}
+		#relatorios {
+			float: left;
+			width: auto;
+			height: auto;
+		}
+			
+		#notificacoes {
+			float: right;
+			width: auto;
+			margin: 0 40px 0 0;
+			text-align: left;
+			height: auto;
+		}
+		#avisos_notificacoes {
+			float: left;
+			width: auto;
+			margin: 0 10px 0 0;
+			overflow: auto;
+			font: 12px Arial, Helvetica, sans-serif;
+			color: #999;
+			height: 300px;
+			border: 1px solid #CCC;
+		}
+		#box_rodape {
+			width: auto;
+			margin: 500px auto;
+		}
+		
+	
 	}		

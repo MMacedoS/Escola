@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Tesouraria</title>
 
-<?php require "../config.php"; require "gerador_cobranca.php"; ?>
+<?php require "../config.php"; require "../gerador_cobranca.php"; ?>
 
 <link href="css/topo.css" rel="stylesheet" type="text/css" />
 <script language="javascript" src="../js/jquery-1.7.2.min.js"></script>

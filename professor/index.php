@@ -20,7 +20,7 @@
 <div id="box">
 
  <div id="relatorios">
-   <div class="card">
+   <div id="card">
    
    <ul>
     <h1><strong>Turmas & Alunos</strong></h1>
@@ -54,23 +54,26 @@
     
     alunos. </strong></li>
    </ul>
+   <br>
    </div>
-    <div class="card">
+    <div id="card">
    
    <ul>
     <h1><strong>Informações de acesso</strong> </h1>
     <li><strong>Seu código de acesso:</strong> <?php echo $code; ?></li>
     <li><strong>Senha:</strong>***** <a rel="superbox[iframe][285x100]" href="altera_senha.php?code=<?php echo $code; ?>">Alterar</a></li>
    </ul> 
+   <br>
    </div>
-    <div class="card">
+    <div id="card">
    
    <ul>
     <h1><strong>Suporte Escolar</strong></h1>
-    <li><strong>Mensagens aguardando resposta:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem WHERE receptor = '$code' AND status = 'Aguarda resposta'")); ?></li>
+    <li><strong>Mensagens aguardando resposta:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem WHERE receptor = '$code' AND status = 'Aguarda resposta'")).'  '; ?></li>
     <li><strong>Mensagens respondidas:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem WHERE receptor = '$code' AND status = 'Respondida'")); ?></li>
     <li><strong>Todas as mensagens:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem WHERE receptor = '$code'")); ?></li>
    </ul> 
+   <br>
    </div>
  </div><!-- relatorios -->
  

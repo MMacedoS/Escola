@@ -45,7 +45,7 @@ if(mysqli_num_rows($result_2) == ''){
 <input type="hidden" name="bimestre" value="<?php echo $res_1['bimestre']; ?>" />
 <input type="hidden" name="disciplina" value="<?php echo $res_1['disciplina']; ?>" />
 <input type="hidden" name="code_aluno" value="<?php echo $res_2['code']; ?>" />
-<table width="955" border="0">
+<table class="users" id="table-responsive" border="0">
   <tr>
     <td width="107">Código:</td>
     <td width="302">Nome do aluno:</td>

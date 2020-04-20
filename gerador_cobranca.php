@@ -29,7 +29,7 @@ if(mysqli_num_rows($sql_1) == ''){
 		
 		if($vencimento >= 5){
 		}else{
-		$sql_2 = mysqli_query($conexao, "SELECT * FROM mensalidades WHERE d_cobranca = '$d_m_y' AND matricula = '$code_aluno'");		
+		$sql_2 = mysqli_query($conexao, "SELECT * FROM mensalidades WHERE mes= '$m' and ano='$a' AND matricula = '$code_aluno'");		
 		if(mysqli_num_rows($sql_2) >=1){
 		}else{
 			$sql_3 = mysqli_query($conexao, "SELECT * FROM mensalidades ORDER BY id DESC LIMIT 1");

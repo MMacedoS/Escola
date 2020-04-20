@@ -422,20 +422,10 @@ padding-left: 75%;
 	color:#666;
 	}
 	
-#relatorios .card {
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #535151;
-    background-clip: border-box;
-    border: 1px solid rgba(128,120,128,.125);
-    border-radius: .25rem;
-    margin: 18px;
-    padding: 1px 0px 1px 1px;
+#card {
+	background-color: rgb(65, 64, 64);
+	border-radius:5% ;
+	margin: 3px 12px 6px 0;
 }	
 #notificacoes{
 	float: left;
@@ -456,3 +446,146 @@ padding-left: 75%;
     height: 300px;
     border: 1px solid #CCC;
 	}
+		
+#box_rodape{
+	width:1000px;
+	margin:50px auto;
+	}
+	#table-responsive {
+		width: 98%;
+		max-height: 500px;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
+		
+	}
+	
+	.users {
+		table-layout: fixed;
+		width: 100%;
+		white-space: nowrap;
+	  }
+	  /* Column widths are based on these cells */
+	  .row-ID {
+		width: 10%;
+	  }
+	  .row-name {
+		width: 20%;
+	  }
+	  .row-job {
+		width: 10%;
+	  }
+	  .row-email {
+		width: 10%;
+	  }
+	  .row-cod {
+		width: 30%;
+	  }
+	  .row-cur {
+		width: 44%;
+	  }
+	  .row-text{
+		  width: 70%;
+		  
+	  }
+	
+	.row-executar {
+	  width: 40%;
+	  text-align: center;
+	}
+	  .users td {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	  }
+	table tbody,
+	table thead {
+	  display: block;
+	}
+	table tbody {
+		overflow: auto;
+		width: 100%;
+		max-height: 500px;
+	  }
+	  .users th {
+		background: darkblue;
+		color: white;
+	  }
+	  .users td,
+	  .users th {
+		text-align: left;
+		padding: 5px 10px;
+	  }
+	  .users tr:nth-child(even) {
+		background: lightblue;
+	  }
+	  .truncate {
+		display: block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;  
+		width: 250px;
+	  }
+@media(max-width:1200px){
+	#logo {
+		width: 110px;
+		height: 24px;
+		float: left;
+		margin: 9px 0 0 -2px;
+	}
+	#box_rodape {
+		width: auto;
+		margin: 450px auto;
+	}
+	#box_topo {
+		width: auto;
+		height: 150px;
+		margin: -10px auto;
+	}
+	#mostra_login {
+		width: auto;
+		height: 50px;
+		float: right;
+		margin: 0px 0px 0px 0px;
+		padding: 1px 1px 0px 100px;
+	}
+	#caixa_preta {
+		background: #000;
+		width: auto;
+		margin: 18px auto;
+		height: 15px;
+	}
+
+	#box {
+		width: auto;
+		background: rgb(248, 248, 248);
+		text-align: left;
+		height: auto;
+		margin: -20px auto;
+		border: 1px solid #333;
+	}
+
+	#relatorios {
+		float: left;
+		width: auto;
+		height: auto;
+		background: rgb(141, 140, 140);
+	}
+
+	#notificacoes {
+		float: left;
+		width: 0;
+		margin: 0px 0px 0 16px;
+		text-align: left;
+		height: auto;
+	}
+	
+	#avisos_notificacoes {
+		border: 1px solid rgb(255, 255, 255);
+		float: left;
+		width: 250px;
+		margin: -8px 10px 0px -12px;
+		height: 300px;
+		border: 1px solid #CCC;
+	}
+}

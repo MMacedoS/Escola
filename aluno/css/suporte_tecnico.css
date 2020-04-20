@@ -28,14 +28,7 @@
 	background:#006;
 	color:#FFF;
 	}
-#box table{
-	margin:10px;
-	width:918px;
-	padding:5px;
-	font:15px Arial, Helvetica, sans-serif;
-	background:#FFF;
-	border:2px solid #333;
-	}
+
 #box table textarea{
 	width:915px;
 	height:50px;
@@ -109,4 +102,42 @@
 	padding:5px;
 	background:#666;
 	margin:10px;
+	}
+	@media(max-width:1000px){
+		#box {
+			width: auto;
+			background: #FFF;
+			height: auto;
+			margin: -20px auto;
+			border: 1px solid #333;
+		}
+		#caixa_preta {
+			background: #000;
+			width: auto;
+			margin: 18px auto;
+			height: 15px;
+		}
+		#box table textarea {
+			width: 300px;
+			height: 50px;
+			padding: 10px;
+			font: 12px Arial, Helvetica, sans-serif;
+			color: #999;
+			border: 1px solid #666;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+		}
+		#box table select {
+			width: auto;
+			height: 35px;
+			padding: 5px;
+			font: 12px Arial, Helvetica, sans-serif;
+			color: #999;
+			margin: 5px 0 3px 0;
+			border: 1px solid #666;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+		}
 	}

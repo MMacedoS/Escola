@@ -24,7 +24,7 @@ if(mysqli_num_rows($result) == ''){
 	while($res_1 = mysqli_fetch_assoc($result)){
 		$curso = $res_1['id_cursos'];
 ?>	
- <table width="955" border="0">
+ <table class="users" id="table-responsive" border="0">
   <tr>
     <td width="400"><strong>Disciplina ministrada:</strong> <?php echo $res_1['disciplina']; ?></td>
     <td width="300"><strong>Total de alunos desta disciplina:</strong><?php 

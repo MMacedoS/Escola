@@ -131,7 +131,7 @@ if(mysqli_num_rows($result)==''){
 }else{
 	while($res_1 = mysqli_fetch_assoc($result)){
 ?> 
-<table width="955" border="0">
+<table class="users" id="table-responsive" border="0">
   <tr>
     <td width="90">Nº Projeto</td>
     <td width="60">Status</td>

@@ -52,7 +52,7 @@ if(mysqli_num_rows($resultado) == ''){
 	 $code_aluno = $res_1['matricula'];
 ?> 
 <form name="button" method="GET" enctype="multipart/form-data" action="">
-<table width="950" border="0">
+<table class="users" id="table-responsive" border="0">
   <tr>
     <th width="94"><strong>Código:</strong></th>
     <th width="350"><strong>Nome:</strong></th>

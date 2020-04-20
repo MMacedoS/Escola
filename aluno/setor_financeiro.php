@@ -15,23 +15,21 @@
 
 <div id="box">
  <h1><strong>Histórico de mensalidades</strong></h1>
-<table width="832" border="0">
+<table class="users" id="table-responsive" border="1">
   <tr>
-    <td width="826" align="center">Abaixo segue seu ralatório de mensalidades</td>
+    <td align="center">Abaixo segue seu ralatório de mensalidades</td>
   </tr>
-  <tr>
-    <td align="center"><hr></td>
-  </tr>
+  
   <tr>
     <td align="center">
-     <table border="0">
+     <table class="users" id="table-responsive" border="0">
       <tr>
-        <td width="114"><strong>Nº da cobrança:</strong></td>
-        <td width="108"><strong>Vencimento:</strong></td>
-        <td width="81"><strong>Valor:</strong></td>
-        <td width="150"><strong>Status:</strong></td>
-        <td width="154"><strong>Data do pagamento:</strong></td>
-        <td width="156"><strong>Forma de pagamento:</strong></td>
+        <td ><strong>Nº da cobrança:</strong></td>
+        <td ><strong>Vencimento:</strong></td>
+        <td ><strong>Valor:</strong></td>
+        <td ><strong>Status:</strong></td>
+        <td ><strong>Data do pagamento:</strong></td>
+        <td ><strong>Forma de pagamento:</strong></td>
       </tr>
       <?php
       $sql_1 = mysqli_query($conexao, "SELECT * FROM mensalidades WHERE matricula = '$code'");

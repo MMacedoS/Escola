@@ -16,13 +16,14 @@
 	margin:10px;
 	color:#FF0;
 	}
-#box table{
-	margin:10px;
-	width:950px;
-	padding:5px;
-	font:15px Arial, Helvetica, sans-serif;
-	background:#FFF;
-	border:2px solid #0CF;
+	#box table {
+		margin: 10px;
+		width: auto;
+		padding: 5px;
+		font: 15px Arial, Helvetica, sans-serif;
+		background: #FFF;
+		border: 2px solid #0CF;
+		height: auto;
 	}
 .td{
 		margin:10px;
