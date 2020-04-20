@@ -48,10 +48,11 @@ require "../gerador_cobranca.php";
 </head>
 
 <body>
+
 <div id="box_topo">
  
  <div id="logo">
-  <img src="../image/logo_ist.gif">  
+  <img id="img" src="../image/logo_ist.gif">  
  </div><!-- logo -->
 
  

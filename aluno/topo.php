@@ -4,7 +4,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="with=device-width,initial-scale=1">
-<meta name="viewport" content="with=device-width,initial-scale=1">
 <?php require_once "../config.php";require "../gerador_cobranca.php";
 $ano=Date('Y');
  
@@ -62,7 +61,7 @@ $result = mysqli_query($conexao, $sql_aluno);
  
  <div id="logo">
   <!-- <img src="../image/logo.png" width="250" /> -->
-   <img src="../image/logo_ist.gif">  
+   <img id="img" src="../image/logo_ist.gif">  
  </div><!-- logo -->
  
  <div id="dados_aluno">

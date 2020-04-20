@@ -48,7 +48,7 @@
  
  <div id="logo">
    
-  <img src="../image/logo_ist.gif" width="250" />
+  <img id="img" src="../image/logo_ist.gif" />
  </div><!-- logo -->
  <script language="JavaScript">
 function refresh() 

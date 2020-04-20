@@ -188,61 +188,57 @@ table tbody {
 	text-overflow: ellipsis;  
 	width: 250px;
   }
-	@media only screen and (max-width:800px){
+@media (max-width:1000px){
 	
-		#box_topo {
-			width: auto;
-			height: 200px;
-			margin: -10px auto;
-		}
-	
-		#logo {
-			width: 100px;
-			height: 100px;
-			float: left;
-			margin: 0px -70px 0 0;
-		}
-		#dados_aluno {
-			width: 281px;
-			background: url(../img/dados_aluno.png);
-			height: 145px;
-			float: right;
-			margin: 10px -1px -50px 0px;
-		}
+	#box_topo {
+		width: 100%;
+		height: 200px;
+		margin: -10px auto;
+	}
+	#img{
+		width: 100px;
+	}
+	#logo {
+		width: 100px;
+		height: 100px;
+		float: left;
+		margin: 77px -100px 0 0;
+	}
+		
 		#mostra_login {
 			width: 300px;
 			height: 30px;
 			float: right;
-			margin: 58px 0 -5px 0;
+			margin: 7px 0 -5px 0;
 		}
 		#caixa_preta {
 			background: #000;
-			width: auto;
+			width: 100%;
 			margin: 18px auto;
 			height: 15px;
 		}
 		#box {
-			width: auto;
+			width: 100%;
 			height: auto;
 			margin: -20px auto;
 			border: 1px solid #333;
 		}
 		#relatorios {
 			float: left;
-			width: auto;
+			width: 100%;
 			height: auto;
 		}
 			
 		#notificacoes {
 			float: right;
-			width: auto;
+			width: 100%;
 			margin: 0 40px 0 0;
 			text-align: left;
 			height: auto;
 		}
 		#avisos_notificacoes {
 			float: left;
-			width: 300px;
+			width: 100%;
 			margin: 0 -25px 10px 0px;
 			overflow: auto;
 			font: 12px Arial, Helvetica, sans-serif;
@@ -251,11 +247,11 @@ table tbody {
 			border: 1px solid #CCC;
 		}
 		#box_rodape {
-			width: auto;
+			width: 100%;
 			margin: 500px auto;
 		}
 		#table-responsive {
-			width: 98%;
+			width: 100%;
 			max-height: 500px;
 			overflow-x: auto;
 			position: absolute;
@@ -264,6 +260,14 @@ table tbody {
 			background: #FFF;
 			border: 2px solid #0CF;
 		}
+		#dados_aluno{
+			width:285px;
+			background:url(../img/dados_aluno.png);
+			height:145px;
+			visibility: hidden;
+			float:right;
+			margin:15px 0 -30px 0;
+			}
 		
 	
 	}		

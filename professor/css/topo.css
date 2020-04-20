@@ -2,7 +2,7 @@ body{
 	padding:0;
 	margin:0;
 	}
-	
+#img{width:250px}	
 #box_topo{
 	width:900px;
 	height:150px;
@@ -526,28 +526,111 @@ padding-left: 75%;
 		text-overflow: ellipsis;  
 		width: 250px;
 	  }
-@media(max-width:1200px){
+	  @media(max-width:500px){
+		#logo {
+			width: 100px;
+			height: 9px;
+			float: left;
+			margin: 13px 0-24px -24px;
+		}
+		#box_rodape {
+			width: 320px;
+			margin: 450px auto;
+		}
+		#box_topo {
+			width: 320px;
+			height: 100px;
+			margin: 50px auto;
+		}
+		#img {
+			width: 100px;
+		}
+		#mostra_login {
+			width: 100px;
+			height: 50px;
+			float: right;
+			margin: -20px 200px 0px 0;
+			padding: 1px 1px 0px 100px;
+		}
+		.custom-select {
+			position: relative;
+			/* position: fixed; */
+			bottom: 3px;
+			right: -93px;
+			width: 187px;
+			margin: 3px 0 0 -160px;
+			border: 3px solid #73AD21;
+			font-family: Arial;
+		}
+		#caixa_preta {
+			background: #000;
+			width: 100%;
+			margin: 18px auto;
+			height: 15px;
+		}
+	
+		#box {
+			width: 100%;
+			background: rgb(248, 248, 248);
+			text-align: left;
+			height: auto;
+			margin: -20px auto;
+			border: 1px solid #333;
+		}
+	
+		#relatorios {
+			float: left;
+			width: 100%;
+			height: auto;
+			background: rgb(141, 140, 140);
+		}
+	
+		#notificacoes {
+			float: left;
+			width: 100%;
+			margin: 0px 0px 0 16px;
+			text-align: left;
+			height: auto;
+		}
+		
+		#avisos_notificacoes {
+			border: 1px solid rgb(255, 255, 255);
+			float: left;
+			width: 100%;
+			margin: -8px 10px 0px -12px;
+			height: 300px;
+			border: 1px solid #CCC;
+		}
+		#box table {
+			font: 15px Arial, Helvetica, sans-serif;
+			margin: 10px;
+			background: #FFF;
+			padding: 5px;
+			color: #039;
+		}
+	}
+@media (min-width:500px) and (max-width:900px){
 	#logo {
 		width: 100px;
 		height: 24px;
 		float: left;
-		margin: -60px 0 0px 0;
+		margin: -34px 0 0px -140px;
 	}
 	#box_rodape {
-		width: auto;
+		width: 100%;
 		margin: 450px auto;
 	}
 	#box_topo {
-		width: auto;
-		height: 182px;
-		margin: 50px auto;
+		width: 500px;
+		height: 100px;
+		margin: 40px auto;
 	}
 	#mostra_login {
 		width: 100px;
 		height: 50px;
 		float: right;
-		margin: 60px 200px 0px 0;
-		padding: 1px 1px 0px 100px;
+		margin: -30px 99px 0px 0;
+		padding: 1px 1px 0px 152px;
 	}
 	.custom-select {
 		position: relative;
@@ -561,13 +644,13 @@ padding-left: 75%;
 	}
 	#caixa_preta {
 		background: #000;
-		width: auto;
+		width: 100%;
 		margin: 18px auto;
 		height: 15px;
 	}
 
 	#box {
-		width: auto;
+		width: 100%;
 		background: rgb(248, 248, 248);
 		text-align: left;
 		height: auto;
@@ -577,14 +660,14 @@ padding-left: 75%;
 
 	#relatorios {
 		float: left;
-		width: auto;
+		width: 100%;
 		height: auto;
 		background: rgb(141, 140, 140);
 	}
 
 	#notificacoes {
 		float: left;
-		width: auto;
+		width: 100%;
 		margin: 0px 0px 0 16px;
 		text-align: left;
 		height: auto;
@@ -593,7 +676,7 @@ padding-left: 75%;
 	#avisos_notificacoes {
 		border: 1px solid rgb(255, 255, 255);
 		float: left;
-		width: 250px;
+		width: 100%;
 		margin: -8px 10px 0px -12px;
 		height: 300px;
 		border: 1px solid #CCC;
@@ -604,6 +687,5 @@ padding-left: 75%;
 		background: #FFF;
 		padding: 5px;
 		color: #039;
-		position: absolute;
 	}
 }

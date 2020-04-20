@@ -78,6 +78,7 @@
 </div><!-- box -->
 
 
-<?php require "rodape.php"; ?>
+
 </body>
+<?php require "rodape.php"; ?>
 </html>

@@ -3,11 +3,13 @@ body{
 	margin:0;
 	}
 	#box_topo {
-		width: 90%;
+		width: 100%;
 		height: 110px;
 		margin: 0px 84px 0px 0px;
 	}
-	
+#img{
+	width: 250px;
+}	
 #logo{
 	width: 209px;
     height: 100px;
@@ -843,7 +845,7 @@ width:978px;
 	
 /* topo para tabelas */
 #table-responsive {
-	width: 98%;
+	width: 100%;
 	max-height: 500px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -926,7 +928,126 @@ table tbody {
 	font:12px Arial, Helvetica, sans-serif;
 	color:#666;
 	}
-@media(max-width:900px){	
+	@media(max-width:500px){	
+		#box_topo {
+			width: 100%;
+			height: 140px;
+			margin: 0px 0 0px 0px;
+		}
+		#box_rodape {
+			width: auto;
+			margin: 692px auto 0;
+		}
+		#logo {
+			width: 100px;
+			height: 100px;
+			float: left;
+			margin: 43px 0px 0px 0px;
+		}
+		#img {
+			width: 100px;
+		}
+		#mostra_login {
+			width: 100px;
+			height: 30px;
+			float: right;
+			margin: 20px 62px;
+		}
+		
+		#caixa_preta {
+			background: #000;
+			width: 100%;
+			margin: 17px auto;
+			height: 15px;
+			margin-left: -14px;
+		}
+		.box_professores {
+			width: 100%;
+			height: auto;
+			margin: -20px auto;
+			border: 1px solid #333;
+			background: #E1E1C4;
+			text-align: left;
+		}
+		#box_rodape {
+			width: 100%;
+			margin: 692px auto 0;
+		}
+	
+	
+	#box {
+	width: 100%;
+	height: auto;
+	margin: -20px auto;
+	border: 1px solid #333;
+	}
+	#notificacoes {
+		float: right;
+		width: 100%;
+		margin: 41px 0 0 0;
+		text-align: left;
+		height: 400px;
+	}
+	#avisos_notificacoes {
+		float: left;
+		width: 100%;
+		margin: 0 10px 0 0;
+		overflow: auto;
+		font: 12px Arial, Helvetica, sans-serif;
+		color: #999;
+		height: 350px;
+		border: 1px solid #CCC;
+	}
+	#relatorios ul {
+		text-align: left;
+		margin: 20px 0px 0 38px;
+		list-style-image: url(../img/seta.png);
+	}
+	#relatorios {
+		float: left;
+		width: 100%;
+		height: 490px;
+		margin: -1px -20px 0 -46px;
+	}
+	/*  */
+	
+	
+	#cadastra_professores {
+		width: 100%;
+		height: auto;
+		margin: -20px auto;
+		border: 1px solid #333;
+		background: rgb(218, 218, 103);
+		text-align: left;
+	}
+	#box_aluno {
+		width: 100%;
+		height: auto;
+		margin: -20px auto;
+		border: 1px solid #333;
+		background: rgb(218, 172, 103);
+		text-align: left;
+	}
+	#cadastra_estudante {
+		width: -webkit-fill-available;
+		background: #06C;
+		height: auto;
+		float: left;
+		text-align: left;
+		border: 1px solid #333;
+	}
+	#box_funcionarios{
+		width:100%;
+		background:#E1E1C4;
+		height:auto;
+		float:none;
+		text-align:left;
+		margin:-20px auto;
+		border:1px solid #333;
+	
+		}
+		}
+@media(min-width:501px) and (max-width:1000px){	
 	#box_topo {
 		width: 100%;
 		height: 140px;
@@ -950,7 +1071,7 @@ table tbody {
 	}
 #caixa_preta {
 background: #000;
-width: auto;
+width: 100%;
 margin: 20px auto;
 height: 15px;
 margin-top: -58px;
@@ -959,21 +1080,21 @@ margin-top: -58px;
 
 
 #box {
-width: auto;
+width: 100%;
 height: auto;
 margin: -20px auto;
 border: 1px solid #333;
 }
 #notificacoes {
     float: right;
-    width: 190px;
-    margin: 41px 160px 0 0;
+    width: 100%;
+    margin: 41px 0 0 0;
     text-align: left;
     height: 400px;
 }
 #avisos_notificacoes {
     float: left;
-    width: 350px;
+    width: 100%;
     margin: 0 10px 0 0;
     overflow: auto;
     font: 12px Arial, Helvetica, sans-serif;
@@ -988,28 +1109,22 @@ border: 1px solid #333;
 }
 #relatorios {
     float: left;
-    width: 379px;
+    width: 100%;
     height: 490px;
     margin: -1px -20px 0 -46px;
 }
 /*  */
 .box_professores {
-    width: auto;
+    width: 100%;
     height: auto;
     margin: -20px auto;
     border: 1px solid #333;
     background: #E1E1C4;
     text-align: left;
 }
-#caixa_preta {
-    background: #000;
-    width: auto;
-    margin: 17px auto;
-    height: 15px;
-    margin-left: -14px;
-}
+
 #cadastra_professores {
-    width: auto;
+    width: 100%;
     height: auto;
     margin: -20px auto;
     border: 1px solid #333;
@@ -1017,7 +1132,7 @@ border: 1px solid #333;
     text-align: left;
 }
 #box_aluno {
-    width: auto;
+    width: 100%;
     height: auto;
     margin: -20px auto;
     border: 1px solid #333;
@@ -1033,7 +1148,7 @@ border: 1px solid #333;
     border: 1px solid #333;
 }
 #box_funcionarios{
-	width:auto;
+	width:100%;
 	background:#E1E1C4;
 	height:auto;
 	float:none;
