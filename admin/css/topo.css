@@ -940,18 +940,18 @@ table tbody {
 		}
 		#logo {
 			width: 100px;
-			height: 100px;
-			float: left;
-			margin: 43px 0px 0px 0px;
+			height: 0px;
+			float: none;
+			margin: 15px auto;
 		}
 		#img {
 			width: 100px;
 		}
 		#mostra_login {
-			width: 100px;
-			height: 30px;
-			float: right;
-			margin: 20px 62px;
+			width: 100%;
+			height: 100%;
+			float: none;
+			margin: 70px auto;
 		}
 		
 		#caixa_preta {

@@ -77,7 +77,7 @@ function refresh()
              if (isset($_GET['selec'])){?>
              <option value="<?php echo $_GET['selec']; ?>"><?php echo $_GET['selec'];?></option>
              <?php } ?>
-         <option value="">nada selecionado!</option>
+         <option value="">nada selecionado</option>
       <?php  
       $sql_busca_cur="SELECT DISTINCT cat.categoria,cat.id_categoria FROM disciplinas d inner join professores p on d.id_professores=p.id_professores inner join cursos c on d.id_cursos=c.id_cursos inner join categoria cat on c.id_categoria=cat.id_categoria where code='$code'";
        $con_busca_cur=mysqli_query($conexao,$sql_busca_cur);

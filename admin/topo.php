@@ -65,7 +65,7 @@ require "../gerador_cobranca.php";
     <label for="bt_menu">&#9776;</label>
     <nav class="menu">
         <ul>
-        <li><a href="index.php">HOME</a></li>
+        <li><a href="index.php">Inicio</a></li>
         
                 
             </li>
@@ -77,10 +77,10 @@ require "../gerador_cobranca.php";
                     <li><a href="cursos_e_disciplinas.php?pg=cursoedisciplinas">Cursos & Disciplinas</a></li>
                 </ul>
             </li>
-            <li><a href="professores.php?pg=todos">PROFESSORES</a></li>  
+            <li><a href="professores.php?pg=todos">Professores</a></li>  
                 
-            <li><a href="estudantes.php?pg=todos">ESTUDANTES</a></li>
-            <li><a href="setor_financeiro.php">SETOR FINANCEIRO</a></li>
+            <li><a href="estudantes.php?pg=todos">Estudantes</a></li>
+            <li><a href="setor_financeiro.php">Setor Financeiro</a></li>
             <li> <a href=""> Relatorios </a>
                 <ul>
                 <li><a href="relatorios.php?tipo=alunos&s=<?php echo base64_encode("pesquisa");?>">Alunos</a></li>
@@ -90,7 +90,7 @@ require "../gerador_cobranca.php";
             </li>
             
             <li><a href="suporte_tecnico.php">Mensagens</a></li>
-            <li><a href="">EXTRAS</a>
+            <li><a href="">Funcionários</a>
             <ul>
             <li><a href="funcionarios.php?pg=todos">Funcionários</a></li>
             </ul>

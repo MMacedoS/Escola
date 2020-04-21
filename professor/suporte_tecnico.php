@@ -57,7 +57,7 @@
   </tr>
 <?php } ?>
   <tr>
-    <td  align="left">Abaixo segue seu ralatório de chamadas</td>
+    <td  align="left">Abaixo segue seu relatório de chamadas</td>
   </tr>
   <tr>
     <td align="center"><hr></td>
