@@ -3,11 +3,13 @@ body{
 	margin:0;
 	}
 	#box_topo {
-		width: 90%;
+		width: 100%;
 		height: 110px;
 		margin: 0px 84px 0px 0px;
 	}
-	
+#img{
+	width: 250px;
+}	
 #logo{
 	width: 209px;
     height: 100px;
@@ -74,7 +76,7 @@ body{
 	list-style:none;
 	}
 #menu_topo ul li{
-	float:left;
+	float: none;;
 	display:inline;
 	}
 #menu_topo ul li a{
@@ -926,25 +928,166 @@ table tbody {
 	font:12px Arial, Helvetica, sans-serif;
 	color:#666;
 	}
-@media(max-width:900px){	
-	#box_topo {
-		width: 90%;
-		height: 200px;
-		margin: 0px 84px 0px 0px;
+	@media(max-width:500px){	
+		#box_topo {
+			width: 100%;
+			height: 140px;
+			margin: 0px 0 0px 0px;
+		}
+		#box_rodape {
+			width: auto;
+			margin: 692px auto 0;
+		}
+		#logo {
+			width: 100px;
+			height: 0px;
+			float: none;
+			margin: 15px auto;
+		}
+		#img {
+			width: 100px;
+		}
+		#mostra_login {
+			width: 100%;
+			height: 100%;
+			float: none;
+			margin: 70px auto;
+		}
+		
+		#caixa_preta {
+			background: #000;
+			width: 100%;
+			margin: 17px auto;
+			height: 15px;
+			
+		}
+		#menu{
+			margin-bottom: -75px;
+		}
+		#box table {
+			font: 12px Arial, Helvetica, sans-serif;
+			margin: 4px;
+			border: 1px solid #666;
+		}
+		.pesq {
+			overflow: visible;
+			width: 100%;
+		}
+		#box select {
+			font: 12px Arial, Helvetica, sans-serif;
+			padding: 5px;
+			width: 120px;
+			height: 30px;
+		}
+		.box_professores {
+			width: 100%;
+			height: auto;
+			margin: -20px auto;
+			border: 1px solid #333;
+			background: #E1E1C4;
+			text-align: left;
+		}
+		#box_rodape {
+			width: 100%;
+			margin: 692px auto 0;
+		}
+	
+	
+	#box {
+	width: 100%;
+	height: auto;
+	margin: -20px auto;
+	border: 1px solid #333;
+	}
+	#notificacoes {
+		float: right;
+		width: 100%;
+		margin: 41px 0 0 0;
+		text-align: left;
+		height: 400px;
+	}
+	#avisos_notificacoes {
+		float: left;
+		width: 100%;
+		margin: 0 10px 0 0;
+		overflow: auto;
+		font: 12px Arial, Helvetica, sans-serif;
+		color: #999;
+		height: 350px;
+		border: 1px solid #CCC;
+	}
+	#relatorios ul {
+		text-align: left;
+		margin: 20px 0px 0 38px;
+		list-style-image: url(../img/seta.png);
+	}
+	#relatorios {
+		float: left;
+		width: 100%;
+		height: 490px;
+		margin: -1px -20px 0 -46px;
+	}
+	/*  */
+	
+	
+	#cadastra_professores {
+		width: 100%;
+		height: auto;
+		margin: -20px auto;
+		border: 1px solid #333;
+		background: rgb(218, 218, 103);
+		text-align: left;
 	}
 	
+	#box_aluno {
+		width: 100%;
+		height: auto;
+		margin: -17px auto;
+		border: 1px solid #333;
+		background: rgb(218, 172, 103);
+		text-align: left;
+	}
+	#cadastra_estudante {
+		width: -webkit-fill-available;
+		background: #06C;
+		height: auto;
+		float: left;
+		text-align: left;
+		border: 1px solid #333;
+	}
+	#box_funcionarios{
+		width:100%;
+		background:#E1E1C4;
+		height:auto;
+		float:none;
+		text-align:left;
+		margin:-20px auto;
+		border:1px solid #333;
+	
+		}
+		}
+@media(min-width:501px) and (max-width:1000px){	
+	#box_topo {
+		width: 100%;
+		height: 140px;
+		margin: 0px 84px 0px 0px;
+	}
+	#box_rodape {
+		width: auto;
+		margin: 692px auto 0;
+	}
 	#logo {
-		width: 130px;
+		width: 100px;
 		height: 100px;
 		float: left;
-		margin: -12px 0px 0px 0px;
+		margin: 2px -35px 0px -6px;
 	}
-#mostra_login {
-    width: 290px;
-    height: 30px;
-    float: right;
-    margin: 40px 0 -5px 0;
-}
+	#mostra_login {
+		width: 100px;
+		height: 30px;
+		float: right;
+		margin: 7px 20px;
+	}
 #caixa_preta {
 background: #000;
 width: 100%;
@@ -952,32 +1095,30 @@ margin: 20px auto;
 height: 15px;
 margin-top: -58px;
 }
-#box_rodape {
-width: 100%;
-margin: 50px auto;
-}
+
+
 
 #box {
-    width: 100%;
-    height: auto;
-    margin: -20px auto;
-    border: 1px solid #333;
+width: 100%;
+height: auto;
+margin: -20px auto;
+border: 1px solid #333;
 }
 #notificacoes {
     float: right;
     width: 100%;
-    margin: 36px 3px 0 0;
+    margin: 41px 0 0 0;
     text-align: left;
-    height: 615px;
+    height: 400px;
 }
 #avisos_notificacoes {
     float: left;
     width: 100%;
-    margin: 2px 10px 0 0;
+    margin: 0 10px 0 0;
     overflow: auto;
     font: 12px Arial, Helvetica, sans-serif;
     color: #999;
-    height: 566px;
+    height: 350px;
     border: 1px solid #CCC;
 }
 #relatorios ul {
@@ -989,7 +1130,7 @@ margin: 50px auto;
     float: left;
     width: 100%;
     height: 490px;
-    margin: 0px -20px 0 30px;
+    margin: -1px -20px 0 -46px;
 }
 /*  */
 .box_professores {
@@ -1000,13 +1141,7 @@ margin: 50px auto;
     background: #E1E1C4;
     text-align: left;
 }
-#caixa_preta {
-    background: #000;
-    width: 100%;
-    margin: 17px auto;
-    height: 15px;
-    margin-left: -14px;
-}
+
 #cadastra_professores {
     width: 100%;
     height: auto;
@@ -1031,4 +1166,14 @@ margin: 50px auto;
     text-align: left;
     border: 1px solid #333;
 }
+#box_funcionarios{
+	width:100%;
+	background:#E1E1C4;
+	height:auto;
+	float:none;
+	text-align:left;
+	margin:-20px auto;
+	border:1px solid #333;
+
+	}
 	}

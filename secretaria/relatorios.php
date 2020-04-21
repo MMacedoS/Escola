@@ -28,9 +28,9 @@ echo "<script language='javascript'>window.location='relatorios.php?tipo=alunos&
 <form name="button" method="post" action="" enctype="multipart/form-data">
 <table class="users" id="table-responsive" border="0">
   <tr>
-    <td width="267"><strong>Status</strong></td>
-    <td width="248"><strong>Turma</strong></td>
-    <td width="180">&nbsp;</td>
+    <td ><strong>Status</strong></td>
+    <td ><strong>Turma</strong></td>
+    <td >&nbsp;</td>
   </tr>
   <tr>
     <td><select name="tipo" size="1" id="select">
@@ -74,7 +74,7 @@ if(mysqli_num_rows($sql_1) == ''){
 }else{
 ?>
 <table class="users" id="table-responsive"  border="0">
-<thead> 
+
 <tr>
     <th class="row-1 row-name"> <strong>Nome:</strong></th>
     <th class="row-2 row-name"><strong>Nº de matricula:</strong></th>
@@ -82,8 +82,7 @@ if(mysqli_num_rows($sql_1) == ''){
     <th class="row-4 row-job"><strong>Mensalidades pagas:</strong></th>
     <th class="row-4 row-ID"><strong>Mensalidade devedoras:</strong></th>
   </tr>
-  </thead> 
-  <tbody>
+ 
   <?php while($res_1 = mysqli_fetch_assoc($sql_1)){ ?>
   <tr>
     <td class="row-cod"><?php echo $res_1['nome']; ?></td>
@@ -96,7 +95,7 @@ if(mysqli_num_rows($sql_1) == ''){
     <td colspan="5"></td>
   </tr> -->
   <?php } ?>
-  </tbody>
+ 
 </table>
 <div id="imprimir">
 <a target="_blank" margin-left="10px" href="alunos_pg_impressao.php?s=<?php echo $_GET['s']; ?>&status=<?php echo $tipo;?>&turma=<?php echo $serie;?>">Imprimir relação completa do aluno</a>
@@ -179,7 +178,7 @@ if(mysqli_num_rows($sql_1) == '') {
 }else{
 ?>
 <table class="users" id="table-responsive"  border="0">
-<thead>  
+
 <tr>
     <th class="row-1 row-cod"><strong>Disciplina/Curso:</strong></th>
     <th class="row-2 row-email"><strong>Código:</strong></th>
@@ -187,8 +186,7 @@ if(mysqli_num_rows($sql_1) == '') {
     <th class="row-4 row-job"><strong>Formação:</strong></th>
     <th class="row-4 row-ID"><strong>Salário:</strong></th>
   </tr>
-  </thead>
-  <tbody>
+ 
 <?php while($res_1 = mysqli_fetch_assoc($sql_1)){ ?>  
   <tr>
     <td class="row-name"><?php
@@ -216,7 +214,7 @@ if(mysqli_num_rows($sql_1) == '') {
   <!-- <tr>
    <td align="center" colspan="6"><a target="_blank" href="professores_pg_impressao.php?s=<?php echo $_GET['s']; ?>">Imprimir relação completa</a></td>
   </tr> -->
-  </tbody>
+  
 </table>
 
 <div id="imprimir">   

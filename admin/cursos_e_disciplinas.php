@@ -7,7 +7,7 @@
     <title>Administração</title>
     
 <link rel="shortcut icon" href="../image/logo_ist.gif">
-    <link rel="stylesheet" href="css/cursos_e_disciplinas.css" type="text/css">
+    
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 </head>
 <body>
@@ -56,14 +56,13 @@
                 } ?>
                 <form name="form1" method="post" action="">
                     <table class="users" id="table-responsive" border="0">
-                    <thead>    
+                   
                     <tr>
                             <td class="row-1 row-cur">Curso</td>
                             <td class="row-1 row-cur">Turno</td>
                             <td class="row-1 row-cur">Categoria</td>
                         </tr>
-                        </thead>
-                        <tbody>
+                       
                         <tr>
                             <td class="row-1 row-cur"><input type="text" name="curso"  width="40px" value=""></td>
                             <td class="row-1 row-cur">
@@ -87,7 +86,7 @@
                             </td>
                             <td class="row-1 row-cur"><input class="input" type="submit" name="cadastra" id="button" value="Cadastrar"></td>
                         </tr>
-                        </tbody>
+                       
                     </table>
                 </form>
                     <br/>
@@ -127,14 +126,13 @@
                 } ?>
                 <form name="form1" method="post" action="">
                 <table class="users" id="table-responsive" border="0">
-                <thead>    
+             
                     <tr>
                             <td class="row-1 row-cur">Curso</td>
                             <td class="row-1 row-cur">Turno</td>
                             <td class="row-1 row-cur">Categoria</td>
                         </tr>
-                        </thead>
-                        <tbody>
+                        
                         <tr>
                             <td class="row-1 row-cur"><input type="text" name="curso"  id="textfield" value="<?php echo $edit_curso['curso'];?>"></td>
                             <td class="row-1 row-cur">
@@ -170,7 +168,7 @@
                             </td>
                             <td class="row-1 row-cur"><input class="input" type="submit" name="atualiza" id="button" value="Atualizar"></td>
                         </tr>
-                        </tbody>
+                      
                     </table>
                     <?php } ?>
                 </form>
@@ -192,15 +190,15 @@
          <br/><br/>
          <h1>Turmas</h1>
          <table class="users" id="table-responsive" border="0">
-                <thead>
+                
                 <tr>
                     <td class="row-1 row-ID"><strong>Turmas:</strong></td>
                     <td class="row-2 row-ID"><strong>Total de disciplinas desta Turma:</strong></td>
                     <td class="row-3 row-ID"> <strong> Categoria:</strong></td>
                     <td class="row-4 row-ID">&nbsp;</td>
                 </tr>
-                </thead>
-                <tbody>
+                
+            
                 <?php while($res_1 = mysqli_fetch_assoc($result)){
                     $cursos_id=$res_1['id_cursos'];
                 ?>
@@ -237,7 +235,7 @@
                     </td>
                 </tr>
                 <?php }?>
-                </tbody>
+               
             </table>
              <br/><br/>
   <?php } ?>
@@ -468,7 +466,7 @@
 
         <form name="form1" method="post">
         <table class="users" id="table-responsive" border="0">
-                <thead>
+               
                 <tr>
                     <td class="row-1 row-cod">Turma:</td>
                     <td class="row-2 row-name">Disciplina:</td>
@@ -477,8 +475,8 @@
                     <td class="row-1 row-ID">&nbsp</td>
                     <td colspan="2"></td>
                 </tr>
-                </thead>
-                <tbody>
+               
+               
                 <tr>
                     <td>
                     <select name="curso">
@@ -511,7 +509,7 @@
                     
                     <td><input class="btn btn-success" type="submit" name="cadastra" id="button" value="Cadastrar"></td>
                 </tr>
-                </tbody>
+                
             </table>
         </form>
        <br/><br/><br/>
@@ -567,7 +565,7 @@
 
         <form name="form1" method="post">
             <table class="users" id="table-responsive" border="0">
-            <thead>    
+            
             <tr>
             <td class="row-1 row-cod">Turma:</td>
                     <td class="row-2 row-name">Disciplina:</td>
@@ -576,8 +574,7 @@
                     <td class="row-1 row-ID">&nbsp</td>
                     <td colspan="2"></td>
                 </tr>
-                </thead>
-                <tbody>
+              
                 <tr>
                     <td>
                     <select name="curso">
@@ -629,7 +626,7 @@
                     
                     <td><input class="btn btn-danger" type="submit" name="atualiza" id="button" value="Atualizar"></td>
                 </tr>
-                </tbody>
+                
             </table>
                     <?php } ?>
         </form>
@@ -647,7 +644,7 @@
                 }else{
                 ?>
                <table class="users" id="table-responsive" border="0">
-                  <thead>
+                  
                     <tr>
                         <td class="row-1 row-name"><strong>Curso:</strong></td>
                         <td class="row-2 row-name"><strong>Turno:</strong></td>
@@ -657,8 +654,7 @@
                         <td class="row-1 row-ID">&nbsp</td>
                         <td class="row-1 row-ID">&nbsp</td>
                     </tr>
-                    </thead>
-                    <tbody>
+                   
                     <?php while($res_busca=mysqli_fetch_assoc($result_buscar_disc)){?>
                     <tr>
                         <td class="row-name"><h3>
@@ -702,7 +698,7 @@
                         </td>
                     </tr>
                     <?php }?>
-                    </tbody>
+                   
                 </table>
                 <?php } ?>
 

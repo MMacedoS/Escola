@@ -845,7 +845,7 @@ width:978px;
 	
 /* topo para tabelas */
 #table-responsive {
-	width: 100%;
+	width: 98%;
 	max-height: 500px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -959,7 +959,25 @@ table tbody {
 			width: 100%;
 			margin: 17px auto;
 			height: 15px;
-			margin-left: -14px;
+			
+		}
+		#menu{
+			margin-bottom: -75px;
+		}
+		#box table {
+			font: 12px Arial, Helvetica, sans-serif;
+			margin: 4px;
+			border: 1px solid #666;
+		}
+		.pesq {
+			overflow: visible;
+			width: 100%;
+		}
+		#box select {
+			font: 12px Arial, Helvetica, sans-serif;
+			padding: 5px;
+			width: 120px;
+			height: 30px;
 		}
 		.box_professores {
 			width: 100%;
@@ -1020,10 +1038,11 @@ table tbody {
 		background: rgb(218, 218, 103);
 		text-align: left;
 	}
+	
 	#box_aluno {
 		width: 100%;
 		height: auto;
-		margin: -20px auto;
+		margin: -17px auto;
 		border: 1px solid #333;
 		background: rgb(218, 172, 103);
 		text-align: left;

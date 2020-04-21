@@ -102,7 +102,7 @@ window.location='fluxo_de_caixa.php?s=$s';</script>'
 
 <form name="" method="post" action="" enctype="multipart/form-data">
 
-<table class="users table-responsive" border="0">
+<table class="users" id="table-responsive" border="0">
   <tr>
     <td colspan="4"><h3><strong>Selecione o filtro</strong></h3></td>
   </tr>
@@ -156,7 +156,7 @@ if(mysqli_num_rows($sql_1)==''){
 ?>
 
 <table class="users" id="table-responsive" border="0">
-<thead>  
+
 <tr>
     <td class="row-1 row-name"><strong>Data:</strong></td>
     <td class="row-1 row-email"><strong>Tipo:</strong></td>
@@ -165,11 +165,11 @@ if(mysqli_num_rows($sql_1)==''){
     <td class="row-1 row-name"><strong>Valor:</strong></td>
     <td class="row-1 row-name" ><strong>For. recebimento:</strong></td>
   </tr>
-  </thead>
+
   <!-- <tr>
     <td colspan="7"><hr></td>
   </tr> -->
-  <tbody>
+
   <?php while($res_1 = mysqli_fetch_assoc($sql_1)){ ?>
   <tr>
     <td><?php echo $res_1['date_completo']; ?></td>
@@ -236,7 +236,7 @@ if(mysqli_num_rows($sql_1)==''){
     
     </td>
   </tr>
-  </tbody>
+ 
 </table>
 <?php } ?>
 

@@ -22,9 +22,9 @@
  <div class="row" >
  <a class="a2" href="estudantes.php?pg=cadastra&bloco=1">Cadastrar novo aluno </a>
  <form class="form" method="post" action="estudantes.php?pg=todos">
-  <input type="text" name="nome" value="" placeholder="pesquise o aluno...">
-  <input type="submit" value="Pesquisar">
-</form>
+  <input type="text" class="pesq" name="nome" value="" placeholder="pesquise o aluno...">
+  <input class="pesq" type="submit" value="Pesquisar">
+</form> 
  </div>
  <h1>Alunos que estão cadastrados</h1>
 <?php
@@ -41,18 +41,18 @@ if(mysqli_num_rows($consulta) == ''){
 ?>
     
     <table class="users" id="table-responsive"  border="0">
-    <thead>  
+
     <tr>
-        <th class="row-1 row-email"><strong>Status:</strong></th>
-        <th class="row-1 row-email"><strong>Código:</strong></th>
-        <th class="row-2 row-name"><strong>Nome:</strong></th>
-        <th class="row-3 row-email"><strong>Turma(ano):</strong></th>
-        <th class="row-4 row-email"><strong>Turno:</strong></th>
-        <th class="row-2 row-email"><strong>Mensalidade:</strong></th>
-        <th class="row-2 row-executar"  colspan="4">Executar</td>
+        <td class="row-1 row-email"><strong>Status:</strong></td>
+        <td class="row-1 row-email"><strong>Código:</strong></td>
+        <td class="row-2 row-name"><strong>Nome:</strong></td>
+        <td class="row-3 row-email"><strong>Turma(ano):</strong></td>
+        <td class="row-4 row-email"><strong>Turno:</strong></td>
+        <td class="row-2 row-email"><strong>Mensalidade:</strong></td>
+        <td class="row-2 row-executar"  colspan="4">Executar</td>
       </tr>
-      </thead>
-      <tbody>
+     
+      
       <?php while($res_1 = mysqli_fetch_assoc($consulta)){ ?>
       <tr>
         <td class="row-email"><h3><?php echo $res_1['status']; ?></h3></td>
@@ -111,7 +111,7 @@ if(mysqli_num_rows($consulta) == ''){
       </tr>
       
       <?php } ?>
-      </tbody>
+     
     </table>
     
     <br /> 

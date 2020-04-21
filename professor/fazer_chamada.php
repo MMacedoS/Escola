@@ -64,7 +64,7 @@ if(mysqli_num_rows($resultado) == ''){
   <input type="hidden" name="dis" value="<?php echo  base64_encode($dis); ?>">
   <tr>
       <td> <?php echo $res_1['matricula']; ?><input type="hidden" name="code_aluno" value="<?php echo $res_1['matricula']; ?>" /></td>
-      <th> <?php echo $res_1['nome']; ?><input type="hidden" name="nome" value="<?php echo $res_1['nome']; ?>" /></th>
+      <td> <?php echo $res_1['nome']; ?><input type="hidden" name="nome" value="<?php echo $res_1['nome']; ?>" /></td>
     <?php 
          $sql_chamada = "SELECT * FROM chamadas_em_sala WHERE date_day = '$date_hoje' AND id_disciplinas = '$dis' AND matricula = '$code_aluno'";
 	       $con_chamada= mysqli_query($conexao, $sql_chamada);

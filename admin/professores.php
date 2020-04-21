@@ -29,14 +29,14 @@
                 echo "No momento não existe professores cadastrados!";
             }else{
         ?>
-            <table class="table table-responsive" height="400" border="0">
+            <table class="users" id="table-responsive" border="0">
                 <tr>
-                    <th width="10">Código:</th>
-                    <th width="200">Nome:</th>
-                    <th width="100">QTD disciplina(s):</th>
-                    <th width="200">Remuneração:</th>
-                    <th width="50">Status:</th>
-                    <th width="100"></th>
+                    <th >Código:</th>
+                    <th >Nome:</th>
+                    <th >QTD disciplina(s):</th>
+                    <th >Remuneração:</th>
+                    <th >Status:</th>
+                    <th ></th>
                 </tr>
                 <?php while($res_1=mysqli_fetch_assoc($con)){
                 $professor_id=$res_1['id_professores'];
