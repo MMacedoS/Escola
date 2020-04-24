@@ -35,7 +35,7 @@ $sql_2 = "SELECT * FROM estudantes WHERE matricula = '$mensalidade'";
 $result_2 = mysqli_query($conexao, $sql_2);
 	while($res_2 = mysqli_fetch_assoc($result_2)){
 ?>
- <table width="950" border="0">
+ <table class="users" id="table-responsive" border="0">
   <tr>
     <td colspan="4"><hr /></td>
   </tr>

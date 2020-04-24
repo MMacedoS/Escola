@@ -144,7 +144,7 @@ function refresh()
      <li><a href="todas_teste.php?pg=teste&selec=<?php echo $_GET['selec'];?>">Teste</a></li>
      <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec'];?>">Prova</a></li>
      <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Lançar Nota Bimestre</a></li>
-     <li><a href="todas_as_observacoes.php?pg=observacoes">Distribuição das Notas</a></li>
+     <li><a href="distribuicao.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Distribuição das Notas</a></li>
     </ul>
       
       <?php }elseif(!isset($_GET['selec'])){
@@ -155,7 +155,7 @@ function refresh()
     </script>
     <?php }  ?>
    </li>
-   <li><a href="suporte_tecnico.php">Suporte Escolar</a></li>
+   <li><a href="suporte_tecnico.php?selec=<?php echo $_GET['selec'];?>">Suporte Escolar</a></li>
         </ul>
         
 

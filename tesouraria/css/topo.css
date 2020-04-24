@@ -65,3 +65,332 @@ body{
 #mostra_login a:hover{
 	color:#999;
 	}
+	#img{
+		width: 300px;
+	}
+	
+#table-responsive {
+	width: 95%;
+	max-height: 500px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+	
+}
+
+.users {
+	table-layout: fixed;
+	width: 95%;
+	white-space: nowrap;
+	
+  }
+  /* Column widths are based on these cells */
+  .row-ID {
+	width: 10%;
+  }
+  .row-name {
+	width: 20%;
+  }
+  .row-job {
+	width: 10%;
+  }
+  .row-email {
+	width: 10%;
+  }
+  .row-cod {
+	width: 30%;
+  }
+  .row-cur {
+	width: 44%;
+  }
+  .row-text{
+	  width: 70%;
+	  
+  }
+
+.row-executar {
+  width: 40%;
+  text-align: center;
+}
+  .users td {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 1%;
+  }
+table tbody,
+table thead {
+  display: block;
+}
+table tbody {
+	overflow: auto;
+	width: 100%;
+	max-height: 500px;
+  }
+  .users th {
+	background: darkblue;
+	color: white;
+  }
+  .users td,
+  .users th {
+	text-align: left;
+	padding: 5px 10px;
+  }
+  .users tr:nth-child(even) {
+	background: lightblue;
+  }
+
+/* media */
+@media(max-width:500px){
+	#box_topo {
+		width: 100%;
+		height: 241px;
+		margin: 0px;
+	}
+	#img{
+		width: 150px;
+		height: 7.8em;
+	}
+	#logo {
+		width: 50%;
+		height: 64px;
+		float: none;
+		margin: -30px 0 0 100px;
+	}
+	#campo_busca {
+		width: 100%;
+		height: 1px;
+		float: right;
+		margin: 60px 0 -12px 0;
+	}
+	#campo_busca .input {
+		float: left;
+		margin: 0 0 0 10px;
+		width: 100px;
+		background: green;
+		height: 34px;
+		cursor: pointer;
+		border: 0;
+		font-weight: bold;
+		color: #FFff;
+	}
+	#mostra_login {
+		width: 98%;
+		height: 10px;
+		float: none;
+		margin: 100px 0 -5px 0;
+	}
+	#campo_busca input {
+		float: left;
+		padding: 10px;
+		width: 50%;
+		height: 13px;
+		border: 1px solid #ccc;
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+	}
+	#caixa_preta {
+		background: #000;
+		width: 100%;
+		margin: 10px auto;
+		height: 15px;
+	}
+	#box {
+		width: 100%;
+		height: auto;
+		margin: -10px auto 20px auto;
+		border: 1px solid #333;
+	}
+	#relatorios {
+		float: left;
+		width: 100%;
+		height: auto;
+	}
+	#notificacoes {
+		float: right;
+		width: 95%;
+		margin: 0 3px 0 0;
+		text-align: left;
+		height: 500px;
+	}
+	#avisos_notificacoes {
+		float: left;
+		overflow: auto;
+		width: 95%;
+		margin: 0 10px 0 0;
+		font: 12px Arial, Helvetica, sans-serif;
+		color: #999;
+		height: 450px;
+		border: 1px solid #CCC;
+	}
+}
+
+@media(min-width:501px) and (max-width:700px){
+	#box_topo {
+		width: 80%;
+		height: 241px;
+		margin: 0px 0 0 115px;
+	}
+	#img{
+		width: 150px;
+		height: 7.8em;
+	}
+	#logo {
+		width: 50%;
+		height: 64px;
+		float: none;
+		margin: -30px 0 0 100px;
+	}
+	#campo_busca {
+		width: 100%;
+		height: 1px;
+		float: right;
+		margin: 60px 0 -12px 0;
+	}
+	#campo_busca .input {
+		float: left;
+		margin: 0 0 0 10px;
+		width: 100px;
+		background: green;
+		height: 34px;
+		cursor: pointer;
+		border: 0;
+		font-weight: bold;
+		color: #FFff;
+	}
+	#mostra_login {
+		width: 98%;
+		height: 10px;
+		float: none;
+		margin: 100px 0 -5px 0;
+	}
+	#campo_busca input {
+		float: left;
+		padding: 10px;
+		width: 50%;
+		height: 13px;
+		border: 1px solid #ccc;
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+	}
+	#caixa_preta {
+		background: #000;
+		width: 100%;
+		margin: 10px auto;
+		height: 15px;
+	}
+	#box {
+		width: 100%;
+		height: auto;
+		margin: -10px auto 20px auto;
+		border: 1px solid #333;
+	}
+	#relatorios {
+		float: left;
+		width: 100%;
+		height: auto;
+	}
+	#notificacoes {
+		float: right;
+		width: 95%;
+		margin: 0 3px 0 0;
+		text-align: left;
+		height: 500px;
+	}
+	#avisos_notificacoes {
+		float: left;
+		overflow: auto;
+		width: 95%;
+		margin: 0 10px 0 0;
+		font: 12px Arial, Helvetica, sans-serif;
+		color: #999;
+		height: 450px;
+		border: 1px solid #CCC;
+	}
+}
+@media(min-width:701px) and (max-width:900px){
+	#box_topo {
+		width: 80%;
+		height: 241px;
+		margin: 0px 0 0 115px;
+	}
+	#img{
+		width: 150px;
+		height: 7.8em;
+	}
+	#logo {
+		width: 50%;
+		height: 64px;
+		float: none;
+		margin: -30px 0 0 100px;
+	}
+	#campo_busca {
+		width: 100%;
+		height: 1px;
+		float: right;
+		margin: 60px 0 -12px 0;
+	}
+	#campo_busca .input {
+		float: left;
+		margin: 0 0 0 10px;
+		width: 100px;
+		background: green;
+		height: 34px;
+		cursor: pointer;
+		border: 0;
+		font-weight: bold;
+		color: #FFff;
+	}
+	#mostra_login {
+		width: 98%;
+		height: 10px;
+		float: none;
+		margin: 100px 0 -5px 0;
+	}
+	#campo_busca input {
+		float: left;
+		padding: 10px;
+		width: 50%;
+		height: 13px;
+		border: 1px solid #ccc;
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+	}
+	#caixa_preta {
+		background: #000;
+		width: 100%;
+		margin: 10px auto;
+		height: 15px;
+	}
+	#box {
+		width: 100%;
+		height: auto;
+		margin: -10px auto 20px auto;
+		border: 1px solid #333;
+	}
+	#relatorios {
+		float: left;
+		width: 100%;
+		height: auto;
+	}
+	#notificacoes {
+		float: right;
+		width: 95%;
+		margin: 0 3px 0 0;
+		text-align: left;
+		height: 500px;
+	}
+	#avisos_notificacoes {
+		float: left;
+		overflow: auto;
+		width: 95%;
+		margin: 0 10px 0 0;
+		font: 12px Arial, Helvetica, sans-serif;
+		color: #999;
+		height: 450px;
+		border: 1px solid #CCC;
+	}
+}

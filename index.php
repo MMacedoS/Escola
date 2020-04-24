@@ -12,7 +12,7 @@
 </head>
 <body>
 <div id="logo">
- <img src="image/logo_ist.gif">   
+ <img id="img" src="image/logo_ist.gif">   
 </div>
 <div id="caixa_login">
     <?php  if (isset($_POST['button'])) {

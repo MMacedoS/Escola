@@ -21,23 +21,23 @@ $ano=Date('Y');
 
 <div id="box">
  <div id="relatorios">
- 
+ <div class="card-1">
    <ul>
     <h1><strong>Frequência Escolar</strong> </h1>
     <li><strong>Presenças:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE matricula = '$code' AND presente = 'SIM' and ano_letivo='$ano'")); ?></li>
     <li><strong>Faltas justificadas:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE  matricula = '$code' AND presente = 'JUSTIFICADA' and ano_letivo='$ano'")); ?></li>
     <li><strong>Faltas não justificada:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE  matricula = '$code' AND presente = 'NAO' and ano_letivo='$ano'")) / 3; ?></li>
    </ul>
-   
+   </div>
   
-    <div class="card">
+    <div class="card-2">
    <ul>
     <h1><strong>Setor Financeiro</strong></h1>
     <li><strong>Pagamento(s) confirmado(s):</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM mensalidades WHERE matricula = '$code' AND status = 'Pagamento Confirmado'")); ?></li>
     <li><strong>Cobrança ainda não quitadas:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM mensalidades WHERE matricula = '$code' AND status = 'Aguarda Pagamento'")); ?></li>
    </ul> 
    </div>
- <div class="card">
+ <div class="card-3">
    <ul>
     <h1><strong>Suporte Escolar</strong></h1>
     <li><strong>Caixa de entrada:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem WHERE receptor = '$code'")); ?></li>
@@ -56,7 +56,7 @@ $ano=Date('Y');
    $sql_1 = mysqli_query($conexao, "SELECT * FROM mural_aluno WHERE id_cursos = '$serie' order by id_mural_aluno desc");
    	while($res_1 = mysqli_fetch_assoc($sql_1)){
    ?>
-    <li><h1><?php echo $res_1['titulo']; ?></h1></li>
+    <li><h2><?php echo $res_1['titulo']; ?></h2></li>
     <?php } ?>
    </ul>
   </div><!-- avisos_notificacoes -->

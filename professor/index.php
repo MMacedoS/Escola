@@ -21,7 +21,7 @@
 <div id="box">
 
  <div id="relatorios">
-   <div id="card">
+   <div class="card-1">
    
    <ul>
     <h1><strong>Turmas & Alunos</strong></h1>
@@ -57,7 +57,7 @@
    </ul>
    <br>
    </div>
-    <div id="card">
+    <div class="card-2">
    
    <ul>
     <h1><strong>Informações de acesso</strong> </h1>
@@ -66,7 +66,7 @@
    </ul> 
    <br>
    </div>
-    <div id="card">
+    <div class="card-3">
    
    <ul>
     <h1><strong>Suporte Escolar</strong></h1>
@@ -89,7 +89,7 @@
    }else{
    	while($res_1 = mysqli_fetch_assoc($sql_1)){
    ?>
-    <li><h1>Nova Mensagem - <?php echo $res_1['mensagem']; ?></h1></li>
+    <li><h2>Nova Mensagem - <?php echo $res_1['mensagem']; ?></h2></li>
     <?php }} ?>
    </ul>
   </div><!-- avisos_notificacoes -->
@@ -97,7 +97,6 @@
  
  
 </div><!-- box -->
-
 
 </body>
 <?php require "rodape.php"; ?>

@@ -763,7 +763,7 @@ if(mysqli_num_rows($result_ced) == ''){
 			echo $rs_ced3['nome'];
 			echo " - ";
 			echo $rs_ced3['code'];
-            echo " \n    ";
+            echo "    ";
 			
 		
 		  }

@@ -61,7 +61,7 @@
   </tr>
 <?php } ?>
   <tr>
-    <td width="826" align="left">Abaixo segue seu ralatório de chamadas</td>
+    <td align="left">Abaixo segue seu ralatório de chamadas</td>
   </tr>
   <tr>
     <td align="center"><hr></td>
@@ -75,13 +75,13 @@
 		echo "Não existe nenhuma mensagem";
 	}else{
 	?>
-     <table id="table_st" border="0">
+     <table id="table-responsive" border="0">
       <tr>
-      <td width="100"><strong>Emissor:</strong></td>
-        <td width="120"><strong>Receptor:</strong></td>
-        <td width="150"><strong>Status:</strong></td>
-        <td width="150"><strong>Data:</strong></td>
-        <td width="100"><strong>Data da resposta:</strong></td>
+      <td ><strong>Emissor:</strong></td>
+        <td ><strong>Receptor:</strong></td>
+        <td ><strong>Status:</strong></td>
+        <td ><strong>Data:</strong></td>
+        <td ><strong>Data da resposta:</strong></td>
       <?php while($res_5 = mysqli_fetch_assoc($result_5)){ ?>
       <tr>
         <td><?php echo $res_5['emissor']; ?></td>
@@ -149,7 +149,7 @@ $result = mysqli_query($conexao, $sql_1);
 ?>
  
 <form name="button" method="get" action="" enctype="multipart/form-data">
-<table width="950" border="0">
+<table class="users" id="table-responsive" border="0">
   <tr>
     <td><strong>Data:</strong></td>
     <td><strong>Nº de matricula do aluno:</strong></td>

@@ -5,7 +5,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="with=device-width,initial-scale=1">
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
-<title>Painél da Secretaria</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
+<title>Painél da Admin</title>
 <link rel="shortcut icon" href="../image/logo_ist.gif">
 </head>
 
@@ -24,41 +25,52 @@
  $y = date("Y");
  
  ?>
-   <ul>
-    <h1><strong>Turmas e Disciplinas</strong></h1>
+<section>
+  <div class="card-1">
+  <ul>
+    <h1><strong>Turmas e Disciplinas<i class="fas fa-home"></i></strong></h1>
     <li><strong>Total de Turmas cadastradas:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM cursos")); ?>  </li>
     <li><strong>Total de disciplinas cadastradas:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM disciplinas")); ?>  </li>
    </ul>   
+   </div>
+   <div class="card-2">
    <ul>
     <h1><strong>Professores</strong></h1>
     <li><strong>Professores Ativos:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM professores WHERE status = 'Ativo'")); ?></li>
     <li><strong>Professores Inativos:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM professores WHERE status = 'Inativo'")); ?></li>
    </ul> 
    
-   <ul>
+    </div>
+    <div class="card-3">
+    <ul>
     <h1><strong>Estudantes</strong></h1>
     <li><strong>Estudantes Ativos:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM estudantes WHERE status = 'Ativo'")); ?></li>
     <li><strong>Estudantes Inativos:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM estudantes WHERE status = 'Inativo'")); ?></li>
    </ul> 
    
-   <ul>
+    </div>
+    <div class="card-4">
+    <ul>
     <h1><strong>Setor Financeiro</strong></h1>
     <li><strong>Cobranças geradas este mês:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM mensalidades WHERE mes = '$m' AND ano = '$y'")); ?></li>
     <li><strong>Cobranças pagas:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM mensalidades WHERE mes = '$m' AND ano = '$y' AND status = 'Pagamento Confirmado'")); ?></li>
     <li><strong>Cobranças não pagas:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM mensalidades WHERE mes = '$m' AND ano = '$y' AND status = 'Aguarda Pagamento'")); ?></li>
    </ul>  
    
-   <ul>
+    </div>
+    <div class="card-5">
+    <ul>
     <h1><strong>Mensagens</strong></h1>
     <li><strong>Contatos que aguarda sua resposta:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem WHERE receptor='COORDENAÇÃO' and status='Aguarde resposta'")); ?></li>
     <li><strong>Contatos respondidos:</strong><?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem WHERE status = 'Respondida'")); ?></li>
     <li><strong>Total de contatos:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem")); ?></li>
-   </ul>        
+   </ul>  
+    </div>      
  </div><!-- relatorios -->
- 
+ </section>
  
  <div id="notificacoes">
-  <h1>Notificações</h1>
+  <h1><strong> Notificações</strong></h1>
   <div id="avisos_notificacoes">
    <ul>
    <?php
@@ -78,6 +90,7 @@
 </div><!-- box -->
 
 
-<?php require "rodape.php"; ?>
+
 </body>
+<?php require "rodape.php"; ?>
 </html>

@@ -78,8 +78,7 @@ $a = date("Y");
   <?php }} ?>  
   </div><!-- avisos_notificacoes -->
  </div><!-- notificacoes -->
- 
- 
+  
 </div><!-- box -->
 
 </body>

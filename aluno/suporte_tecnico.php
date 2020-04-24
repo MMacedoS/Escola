@@ -102,7 +102,7 @@ if($result_4 == ''){
   </tr>
 <?php } ?>
   <tr>
-    <td width="826" align="left">Abaixo segue seu ralatório de chamadas</td>
+    <td width="826" align="left">Abaixo segue seu relatório de chamadas</td>
   </tr>
   <tr>
     <td align="center"><hr></td>
@@ -116,7 +116,7 @@ if($result_4 == ''){
 		echo "Não existe nenhuma mensagem";
 	}else{
 	?>
-     <table class="users" id="table_st" border="0">
+     <table id="table-responsive" border="0">
       <tr>
         <td width="100"><strong>Emissor:</strong></td>
         <td width="120"><strong>Receptor:</strong></td>

@@ -45,12 +45,12 @@
 <div id="box_topo">
  
  <div id="logo">
-  <a href="index.php"><img border="0" src="../image/logo.png" width="300" /></a>
+  <a href="index.php"><img id="img" border="0" src="../image/logo.png" /></a>
  </div><!-- logo -->
  
  <div id="campo_busca">
   <form name="search" method="post" action="" enctype="multipart/form-data">
-   <input type="text" name="key" /><input class="input" type="submit" name="search" value="" />
+   <input type="text" name="key" /><input class="btn btn-success input"  type="submit" name="search" value="BUSCAR" />
   </form>
   
  

@@ -31,12 +31,12 @@
         ?>
             <table class="users" id="table-responsive" border="0">
                 <tr>
-                    <th >Código:</th>
-                    <th >Nome:</th>
-                    <th >QTD disciplina(s):</th>
-                    <th >Remuneração:</th>
-                    <th >Status:</th>
-                    <th ></th>
+                    <td >Código:</td>
+                    <td >Nome:</td>
+                    <td >QTD disciplina(s):</td>
+                    <td >Remuneração:</td>
+                    <td >Status:</td>
+                    <td ></td>
                 </tr>
                 <?php while($res_1=mysqli_fetch_assoc($con)){
                 $professor_id=$res_1['id_professores'];
@@ -292,84 +292,92 @@ $cadastra_login = mysqli_query($conexao, $sql_3);
 <?php if(isset($_POST['cancelar'])){?> 
     <script>window.location='professores.php?pg=todos';</script>
   <?php  }?>
+  <div class="container">
+  <form action="/action_page.php">
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">Código</label>
+      </div>
+      <div class="col-25">
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+      </div>
+      <div class="col-25">
+        <label for="fname">Nome</label>
+      </div>
+      <div class="col-25">
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+      </div>
+      <div class="col-25">
+        <label for="fname">CPF:</label>
+      </div>
+      <div class="col-25">
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+      </div>  
+    </div>  
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Data de Nascimento</label>
+      </div>
+      <div class="col-25">
+        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+      </div>
+      <div class="col-25">
+        <label for="country">Country</label>
+      </div>
+      <div class="col-75">
+        <select id="country" name="country">
+          <option value="australia">Australia</option>
+          <option value="canada">Canada</option>
+          <option value="usa">USA</option>
+        </select>
+      </div>
+      <div class="col-25">
+        <label for="fname">Graduação</label>
+      </div>
+      <div class="col-25">
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+      </div>
+    </div>
+    <div class="row">
+    <div class="col-25">
+        <label for="fname">POS</label>
+      </div>
+      <div class="col-25">
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+      </div>
+      <div class="col-25">
+        <label for="fname">Mestrado</label>
+      </div>
+      <div class="col-25">
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+      </div>
+      <div class="col-25">
+        <label for="fname">Doutorado</label>
+      </div>
+      <div class="col-25">
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+      </div>
+    </div>
+    <div class="row">
+    <div class="col-25">
+        <label for="fname">Salario</label>
+      </div>
+      <div class="col-25">
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+      </div>
+      <div class="col-25">
+        <label for="fname">Login</label>
+      </div>
+      <div class="col-25">
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+      </div>
+    </div>
+    <div class="row">
+      <input type="submit" value="Submit">
+    </div>
+  </form>
+</div>
 
-
-<form name="form1" method="post" action="">
-  <table class="users" id="table-responsive" border="0">
-    <tr>
-      <td>Código:</td>
-      <td>Nome:</td>
-      <td>CPF:</td>
-    </tr>
-    <tr>
-      <td>
-      <?php
-      $sql_4 = "SELECT * FROM professores ORDER BY id_professores DESC LIMIT 1";
-	  $buscar_prof = mysqli_query($conexao, $sql_4);
-	  if(mysqli_num_rows($buscar_prof) == ''){
-		  $new_code = "87415978";
-	  ?>
-        <input type="text" name="code" id="textfield" disabled="disabled" value="<?php echo $new_code;  ?>">
-        <input type="hidden" name="code" value="<?php echo $new_code;  ?>" />
-        </td>      
-      <?php
-	  }else{
-	  	while($res_1 = mysqli_fetch_assoc($buscar_prof)){
-			
-			$new_code = $res_1['code']+$res_1['id_professores']+741;
-	  ?>
-        <input type="text" name="code" id="textfield" disabled="disabled" value="<?php echo $new_code;  ?>">
-        <input type="hidden" name="code" value="<?php echo $new_code;  ?>" />
-        </td>
-      <?php }} ?>
-      <td>
-      <input type="text" class="form-control" name="nome" id="textfield2"></td>
-      <td>
-      <input type="text" class="form-control"name="cpf" id="textfield3"></td>
-    </tr>
-    <tr>
-      <td>Data de nascimento:</td>
-      <td>Formação Acadêmica</td>
-      <td>Graduação(ões):</td>
-    </tr>
-    <tr>
-      <td><label for="textfield4"></label>
-      <input type="date" class="form-control" name="nascimento" id="textfield4"></td>
-      <td><label for="select"></label>
-        <select class="form-control" name="formacao" size="1" id="select">
-          <option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
-          <option value="Ensino Médio Completo">Ensino Médio Completo</option>
-          <option value="Superior Incompleto">Superior Incompleto</option>
-          <option value="Superior Completo">Superior Completo</option>
-      </select></td>
-      <td><input type="text" class="form-control" name="graduacao" id="textfield5"></td>
-    </tr>
-    <tr>
-      <td>Pos-graduação(ões):</td>
-      <td>Mestrado(s):</td>
-      <td>Doutorado(s):</td>
-    </tr>
-    <tr>
-      <td><input type="text" class="form-control" name="pos_graduacao" id="textfield6"></td>
-      <td><input type="text" class="form-control" name="mestrado" id="textfield7"></td>
-      <td><input type="text" class="form-control" name="doutorado" id="textfield8"></td>
-    </tr>
-    <tr>
-      <td>Salário:</td>
-      <td>Login:</td>
-    </tr>
-    <tr>
-      <td><input type="number" class="form-control" name="salario" id="textfield8"></td>
-      <td><input type="text" name="usuario" class="form-control" id="textfield8"></td>
-    </tr>
-    <tr>
-      <td><input class="input" type="submit" name="button" id="button" value="Cadastrar"></td>
-      <td><button class="btn btn-danger"  name="cancelar" >Cancelar</button></td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-  </table>
-</form>
 <br />
 </div><!-- cadastra_professores -->
 <?php } ?>    

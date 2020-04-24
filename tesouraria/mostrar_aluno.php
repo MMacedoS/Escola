@@ -24,14 +24,12 @@ $sql_1 = "SELECT * FROM estudantes WHERE matricula = '$matricula'";
 $result_1 = mysqli_query($conexao, $sql_1);
 	while($res_1 = mysqli_fetch_assoc($result_1)){
 ?>
- <table width="900" border="0">
-  <tr>
-    <td colspan="4"><hr /></td>
+<table id="table-responsive" border="0"> <td colspan="4"><hr /></td>
   </tr>
   <tr>
-    <td width="314"><strong>Nome:</strong></td>
-    <td width="308"><strong>Nascimento</strong></td>
-    <td width="221"><strong>Vencimento:</strong></td>
+    <td><strong>Nome:</strong></td>
+    <td ><strong>Nascimento</strong></td>
+    <td ><strong>Vencimento:</strong></td>
   </tr>
   <tr>
     <td><?php echo $res_1['nome']; ?></td>
@@ -59,13 +57,12 @@ $result_1 = mysqli_query($conexao, $sql_1);
     <td><?php //echo $res_1['serie']; ?></td>
   </tr>
   <tr>
-    <td colspan="3"><hr> 
+   
  
   <h1><strong>Histórico de mensalidade</strong></h1></td>
   </tr>
   <tr>
-    <td colspan="3">
-    <table width="920" border="0">
+    <table class="users" id="table-responsive" border="0">
       <tr>
         <td width="130" height="21"><strong>Nº da cobrança:</strong></td>
         <td width="100"><strong>Vencimento:</strong></td>
@@ -87,9 +84,8 @@ $result_1 = mysqli_query($conexao, $sql_1);
         <td><?php echo $res_2['data_pagamento']; ?></td>
         <td><?php echo $res_2['metodo_pagamento']; ?></td>
         </tr>
-      <tr>
-        <td colspan="6"><hr></td>
-        </tr>
+     
+      
      <?php } ?>
     </table>
     </td>

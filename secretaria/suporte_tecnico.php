@@ -29,7 +29,7 @@
 	  Selecione o setor que você quer enviar esta mensagem
      <select name="setor" size="1" id="select">
        <option value="COORDENAÇÃO" style="background-color:#F3F781;">COORDENAÇÃO</option>
-        <option value="" style="background-color:#F3F781;"></option>
+        <option value="SECRETARIA" style="background-color:#F3F781;">SECRETARIA</option>
        <option value="PROFESSOR">PROFESSORES</option>
        <?php      
 		$sql_2 = "SELECT DISTINCT p.code,p.nome from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020";
@@ -40,7 +40,7 @@
         <option value="<?php echo $res_2['code']; ?>" style="background-color:#81F79F;"><?php echo $res_2['nome'] ?></option>
        <?php } ?>
                 
-       <option value=""><strong> ALUNOS DE CLASSE</strong></option>
+       <option value=""><strong> ALUNOS DA ESCOLA</strong></option>
        <?php
        $sql_3 = "SELECT DISTINCT e.matricula,e.nome, c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and e.status='ativo'";
 	   $result_3 = mysqli_query($conexao, $sql_3);
@@ -61,7 +61,7 @@
   </tr>
 <?php } ?>
   <tr>
-    <td width="826" align="left">Abaixo segue seu ralatório de chamadas</td>
+    <td align="left">Abaixo segue seu ralatório de chamadas</td>
   </tr>
   <tr>
     <td align="center"><hr></td>
@@ -69,19 +69,19 @@
   <tr>
     <td align="center">
     <?php
-   $sql_5 = "SELECT * FROM central_mensagem WHERE emissor = 'COORDENAÇÃO' or receptor='COORDENAÇÃO' order by id desc";
+   $sql_5 = "SELECT * FROM central_mensagem WHERE emissor = 'SECRETARIA' or receptor='SECRETARIA' order by id desc";
 	$result_5 = mysqli_query($conexao, $sql_5);
 	if(mysqli_num_rows($result_5) == ''){
 		echo "Não existe nenhuma mensagem";
 	}else{
 	?>
-     <table id="table_st" border="0">
+     <table id="table-responsive" border="0">
       <tr>
-      <td width="100"><strong>Emissor:</strong></td>
-        <td width="120"><strong>Receptor:</strong></td>
-        <td width="150"><strong>Status:</strong></td>
-        <td width="150"><strong>Data:</strong></td>
-        <td width="100"><strong>Data da resposta:</strong></td>
+      <td ><strong>Emissor:</strong></td>
+        <td ><strong>Receptor:</strong></td>
+        <td ><strong>Status:</strong></td>
+        <td ><strong>Data:</strong></td>
+        <td ><strong>Data da resposta:</strong></td>
       <?php while($res_5 = mysqli_fetch_assoc($result_5)){ ?>
       <tr>
         <td><?php echo $res_5['emissor']; ?></td>

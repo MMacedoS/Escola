@@ -17,31 +17,10 @@ body{
     margin: -17px 0px 0px 44px;
 	}
 
-	
-#campo_busca{
-	width:450px;
-	height:80px;
-	float:right;
-	margin:60px 0 -12px 0;
-	}
-#campo_busca input{
-	float:left;
-	padding:10px;
-	width:300px;
-	height:39px;
-	border:1px solid #ccc;
-	
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
-	border-radius:10px;
-	}
-#campo_busca .input{
-	float:left;
-	margin:0 0 0 10px;
-	background:url(../img/button.png) no-repeat;
-	width:100px;
-	height:63px;
-	border:0;
+	textarea {
+		overflow: auto;
+		resize: vertical;
+		width: 100%;
 	}
 	
 #mostra_login{
@@ -67,11 +46,31 @@ body{
     height: 40px;
     margin: -20px auto;
 	}
+	#menu{
+		margin-bottom: -75px;
+		position: sticky;
+		top: 0;
+	}
 #menu_topo{
 	width:980px;
 	height:40px;
 	margin:auto;
 	}
+.card-1, .card-2, .card-3, .card-4, .card-5   {
+		position: relative;
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-direction: column;
+		flex-direction: column;
+		width: 95%;
+		margin: 5px 0 0 20px;
+		word-wrap: break-word;
+		background-color: #bdb1b1;
+		background-clip: border-box;
+		border: 1px solid rgba(0,0,0,.125);
+		border-radius: .25rem;
+	}
+	
 #menu_topo ul{
 	list-style:none;
 	}
@@ -423,7 +422,7 @@ width:978px;
     height: auto;
     margin: -20px auto;
     border: 1px solid #333;
-    background: #E1E1C4;
+    background: #ffff45ab;
     text-align: left;
 	}
 .box_professores .a2{
@@ -857,6 +856,7 @@ width:978px;
 	table-layout: fixed;
 	width: 100%;
 	white-space: nowrap;
+	
   }
   /* Column widths are based on these cells */
   .row-ID {
@@ -890,6 +890,7 @@ width:978px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	width: 1%;
   }
 table tbody,
 table thead {
@@ -928,11 +929,15 @@ table tbody {
 	font:12px Arial, Helvetica, sans-serif;
 	color:#666;
 	}
+
 	@media(max-width:500px){	
 		#box_topo {
 			width: 100%;
 			height: 140px;
 			margin: 0px 0 0px 0px;
+		}
+		.row-1 {
+			background: blue;
 		}
 		#box_rodape {
 			width: auto;
@@ -963,6 +968,8 @@ table tbody {
 		}
 		#menu{
 			margin-bottom: -75px;
+			position: sticky;
+			top: 0;
 		}
 		#box table {
 			font: 12px Arial, Helvetica, sans-serif;
@@ -984,7 +991,6 @@ table tbody {
 			height: auto;
 			margin: -20px auto;
 			border: 1px solid #333;
-			background: #E1E1C4;
 			text-align: left;
 		}
 		#box_rodape {
@@ -1000,32 +1006,33 @@ table tbody {
 	border: 1px solid #333;
 	}
 	#notificacoes {
-		float: right;
-		width: 100%;
-		margin: 41px 0 0 0;
-		text-align: left;
+		width: 98%;
+		margin: 10px 3px;
 		height: 400px;
+		background-color: #eff51fd4;
+		border-radius: 6%;
+	}
+	#notificacoes h1 {
+		font: 21px Arial, Helvetica, sans-serif;
+		color: #848383;
+		margin: 17px 0px 0 40px;
 	}
 	#avisos_notificacoes {
+		width: 95%;
+		margin: auto 8px;
+		height: 350px;
+	}
+	
+	#relatorios {
 		float: left;
 		width: 100%;
-		margin: 0 10px 0 0;
-		overflow: auto;
-		font: 12px Arial, Helvetica, sans-serif;
-		color: #999;
-		height: 350px;
-		border: 1px solid #CCC;
+		height: auto;
+		margin: -1px -20px 0 -46px;
 	}
 	#relatorios ul {
 		text-align: left;
 		margin: 20px 0px 0 38px;
 		list-style-image: url(../img/seta.png);
-	}
-	#relatorios {
-		float: left;
-		width: 100%;
-		height: 490px;
-		margin: -1px -20px 0 -46px;
 	}
 	/*  */
 	
@@ -1055,6 +1062,15 @@ table tbody {
 		text-align: left;
 		border: 1px solid #333;
 	}
+	#cadastra_funcionarios {
+		width: 100%;
+		background: #E1E1C4;
+		height: auto;
+		float: none;
+		text-align: left;
+		margin: -20px auto;
+		border: 1px solid #333;
+	}
 	#box_funcionarios{
 		width:100%;
 		background:#E1E1C4;
@@ -1065,37 +1081,89 @@ table tbody {
 		border:1px solid #333;
 	
 		}
+		.card-1, .card-2, .card-3, .card-4, .card-5  {
+			position: static;
+			margin: 5px 0 0px 55px;
+			border: 1px solid rgba(0,0,0,.125);
+			border-radius: 1.25rem;
 		}
-@media(min-width:501px) and (max-width:1000px){	
+		.card-1{
+			background-color: #eb7947;
+		}
+		.card-2{
+			background-color: #ffc107;
+		}
+		.card-3{
+			background-color: rgba(0,123,255,.5);
+		}
+		.card-4{
+			background-color: #28a74559;
+		}
+		.card-5{
+			background-color: #dc354587;
+		}
+		}
+@media(min-width:501px) and (max-width:700px){
 	#box_topo {
 		width: 100%;
 		height: 140px;
 		margin: 0px 84px 0px 0px;
 	}
-	#box_rodape {
-		width: auto;
-		margin: 692px auto 0;
-	}
 	#logo {
+		width: 100%;
+		height: 0;
+		float: none;
+		margin: 15px auto;
+	}
+	#img {
 		width: 100px;
-		height: 100px;
-		float: left;
-		margin: 2px -35px 0px -6px;
 	}
 	#mostra_login {
-		width: 100px;
-		height: 30px;
-		float: right;
-		margin: 7px 20px;
+		width: 100%;
+		height: 0;
+		float: none;
+		margin: 70px auto;
 	}
-#caixa_preta {
-background: #000;
-width: 100%;
-margin: 20px auto;
-height: 15px;
-margin-top: -58px;
-}
-
+	
+		
+	#caixa_preta {
+		background: #000;
+		width: 100%;
+		margin: 17px auto;
+		height: 15px;
+		
+	}
+	#menu{
+		margin-bottom: -75px;
+		position: sticky;
+		top: 0;
+	}
+	#box table {
+		font: 12px Arial, Helvetica, sans-serif;
+		margin: 4px;
+		border: 1px solid #666;
+	}
+	.pesq {
+		overflow: visible;
+		width: 100%;
+	}
+	#box select {
+		font: 12px Arial, Helvetica, sans-serif;
+		padding: 5px;
+		width: 120px;
+		height: 30px;
+	}
+	.box_professores {
+		width: 100%;
+		height: auto;
+		margin: -20px auto;
+		border: 1px solid #333;
+		text-align: left;
+	}
+	#box_rodape {
+		width: 100%;
+		margin: 692px auto 0;
+	}
 
 
 #box {
@@ -1105,66 +1173,61 @@ margin: -20px auto;
 border: 1px solid #333;
 }
 #notificacoes {
-    float: right;
-    width: 100%;
-    margin: 41px 0 0 0;
-    text-align: left;
-    height: 400px;
+	width: 98%;
+	margin: 10px 3px;
+	height: 400px;
+	background-color: #eff51fd4;
+	border-radius: 6%;
+}
+#notificacoes h1 {
+	font: 21px Arial, Helvetica, sans-serif;
+	color: #848383;
+	margin: 17px 0px 0 40px;
 }
 #avisos_notificacoes {
-    float: left;
-    width: 100%;
-    margin: 0 10px 0 0;
-    overflow: auto;
-    font: 12px Arial, Helvetica, sans-serif;
-    color: #999;
-    height: 350px;
-    border: 1px solid #CCC;
+	width: 95%;
+	margin: auto 8px;
+	height: 350px;
+}
+
+#relatorios {
+	float: left;
+	width: 100%;
+	height: auto;
+	margin: -1px -20px 0 -46px;
 }
 #relatorios ul {
 	text-align: left;
 	margin: 20px 0px 0 38px;
 	list-style-image: url(../img/seta.png);
 }
-#relatorios {
-    float: left;
-    width: 100%;
-    height: 490px;
-    margin: -1px -20px 0 -46px;
-}
 /*  */
-.box_professores {
-    width: 100%;
-    height: auto;
-    margin: -20px auto;
-    border: 1px solid #333;
-    background: #E1E1C4;
-    text-align: left;
-}
+
 
 #cadastra_professores {
-    width: 100%;
-    height: auto;
-    margin: -20px auto;
-    border: 1px solid #333;
-    background: rgb(218, 218, 103);
-    text-align: left;
+	width: 100%;
+	height: auto;
+	margin: -20px auto;
+	border: 1px solid #333;
+	background: rgb(218, 218, 103);
+	text-align: left;
 }
+
 #box_aluno {
-    width: 100%;
-    height: auto;
-    margin: -20px auto;
-    border: 1px solid #333;
-    background: rgb(218, 172, 103);
-    text-align: left;
+	width: 100%;
+	height: auto;
+	margin: -17px auto;
+	border: 1px solid #333;
+	background: rgb(218, 172, 103);
+	text-align: left;
 }
 #cadastra_estudante {
-    width: -webkit-fill-available;
-    background: #06C;
-    height: auto;
-    float: left;
-    text-align: left;
-    border: 1px solid #333;
+	width: -webkit-fill-available;
+	background: #06C;
+	height: auto;
+	float: left;
+	text-align: left;
+	border: 1px solid #333;
 }
 #box_funcionarios{
 	width:100%;
@@ -1176,4 +1239,560 @@ border: 1px solid #333;
 	border:1px solid #333;
 
 	}
+	#cadastra_funcionarios {
+		width: 100%;
+		background: #E1E1C4;
+		height: auto;
+		float: none;
+		text-align: left;
+		margin: -20px auto;
+		border: 1px solid #333;
 	}
+	.card-1, .card-2, .card-3, .card-4, .card-5  {
+		position: static;
+		margin: 5px 0 0px 55px;
+		border: 1px solid rgba(0,0,0,.125);
+		border-radius: 1.25rem;
+	}
+	.card-1{
+		background-color: #eb7947;
+	}
+	.card-2{
+		background-color: #ffc107;
+	}
+	.card-3{
+		background-color: rgba(0,123,255,.5);
+	}
+	.card-4{
+		background-color: #28a74559;
+	}
+	.card-5{
+		background-color: #dc354587;
+	}
+
+	}
+	@media(min-width:701px) and (max-width:900px){	
+		#box_topo {
+			width: 100%;
+			height: 140px;
+			margin: 0px 84px 0px 0px;
+		}
+		#logo {
+			width: 100%;
+			height: 0;
+			float: none;
+			margin: 15px auto;
+		}
+		#img {
+			width: 100px;
+		}
+		#mostra_login {
+			width: 100%;
+			height: 0;
+			float: none;
+			margin: 100px auto;
+			padding: 0 0 0 120px;
+		}
+		
+			
+		#caixa_preta {
+			background: #000;
+			width: 100%;
+			margin: 17px auto;
+			height: 15px;
+			
+		}
+		#menu{
+			margin-bottom: -75px;
+			position: sticky;
+			top: 0;
+		}
+		#box table {
+			font: 12px Arial, Helvetica, sans-serif;
+			margin: 4px;
+			border: 1px solid #666;
+		}
+		.pesq {
+			overflow: visible;
+			width: 100%;
+		}
+		#box select {
+			font: 12px Arial, Helvetica, sans-serif;
+			padding: 5px;
+			width: 120px;
+			height: 30px;
+		}
+		.box_professores {
+			width: 100%;
+			height: auto;
+			margin: -20px auto;
+			border: 1px solid #333;
+			text-align: left;
+		}
+		#box_rodape {
+			width: 100%;
+			margin: 692px auto 0;
+		}
+	
+	
+	#box {
+	width: 100%;
+	height: auto;
+	margin: -20px auto;
+	border: 1px solid #333;
+	}
+	#notificacoes {
+		width: 95%;
+		margin: 10px 32px;
+		height: 400px;
+		background-color: #eff51fd4;
+		border-radius: 6%;
+	}
+	#notificacoes h1 {
+		font: 21px Arial, Helvetica, sans-serif;
+		color: #848383;
+		margin: 17px 0px 0 40px;
+	}
+	#avisos_notificacoes {
+		width: 95%;
+		margin: auto 8px;
+		height: 350px;
+	}
+	
+	#relatorios {
+		float: left;
+		width: 100%;
+		height: auto;
+		margin: -1px -20px 0 -46px;
+	}
+	#relatorios ul {
+		text-align: left;
+		margin: 20px 0px 0 38px;
+		list-style-image: url(../img/seta.png);
+	}
+	/*  */
+	
+	
+	#cadastra_professores {
+		width: 100%;
+		height: auto;
+		margin: -20px auto;
+		border: 1px solid #333;
+		background: rgb(218, 218, 103);
+		text-align: left;
+	}
+	
+	#box_aluno {
+		width: 100%;
+		height: auto;
+		margin: -17px auto;
+		border: 1px solid #333;
+		background: rgb(218, 172, 103);
+		text-align: left;
+	}
+	#cadastra_estudante {
+		width: -webkit-fill-available;
+		background: #06C;
+		height: auto;
+		float: left;
+		text-align: left;
+		border: 1px solid #333;
+	}
+	#cadastra_funcionarios {
+		width: 100%;
+		background: #E1E1C4;
+		height: auto;
+		float: none;
+		text-align: left;
+		margin: -20px auto;
+		border: 1px solid #333;
+	}
+	#box_funcionarios{
+		width:100%;
+		background:#E1E1C4;
+		height:auto;
+		float:none;
+		text-align:left;
+		margin:-20px auto;
+		border:1px solid #333;
+	
+		}
+		.card-1, .card-2, .card-3, .card-4, .card-5  {
+			position: static;
+			margin: 5px 0 0px 55px;
+			border: 1px solid rgba(0,0,0,.125);
+			border-radius: 1.25rem;
+		}
+		.card-1{
+			background-color: #eb7947;
+		}
+		.card-2{
+			background-color: #ffc107;
+		}
+		.card-3{
+			background-color: rgba(0,123,255,.5);
+		}
+		.card-4{
+			background-color: #28a74559;
+		}
+		.card-5{
+			background-color: #dc354587;
+		}
+	}
+	@media(min-width:900px) and (max-width:1000px){	
+		#box_topo {
+			width: 100%;
+			height: 140px;
+			margin: 0px 84px 0px 0px;
+		}
+		#logo {
+			width: 100%;
+			height: 0;
+			float: none;
+			margin: 15px auto;
+		}
+		#img {
+			width: 100px;
+		}
+		#mostra_login {
+			width: 100%;
+			height: 0;
+			float: none;
+			margin: 100px auto;
+			padding: 0 0 0 120px;
+		}
+		
+			
+		#caixa_preta {
+			background: #000;
+			width: 100%;
+			margin: 17px auto;
+			height: 15px;
+			
+		}
+		#menu{
+			margin-bottom: -75px;
+			position: sticky;
+			top: 0;
+		}
+		#box table {
+			font: 12px Arial, Helvetica, sans-serif;
+			margin: 4px;
+			border: 1px solid #666;
+		}
+		.pesq {
+			overflow: visible;
+			width: 100%;
+		}
+		#box select {
+			font: 12px Arial, Helvetica, sans-serif;
+			padding: 5px;
+			width: 120px;
+			height: 30px;
+		}
+		.box_professores {
+			width: 100%;
+			height: auto;
+			margin: -20px auto;
+			border: 1px solid #333;
+			text-align: left;
+		}
+		#box_rodape {
+			width: 100%;
+			margin: 692px auto 0;
+		}
+	
+	
+	#box {
+	width: 100%;
+	height: auto;
+	margin: -20px auto;
+	border: 1px solid #333;
+	}
+	#notificacoes {
+		width: 95%;
+		margin: 10px 32px;
+		height: 400px;
+		background-color: #eff51fd4;
+		border-radius: 6%;
+	}
+	#notificacoes {
+		width: 60%;
+		margin: -576px 22px;
+		height: 570px;
+		background-color: #eff51fd4;
+		border-radius: 6%;
+	}
+	#avisos_notificacoes {
+		width: 95%;
+		margin: auto 8px;
+		height: 500px;
+	}
+	
+	#relatorios {
+		float: left;
+		width: 100%;
+		height: auto;
+		margin: -1px -20px 0 -46px;
+	}
+	#relatorios ul {
+		text-align: left;
+		margin: 20px 0px 0 38px;
+		list-style-image: url(../img/seta.png);
+	}
+	/*  */
+	
+	
+	#cadastra_professores {
+		width: 100%;
+		height: auto;
+		margin: -20px auto;
+		border: 1px solid #333;
+		background: rgb(218, 218, 103);
+		text-align: left;
+	}
+	
+	#box_aluno {
+		width: 100%;
+		height: auto;
+		margin: -17px auto;
+		border: 1px solid #333;
+		background: rgb(218, 172, 103);
+		text-align: left;
+	}
+	#cadastra_estudante {
+		width: -webkit-fill-available;
+		background: #06C;
+		height: auto;
+		float: left;
+		text-align: left;
+		border: 1px solid #333;
+	}
+	#cadastra_funcionarios {
+		width: 100%;
+		background: #E1E1C4;
+		height: auto;
+		float: none;
+		text-align: left;
+		margin: -20px auto;
+		border: 1px solid #333;
+	}
+	#box_funcionarios{
+		width:100%;
+		background:#E1E1C4;
+		height:auto;
+		float:none;
+		text-align:left;
+		margin:-20px auto;
+		border:1px solid #333;
+	
+		}
+		.card-1, .card-2, .card-3, .card-4, .card-5 {
+			display: -ms-flexbox;
+			position: static;
+			display: flex;
+			-ms-flex-direction: column;
+			flex-direction: column;
+			width: 34%;
+			margin: 5px 0 0 50px;
+			word-wrap: break-word;
+			background-color: #bdb1b1;
+			background-clip: border-box;
+			border: 1px solid rgba(0,0,0,.125);
+			border-radius: 1.25rem;
+		}
+		.card-1{
+			background-color: #eb7947;
+		}
+		.card-2{
+			background-color: #ffc107;
+		}
+		.card-3{
+			background-color: rgba(0,123,255,.5);
+		}
+		.card-4{
+			background-color: #28a74559;
+		}
+		.card-5{
+			background-color: #dc354587;
+		}
+	}
+	/*  */
+@media(min-width:1000px) and (max-width:2600px){	
+		#box_topo {
+			width: 100%;
+			height: 140px;
+			margin: 0px 84px 0px 0px;
+		}
+		#logo {
+			width: 100%;
+			height: 0;
+			float: none;
+			margin: 15px auto;
+		}
+		#img {
+			width: 200px;
+		}
+		#mostra_login {
+			width: 100%;
+			height: 0;
+			float: none;
+			margin: 100px auto;
+			padding: 0px 0 0 450px;
+		}
+		
+			
+		#caixa_preta {
+			background: #000;
+			width: 100%;
+			margin: 19px auto;
+			height: 15px;
+		}
+		#menu {
+			margin-bottom: -20px;
+			position: sticky;
+			top: 0;
+		}
+		#box table {
+			font: 12px Arial, Helvetica, sans-serif;
+			margin: 4px;
+			border: 1px solid #666;
+		}
+		.pesq {
+			overflow: visible;
+			width: 100%;
+		}
+		#box select {
+			font: 12px Arial, Helvetica, sans-serif;
+			padding: 5px;
+			width: 120px;
+			height: 30px;
+		}
+		.box_professores {
+			width: 100%;
+			height: auto;
+			margin: -20px auto;
+			border: 1px solid #333;
+			text-align: left;
+		}
+		#box_rodape {
+			width: 100%;
+			margin: 692px auto 0;
+		}
+	
+	
+	#box {
+	width: 100%;
+	height: auto;
+	margin: -20px auto;
+	border: 1px solid #333;
+	}
+	#notificacoes {
+		width: 95%;
+		margin: 10px 32px;
+		height: 400px;
+		background-color: #eff51fd4;
+		border-radius: 6%;
+	}
+	#notificacoes {
+		width: 60%;
+		margin: -576px 22px;
+		height: 570px;
+		background-color: #eff51fd4;
+		border-radius: 6%;
+	}
+	#avisos_notificacoes {
+		width: 95%;
+		margin: auto 8px;
+		height: 500px;
+	}
+	
+	#relatorios {
+		float: left;
+		width: 100%;
+		height: auto;
+		margin: -1px -20px 0 -46px;
+	}
+	#relatorios ul {
+		text-align: left;
+		margin: 20px 0px 0 38px;
+		list-style-image: url(../img/seta.png);
+	}
+	/*  */
+	
+	
+	#cadastra_professores {
+		width: 100%;
+		height: auto;
+		margin: -20px auto;
+		border: 1px solid #333;
+		background: rgb(218, 218, 103);
+		text-align: left;
+	}
+	
+	#box_aluno {
+		width: 100%;
+		height: auto;
+		margin: -17px auto;
+		border: 1px solid #333;
+		background: rgb(218, 172, 103);
+		text-align: left;
+	}
+	#cadastra_estudante {
+		width: -webkit-fill-available;
+		background: #06C;
+		height: auto;
+		float: left;
+		text-align: left;
+		border: 1px solid #333;
+	}
+	#cadastra_funcionarios {
+		width: 100%;
+		background: #E1E1C4;
+		height: auto;
+		float: none;
+		text-align: left;
+		margin: -20px auto;
+		border: 1px solid #333;
+	}
+	#box_funcionarios{
+		width:100%;
+		background:#E1E1C4;
+		height:auto;
+		float:none;
+		text-align:left;
+		margin:-20px auto;
+		border:1px solid #333;
+	
+		}
+		.card-1, .card-2, .card-3, .card-4, .card-5 {
+			display: -ms-flexbox;
+			position: static;
+			display: flex;
+			-ms-flex-direction: column;
+			flex-direction: column;
+			width: 34%;
+			margin: 5px 0 0 50px;
+			word-wrap: break-word;
+			background-color: #bdb1b1;
+			background-clip: border-box;
+			border: 1px solid rgba(0,0,0,.125);
+			border-radius: 1.25rem;
+		}
+		.card-1{
+			background-color: #eb7947;
+		}
+		.card-2{
+			background-color: #ffc107;
+		}
+		.card-3{
+			background-color: rgba(0,123,255,.5);
+		}
+		.card-4{
+			background-color: #28a74559;
+		}
+		.card-5{
+			background-color: #dc354587;
+		}
+	}
+/*  */
