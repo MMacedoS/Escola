@@ -13,8 +13,16 @@
 <body>
 
 <div id="box">
+  
 <?php
+$c=$code;
+if (isset($_GET['selec'])) {?>
 
+
+<?php
+  $selec=$_GET['selec'];
+}
+?><?php
 $sql_5 = "SELECT * FROM atividades_bimestrais WHERE id_ativ_bim = '$id'";
 $result_5 = mysqli_query($conexao, $sql_5);
 	while($res_5 = mysqli_fetch_assoc($result_5)){
@@ -22,22 +30,19 @@ $result_5 = mysqli_query($conexao, $sql_5);
 ?>
  <form name="send" method="post" action="" enctype="multipart/form-data">	
 	
-<table border="0">
-  <tr>
-    <td width="272">Disciplina</td>
-    <td>Bimestre:</td>
-    <td width="216">Data de aplicação da prova</td>
-  </tr>
-  <tr>
-    <td>
-      <select name="dis" id="dis">
-      <option value="<?php echo $dis = $res_5['id_disciplina']; ?>"><?php $disci = $res_5['id_disciplina']; 
-      $busDis="SELECT * FROM disciplinas where id_disciplinas='$disci'";
-      $conDis=mysqli_query($conexao,$busDis);
-      while($resDis=mysqli_fetch_assoc($conDis)){
-        echo $resDis['disciplina'];
-      }
-      ?></option>
+  
+  <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Disciplina e Turma</label>
+        <select name="dis" id="dis">
+        <option value="<?php echo $dis = $res_5['id_disciplina']; ?>"><?php $disci = $res_5['id_disciplina']; 
+          $busDis="SELECT * FROM disciplinas d inner join cursos c on d.id_cursos=c.id_cursos  where id_disciplinas='$disci'";
+          $conDis=mysqli_query($conexao,$busDis);
+          while($resDis=mysqli_fetch_assoc($conDis)){
+            echo $resDis['disciplina'].' <|> '.$resDis['curso'];
+          }
+          ?></option>
       <option value=""></option>
       <?php
       $sql_busca_nome="select nome,id_professores from professores where code='$code'";
@@ -48,41 +53,54 @@ $result_5 = mysqli_query($conexao, $sql_5);
        $ano_letivo=date("Y");
        }
 
-      $sql_1 = "SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos WHERE id_professores='$id_professor'";
+      $sql_1 = "SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner JOIN categoria cat on c.id_categoria=cat.id_categoria WHERE id_professores='$id_professor' and cat.categoria='$selec'";
 	  $result_1 = mysqli_query($conexao, $sql_1);
 	  	while($res_1 = mysqli_fetch_assoc($result_1)){
 	  ?>
       <option value="<?php echo $res_1['id_disciplinas']; ?>"><?php echo $res_1['disciplina']." <|> ".$res_1['curso']; ?></option>
       <?php } ?>
-      </select>
-      </td>
-    <td><select name="bimestre" size="1">
-      <option value="<?php echo $res_5['bimestre']; ?>"><?php echo $res_5['bimestre'];?>&ordm Bimestre</option>
+        </select>
+        </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Bimestre</label>     
+          
+                <select name="bimestre" size="1">
+                  <option value="<?php echo $res_5['bimestre']; ?>"><?php echo $res_5['bimestre'];?>&ordm Bimestre</option>
 
-      <option value=""></option>
-      <?php
-      $buscaBi="SELECT * FROM unidades";
-      $conBi=mysqli_query($conexao,$buscaBi);
-      while($resBi=mysqli_fetch_assoc($conBi)){
-       ?>
-      <option value="<?php echo $resBi['unidade'];?>"><?php echo $resBi['unidade'];?>&ordm; Bimestre</option>
-      <?php } ?>
-    </select></td>
-    <td><input type="text" name="aplicacao" value="<?php echo $res_5['data_aplicacao']; ?>"></td>
-  </tr> 
-  <tr>
-    <td>Informações adicionais:</td>
-  </tr>
-  <tr>
-    <td colspan="3"><textarea name="detalhes" cols="" rows=""><?php echo $res_5['detalhes']; ?></textarea></td>
-  </tr>
-  <tr>
-    <td><input class="input" type="submit" name="button" id="button" value="Atualizar"></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  </table>
-  </form>
+                  <option value=""></option>
+                  <?php
+                  $buscaBi="SELECT * FROM unidades";
+                  $conBi=mysqli_query($conexao,$buscaBi);
+                  while($resBi=mysqli_fetch_assoc($conBi)){
+                  ?>
+                  <option value="<?php echo $resBi['unidade'];?>"><?php echo $resBi['unidade'];?>&ordm; Bimestre</option>
+                  <?php } ?>
+              </select>
+      </div>
+  </div>
+  <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Data da aplicação</label>
+                <input type="text" name="aplicacao" value="<?php echo $res_5['data_aplicacao']; ?>">
+  </div>
+  </div>
+  </div>
+  <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Informações adicionais</label>
+                <textarea name="detalhes" cols="" rows=""><?php echo $res_5['detalhes']; ?></textarea>
+                <input type="hidden" name="code" value="<?php echo $code;?>">
+                </div>
+  </div>
+  <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+              <input class="input" type="submit" name="button" id="button" value="Atualizar">
+              </div>
+  </div>
+  
+    </form>
 <?php } ?> 
 
 <?php if(isset($_POST['button'])){

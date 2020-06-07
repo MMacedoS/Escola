@@ -94,6 +94,17 @@ $disciplina = $_POST['disciplina'];
  echo "<script language='javascript'>window.location='correcao_observacao.php?pg=observacoes&id=$id';</script>";
 
 }?> 
+<script>
+       (function( $ ) {
+            $(function() {
+              //$("#date").mask("99/99/9999");
+              //$("#phone").mask("(99) 999-9999");
+              //$("#cep").mask("99.999-99");
+              //$("#cpf").mask("99.999.999-99");
+              $("#nota").mask("9.9");
+            });
+          })(jQuery);
+        </script>
 
 <?php require "rodape.php"; ?>
 

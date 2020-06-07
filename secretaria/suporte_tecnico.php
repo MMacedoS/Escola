@@ -143,7 +143,7 @@
 if(@$_GET['acao'] == 'responder'){
   $id=$_GET['id'];
   if(isset($_GET['novaresposta'])){$sql_1 = "SELECT * FROM central_mensagem WHERE id='$id'";}else{
-$sql_1 = "SELECT * FROM central_mensagem WHERE id='$id' and receptor='COORDENAÇÃO' and resposta=''";}
+$sql_1 = "SELECT * FROM central_mensagem WHERE id='$id' and receptor='SECRETARIA' and resposta=''";}
 $result = mysqli_query($conexao, $sql_1);
 	while($res_1 = mysqli_fetch_assoc($result)){
 ?>
@@ -200,7 +200,7 @@ $emissor=$_GET['emissor'];
 if(isset($_GET['nova'])){
   
   switch ($receptor) {
-    case $receptor=="COORDENAÇÃO":
+    case $receptor=="SECRETARIA":
       $sql_2 = "UPDATE central_mensagem SET status = 'Aguarde resposta', data_resposta = '', mensagem = '$resp', resposta='', emissor='$receptor',receptor='$emissor' WHERE id = '$id' ";
       
 
@@ -232,7 +232,7 @@ $mensagem = $_POST['mensagem'];
 $date = date("d/m/Y H:i:s");
 
 if($setor==""){?> <script>alert("Erro ao enviar mensagem"); echo "<script language='javascript'>window.alert('Ocorreu um erro!');window.location='suporte_tecnico.php';</script>";</script>   <?php }else{	
-$sql_4 = "INSERT INTO central_mensagem (date, status, emissor, receptor, mensagem) VALUES ('$date', 'Aguarde resposta', 'COORDENAÇÃO', '$setor', '$mensagem')";
+$sql_4 = "INSERT INTO central_mensagem (date, status, emissor, receptor, mensagem) VALUES ('$date', 'Aguarde resposta', 'SECRETARIA', '$setor', '$mensagem')";
 $result_4 = mysqli_query($conexao, $sql_4);
 if($result_4 == ''){
 	echo "<script language='javascript'>window.alert('Ocorreu um erro!');window.location='suporte_tecnico.php';</script>";

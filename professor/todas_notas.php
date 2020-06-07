@@ -71,7 +71,7 @@ if(mysqli_num_rows($result)==''){
     $conDisc=mysqli_query($conexao,$buscaDisc);
     echo mysqli_num_rows($conDisc);
     ?></h3></td>
-    <td colspan="3"><a href="lancar_notas.php?pg=notas&selec=<?php echo $_GET['selec']; ?>&id=<?php echo $res_1['id_disciplinas']; ?>">Visualizar média</a></td>
+    <td colspan="3"><a href="lancar_notas.php?pg=notas&selec=<?php echo $_GET['selec']; ?>&id=<?php echo $res_1['id_disciplinas']; ?>"><font color="blue">Visualizar média</font></a></td>
    
   </tr>  
   </table> 

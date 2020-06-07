@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <?php $painel_atual = "professor"; ?>
 <html lang="en">
@@ -9,7 +10,12 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="shortcut icon" href="../image/logo_ist.gif">
     <title>Distribuição de Notas</title>
-    <?php require_once "../config.php"; ?>
+    <?php require_once "../config.php"; 
+    
+    // $go_to_url é o link do banner
+echo "<script>window.open('gerar_pdf.php', '_blank');</script>";
+
+    ?>
 </head>
 <body>
 <div id="box">
@@ -36,6 +42,7 @@ while($res_dis=mysqli_fetch_assoc($con_disc)){
 <?php if(isset($_GET['button'])){ 
     $disciplina=$_GET['disciplina'];
     ?>
+    
 <table class="table-responsive"  border="1" cellpadding="5" cellspacing="4" bgcolor="#FFF4EA">
 <tr>
 <td rowspan="2" class="nome" bgcolor="#efefef"><strong>Alunos</strong></td>
@@ -669,7 +676,9 @@ $resFinal=$mediaFinal+0.4;
 <td bgcolor="#FFFFFF" align="center"><font color="#003399"><strong>7,25</strong></font></td> -->
 </tr>
 </table>
-<?php }?>
+<?php }
+
+?>
 </div>
 
 </div><!-- box -->

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="with=device-width,initial-scale=1">
 <link rel="stylesheet" type="text/css" href="css/todas_as_avaliacoes.css"/>
-<title>Provas</title>
+<title>Atividades Bimestrais</title>
 
     <link rel="shortcut icon" href="../image/logo_ist.gif">
 </head>
@@ -20,7 +20,7 @@
     $selec=$_GET['selec'];
  ?>
 <div class="row" id="row_button">
-<br /><a class="a2" rel="superbox[iframe][850x350]" href="cadastrar_atividades.php?tipo=atividade_bimestral&code=<?php echo $id_professor; ?>&selec=<?php echo $selec;?>">Cadastrar Atividade</a>
+<br /><a class="a2" rel="superbox[iframe][300x350]" href="cadastrar_atividades.php?tipo=atividade_bimestral&code=<?php echo $id_professor; ?>&selec=<?php echo $selec;?>">Cadastrar Atividade</a>
 <br /><a class="a3" rel="stylesheet" href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $selec;?>">Atualizar Pagina</a>
 </div>
 <script language="JavaScript">
@@ -132,7 +132,7 @@ if(mysqli_num_rows($result)==''){
 ?> 
 <table class="users" id="table-responsive" border="0">
   <tr>
-    <td width="90">Nº prova</td>
+    <td width="90">Nº Ativ</td>
     <td width="60">Status</td>
     <td width="131">Lançamento</td>
     <td width="187">Data de aplicação</td>
@@ -154,10 +154,10 @@ if(mysqli_num_rows($result)==''){
     <td><h3><?php echo $res_1['bimestre']; ?></h3></td>
   </tr>
   <tr>
-    <td><a rel="superbox[iframe][850x350]" href="editar_atividade.php?id=<?php echo $res_1['id_ativ_bim']; ?>&code=<?php echo $code; ?>">Editar</a></td>
+    <td><a rel="superbox[iframe][350x400]" href="editar_atividade.php?id=<?php echo $res_1['id_ativ_bim'];?>&code=<?php echo $code; ?>&selec=<?php echo $selec;?>">Editar</a></td>
     <td colspan="3"><a href="correcao_atividades.php?pg=atividade_bimestral&selec=<?php echo $_GET['selec']; ?>&id=<?php echo $res_1['id_ativ_bim']; ?>">Lançar notas</a></td>
     <td></td>
-    <td><a href="todas_as_atividades.php?pg=excluir&id=<?php echo $res_1['id']; ?>&selec=<?php echo $_GET['selec']; ?>&code=<?php echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td>
+    <td><a href="todas_ativ_tarefas.php?pg=excluir&id=<?php echo $res_1['id_ativ_bim']; ?>&selec=<?php echo $_GET['selec']; ?>&code=<?php echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td>
   </tr>  
   </table> 
  
@@ -168,10 +168,10 @@ if($_GET['pg'] == 'excluir'){
 $id = $_GET['id'];
 $code = $_GET['code'];
 
-// $sql_2 = "DELETE FROM atividades_bimestrais WHERE id = '$id'";
+// $sql_2 = "DELETE FROM atividades_bimestrais WHERE id_ativ_bim = '$id'";
 // mysqli_query($conexao, $sql_2);
 
-echo "<script language='javascript'>window.location='todas_ativ_tarefas.php?pg=atividades_bimestrais'&selec=".$_GET['selec']."';</script>";
+ echo "<script language='javascript'>window.location='todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=".$_GET['selec']."';</script>";
 
 }?> 
 </div><!-- box-->

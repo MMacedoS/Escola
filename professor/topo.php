@@ -17,8 +17,11 @@
 
 <link rel="stylesheet" href="../jquery.superbox.css" type="text/css" media="all" />
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+  
 
 	<script type="text/javascript" src="../jquery.superbox-min.js"></script>
+  
+  <script src="js/jquery.maskedinput-1.3.js" type="text/javascript"></script>
 	<script type="text/javascript">
 
 		$(function(){
@@ -72,7 +75,7 @@ function refresh()
     ?> Seu código é:</strong> <?php echo @$code; ?>
       Escolha uma <strong>Modalidade:</strong>
       <form name='incluir' ... />
-       <select class="custom-select" name="selec" LANGUAGE="JAVASCRIPT" ONCHANGE="refresh()" >
+       <select class="custom-select" name="selec" LANGUAGE="JAVASCRIPT" ONCHANGE="submit()" >
          <?php
              if (isset($_GET['selec'])){?>
              <option value="<?php echo $_GET['selec']; ?>"><?php echo $_GET['selec'];?></option>
@@ -132,7 +135,7 @@ function refresh()
      <li><a href="todas_teste.php?pg=teste&selec=<?php echo $_GET['selec'];?>">Teste</a></li>
      <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec'];?>">Prova</a></li>
      <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Lançar Nota Bimestre</a></li>
-     <li><a href="distribuicao.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
+     <li><a href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
     </ul>
 
       <?php }elseif((isset($_GET['selec']))&&($_GET['selec']=='ensino-medio-final')){ ?>
@@ -144,7 +147,8 @@ function refresh()
      <li><a href="todas_teste.php?pg=teste&selec=<?php echo $_GET['selec'];?>">Teste</a></li>
      <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec'];?>">Prova</a></li>
      <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Lançar Nota Bimestre</a></li>
-     <li><a href="distribuicao.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Distribuição das Notas</a></li>
+     <li><a href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Distribuição das Notas</a></li>
+     <!-- <li><a href="gerar_pdf.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Distribuição das Notas</a></li>  -->
     </ul>
       
       <?php }elseif(!isset($_GET['selec'])){

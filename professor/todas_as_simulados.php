@@ -18,7 +18,7 @@
 <div id="box">
 <?php if($_GET['pg'] == 'simulados'){ ?>
 <div class="row" id="row_button">
-<br /><a class="a2" rel="superbox[iframe][850x350]" href="cadastrar_trabalho.php?tipo=atividade_pesquisa&code=<?php echo $code; ?>">Cadastrar Pesquisa</a>
+<br /><a class="a2" rel="superbox[iframe][350x350]" href="cadastrar_trabalho.php?tipo=atividade_pesquisa&code=<?php echo $code; ?>">Cadastrar Pesquisa</a>
 <br /><a class="a3" rel="stylesheet" href="todas_as_trabalhos.php?pg=atividades_pesquisa">Atualizar Pagina</a>
 </div>
 <p></p>
@@ -35,7 +35,7 @@ if(mysqli_num_rows($result) == ''){
 ?> 
 <table class="users" id="table-responsive" border="0">
   <tr>
-    <td width="90">Nº prova</td>
+    <td width="90">Nº Trab</td>
     <td width="60">Status</td>
     <td width="131">Lançamento</td>
     <td width="187">Data de aplicação</td>
@@ -49,7 +49,7 @@ if(mysqli_num_rows($result) == ''){
     <td><h3><?php echo $res_1['disciplina']; ?></h3></td>
   </tr>
   <tr>
-    <td><a rel="superbox[iframe][850x350]" href="editar_trabalho.php?id=<?php echo $res_1['id']; ?>&code=<?php echo $code; ?>">Editar</a></td>
+    <td><a rel="superbox[iframe][350x400]" href="editar_trabalho.php?id=<?php echo $res_1['id']; ?>&code=<?php echo $code; ?>&selec=<?php echo $selec;?>">Editar</a></td>
     <td colspan="3"><a href="correcao_trabalho.php?pg=atividade_pesquisa&id=<?php echo $res_1['id']; ?>">Fazer correção</a></td>
     <td></td>
     <td><a href="todas_as_trabalhos.php?pg=excluir&id=<?php echo $res_1['id']; ?>&code=<?php echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td>

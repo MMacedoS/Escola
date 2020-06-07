@@ -22,6 +22,12 @@ body{
 		resize: vertical;
 		width: 100%;
 	}
+	#textarea {
+		overflow: auto;
+		resize: vertical;
+		width: 90%;
+		margin: -3px;
+	}
 	
 #mostra_login{
 	width:500px;

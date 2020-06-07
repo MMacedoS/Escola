@@ -29,7 +29,7 @@
 	  Selecione o setor que você quer enviar esta mensagem
      <select name="setor" size="1" id="select">
        <option value="COORDENAÇÃO" style="background-color:#F3F781;">COORDENAÇÃO</option>
-        <option value="" style="background-color:#F3F781;"></option>
+        <option value="SECRETARIA" style="background-color:#F3F781;">SECRETARIA</option>
        <option value="PROFESSOR">PROFESSORES</option>
        <?php      
 		$sql_2 = "SELECT DISTINCT p.code,p.nome from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020";

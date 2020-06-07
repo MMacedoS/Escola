@@ -35,7 +35,7 @@ if(mysqli_num_rows($result) == ''){
 ?> 
 <table class="users" id="table-responsive" border="0">
   <tr>
-    <td width="90">Nº prova</td>
+    <td width="90">Nº Teste</td>
     <td width="60">Status</td>
     <td width="131">Lançamento</td>
     <td width="187">Data de aplicação</td>
@@ -49,7 +49,7 @@ if(mysqli_num_rows($result) == ''){
     <td><h3><?php echo $res_1['disciplina']; ?></h3></td>
   </tr>
   <tr>
-    <td><a rel="superbox[iframe][850x350]" href="editar_observacoes.php?id=<?php echo $res_1['id']; ?>&code=<?php echo $code; ?>">Editar</a></td>
+    <td><a rel="superbox[iframe][350x450]" href="editar_observacoes.php?id=<?php echo $res_1['id']; ?>&code=<?php echo $code; ?>&selec=<?php echo $selec;?>">Editar</a></td>
     <td colspan="3"><a href="correcao_observacao.php?pg=observacoes&id=<?php echo $res_1['id']; ?>">Inserir notas para alunos</a></td>
     <td></td>
     <td><a href="todas_as_observacoes.php?pg=excluir&id=<?php echo $res_1['id']; ?>&code=<?php echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td>

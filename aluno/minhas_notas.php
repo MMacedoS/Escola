@@ -651,6 +651,35 @@ $result_5 = mysqli_query($conexao, $sql_5);
 <!-- fim teste -->
 <?php if($_GET['pg'] == 'distribuicao'){ ?>
 <h1><strong>Suas notas bimestrais</strong></h1>
+<form action="" method="POST">
+<h1>Bimestre:
+
+ <select name="busca" id="cooler" ONCHANGE="submit();" >  <!--  Função para recarregar a página com o grupo escolhido  -->
+  <?php 
+      if(isset($_POST['busca'])){
+      ?>
+        <option value=""><?php echo $_POST['busca'].' Unidade';?></option>
+      <?php
+      }
+  ?>
+    
+  <option value="">Selecione uma bimestre</option>
+    
+  <?php   
+    $selec_uni="SELECT * FROM unidades";
+    $con_unidade=mysqli_query($conexao,$selec_uni);
+    while($res_unidade=mysqli_fetch_assoc($con_unidade)){
+      ?>
+        <option value="<?php echo $res_unidade['unidade'];?>"><?php echo $res_unidade['unidade'];?></option>
+    <?php
+    }
+  
+  ?>
+
+</select>
+<input type="hidden" name="pg" value="distribuicao">
+</h1>
+</form>
 <div class="table-responsive">
 <table	class="table-responsive" border="0">
   <tr>
@@ -668,28 +697,29 @@ $result_5 = mysqli_query($conexao, $sql_5);
 <?php
 $sql_1 = "SELECT * FROM disciplinas WHERE id_cursos = '$serie' ORDER BY disciplina ASC";
 $result_1 = mysqli_query($conexao, $sql_1);
+	$uni=@$_POST['busca'];
 	while($res_1 = mysqli_fetch_assoc($result_1)){
 		$disciplina = $res_1['id_disciplinas'];
 
-$sql_2 = "SELECT * FROM notas_atividades WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1' and ano_letivo='$data'";
+$sql_2 = "SELECT * FROM notas_atividades WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '$uni' and ano_letivo='$data'";
 $result_2 = mysqli_query($conexao, $sql_2);
 		
-$sql_3 = "SELECT * FROM notas_pro_inter WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1' and ano_letivo='$data'";
+$sql_3 = "SELECT * FROM notas_pro_inter WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '$uni' and ano_letivo='$data'";
 $result_3 = mysqli_query($conexao, $sql_3);	
 
-$sql_4 = "SELECT * FROM notas_pro_transversal WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1' and ano_letivo='$data'";
+$sql_4 = "SELECT * FROM notas_pro_transversal WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '$uni' and ano_letivo='$data'";
 $result_4 = mysqli_query($conexao, $sql_4);
 		
-$sql_5 = "SELECT * FROM notas_ava_coc WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1' and ano_letivo='$data'";	
+$sql_5 = "SELECT * FROM notas_ava_coc WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '$uni' and ano_letivo='$data'";	
 $result_5 = mysqli_query($conexao, $sql_5);
 
-$sql_6 = "SELECT * FROM notas_ava_teste WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1' and ano_letivo='$data'";	
+$sql_6 = "SELECT * FROM notas_ava_teste WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '$uni' and ano_letivo='$data'";	
 $result_6 = mysqli_query($conexao, $sql_6);
 
-$sql_7 = "SELECT * FROM notas_ava_prova WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '1' and ano_letivo='$data'";	
+$sql_7 = "SELECT * FROM notas_ava_prova WHERE code = '$code' AND id_disciplina = '$disciplina' AND bimestre = '$uni' and ano_letivo='$data'";	
 $result_7 = mysqli_query($conexao, $sql_7);
 	
-$sql_8 = "SELECT * FROM notas_bimestres WHERE code = '$code' AND id_disciplinas = '$disciplina' AND bimestre = '1' and ano_letivo='$data'";	
+$sql_8 = "SELECT * FROM notas_bimestres WHERE code = '$code' AND id_disciplinas = '$disciplina' AND bimestre = '$uni' and ano_letivo='$data'";	
 $result_8 = mysqli_query($conexao, $sql_8);
 	
 		
@@ -814,6 +844,21 @@ $result_8 = mysqli_query($conexao, $sql_8);
 				}
 				
 			}
+	}?>
+	</td>    
+	<td>
+	<?php
+    if(mysqli_num_rows($result_8) == ''){
+		echo "<h2>Aguarade</h2>";
+	}else{
+						
+				if($nota >= 7){
+					echo "<h2><strong>APROVADO</strong></h2>";
+				}else{
+					echo "<h3><strong>REPROVADO</strong></h3>";
+				}
+				
+			
 	}?>
     </td>    
 	 

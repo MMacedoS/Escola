@@ -20,7 +20,7 @@
     $selec=$_GET['selec'];
  ?>
 <div class="row" id="row_button">
-<br /><a class="a2" rel="superbox[iframe][850x350]" href="cadastrar_coc.php?tipo=coc&selec=<?php echo $selec;?>&code=<?php echo $id_professor; ?>">Cadastrar Atividade</a>
+<br /><a class="a2" rel="superbox[iframe][350x400]" href="cadastrar_coc.php?tipo=coc&selec=<?php echo $selec;?>&code=<?php echo $id_professor; ?>">Cadastrar Atividade</a>
 <br /><a class="a3" rel="stylesheet" href="todas_coc.php?pg=coc&selec=<?php echo $selec; ?>">Atualizar Pagina</a>
 </div>
 <script language="JavaScript">
@@ -155,7 +155,7 @@ if(mysqli_num_rows($result)==''){
      <td><h3><?php echo $res_1['bimestre']; ?></h3></td>
   </tr>
   <tr>
-    <td><a rel="superbox[iframe][850x350]" href="editar_coc.php?id=<?php echo $res_1['id_ava_coc']; ?>&code=<?php echo $code; ?>">Editar</a></td>
+    <td><a rel="superbox[iframe][350x400]" href="editar_coc.php?id=<?php echo $res_1['id_ava_coc']; ?>&code=<?php echo $code; ?>&selec=<?php echo $selec;?>">Editar</a></td>
     <td colspan="3"><a href="correcao_coc.php?pg=coc&selec=<?php echo $_GET['selec']; ?>&id=<?php echo $res_1['id_ava_coc']; ?>">Lançar notas</a></td>
     <td></td>
     <td><a href="todas_coc.php?pg=excluir&id=<?php echo $res_1['id_ava_coc']; ?>&selec=<?php echo $_GET['selec']; ?>&code=<?php echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td>

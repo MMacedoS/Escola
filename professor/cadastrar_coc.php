@@ -14,6 +14,7 @@
 
 <div id="box">
 <?php if($_GET['tipo'] == 'coc'){
+   $c=$code;
   if(isset($_GET['selec'])){$selec=$_GET['selec'];}
   ?>
 
@@ -41,66 +42,76 @@ mysqli_query($conexao, $sql_3);
 $sql_4 = "INSERT INTO mural_aluno (date, status, curso, titulo,origem) VALUES ('$date', 'Ativo', '$curso', 'As notas das Avaliações COC estão sendo divulgadas','Avaliação COC')";
 mysqli_query($conexao, $sql_4);
 
-echo "<script language='javascript'>window.alert('atividade cadastrada com sucesso! Click em OK para cadastrar outras!');window.location='cadastrar_coc.php?tipo=coc';</script>";
+echo "<script language='javascript'>window.alert('atividade cadastrada com sucesso! Click em OK para cadastrar outras!');window.location='cadastrar_coc.php?tipo=coc&code=$code&selec=$selec';</script>";
 
 die;		
 }//fim if verifica
 else{
-echo "<script language='javascript'>window.alert('atividade ja existe! Click em OK para cadastrar outra!');window.location='cadastrar_coc.php?tipo=coc';</script>";
+echo "<script language='javascript'>window.alert('atividade ja existe! Click em OK para cadastrar outra!');window.location='cadastrar_coc.php?tipo=coc&code=$code&selec=$selec';</script>";
 }
 }}?>
 
- <form name="send" method="post" action="" enctype="multipart/form-data">	
+<form name="send" method="post" action="" enctype="multipart/form-data">	
 	
-<table border="0">
-  <tr>
-    <td width="272">Disciplina</td>
-    <td>Bimestre:</td>
-    <td width="216">Data de aplicação do Projetos</td>
-  </tr>
-  <tr>
-    <td>
-      <select name="dis" id="dis">
-      <?php
-      $sql_busca_nome="select nome,id_professores from professores where code='$code'";
-    $con_busca_nome=mysqli_query($conexao,$sql_busca_nome);
-    while($res_busca_nome=mysqli_fetch_assoc($con_busca_nome)){
-      
-       $id_professor=$res_busca_nome['id_professores'];
-       $ano_letivo=date("Y");
-       }
 
+  
+  <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Disciplina e Turma</label>
+        <select name="dis" id="dis">
+        <?php
+        $sql_busca_nome="select nome,id_professores from professores where code='$c'";
+      $con_busca_nome=mysqli_query($conexao,$sql_busca_nome);
+      while($res_busca_nome=mysqli_fetch_assoc($con_busca_nome)){
+        
+         $id_professor=$res_busca_nome['id_professores'];
+         $ano_letivo=date("Y");
+         }
+  
        $sql_1 = "SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner JOIN categoria cat on c.id_categoria=cat.id_categoria WHERE id_professores='$id_professor' and cat.categoria='$selec'";
-	  $result = mysqli_query($conexao, $sql_1);
-	  	while($res_1 = mysqli_fetch_assoc($result)){
-	  ?>
-      <option value="<?php echo $res_1['id_disciplinas']; ?>"><?php echo $res_1['disciplina']." <|> ".$res_1['curso']; ?></option>
-      <?php } ?>
+      $result = mysqli_query($conexao, $sql_1);
+        while($res_1 = mysqli_fetch_assoc($result)){
+      ?>
+        <option value="<?php echo $res_1['id_disciplinas']; ?>"><?php echo $res_1['disciplina']." <|> ".$res_1['curso']; ?></option>
+        <?php } ?>
+        </select>
+        </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Bimestre</label>     
+          
+      <select name="bimestre" size="1">
+       <?php $buscaUnidade="SELECT * FROM unidades ";
+       $conUnidade=mysqli_query($conexao,$buscaUnidade);
+       while($resUnidade=mysqli_fetch_assoc($conUnidade)){
+       ?>
+        <option value="<?php echo $resUnidade['unidade'];?>"><?php echo $resUnidade['unidade'];?>&ordm; Bimestre</option>
+       <?php } ?>
       </select>
-      </td>
-    <td><select name="bimestre" size="1">
-     <?php $buscaUnidade="SELECT * FROM unidades ";
-     $conUnidade=mysqli_query($conexao,$buscaUnidade);
-     while($resUnidade=mysqli_fetch_assoc($conUnidade)){
-     ?>
-      <option value="<?php echo $resUnidade['unidade'];?>"><?php echo $resUnidade['unidade'];?>&ordm; Bimestre</option>
-     <?php } ?>
-    </select></td>
-    <td><input type="text" name="aplicacao" value="<?php echo date("d/m/Y"); ?>"></td>
-  </tr> 
-  <tr>
-    <td>Informações adicionais:</td>
-  </tr>
-  <tr>
-    <td colspan="3"><textarea name="detalhes" cols="" rows=""></textarea></td>
-  </tr>
-  <tr>
-    <td><input class="input" type="submit" name="button" id="button" value="Cadastrar"></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  </table>
-  </form>
+      </div>
+  </div>
+  <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Data da aplicação</label>
+                <input type="text" name="aplicacao" value="<?php echo date("d/m/Y"); ?>">
+  </div>
+  </div>
+  </div>
+  <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Informações adicionais</label>
+                <textarea name="detalhes" cols="" rows="" value="<?php echo $sql_1;?>"></textarea>
+                </div>
+  </div>
+  <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+              <input class="input" type="submit" name="button" id="button" value="Cadastrar">
+              </div>
+  </div>
+  
+    </form>
 <?php } ?>
 </div><!-- box -->
 

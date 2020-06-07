@@ -7,7 +7,7 @@
 
 <body>
 <?php if(isset($_POST['button'])){
-require "../conexao.php";
+require "../Control/conexao.php";
 
 
 $senha = $_POST['senha'];
@@ -17,8 +17,8 @@ $code = $_GET['code'];
 if($senha != $senha2){
 	echo "<script language='javascript'>window.alert('As senhas não confere!');</script>";
 }else{
-
-mysqli_query($conexao, "UPDATE login SET senha = '$senha' WHERE code = '$code'");
+$s=md5($senha);
+mysqli_query($conexao, "UPDATE login SET senha = '$senha', senha_rec='$s' WHERE code = '$code'");
 
 echo "Senha alterada com sucesso<br>Clique em F5 em seu teclado";
 die;

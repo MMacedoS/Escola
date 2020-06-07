@@ -4,6 +4,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="with=device-width,initial-scale=1">
+<link rel="stylesheet" href="../jquery.superbox.css" type="text/css" media="all" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+  
+
+	<script type="text/javascript" src="../jquery.superbox-min.js"></script>
+  
+  <script src="js/jquery.maskedinput-1.3.js" type="text/javascript"></script>
 <title>Editar Nota</title>
 <?php require "../config.php"; ?>
 </head>
@@ -36,7 +43,7 @@ die;
 }?>
 <em>Digite abaixo qual vai ser a nova nota</em>
 <form name="" method="post" action="" enctype="multipart/form-data">
- <input type="text" size="4" maxlength="7" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
+ <input type="text" size="4" maxlength="7" id="nota" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
 </form>
 <?php }?>
 
@@ -67,7 +74,7 @@ die;
 }?>
 <em>Digite abaixo qual vai ser a nova nota</em>
 <form name="" method="post" action="" enctype="multipart/form-data">
- <input type="text" size="4" maxlength="7" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
+ <input type="text" size="4" maxlength="7" id="nota" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
 </form>
 <?php }?>
 
@@ -105,7 +112,7 @@ die;
 }?>
 <em>Digite abaixo qual vai ser a nova nota</em>
 <form name="" method="post" action="" enctype="multipart/form-data">
- <input type="text" size="4" maxlength="7" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
+ <input type="text" size="4" maxlength="7" id="nota" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
 </form>
 <?php }?>
 <!-- interdisciplinar -->
@@ -143,7 +150,7 @@ die;
 }?>
 <em>Digite abaixo qual vai ser a nova nota</em>
 <form name="" method="post" action="" enctype="multipart/form-data">
- <input type="text" size="4" maxlength="7" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
+ <input type="text" size="4" maxlength="7"  id="nota" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
 </form>
 <?php }?>
 
@@ -184,7 +191,7 @@ die;
 }?>
 <em>Digite abaixo qual vai ser a nova nota</em>
 <form name="" method="post" action="" enctype="multipart/form-data">
- <input type="text" size="4" maxlength="7" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
+ <input type="text" size="4" maxlength="7" id="nota" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
 </form>
 <?php }?>
 <!-- fim trans -->
@@ -224,7 +231,7 @@ die;
 }?>
 <em>Digite abaixo qual vai ser a nova nota</em>
 <form name="" method="post" action="" enctype="multipart/form-data">
- <input type="text" size="4" maxlength="7" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
+ <input type="text" size="4" maxlength="7" id="nota" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
 </form>
 <?php }?>
 
@@ -264,7 +271,7 @@ die;
 }?>
 <em>Digite abaixo qual vai ser a nova nota</em>
 <form name="" method="post" action="" enctype="multipart/form-data">
- <input type="text" size="4" maxlength="7" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
+ <input type="text" size="4" maxlength="7" id="nota" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
 </form>
 <?php }?>
 
@@ -304,7 +311,7 @@ die;
 }?>
 <em>Digite abaixo qual vai ser a nova nota</em>
 <form name="" method="post" action="" enctype="multipart/form-data">
- <input type="text" size="4" maxlength="7" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
+ <input type="text" size="4" maxlength="7" id="nota" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
 </form>
 <?php }?>
 <!-- fim provas -->
@@ -345,7 +352,7 @@ die;
 <?php if($_GET['nota']>=7){?>
 	<h2>média atingida</h2>
 <?php }else{?> 
- <input type="text" size="4" maxlength="7" name="nota" value="<?php echo $nota=7-$_GET['nota']; ?>" /><input type="submit" name="send" value="Inserir" />
+ <input type="text" size="4" maxlength="7" id="nota" name="nota" value="<?php echo $nota=7-$_GET['nota']; ?>" /><input type="submit" name="send" value="Inserir" />
  <?php }?>
 </form>
 
@@ -390,9 +397,24 @@ $result = mysqli_query($conexao, $sql_3);
  
 <em>Digite abaixo qual vai ser a nova nota</em>
 <form name="" method="post" action="" enctype="multipart/form-data">
- <input type="text" size="4" maxlength="7" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
+ <input type="text" size="4" maxlength="7"  id="nota" name="nota" value="<?php echo $_GET['nota']; ?>" /><input type="submit" name="send" value="Alterar" />
 </form> 
 <?php } ?>
 
+<script>
+       (function( $ ) {
+            $(function() {
+              //$("#date").mask("99/99/9999");
+              //$("#phone").mask("(99) 999-9999");
+              //$("#cep").mask("99.999-99");
+              //$("#cpf").mask("99.999.999-99");
+              $("#nota").mask("9.9");
+              
+              $("#nota").css('background', 'write');
+              $('#nota').attr("disabled", false);
+              $('#nota').focus();
+            });
+          })(jQuery);
+        </script>
 </body>
 </html>

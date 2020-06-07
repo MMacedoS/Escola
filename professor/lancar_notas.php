@@ -40,6 +40,7 @@ while($resDis=mysqli_fetch_assoc($conDis)){
 <div id="caixa_preta">
 </div><!-- caixa_preta -->
 <div id="box">
+  <div class="div-responsive">
 <br>
 <h1><a class="a3" rel="stylesheet" href="lancar_notas.php?pg=notas&selec=<?php echo $selec; ?>&id=<?php echo $id; ?>">Atualizar Pagina</a></h1>
 <br>
@@ -138,7 +139,7 @@ if(mysqli_num_rows($result) == ''){
       <!-- while estudante -->
       <?php
       $code_aluno = $res_2['code'];
-      $busca_aluno="SELECT nome, matricula FROM estudantes WHERE matricula='$code_aluno' and status='Ativo'";
+      $busca_aluno="SELECT nome, matricula FROM estudantes WHERE matricula='$code_aluno' and status='Ativo' ORDER BY nome asc";
       $con_aluno=mysqli_query($conexao,$busca_aluno);
       while($res_aluno=mysqli_fetch_assoc($con_aluno)){
         
@@ -183,7 +184,7 @@ if(mysqli_num_rows($result) == ''){
     <?php if($res_4['bimestre']==4){
     }else{ ?>
    <td align="center"><a href="alterar_nota_trabalho.php?pg=ponto_extra&selec=<?php echo $selec;?>&id=<?php echo $res_4['id_disciplinas'];?>&aluno=<?php echo $res_2['code']; ?>&disciplina=<?php echo $res_2['id_disciplinas']; ?>&bimestre=<?php echo $res_2['bimestre'];  ?>&professor=<?php echo $code;  ?>&nota=<?php echo $res_4['nota']; ?>" rel="superbox[iframe][400x100]"><img src="../image/ico-editar.png" border="0" title="Alterar a nota" /></a></td>
-    <td><a target="_blank" href="../trabalhos_alunos/<?php echo $res_4['code']; ?>">Inserir conselho</a></td>
+    <td><a target="_blank" href="lancar_notas.php?pg=notas&selec=<?php echo $selec;?>&id=<?php echo $res_4['id_disciplinas'];?>&info" >Inserir conselho</a></td>
    
     <?php } //if bimestre
   }// if nota
@@ -193,6 +194,7 @@ if(mysqli_num_rows($result) == ''){
 </table>
 </form>
 <?php } ?>
+</div>
 </div><!-- box -->
 
 <?php if(isset($_GET['button'])){
@@ -220,7 +222,9 @@ mysqli_query($conexao, $sql_4);
  echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
 
 }?> 
-
+<?php if(isset($_GET['info'])){
+  echo "<script>alert('Em breve esta pagina estará disponivel');</script>";
+}?>
 <?php require "rodape.php"; ?>
 
 <body>

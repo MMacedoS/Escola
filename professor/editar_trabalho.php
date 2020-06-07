@@ -12,7 +12,14 @@
 
 <div id="box">
 <?php
+$c=$code;
+if (isset($_GET['selec'])) {?>
 
+
+<?php
+  $selec=$_GET['selec'];
+}
+?><?php
 $sql_5 = "SELECT * FROM atividades_pesquisa WHERE id = '$id'";
 $result_5 = mysqli_query($conexao, $sql_5);
 	while($res_5 = mysqli_fetch_assoc($result_5)){

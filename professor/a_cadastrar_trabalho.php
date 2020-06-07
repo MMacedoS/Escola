@@ -6,6 +6,8 @@
 <title>Cadastrar Trabalho</title>
 <?php require "../config.php"; ?>
 <link rel="stylesheet" type="text/css" href="css/cadastrar_trabalho.css"/>
+
+
 </head>
 
 <body>
