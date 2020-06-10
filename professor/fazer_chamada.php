@@ -11,13 +11,13 @@
 
 <body>
 
-<?php require_once ("topo.php"); ?>
+<?php require_once ("topo.php"); $q_c=0;?>
 <div id="caixa_preta">
 </div><!-- caixa_preta -->
 
 <div id="box">
  
- <h1>Abaixo está mostrando todos os alunos do(a) <strong>
+ <h1>Abaixo está mostrando todos os alunos do <strong>
  <?php $curso = base64_decode($_GET['curso']); 
  $buscaCurso="SELECT * from cursos where id_cursos='$curso'";
  $busca=$conCurso=mysqli_query($conexao,$buscaCurso);
@@ -29,6 +29,7 @@
         ?><script>alert('erro ao buscar os cursos');</script><?php
   }
   ?></strong> 
+  
  Data de Hoje <strong><?php echo date("d/m/Y"); ?></strong></h1>
    <h1>disciplina: <?php $dis=base64_decode($_GET['dis']);
    $buscaDis="SELECT * FROM disciplinas where id_disciplinas='$dis'";
@@ -37,7 +38,8 @@
         echo $resDisc['disciplina'];
    }
    ?>
-     <!-- <a background-color="blue" id="h1_a" rel="superbox[iframe][900x500]" href="fazer_rapida.php?curso=<?php echo $_GET['curso'];?>&dis=<?php echo $_GET['dis'];?>&turno=<?php echo $_GET['turno'];?>"><img title="chamada rapida" border="0" src="../image/confirma.png" width="50" /></a></h1> -->
+     <!-- <a background-color="blue" id="h1_a" rel="superbox[iframe][900x500]" href="fazer_rapida.php?curso=<?php echo $_GET['curso'];?>&dis=<?php echo $_GET['dis'];?>&turno=<?php echo $_GET['turno'];?>"><img title="chamada rapida" border="0" src="../image/confirma.png" width="50" /></a> -->
+     </h1>
     <?php
 
 $date = date("d/m/Y H:i:s");
@@ -52,12 +54,15 @@ if(mysqli_num_rows($resultado) == ''){
  while($res_1 = mysqli_fetch_assoc($resultado)){
 	 $code_aluno = $res_1['matricula'];
 ?> 
+
 <form name="button" method="GET" enctype="multipart/form-data" action="">
+
 <table class="users" id="table-responsive" border="0">
   <tr>
     <th width="94"><strong>Código:</strong></th>
     <th width="350"><strong>Nome:</strong></th>
     <th colspan="2"><strong>Este aluno está presente?</strong></th>
+    <th colspan="2"><strong></strong></th>
     <th></th>
   </tr>
   <input type="hidden" name="curso" value="<?php echo  base64_encode($curso); ?>">
@@ -71,120 +76,155 @@ if(mysqli_num_rows($resultado) == ''){
          if(mysqli_num_rows($con_chamada)==''){
     ?>      
        <td width="315">
-        <input type="radio" name="presenca" id="radio" value="SIM" checked>
+        <input type="checkbox" name="checkbox[]" id="radio" value="<?php echo $res_1['matricula']; ?>" >
       <label for="radio">SIM </label> 
-        <input type="radio" name="presenca" value="FALTA">
+        <input type="checkbox" name="checkboxf[]" value="<?php echo $res_1['matricula']; ?>">
       <label for="radio">NÃO </label> 
-        <input type="radio" id="p" name="presenca" value="JUSTIFICADA">
+        <input type="checkbox" name="checkboxj[]" value="<?php echo $res_1['matricula']; ?>">
         <label for="radio">FALTA JUSTIFICADA </label>
        <label for="fileField"></label>
-       </td><?php   
-       if(isset($_GET['inserir'])=='Guardar'&& isset($_GET['presenca'])=='JUSTIFICADA' || isset($_GET['presenca'])=='FALTA'){
-           
-           $code_aluno = $_GET['code_aluno'];	
-                $nome = $_GET['nome'];	
-                @$presensa = $_GET['presenca'];
-                $sql_ver_falta= "SELECT * FROM chamadas_em_sala WHERE date_day = '$date_hoje' AND matricula ='$code_aluno'";
-                 
-                $con_ver_falta = mysqli_query($conexao, $sql_ver_falta);
-                if(mysqli_num_rows($con_ver_falta)>=1 && $presensa == 'JUSTIFICADA' || $presensa == 'FALTA') {
-                ?>
-                  <td colspan="3">
-                  <h3><strong>Este aluno possui presença em outra disciplina hoje, tem certeza que ele não está na sala de aula?</strong></h3>
-                  <a href="fazer_chamada.php?curso=<?php echo $_GET['curso']; ?>&dis=<?php echo $_GET['dis']; ?>&confirmar_falta=sim&code_aluno=<?php echo $code_aluno; ?>&tipo=<?php echo $_GET['presenca']; ?>">CONFIRMAR FALTA</a> | <a href="">CANCELAR</a>
-                  </td>
-               <?php } else if (mysqli_num_rows($con_ver_falta)==0 && $presensa == 'FALTA' || $presensa == 'JUSTIFICADA'){
-                 ?>
-                 <td colspan="3">
-                  <h3><strong>Este aluno NÃO possui presença em outras disciplinas hoje, tem certeza que ele não está na sala de aula?</strong></h3>
-                  <a href="fazer_chamada.php?curso=<?php echo $_GET['curso']; ?>&dis=<?php echo $_GET['dis']; ?>&confirmar_falta=sim&code_aluno=<?php echo $code_aluno; ?>&tipo=<?php echo $_GET['presenca']; ?>">CONFIRMAR FALTA</a> | <a href="">CANCELAR</a>
-                  </td>
-                 
-                 <?php
-               }?>
-        <?php             
-       }else{ ?>
-       <td width="62"><input type="submit" name="inserir" id="button" value="Guardar" onclick="alert('chamada realizada');"></td>
-         <?php }
+       </td>
+       <td><strong></strong></td>
+       <td><strong></strong></td>
+       <?php 
+      
+       
           }//fechamento do if falta
-         else{?>
-         <td><?php echo "chamada realizada! presença: "; 
+         else{ ?>
+         <td><?php echo "presença: "; 
           
            while($mostrar_chamada=mysqli_fetch_assoc($con_chamada)){
                     echo $mostrar_chamada['presente'];
+                    $chamada=$mostrar_chamada['id'];
+                    $q_c=$q_c+1;
            }
            ?></td>
-         <td width="62"><button class="" name="alterar" id="btn_alter"  value="alterar"><img  border="0" src="../image/deleta.png" width="22" /></button></td>
+         <td width="62"><a href="fazer_chamada.php?selec=nadaselecionado&pg=excluir&curso=<?php echo $_GET['curso']?>&dis=<?php echo $_GET['dis']?>&cha=<?php echo base64_encode($chamada); ?>"><img  border="0" src="../image/deleta.png" width="22" /></a></td>
         
          <?php }
          ?>
          
   </tr>  
   </table>
-  </form>
+  
+  
   <?php }
-?>
 
+?>
+<input type="submit" class="btn btn-primary" name="inserir" id="" value="Inserir dados" onclick="alert('chamada efetuada');">
+</form>
 <?php 
   if(isset($_GET['inserir'])=='Guardar'){
 
-$code_aluno = $_GET['code_aluno'];	
-$nome = $_GET['nome'];	
+// $code_aluno = $_GET['code_aluno'];	
+// $nome = $_GET['nome'];	
 $curso = $_GET['curso'];
-@$presensa = $_GET['presenca'];
+// @$presensa = $_GET['presenca'];
 $ano=Date('Y');
 $disc=($_GET['dis']);
 
-if($presensa == ''){
-	echo "<script language='javascript'>window.alert('Por favor, informe se este aluno está presente ou não na sala de aula!');</script>";
-}else if($presensa=='SIM'){
-$sql_4 = "INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas, matricula, presente, ano_letivo) VALUES ('$date', '$date_hoje','$dis', '$code_aluno', '$presensa','$ano')";	
-$insere=mysqli_query($conexao, $sql_4);
-if($insere){
-	echo "<script language='javascript'>window.location='fazer_chamada.php?curso=$curso&dis=$disc; ?>';</script>";
 
-  }else{
-  ?> 
-    <script>
-    alert('Erro ao inserir a chamada');
-    </script>
-  <?php
-  }
-}
-  }
- ?>
-<?php 
-  if(isset($_GET['alterar'])=='alterar'){
+// if($presensa == ''){
+// 	echo "<script language='javascript'>window.alert('Por favor, informe se este aluno está presente ou não na sala de aula!');</script>";
+// }else if($presensa=='SIM'){
+// $sql_4 = "INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas, matricula, presente, ano_letivo) VALUES ('$date', '$date_hoje','$dis', '$code_aluno', '$presensa','$ano')";	
+// $insere=mysqli_query($conexao, $sql_4);
+// if($insere){
+// 	echo "<script language='javascript'>window.location='fazer_chamada.php?curso=$curso&dis=$disc; ?';</script>";
 
-$code_aluno = $_GET['code_aluno'];	
-$curso = $_GET['curso'];
-$ano=Date('Y');
-$sql_alterar = "delete from chamadas_em_sala where date_day='$date_hoje' and matricula='$code_aluno' and id_disciplinas='$dis' and ano_letivo='$ano'";	
+//   }else{
+//   ? 
+//     <script>
+//     alert('Erro ao inserir a chamada');
+//     </script>
+//   <?php
+//   }
+// }
+$chgeckboxes = @$_GET['checkbox'];
+$chgeckboxes1 = @$_GET['checkboxf'];
+$chgeckboxes2 = @$_GET['checkboxj'];
+if(!empty($chgeckboxes)){
+foreach( $chgeckboxes AS $dado ){     
+  
+      // $arr = filter( $_POST['excluir'] );
+      $res=$pdo->prepare("INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas, matricula, presente, ano_letivo) values(:data,:hoje,:dis,:dado,:presenca,:ano)");
 
-mysqli_query($conexao, $sql_alterar);
-$disc=($_GET['dis']);
-	echo "<script language='javascript'>window.location='fazer_chamada.php?curso=$curso&dis=$disc; ?>';</script>";
-  }
-
- ?>
- <?php if(@$_GET['confirmar_falta'] == 'sim'){
-
-$code_aluno = $_GET['code_aluno'];
-$presensa = $_GET['tipo'];
-$ano=Date('Y');
-$sql_5 = "INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas,matricula, presente, ano_letivo) VALUES ('$date', '$date_hoje', '$dis', '$code_aluno', '$presensa', '$ano')";	
-mysqli_query($conexao, $sql_5);
-$curso = $_GET['curso'];
-$disc=($_GET['dis']);
- echo "<script language='javascript'>window.location='fazer_chamada.php?curso=$curso&dis=$disc; ?>';</script>";
- 
+      $res->bindvalue(":data",$date);
+      $res->bindvalue(":hoje",$date_hoje);
+      $res->bindvalue(":dis",$dis);
+      $res->bindvalue(":dado",$dado);
+      $res->bindvalue(":presenca",'SIM');
+      $res->bindvalue(":ano",$ano);
+      $res->execute();
+      // $query ="INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas, matricula, presente, ano_letivo) VALUES ('$date', '$date_hoje','$dis', '$dado', 'SIM','$ano')";
+      // mysqli_query($conexao, $query);
+}}
+if(!empty($chgeckboxes1)){
+  foreach( $chgeckboxes1 AS $dado ){     
+    
+        // $arr = filter( $_POST['excluir'] );
+        $res=$pdo->prepare("INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas, matricula, presente, ano_letivo) values(:data,:hoje,:dis,:dado,:presenca,:ano)");
+  
+        $res->bindvalue(":data",$date);
+        $res->bindvalue(":hoje",$date_hoje);
+        $res->bindvalue(":dis",$dis);
+        $res->bindvalue(":dado",$dado);
+        $res->bindvalue(":presenca",'FALTA');
+        $res->bindvalue(":ano",$ano);
+        $res->execute();
+        // $query ="INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas, matricula, presente, ano_letivo) VALUES ('$date', '$date_hoje','$dis', '$dado', 'SIM','$ano')";
+        // mysqli_query($conexao, $query);
+  }}
+  if(!empty($chgeckboxes2)){
+    foreach( $chgeckboxes2 AS $dado ){     
+      
+          // $arr = filter( $_POST['excluir'] );
+          $res=$pdo->prepare("INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas, matricula, presente, ano_letivo) values(:data,:hoje,:dis,:dado,:presenca,:ano)");
+    
+          $res->bindvalue(":data",$date);
+          $res->bindvalue(":hoje",$date_hoje);
+          $res->bindvalue(":dis",$dis);
+          $res->bindvalue(":dado",$dado);
+          $res->bindvalue(":presenca",'JUSTIFICADA');
+          $res->bindvalue(":ano",$ano);
+          $res->execute();
+          // $query ="INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas, matricula, presente, ano_letivo) VALUES ('$date', '$date_hoje','$dis', '$dado', 'SIM','$ano')";
+          // mysqli_query($conexao, $query);
+    }}
+echo "<script language='javascript'>window.location='fazer_chamada.php?selec=nadaselecionado&curso=$curso&dis=$disc; ?';</script>";
 }?>
+<?php 
+if(isset($_GET['pg'])=='excluir'){
+
+$chamada= base64_decode($_GET['cha']);	
+$curso = $_GET['curso'];
+$ano=Date('Y');
+$res = $pdo->prepare("delete from chamadas_em_sala where id=:id ");
+
+$res->bindValue(":id", $chamada);
+$res->execute();
+$disc=($_GET['dis']);
+	echo "<script language='javascript'>window.location='fazer_chamada.php?curso=$curso&dis=$disc; ?>';</script>";
+  }
+
+ ?>
+ 
 
 
 
-<!  alterar falta ou colocar falta>
-<?php }else{ echo "";}
+<!-- <!  alterar falta ou colocar falta> -->
+<?php 
+$q_a=mysqli_num_rows($resultado);
+
+$qtde=$q_a-$q_c;
+if($qtde>=1){
+  echo "<script>alert('Possui ".$qtde." aluno(s) sem presença.');</script>";
+}elseif($qtde<0){
+  echo "<script>alert('<ERRO> Esta chamada possui alunos com 2 resultados na presença. Porfavor corrigir!');</script>";
+}
+}else{ echo "";}
 ?>
+
 </div><!-- box -->
 
 <?php require "rodape.php"; ?>

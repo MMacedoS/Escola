@@ -18,7 +18,8 @@
 </style>';
 $pagina.='<link rel="shortcut icon" href="../image/logo_ist.gif">';
     $pagina.="<body>";
-    $pagina.='<h1 align="center">Distribuição Notas de:'.$nomed.$nomec.'</h1>';    
+    $pagina.='<h3 align="center">Distribuição Notas de:'.$nomed.$nomec.'</h3>';  
+    
     $pagina.='<table class="table-responsive table"  border="1" cellpadding="5" cellspacing="4" bgcolor="#FFF4EA">';
     $pagina.="<tr>";
     $pagina.='<td rowspan="2" class="nome" bgcolor="#efefef"><strong>Alunos</strong></td>';
@@ -29,7 +30,7 @@ $pagina.='<link rel="shortcut icon" href="../image/logo_ist.gif">';
         while($res_con=mysqli_fetch_assoc($con_select)){
             $arrayEmails[]= $res_con["bimestre"];
 
-    $pagina.='<td bgcolor="#efefef" colspan="8" align="center"><strong>'.$res_con['bimestre'].' Unidade </strong></td>';}//finalizando lista de unidades na tablea
+    $pagina.='<td bgcolor="#efefef" colspan="7" align="center"><strong>'.$res_con['bimestre'].' Unidade </strong></td>';}//finalizando lista de unidades na tablea
     $pagina.='<td bgcolor="#efefef" rowspan="2"><strong>TO</strong></td>';
     $pagina.='<td bgcolor="#efefef" rowspan="2"><strong>MF</strong></td>';
     $pagina.='<td bgcolor="#efefef" rowspan="2"><strong>RF</strong></td>';
@@ -39,12 +40,11 @@ $pagina.='<link rel="shortcut icon" href="../image/logo_ist.gif">';
     while($unidade>0){//listando os titulos da atividades
        
     $pagina.='<td bgcolor="#FFFFF1" class="at"><font color="#090000">AT</font></td>
-    <td bgcolor="#FFFFFF" class="at"><font color="#090000">P_I</font></td>
-    <td bgcolor="#FFFFFF" class="at"><font color="#090000">P_T</font></td>
-    <td bgcolor="#FFFFFF" class="at"><font color="#090000">AV</font></td>
-    <td bgcolor="#FFFFFF" class="at"><font color="#090000">COC</font></td>
-    <td bgcolor="#FFFFFF" class="at"><font color="#090000">AF</font></td>
-    <td bgcolor="#FFFFFF" class="at"><font color="#090000">TO</font></td>
+    <td bgcolor="#FFFFFF" class="at"><font color="#090000">Sim</font></td>
+    <td bgcolor="#FFFFFF" class="at"><font color="#090000">Tra</font></td>
+    <td bgcolor="#FFFFFF" class="at"><font color="#090000">Teste</font></td>
+    <td bgcolor="#FFFFFF" class="at"><font color="#090000">Pro</font></td>
+    <td bgcolor="#FF643F" class="at"><font color="#090000">TO</font></td>
     <td bgcolor="#FF643F" class="at"><font color="#090000">S</font></td>';
     
     
@@ -76,23 +76,7 @@ $pagina.='<link rel="shortcut icon" href="../image/logo_ist.gif">';
     
      }
      }///finalizando lista atividades
-    //  p-i
-    $sqlinter="select nota from notas_pro_inter where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula'];
-    $coninter=mysqli_query($conexao,$sqlinter);
-    if(mysqli_num_rows($coninter)==""){
-        
-        $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="blue">aguarda</font></td>';
-            
-        }else{
     
-    while($resTrans=mysqli_fetch_assoc($coninter)){
-    $media1=$media1+$resTrans['nota'];
-    
-    $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#090000">'.$resTrans['nota'].'</font></td>';
-    
-    
-     }
-     }//finalizando pro_inter
     //  <!-- transversal -->
     
     $sqlTrans="select nota from notas_pro_transversal where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula'];

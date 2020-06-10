@@ -6,7 +6,8 @@
 <title>Detalhes da Busca</title>
 <link rel="stylesheet" type="text/css" href="css/mostrar_resultado.css"/>
 <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/> -->
- <?php require "../Control/conexao.php"; $ano=Date('Y'); ?>
+ <?php $painel_atual="admin";
+    require_once("../config.php"); $ano=Date('Y'); ?>
 </head>
 
 <body>

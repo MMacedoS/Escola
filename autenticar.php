@@ -33,7 +33,7 @@ if($linhas > 0){
 	}
 
 	if($_SESSION['painel'] == 'Aluno'){
-		header("location:aluno/index.php");
+		header("location:aluno/aluno.html");
 		exit();
 	}
 

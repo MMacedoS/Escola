@@ -24,39 +24,7 @@
   ?>
 
 
-<?php if(isset($_POST['button'])){
 
-$dis = $_POST['dis'];
-
-$bimestre = $_POST['bimestre'];
-$aplicacao = $_POST['aplicacao'];
-$detalhes = $_POST['detalhes'];
-$date = date("d/m/Y");
-$ano_letivo=date("Y");
-
-$sql_2 = "SELECT * FROM disciplinas WHERE id_disciplinas = '$dis'";
-$result_2 = mysqli_query($conexao, $sql_2);
-	while($res_2 = mysqli_fetch_assoc($result_2)){
-		$curso = $res_2['id_cursos'];
-		
-$verifica_busca="SELECT * FROM atividades_bimestrais where professor='$code' and id_curso='$curso' and bimestre='$bimestre' and ano_letivo='$ano_letivo'";
-$con_verifica=mysqli_query($conexao,$verifica_busca);
-if(mysqli_num_rows($con_verifica)==0){
-$sql_3 = "INSERT INTO atividades_bimestrais (data, status, professor,id_curso, id_disciplina, detalhes, bimestre,ano_letivo, data_aplicacao)
- VALUES ('$date', 'Ativo', '$code', '$curso', '$dis', '$detalhes', '$bimestre', '$ano_letivo','$aplicacao')";
-mysqli_query($conexao, $sql_3);
-		
-$sql_4 = "INSERT INTO mural_aluno (date, status, curso, titulo,origem) VALUES ('$date', 'Ativo', '$curso', 'As notas das provas bimestrais estão sendo divulgadas','atividade avaliativa')";
-mysqli_query($conexao, $sql_4);
-
-echo "<script language='javascript'>window.alert('atividade cadastrada com sucesso! Click em OK para cadastrar outras! $code');window.location='cadastrar_atividades.php?tipo=atividade_bimestral&code=$code&selec=$selec';</script>";
-
-die;		
-}//fim if verifica
-else{
-echo "<script language='javascript'>window.alert('atividade ja existe! Click em OK para cadastrar outra!');window.location='cadastrar_atividades.php?tipo=atividade_bimestral&code=$code&selec=$selec';</script>";
-}
-}}?>
 
  <form name="send" method="post" action="" enctype="multipart/form-data">	
 	
@@ -65,9 +33,20 @@ echo "<script language='javascript'>window.alert('atividade ja existe! Click em 
 					<div class="col-md-4 col-sm-12">
 						<div class="form-group">
 							<label for="exampleFormControlInput1">Disciplina e Turma</label>
-      <select name="dis" id="dis">
-      <?php
+      <select name="dis" id="dis" onchange="submit();">
       
+      <?php
+       if($_POST['dis']!=''){
+        $sql_rec_curso="SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner JOIN categoria cat on c.id_categoria=cat.id_categoria WHERE cat.categoria='$selec' and d.id_disciplinas=".$_POST['dis'];
+        $result_rec_curso = mysqli_query($conexao,$sql_rec_curso);
+        while($r2=mysqli_fetch_assoc($result_rec_curso)){
+            ?>
+            <option value="<?php echo $r2['id_disciplinas']; ?>"><?php echo $r2['disciplina'].' '.$r2['curso'];?></option>
+                    <?php
+            }
+     }else {
+       echo '<option value="">Selecione uma disciplina</option>';
+     }
       $sql_busca_nome="select nome,id_professores from professores where code='$c'";
 
     $con_busca_nome=mysqli_query($conexao,$sql_busca_nome);
@@ -91,7 +70,9 @@ echo "<script language='javascript'>window.alert('atividade ja existe! Click em 
 							<label for="exampleFormControlInput1">Bimestre</label>     
         
     <select name="bimestre" size="1">
-     <?php $buscaUnidade="SELECT * FROM unidades ";
+     <?php 
+     $d=@$_POST['dis'];
+     $buscaUnidade="SELECT * FROM unidades where unidade not in (select bimestre from atividades_bimestrais where id_disciplina='$d' )";
      $conUnidade=mysqli_query($conexao,$buscaUnidade);
      while($resUnidade=mysqli_fetch_assoc($conUnidade)){
      ?>
@@ -126,3 +107,36 @@ echo "<script language='javascript'>window.alert('atividade ja existe! Click em 
 
 </body>
 </html>
+<?php if(isset($_POST['button'])){
+
+$dis = $_POST['dis'];
+
+$bimestre = $_POST['bimestre'];
+$aplicacao = $_POST['aplicacao'];
+$detalhes = $_POST['detalhes'];
+$date = date("d/m/Y");
+$ano_letivo=date("Y");
+
+$sql_2 = "SELECT * FROM disciplinas WHERE id_disciplinas = '$dis'";
+$result_2 = mysqli_query($conexao, $sql_2);
+	while($res_2 = mysqli_fetch_assoc($result_2)){
+		$curso = $res_2['id_cursos'];
+		
+$verifica_busca="SELECT * FROM atividades_bimestrais where professor='$code' and id_curso='$curso' and bimestre='$bimestre' and ano_letivo='$ano_letivo'";
+$con_verifica=mysqli_query($conexao,$verifica_busca);
+if(mysqli_num_rows($con_verifica)==0){
+$sql_3 = "INSERT INTO atividades_bimestrais (data, status, professor,id_curso, id_disciplina, detalhes, bimestre,ano_letivo, data_aplicacao)
+ VALUES ('$date', 'Ativo', '$code', '$curso', '$dis', '$detalhes', '$bimestre', '$ano_letivo','$aplicacao')";
+mysqli_query($conexao, $sql_3);
+		
+$sql_4 = "INSERT INTO mural_aluno (date, status, curso, titulo,origem) VALUES ('$date', 'Ativo', '$curso', 'As notas das provas bimestrais estão sendo divulgadas','atividade avaliativa')";
+mysqli_query($conexao, $sql_4);
+
+echo "<script language='javascript'>window.alert('atividade cadastrada com sucesso! Click em OK para cadastrar outras! $code');window.location='cadastrar_atividades.php?tipo=atividade_bimestral&code=$code&selec=$selec';</script>";
+
+die;		
+}//fim if verifica
+else{
+echo "<script language='javascript'>window.alert('atividade ja existe! Click em OK para cadastrar outra!');window.location='cadastrar_atividades.php?tipo=atividade_bimestral&code=$code&selec=$selec';</script>";
+}
+}}?>

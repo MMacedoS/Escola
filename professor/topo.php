@@ -73,14 +73,14 @@ function refresh()
        $ano_letivo=date("Y");
        }
     ?> Seu código é:</strong> <?php echo @$code; ?>
-      Escolha uma <strong>Modalidade:</strong>
+      Escolha uma <strong>Categoria:</strong>
       <form name='incluir' ... />
        <select class="custom-select" name="selec" LANGUAGE="JAVASCRIPT" ONCHANGE="submit()" >
          <?php
              if (isset($_GET['selec'])){?>
              <option value="<?php echo $_GET['selec']; ?>"><?php echo $_GET['selec'];?></option>
              <?php } ?>
-         <option value="">nada selecionado</option>
+         <option value="">Selecione aqui.</option>
       <?php  
       $sql_busca_cur="SELECT DISTINCT cat.categoria,cat.id_categoria FROM disciplinas d inner join professores p on d.id_professores=p.id_professores inner join cursos c on d.id_cursos=c.id_cursos inner join categoria cat on c.id_categoria=cat.id_categoria where code='$code'";
        $con_busca_cur=mysqli_query($conexao,$sql_busca_cur);
@@ -111,7 +111,7 @@ function refresh()
                 
             </li>
               
-            <li> <a href="turmas_e_alunos.php">Turmas e Alunos</a>
+            <li> <a href="turmas_e_alunos.php?selec=nada selecionado">Turmas e Alunos</a>
                 
             </li>
             <li><a href="">Todas as Avaliações</a>
@@ -123,7 +123,7 @@ function refresh()
      <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<?php echo $_GET['selec']; ?>">Trabalhos/Atividades Praticas</a></li>
      <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec']; ?>">Provas</a></li>
      <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Lançar Nota Bimestre</a></li>
-     <li><a href="distribuicao.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
+     <li><a href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
     </ul>
      <?php 
      } elseif((isset($_GET['selec']))&&(($_GET['selec']=="ensino-medio-inicial")||($_GET['selec']=="fundamental-final"))){ ?>      
@@ -147,7 +147,7 @@ function refresh()
      <li><a href="todas_teste.php?pg=teste&selec=<?php echo $_GET['selec'];?>">Teste</a></li>
      <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec'];?>">Prova</a></li>
      <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Lançar Nota Bimestre</a></li>
-     <li><a href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Distribuição das Notas</a></li>
+     <li><a href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
      <!-- <li><a href="gerar_pdf.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Distribuição das Notas</a></li>  -->
     </ul>
       
@@ -159,7 +159,7 @@ function refresh()
     </script>
     <?php }  ?>
    </li>
-   <li><a href="suporte_tecnico.php?selec=<?php echo $_GET['selec'];?>">Suporte Escolar</a></li>
+   <li><a href="suporte_tecnico.php?selec=nada selecionado">Suporte Escolar</a></li>
         </ul>
         
 

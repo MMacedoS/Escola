@@ -1,61 +1,61 @@
-
-
-body{
+body {
     background: #ae1;
 }
 
-#logo{
+#logo {
     width: 350px;
     height: 247px;
     margin: auto;
 }
-#logo img{
+
+#logo img {
     width: 350px;
     height: 250px;
 }
-#caixa_login{
+
+#caixa_login {
     background: #ae1;
-     width: 450px;
+    width: 450px;
     height: 300px;
     margin: -35px auto;
     border: 1px solid #CCC;
-
     -webkit-margin: border radius 5px;
     -moz-margin: border radius 5px;
     -ms-margin: border radius 5px;
     -o-margin: border radius 5px;
     margin: border radius 5px;
     border-radius: 5px;
-    
-
 }
-#caixa_login table{
-    font: 15px Arial, Helvetica,sans-serif;
+
+#caixa_login table {
+    font: 15px Arial, Helvetica, sans-serif;
     color: #666;
     margin: 40px 10px 10px 10px;
 }
-#caixa_login h1{
-    font: 15px Arial, Helvetica,sans-serif;
+
+#caixa_login h1 {
+    font: 15px Arial, Helvetica, sans-serif;
     color: #666;
     margin: 10px 0px 0px 0px;
 }
-#caixa_login input{
-    font: 15px Arial, Helvetica,sans-serif;
+
+#caixa_login input {
+    font: 15px Arial, Helvetica, sans-serif;
     color: #F60;
     height: 25px;
     padding: 10px;
     width: 400px;
     border: 1px solid #CCC;
-
-   -webkit-margin: border radius 5px;
+    -webkit-margin: border radius 5px;
     -moz-margin: border radius 5px;
     -ms-margin: border radius 5px;
     -o-margin: border radius 5px;
     margin: border radius 5px;
     border-radius: 5px;
 }
-#caixa_login .input{
-    font: 15px Arial, Helvetica,sans-serif;
+
+#caixa_login .input {
+    font: 15px Arial, Helvetica, sans-serif;
     color: #FFF;
     height: 40px;
     padding: 10px;
@@ -64,21 +64,20 @@ body{
     width: 80px;
     margin: 10px 0 0 0;
     border: 1px solid #CCC;
-
-   -webkit-margin: border radius 5px;
+    -webkit-margin: border radius 5px;
     -moz-margin: border radius 5px;
     -ms-margin: border radius 5px;
     -o-margin: border radius 5px;
     margin: border radius 5px;
     border-radius: 5px;
 }
-#caixa_login .input:hover{
-   
+
+#caixa_login .input:hover {
     background: #060;
-    
 }
-#caixa_login h2{
-    font: 15px Arial, Helvetica,sans-serif;
+
+#caixa_login h2 {
+    font: 15px Arial, Helvetica, sans-serif;
     color: #FFF;
     background: #F60;
     text-align: center;
@@ -86,16 +85,15 @@ body{
     float: left;
     margin: 28px 0 10px 10px;
     border: 1px solid #CCC;
-
-   -webkit-margin: border radius 5px;
+    -webkit-margin: border radius 5px;
     -moz-margin: border radius 5px;
     -ms-margin: border radius 5px;
     -o-margin: border radius 5px;
     margin: border radius 5px;
     border-radius: 5px;
 }
-@media(max-width:700px){
 
+@media(max-width:700px) {
     #logo {
         width: 350px;
         height: 247px;
@@ -121,7 +119,7 @@ body{
         border-radius: 5px;
     }
     #caixa_login input {
-        font: 15px Arial, Helvetica,sans-serif;
+        font: 15px Arial, Helvetica, sans-serif;
         color: #F60;
         height: 25px;
         padding: 10px;
@@ -134,13 +132,15 @@ body{
         margin: border radius 5px;
         border-radius: 5px;
     }
-
 }
-@media(max-width:320px){
-    #caixa_login input {
-       
-        width: 100%;
-       
-    }
 
+@media(max-width:320px) {
+    #caixa_login input {
+        width: 100%;
+    }
+}
+
+.olho {
+    position: left;
+    width: 25px;
 }

@@ -8,11 +8,13 @@
     
     <title>Historico Professor</title>
     
-<link rel="shortcut icon" href="../image/logo_ist.gif">
-    <?php require_once("../control/conexao.php"); ?>
+
+    <?php $painel_atual="admin";
+    require_once("../config.php"); ?>
 </head>
 <body>
 <div id="box">
+  <h1>historico_do_professor</h1>
 <?php
 $id = $_GET['id'];
 

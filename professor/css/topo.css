@@ -1224,6 +1224,10 @@ table tbody {
     }
 }
 
+.form-control {
+    position: unset;
+}
+
 .div-responsive {
     display: block;
     width: 100%;

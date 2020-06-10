@@ -16,7 +16,7 @@
 <div id="caixa_preta">
 </div><!-- caixa_preta -->
 <?php if (!isset($_GET['selec'])) {
-  ?><script>alert('Escolha uma modalidade no botão acima');</script><?php
+  ?><script>alert('Se deseja acessar todas as avaliações para cadastrar e lançar notas, escolha uma categoria no botão acima ao lado do botão sair.');</script><?php
 }?>
 <div id="box">
 

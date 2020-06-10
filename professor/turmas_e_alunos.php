@@ -17,7 +17,7 @@
 <h1>Abaixo mostra seu histórico de disciplinas e alunos!</h1>
 <?php
 
- $sql_1 = "SELECT * FROM disciplinas WHERE id_professores = '$id_professor'";
+ $sql_1 = "SELECT d.*,c.curso FROM disciplinas d inner join cursos c on c.id_cursos=d.id_cursos WHERE id_professores = '$id_professor'";
  $result = mysqli_query($conexao, $sql_1);
 if(mysqli_num_rows($result) == ''){
 	echo "Você não ministra nenhuma disciplina!";
@@ -27,13 +27,13 @@ if(mysqli_num_rows($result) == ''){
 ?>	
  <table class="users" id="table-responsive" border="0">
   <tr>
-    <td width="400"><strong>Disciplina ministrada:</strong> <?php echo $res_1['disciplina']; ?></td>
+    <td width="400"><strong>Disciplina ministrada:</strong> <?php echo $res_1['disciplina'].' '.$res_1['curso'];; ?></td>
     <td width="300"><strong>Total de alunos desta disciplina:</strong><?php 
 	$sql_2 = "SELECT * from estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes where ce.id_cursos='$curso'";
 	echo mysqli_num_rows(mysqli_query($conexao, $sql_2)); ?></td>
     <td width="123">
     
-    <button id="button" type="button" color="red" onclick="window.location='fazer_chamada.php?curso=<?php echo base64_encode($res_1['id_cursos']); ?>&dis=<?php echo base64_encode($res_1['id_disciplinas']); ?>'">Realizar Chamada</button>
+    <button id="button" type="button" color="red" onclick="window.location='fazer_chamada.php?selec=selecioneaqui&curso=<?php echo base64_encode($res_1['id_cursos']); ?>&dis=<?php echo base64_encode($res_1['id_disciplinas']); ?>'">Realizar Chamada</button>
     
     </td>
   </tr>

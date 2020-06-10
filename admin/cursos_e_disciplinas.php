@@ -479,8 +479,17 @@
                
                 <tr>
                     <td>
-                    <select name="curso">
+                    <select name="curso" onchange="submit();">
                     <?php 
+                        if(@$_POST['curso']){
+                            $sql_rec_curso="select * from cursos where id_cursos=".$_POST['curso'];
+                            $result_rec_curso = mysqli_query($conexao,$sql_rec_curso);
+                            while($r2=mysqli_fetch_assoc($result_rec_curso)){
+                                ?>
+                                <option value="<?php echo $r2['id_cursos']; ?>"><?php echo $r2['curso'].' '.$r2['turno'];?></option>
+                                        <?php
+                                }
+                         }
                         $sql_rec_curso="select * from cursos";
                         $result_rec_curso = mysqli_query($conexao,$sql_rec_curso);
 
@@ -491,7 +500,17 @@
                     </select>
                     </td>
                     <td>
-                        <input type="text" name="disciplina" id="textfield">
+                    <select name="disciplina" >
+                    <?php 
+                    $l=$_POST['curso'];
+                        $sql_rec_dis="SELECT l.nome FROM lista_disc l inner JOIN cursos c on c.id_categoria=l.categoria where c.id_cursos='$l' order by l.nome asc";
+                        $result_rec_dis = mysqli_query($conexao,$sql_rec_dis);
+
+                            while($l2=mysqli_fetch_assoc($result_rec_dis)){
+                    ?>
+                    <option value="<?php echo $l2['nome']; ?>"><?php echo $l2['nome'];?></option>
+                            <?php  }?>
+                    </select>
                     </td>
                     <td width="143">
                         <select name="professor" >
@@ -577,8 +596,19 @@
               
                 <tr>
                     <td>
-                    <select name="curso">
-                    <?php $turma=$edit_disc['id_cursos'];
+                    <select name="curso" onchange="submit();">
+                    
+                    <?php
+                     if(@$_POST['curso']){
+                            $sql_rec_curso="select * from cursos where id_cursos=".$_POST['curso'];
+                            $result_rec_curso = mysqli_query($conexao,$sql_rec_curso);
+                            while($r2=mysqli_fetch_assoc($result_rec_curso)){
+                                ?>
+                                <option value="<?php echo $r2['id_cursos']; ?>"><?php echo $r2['curso'].' '.$r2['turno'];?></option>
+                                        <?php
+                                }
+                         }
+                         $turma=$edit_disc['id_cursos'];
                         $sql_busca_turma="select * from cursos where id_cursos='$turma'";
                         $con_busca_turma=mysqli_query($conexao,$sql_busca_turma);
                          while($res_busca_turma=mysqli_fetch_assoc($con_busca_turma)){
@@ -600,12 +630,27 @@
                     </select>
                     </td>
                     <td>
-                        <input type="text" name="disciplina" id="textfield" value="<?php echo $edit_disc['disciplina'];?>">
+                    <select name="disciplina" >
+                    <?php  
+                            ?>
+                            <option value="<?php echo $edit_disc['disciplina']; ?>"><?php echo $edit_disc['disciplina'];?></option> <?php
+                            
+                        ?>
+                    <?php 
+                    $l=$_POST['curso'];
+                        $sql_rec_dis="SELECT l.nome FROM lista_disc l inner JOIN cursos c on c.id_categoria=l.categoria where c.id_cursos='$l' order by l.nome asc";
+                        $result_rec_dis = mysqli_query($conexao,$sql_rec_dis);
+
+                            while($l2=mysqli_fetch_assoc($result_rec_dis)){
+                    ?>
+                    <option value="<?php echo $l2['nome']; ?>"><?php echo $l2['nome'];?></option>
+                            <?php  }?>
+                    </select>
                     </td>
                     <td width="143">
                         <select name="professor" >
-                        <?php $code=$edit_disc['professor']; 
-                            $sql_proc_prof="select nome,id_professores from professores where code='$code'";
+                        <?php $code=$edit_disc['id_professores']; 
+                            $sql_proc_prof="select nome,id_professores from professores where id_professores='$code'";
                             $con_proc_prof=mysqli_query($conexao,$sql_proc_prof);
                             while ($proc_prof=mysqli_fetch_assoc($con_proc_prof)){
                             ?>
@@ -634,19 +679,67 @@
         </div>
    <?php die;}} ?>
 
-   <!MOSTRAR AS DICIPLINAS NA TABELA>
+   <!-- <!MOSTRAR AS DICIPLINAS NA TABELA> -->
+
             <br/><br/>
                 <h1>Disciplina</h1>
-                <?php $sql_buscar_disc="select * from disciplinas";
-                $result_buscar_disc=mysqli_query($conexao,$sql_buscar_disc);
-                if(mysqli_num_rows($result_buscar_disc)==''){
+<form name="button" method="post" action="" enctype="multipart/form-data">
+<table class="users" id="table-responsive" border="0">
+  <tr>
+    <td ><strong>Professor</strong></td>
+    <td ><strong>Turma</strong></td>
+    <td >&nbsp;</td>
+  </tr>
+  <tr>
+    <td><input type="text" class="pesq" name="nome" value="" placeholder="pesquise o aluno..."></td>
+    <td>
+      <select name="turma" class="pesq" id="select2">
+      <?php if(isset($_GET['turma'])){
+        $t=$_GET['turma'];
+        ?> <option value="<?php echo $_GET['turma']; ?>"><?php $sql_2 = mysqli_query($conexao, "SELECT curso FROM cursos where id_cursos='$t'");
+	  	   while($res_2 = mysqli_fetch_assoc($sql_2)){ echo $res_2['curso'];}}?></option>
+      <?php
+      $sql_2 = mysqli_query($conexao, "SELECT * FROM cursos");
+	  	while($res_2 = mysqli_fetch_assoc($sql_2)){
+	  ?>
+       <option value="<?php echo $res_2['id_cursos']; ?>"><?php echo $res_2['curso']; ?></option>      
+       <?php } ?>
+      </select>
+    </td>
+    <td><input class="input" type="submit" name="button" id="button" value="Filtrar"></td>
+  </tr>
+</table>
+</form>
+<?php if(isset($_POST['button'])){
+
+$tipo = $_POST['nome'];
+$serie = $_POST['turma'];
+
+$s = base64_encode('filtro');
+
+echo "<script language='javascript'>window.location='cursos_e_disciplinas.php?pg=disciplina&s=$s&status=$tipo&turma=$serie';</script>";
+
+}?>
+                <?php 
+                // $s = base64_decode($_GET['s']);;
+                    if(isset($_GET['s'])){ 
+                        $tipo=$_GET['status'];
+                        $serie=$_GET['turma'];
+                        $s="select d.* from disciplinas d inner join cursos c ON c.id_cursos=d.id_cursos INNER JOIN professores p ON d.id_professores=p.id_professores where (p.nome like '%".$tipo."%' AND
+                        c.id_cursos='$serie') or c.id_cursos='$serie'";
+                        $sql_1 = mysqli_query($conexao, $s);
+                    }else{
+                        $s="SELECT d.* from disciplinas d inner join cursos c ON c.id_cursos=d.id_cursos INNER JOIN professores p ON d.id_professores=p.id_professores ORDER BY d.disciplina asc";
+                        $sql_1 = mysqli_query($conexao, $s);
+                    }
+                if(mysqli_num_rows($sql_1)==''){
                     echo "<h2>No momento não existe nenhuma disciplina cadastrada!</h2><br><br>";
                 }else{
                 ?>
                <table class="users" id="table-responsive" border="0">
                   
                     <tr>
-                        <td class="row-1 row-name"><strong>Curso:</strong></td>
+                        <td class="row-1 row-name"><strong>Turma:</strong></td>
                         <td class="row-2 row-name"><strong>Turno:</strong></td>
                         <td class="row-3 row-ID"><strong>Disciplina:</strong></td>
                         <td class="row-4 row-name" ><strong>Professor:</strong></td>
@@ -655,7 +748,7 @@
                         <td class="row-1 row-ID">&nbsp</td>
                     </tr>
                    
-                    <?php while($res_busca=mysqli_fetch_assoc($result_buscar_disc)){?>
+                    <?php while($res_busca=mysqli_fetch_assoc($sql_1)){?>
                     <tr>
                         <td class="row-name"><h3>
                           

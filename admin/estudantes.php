@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +18,7 @@
     <?php require_once("topo.php");
     
     ?>
+    <?php $agora = date('Y-m-d');?>
   <script>
     function is_cpf (c) {
 
@@ -94,21 +96,72 @@
         <br /><br />
         <div class="row">
             <a class="a2" href="estudantes.php?pg=cadastra&bloco=1">Cadastrar novo aluno </a>
-            <form class="form" method="post" action="estudantes.php?pg=todos">
+            <!-- <form class="form" method="post" action="estudantes.php?pg=todos">
                 <input type="text" class="pesq" name="nome" value="" placeholder="pesquise o aluno...">
                 <input class="pesq" type="submit" value="Pesquisar">
-            </form>
-        </div>
+            </form> -->
+        </div><form name="button" method="post" action="" enctype="multipart/form-data">
+<table class="users" id="table-responsive" border="0">
+  <tr>
+    <td ><strong>Estudante</strong></td>
+    <td ><strong>Turma</strong></td>
+    <td >&nbsp;</td>
+  </tr>
+  <tr>
+    <td><input type="text" class="pesq" name="nome" value="" placeholder="pesquise pelo nome..."></td>
+    <td>
+      <select name="turma" class="pesq" id="select2">
+      <?php if(isset($_GET['turma'])){
+        $t=$_GET['turma'];
+        ?> <option value="<?php echo $_GET['turma']; ?>"><?php $sql_2 = mysqli_query($conexao, "SELECT curso FROM cursos where id_cursos='$t'");
+	  	   while($res_2 = mysqli_fetch_assoc($sql_2)){ echo $res_2['curso'];}}?></option>
+      <?php
+      $sql_2 = mysqli_query($conexao, "SELECT * FROM cursos");
+	  	while($res_2 = mysqli_fetch_assoc($sql_2)){
+	  ?>
+       <option value="<?php echo $res_2['id_cursos']; ?>"><?php echo $res_2['curso']; ?></option>      
+       <?php } ?>
+      </select>
+    </td>
+    <td><input class="input" type="submit" name="button" id="button" value="Filtrar"></td>
+  </tr>
+</table>
+</form>
+<?php if(isset($_POST['button'])){
+
+$tipo = $_POST['nome'];
+$serie = $_POST['turma'];
+
+$s = base64_encode('filtro');
+
+echo "<script language='javascript'>window.location='estudantes.php?pg=todos&s=$s&status=$tipo&turma=$serie';</script>";
+
+}?>
         <h1>Alunos que estão cadastrados</h1>
         <?php
-if(isset($_POST['nome'])){
-  $pesquisa=$_POST['nome'];
-  $sql_1 = "SELECT * FROM estudantes WHERE  nome like '%".$pesquisa."%'  and status != 'encerrado' order by nome asc";
+if(isset($_GET['s'])){ 
+    $tipo=$_GET['status'];
+    $serie=$_GET['turma'];
+    $ano=Date('Y');
+    switch ($tipo) {
+        case '':
+            $s="SELECT * FROM estudantes e INNER JOIN cursos_estudantes ce on ce.id_estudantes=e.id_estudantes INNER JOIN cursos c on ce.id_cursos=c.id_cursos where ce.ano_letivo='$ano' AND c.id_cursos='$serie' order by e.nome asc";
+            $sql_1 = mysqli_query($conexao, $s);
+            break;
+        
+        default:
+            $s="SELECT * FROM estudantes e INNER JOIN cursos_estudantes ce on ce.id_estudantes=e.id_estudantes INNER JOIN cursos c on ce.id_cursos=c.id_cursos where ce.ano_letivo='$ano' AND e.nome like '%".$tipo."%' order by e.nome asc";
+            $sql_1 = mysqli_query($conexao, $s);
+            break;
+    }
+    
 }else{
-  $sql_1 = "SELECT * FROM estudantes WHERE  nome != '' and status != 'encerrado' order by nome asc";
+    $s="SELECT * FROM estudantes e INNER JOIN cursos_estudantes ce on ce.id_estudantes=e.id_estudantes INNER JOIN cursos c on ce.id_cursos=c.id_cursos ORDER BY e.nome asc";
+    $sql_1 = mysqli_query($conexao, $s);
 }
-$consulta = mysqli_query($conexao, $sql_1);
-if(mysqli_num_rows($consulta) == ''){
+$linhas=mysqli_num_rows($sql_1);
+if(mysqli_num_rows($sql_1)==''){
+    
 	echo "<h2>Não exisite nenhum aluno cadastrado no momento</h2>";
 }else{
 ?>
@@ -126,7 +179,9 @@ if(mysqli_num_rows($consulta) == ''){
             </tr>
 
 
-            <?php while($res_1 = mysqli_fetch_assoc($consulta)){ ?>
+            <?php while($res_1 = mysqli_fetch_assoc($sql_1)){
+                 
+                 ?>
             <tr>
                 <td class="row-email">
                     <h3><?php echo $res_1['status']; ?></h3>
@@ -197,9 +252,11 @@ if(mysqli_num_rows($consulta) == ''){
             </tr>
 
             <?php } ?>
-
+           
+    
+    
         </table>
-
+        <h1><strong> Total de usuarios buscado:</strong> <?php echo @$linhas;?></h1>
         <br />
         <?php } // aqui fecha a consulta ?>
 
@@ -288,11 +345,13 @@ $tel_residencial = $_POST['tel_residencial'];
 $cep = $_POST['cep'];
 $celular = $_POST['celular'];
 $usuario =$_POST['email'];
-$senha_rec=md5($cpf);
+$d=Date('d');
+$senha=$code.$d;
+$senha_rec=md5($senha);
 
 $sql_2 = "INSERT INTO estudantes (matricula, status, nome, cpf, email, nascimento, mae, pai, estado, cidade, bairro, endereco, complemento, cep, tel_residencial, celular) VALUES ('$code', 'Ativo', '$nome', '$cpf', '$email', '$nascimento', '$mae', '$pai', '$estado', '$cidade', '$bairro', '$endereco', '$complemento', '$cep', '$tel_residencial', '$celular')";
 
-$sql_login = "INSERT INTO login (status, code, senha,senha_rec, nome, painel) VALUES ('Ativo', '$code', '$cpf','$senha_rec', '$usuario', 'Aluno')";
+$sql_login = "INSERT INTO login (status, code, senha,senha_rec, nome, painel) VALUES ('Ativo', '$code', '$senha','$senha_rec', '$usuario', 'Aluno')";
 
 $cadastra = mysqli_query($conexao, $sql_2);
 if($cadastra){
@@ -354,11 +413,11 @@ echo "<script language='javascript'>window.alert('Dados cadastrados com sucesso!
 
                         </tr>
                         <td><label for="celular"></label>
-                            <input type="text" name="nome" class="form-control" id="textfield2"></td>
+                            <input type="text" name="nome" class="form-control" id="textfield2"required></td>
                         <td><label for="celular"></label>
-                            <input type="text" name="sobrenome" class="form-control" id="textfield2" required></td>
+                            <input type="text" name="sobrenome" class="form-control" id="textfield2"></td>
                         <td><label for="tel_amigo"></label>
-                        <input id="cpf" name="cpf" class="form-control" type="text" onkeyup="cpfCheck(this)" maxlength="18" onkeydown="javascript: fMasc( this, mCPF );"required> <span id="cpfResponse"></span>
+                        <input id="cpf" name="cpf" class="form-control" type="text" onkeyup="cpfCheck(this)" maxlength="18" onkeydown="javascript: fMasc( this, mCPF );"> <span id="cpfResponse"></span>
 
                             </tr>
                             <tr>
@@ -370,7 +429,7 @@ echo "<script language='javascript'>window.alert('Dados cadastrados com sucesso!
                                 <td><label for="tel_amigo"></label>
                                     <input type="email" class="form-control" name="email" id="textfield3" required></td>
                                 <td><label for="nascimento"></label>
-                                    <input type="date" class="form-control" name="nascimento" id="textfield4"></td>
+                                    <input type="date" class="form-control" name="nascimento" id="textfield4" value="<?php echo $agora;?>"></td>
                                 <td><label for="select"></label>
                                     <input type="text" class="form-control" name="mae" id="textfield12"></td>
 
@@ -517,8 +576,8 @@ else{?>
                             </td>
                             <td><label for="cuidado_especial"></label>
                                 <select name="cuidado_especial" size="1" id="cuidado_especial">
+                                    <option value="NAO">NÃO</option>
                                     <option value="SIM">SIM</option>
-                                    <option value="NÃO">NÃO</option>
                                 </select></td>
                         </tr>
                         <tr>
@@ -527,10 +586,15 @@ else{?>
                             <td>Telefone de cobrança:</td>
                         </tr>
                         <tr>
-                            <td><label for="mensalidade"></label>
+                            <td><label for="Mensalidade"></label>
                                 <input type="text" name="mensalidade" id="mensalidade"></td>
-                            <td><label for="vencimento"></label>
-                                <input type="text" name="vencimento" id="vencimento"></td>
+                                <td><label for="Vencimento"></label>
+                                <select name="vencimento" size="1" id="vencimento">
+                                    <option value="05">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="25">25</option>
+                                </select></td>
                             <td><label for="tel_cobranca"></label>
                                 <input type="text" name="tel_cobranca" id="tel_cobranca"></td>
                         </tr>

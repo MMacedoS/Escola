@@ -110,7 +110,9 @@
         </td>
         </tr>
         <tr>
-        <td><input type="password" name="password"></td>
+            
+        <td><img src="https://cdn0.iconfinder.com/data/icons/ui-icons-pack/100/ui-icon-pack-14-512.png" width="16px" id="olho" class="olho">
+        <input type="password" id="pass" name="password"></td>
         </tr>
         <tr>
         <td><input class="input"type="submit" name="button" value="Entrar"><p align="right"><a data-toggle="modal" data-target="#modal-senha" href="#">Esqueceu a senha? Recupere já!</a></p></td>
@@ -207,3 +209,27 @@ if(isset($_POST['recuperar-senha'])){
 
 }
 ?>
+<script>
+document.getElementById('olho').addEventListener('mousedown', function() {
+  document.getElementById('pass').type = 'text';
+});
+document.getElementById('olho_e').addEventListener('mousedown', function() {
+  document.getElementById('pass_e').type = 'text';
+});
+
+document.getElementById('olho').addEventListener('mouseup', function() {
+  document.getElementById('pass').type = 'password';
+});
+document.getElementById('olho_e').addEventListener('mouseup', function() {
+  document.getElementById('pass_e').type = 'password';
+});
+
+// Para que o password não fique exposto apos mover a imagem.
+document.getElementById('olho').addEventListener('mousemove', function() {
+  document.getElementById('pass').type = 'password';
+});
+// Para que o password não fique exposto apos mover a imagem.
+document.getElementById('olho_e').addEventListener('mousemove', function() {
+  document.getElementById('pass_e').type = 'password';
+});
+</script>

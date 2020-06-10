@@ -33,12 +33,15 @@
         <div id="box">
 
             <div align="center">
-                <h1>Distribuição de Notas</h1>
+                <h1>Gerar distribuição de Notas</h1>
+                <br>
                 <form action="" method="GET">
-                    Selecione uma disciplina:
-                    <select name="disciplina" id=""><?php 
+                   <div class="row">
+                       <div class="form-group">
+                    <label for="exampleFormControlInput1">Selecione uma Turma</label>
+                    <select name="disciplina" class="form-control col-sm-12"><?php 
                             $code=$_GET['code'];
-                            $sql_disc="SELECT d.id_disciplinas,d.disciplina,c.curso,c.id_cursos from disciplinas d INNER JOIN professores p on d.id_professores=p.id_professores INNER JOIN cursos c on c.id_cursos=d.id_cursos where p.code='$code'";
+                            $sql_disc="SELECT d.id_disciplinas,d.disciplina,c.curso,c.id_cursos,cat.categoria from disciplinas d INNER JOIN professores p on d.id_professores=p.id_professores INNER JOIN cursos c on c.id_cursos=d.id_cursos inner JOIN categoria cat on cat.id_categoria=c.id_categoria where p.code='$code'";
                             $con_disc=mysqli_query($conexao,$sql_disc);
                             while($res_dis=mysqli_fetch_assoc($con_disc)){
                             ?>
@@ -46,6 +49,20 @@
                             <?php echo $res_dis['disciplina']." ";?><?php echo $res_dis['curso']?></option>
                         <?php }?>
                     </select>
+                    </div>
+                    </div>
+                    <div class="row">
+                       <div class="form-group">
+                    <label for="exampleFormControlInput1">Selecione uma Situação</label>
+                    <select name="situacao" class="form-control col-sm-12">
+                            <option value="">Notas</option>
+                            <option value="ap">Aprovados</option>
+                            <option value="rp">Reprovados</option>
+                            <option value="ae">Aprovados por adição extra </option>
+                    </select>
+                    </div>
+                    </div>
+                    
 
                     <input type="hidden" name="code" value="<?php echo $_GET['code'];?>">
 
@@ -55,13 +72,72 @@
                 <?php 
 if(isset($_GET['button'])){
     // $go_to_url é o link do banner
+
 $disc=$_GET['disciplina'];
-$sql="select id_cursos from disciplinas where id_disciplinas='$disc'";
-$con=mysqli_query($conexao,$sql);
-while($res=mysqli_fetch_assoc($con)){
-    $curso=$res['id_cursos'];
+$situacao=$_GET['situacao'];
+switch ($situacao) {
+    case '':
+        $sql="SELECT c.id_cursos, cat.categoria,c.curso,d.disciplina from disciplinas d INNER join cursos c on d.id_cursos=c.id_cursos INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where id_disciplinas='$disc'";
+                $con=mysqli_query($conexao,$sql);
+                while($res=mysqli_fetch_assoc($con)){
+                    $curso=$res['id_cursos'];
+                    $ca=$res['categoria'];
+                    $nomec=$res['curso'];
+                    $nomed=$res['disciplina'];
+
+                }
+                switch ($ca) {
+                    case 'fundamental-inicial':
+                        echo "<script>window.open('rel_inicial.php?id=$disc&curso=$curso&nomed=$nomed&nomec=$nomec', '_blank');</script>";
+                        break;
+                        case 'fundamental-final':
+                            echo "<script>window.open('gerar_pdf.php?id=$disc&curso=$curso&nomed=$nomed&nomec=$nomec', '_blank');</script>";
+                            break;
+                            case 'ensino-medio-inicial':
+                                echo "<script>window.open('gerar_pdf.php?id=$disc&curso=$curso&nomed=$nomed&nomec=$nomec', '_blank');</script>";
+                                break;
+                                case 'ensino-medio-final':
+                                    echo "<script>window.open('rel_final.php?id=$disc&curso=$curso&nomed=$nomed&nomec=$nomec', '_blank');</script>";
+                                    break;
+                }
+        break;
+        case 'ap':
+            $sql="SELECT c.id_cursos, cat.categoria,c.curso,d.disciplina from disciplinas d INNER join cursos c on d.id_cursos=c.id_cursos INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where id_disciplinas='$disc'";
+            $con=mysqli_query($conexao,$sql);
+            while($res=mysqli_fetch_assoc($con)){
+                $curso=$res['id_cursos'];
+                $ca=$res['categoria'];
+                $nomec=$res['curso'];
+                $nomed=$res['disciplina'];
+
+            }
+                    echo "<script>window.open('rel_aluno.php?pg=ap&id=$disc&curso=$curso&nomed=$nomed&nomec=$nomec', '_blank');</script>";
+                
+            break;
+        case 'rp':
+                # code...
+                $sql="SELECT c.id_cursos, cat.categoria,c.curso,d.disciplina from disciplinas d INNER join cursos c on d.id_cursos=c.id_cursos INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where id_disciplinas='$disc'";
+            $con=mysqli_query($conexao,$sql);
+            while($res=mysqli_fetch_assoc($con)){
+                $curso=$res['id_cursos'];
+                $ca=$res['categoria'];
+                $nomec=$res['curso'];
+                $nomed=$res['disciplina'];
+
+            }
+                    echo "<script>window.open('rel_aluno.php?pg=rp&id=$disc&curso=$curso&nomed=$nomed&nomec=$nomec', '_blank');</script>";
+                
+                break;
+        case 'ae':
+                    # code...
+                    break;
+    
+    default:
+        # code...
+        break;
 }
-echo "<script>window.open('gerar_pdf.php?id=$disc&curso=$curso', '_blank');</script>";
+
+
 }
 ?>
                 <?php require "rodape.php"; ?>

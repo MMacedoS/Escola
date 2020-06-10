@@ -1,31 +1,29 @@
-*{
+* {
     margin: auto;
     padding: auto;
     max-width: 1350px;
-    
 }
-.menu{
-  
+
+.menu {
     width: 100%;
     height: 50px;
     background-color: rgb(0, 0, 0);
     font-family: Arial, Helvetica, sans-serif;
     margin-right: 50;
 }
- 
-.menu ul{
+
+.menu ul {
     list-style: none;
     position: relative;
-    
-
 }
-.menu ul li{
-   
+
+.menu ul li {
     width: 10rem;
     float: left;
     border-bottom: solid 1px #ccc;
 }
-.menu a{
+
+.menu a {
     padding: 15px;
     display: block;
     text-decoration: none;
@@ -33,30 +31,34 @@
     background-color: #222;
     color: #fff;
 }
-.menu ul ul{
+
+.menu ul ul {
     position: absolute;
     visibility: hidden;
     padding-left: 1px;
     background-color: #069;
 }
-.menu ul li:hover ul{
+
+.menu ul li:hover ul {
     visibility: visible;
 }
-.menu a:hover{
-   
- 
+
+.menu a:hover {
     background-color: #f4f4f4;
     color: #555;
     margin-left: 0;
 }
-.menu ul ul li{
+
+.menu ul ul li {
     float: none;
     border-bottom: solid 1px #ccc;
 }
-.menu ul ul li a{
+
+.menu ul ul li a {
     background-color: #069;
 }
-label[for="bt_menu"]{
+
+label[for="bt_menu"] {
     padding: 5px;
     background-color: #222;
     color: #fff;
@@ -66,40 +68,39 @@ label[for="bt_menu"]{
     cursor: pointer;
     height: 50px;
 }
-#bt_menu{
-    display: none;
 
-}
-label[for="bt_menu"]{
+#bt_menu {
     display: none;
 }
-@media(max-width:1350px){
-    label[for="bt_menu"]{
+
+label[for="bt_menu"] {
+    display: none;
+}
+
+@media(max-width:1360px) {
+    label[for="bt_menu"] {
         display: block;
     }
-    #bt_menu:checked ~ .menu{
+    #bt_menu:checked~.menu {
         margin-left: 0;
     }
-    .menu{
+    .menu {
         margin-top: 5px;
         margin-left: -100%;
         transition: all .4s;
     }
-    .menu ul li{
+    .menu ul li {
         width: 100%;
         float: none;
     }
-    .menu ul ul{
+    .menu ul ul {
         position: static;
         overflow: hidden;
         max-height: 0;
         transition: all 4s;
-
-
     }
-    .menu ul li:hover ul{
+    .menu ul li:hover ul {
         height: auto;
         max-height: 200px;
     }
-   
 }

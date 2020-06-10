@@ -10,15 +10,15 @@
     <title>Professores</title>
 
     <link rel="shortcut icon" href="../image/logo_ist.gif">
-    
 
-<link rel="stylesheet" href="../jquery.superbox.css" type="text/css" media="all" />
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-  
 
-	<script type="text/javascript" src="../jquery.superbox-min.js"></script>
-  
-  <script src="js/jquery.maskedinput-1.3.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../jquery.superbox.css" type="text/css" media="all" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+
+
+    <script type="text/javascript" src="../jquery.superbox-min.js"></script>
+
+    <script src="js/jquery.maskedinput-1.3.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -26,17 +26,45 @@
     <div id="caixa_preta">
     </div><!-- caixa_preta-->
 
-    <!exibir tabela de professores cadastrados>
+    <!-- <!exibir tabela de professores cadastrados> -->
 
         <?php if(@$_GET['pg']=='todos'){ ?>
         <div class="box_professores">
             <br /><br />
             <a class="a2" href="professores.php?pg=cadastra">Cadastrar Professor</a>
             <h1>Lista de Professores</h1>
+            <form name="button" method="post" action="" enctype="multipart/form-data">
+                <table class="users" id="table-responsive" border="0">
+                    <tr>
+                        <td><strong>Professor</strong></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="pesq" name="nome" value="" placeholder="pesquise o professor..."></td>
+                        
+                        <td><input class="input" type="submit" name="button" id="button" value="Filtrar"></td>
+                    </tr>
+                </table>
+            </form>
+            <?php if(isset($_POST['button'])){
+
+$tipo = $_POST['nome'];
+
+$s = base64_encode('filtro');
+
+echo "<script language='javascript'>window.location='professores.php?pg=todos&s=$s&status=$tipo';</script>";
+
+}?>
             <?php 
-            $sql="select * from professores where nome !=''";
-            $con=mysqli_query($conexao,$sql);
-            if(mysqli_num_rows($con)==''){
+                if(isset($_GET['s'])){ 
+                    $tipo=$_GET['status'];
+                    $s="SELECT * from professores where nome like '%".$tipo."%'";
+                    $sql_1 = mysqli_query($conexao, $s);
+                }else{
+                    $s="SELECT * from professores order by nome asc";
+                    $sql_1 = mysqli_query($conexao, $s);
+                }
+            if(mysqli_num_rows($sql_1)==''){
                 echo "No momento não existe professores cadastrados!";
             }else{
         ?>
@@ -49,7 +77,7 @@
                     <th>Status:</th>
                     <th></th>
                 </tr>
-                <?php while($res_1=mysqli_fetch_assoc($con)){
+                <?php while($res_1=mysqli_fetch_assoc($sql_1)){
                 $professor_id=$res_1['id_professores'];
                 ?>
                 <tr>
@@ -117,7 +145,7 @@
                 echo "<script language='javascript'>window.location='professores.php?pg='todos';</script>";
             }?>
                 <!-- <!ativar professor> -->
-                    <?php 
+                <?php 
                 if (@$_GET['func']=='ativa') {
                     $id=$_GET['id'];
                     $code=$_GET['code'];
@@ -133,8 +161,8 @@
             
             
             ?>
-                    <!inativar professor>
-                        <?php 
+                <!inativar professor>
+                    <?php 
                 if (@$_GET['func']=='inativa') {
                     $id=$_GET['id'];
                     $code=$_GET['code'];
@@ -414,19 +442,19 @@ enviar($usuario,$cpf);
                 <br />
             </div><!-- cadastra_professores -->
             <?php } ?>
-            
-<script>
-       (function( $ ) {
-            $(function() {
-              //$("#date").mask("99/99/9999");
-              //$("#phone").mask("(99) 999-9999");
-              //$("#cep").mask("99.999-99");
-              $("#cpf").mask("999.999.999-99");
-              
-            
-            });
-          })(jQuery);
-        </script>
+
+            <script>
+            (function($) {
+                $(function() {
+                    //$("#date").mask("99/99/9999");
+                    //$("#phone").mask("(99) 999-9999");
+                    //$("#cep").mask("99.999-99");
+                    $("#cpf").mask("999.999.999-99");
+
+
+                });
+            })(jQuery);
+            </script>
 
             <?php require_once("rodape.php");   ?>
 </body>

@@ -1,14 +1,14 @@
 <?php
-
+date_default_timezone_set('America/Sao_Paulo');
 function connectar(){
     // $servidor ="mysql873.umbler.com";
     // $usuario="kamaur";
     // $senha="kamaur2711";
     // $banco="ist";
-$servidor = 'mysql669.umbler.com';
-$usuario = 'ist';
-$senha = 'kamaur2711';
-$banco = 'escolaist';
+$servidor = 'localhost';
+$usuario = 'root';
+$senha = '';
+$banco = 'ist';
 
     $con= new mysqli($servidor,$usuario,$senha,$banco);
     return $con;
@@ -17,10 +17,10 @@ $conexao=connectar();
 
 //DADOS PARA CONEXÃO COM BANCO DE DADOS LOCAL
 
-$host = 'mysql669.umbler.com';
-$usuario = 'ist';
-$senha = 'kamaur2711';
-$banco = 'escolaist';
+$host = 'localhost';
+$usuario = 'root';
+$senha = '';
+$banco = 'ist';
 
 
 //DADOS PARA CONEXÃO COM BANCO DE DADOS HOSPEDADA
@@ -39,10 +39,10 @@ $opcao3 = 10;
 
 //VARIAVEL PARA DEFINIR O CAMINHO DO SISTEMA
 // $url_sistema = 'http://sistemapdvteste-com-br.umbler.net';
-$url_sistema = 'https://escolaisttucano.com.br';
+$url_sistema = 'http://mmsescolar.com.br';
 // $url_sistema = 'http://garradeaguia-com-br.umbler.net';
 
-$email_adm = 'adm@escolaisttucano.com.br';
+$email_adm = 'mauricio.jorro@hotmail.com';
 
 $cidade = 'Bahia';
 

@@ -51,67 +51,83 @@ else{
 echo "<script language='javascript'>window.alert('atividade ja existe! Click em OK para cadastrar outra!');window.location='cadastrar_teste.php?tipo=teste&code=$code&selec=$selec';</script>";
 }
 }}?>
-<form name="send" method="post" action="" enctype="multipart/form-data">	
-	
 
-  
-  <div class="row">
-            <div class="col-md-4 col-sm-12">
-              <div class="form-group">
-                <label for="exampleFormControlInput1">Disciplina e Turma</label>
-        <select name="dis" id="dis">
-        <?php
-        $sql_busca_nome="select nome,id_professores from professores where code='$c'";
-      $con_busca_nome=mysqli_query($conexao,$sql_busca_nome);
-      while($res_busca_nome=mysqli_fetch_assoc($con_busca_nome)){
-        
-         $id_professor=$res_busca_nome['id_professores'];
-         $ano_letivo=date("Y");
-         }
-  
-       $sql_1 = "SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner JOIN categoria cat on c.id_categoria=cat.id_categoria WHERE id_professores='$id_professor' and cat.categoria='$selec'";
-      $result = mysqli_query($conexao, $sql_1);
-        while($res_1 = mysqli_fetch_assoc($result)){
-      ?>
-        <option value="<?php echo $res_1['id_disciplinas']; ?>"><?php echo $res_1['disciplina']." <|> ".$res_1['curso']; ?></option>
-        <?php } ?>
-        </select>
-        </div>
-            </div>
-            <div class="col-md-4 col-sm-12">
-              <div class="form-group">
-                <label for="exampleFormControlInput1">Bimestre</label>     
-          
-      <select name="bimestre" size="1">
-       <?php $buscaUnidade="SELECT * FROM unidades ";
-       $conUnidade=mysqli_query($conexao,$buscaUnidade);
-       while($resUnidade=mysqli_fetch_assoc($conUnidade)){
-       ?>
-        <option value="<?php echo $resUnidade['unidade'];?>"><?php echo $resUnidade['unidade'];?>&ordm; Bimestre</option>
-       <?php } ?>
-      </select>
-      </div>
-  </div>
-  <div class="col-md-4 col-sm-12">
-              <div class="form-group">
-                <label for="exampleFormControlInput1">Data da aplicação</label>
-                <input type="text" name="aplicacao" value="<?php echo date("d/m/Y"); ?>">
-  </div>
-  </div>
-  </div>
-  <div class="col-md-4 col-sm-12">
-              <div class="form-group">
-                <label for="exampleFormControlInput1">Informações adicionais</label>
-                <textarea name="detalhes" cols="" rows="" value="<?php echo $sql_1;?>"></textarea>
-                </div>
-  </div>
-  <div class="col-md-4 col-sm-12">
-              <div class="form-group">
-              <input class="input" type="submit" name="button" id="button" value="Cadastrar">
-              </div>
-  </div>
-  
-    </form>
+<form name="send" method="post" action="" enctype="multipart/form-data">	
+ 
+ 
+<div class="row">
+         <div class="col-md-4 col-sm-12">
+           <div class="form-group">
+             <label for="exampleFormControlInput1">Disciplina e Turma</label>
+     <select name="dis" id="dis" onchange="submit();">
+     
+     <?php
+      if($_POST['dis']!=''){
+       $sql_rec_curso="SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner JOIN categoria cat on c.id_categoria=cat.id_categoria WHERE cat.categoria='$selec' and d.id_disciplinas=".$_POST['dis'];
+       $result_rec_curso = mysqli_query($conexao,$sql_rec_curso);
+       while($r2=mysqli_fetch_assoc($result_rec_curso)){
+           ?>
+           <option value="<?php echo $r2['id_disciplinas']; ?>"><?php echo $r2['disciplina'].' '.$r2['curso'];?></option>
+                   <?php
+           }
+    }else {
+      echo '<option value="">Selecione uma disciplina</option>';
+    }
+     $sql_busca_nome="select nome,id_professores from professores where code='$c'";
+
+   $con_busca_nome=mysqli_query($conexao,$sql_busca_nome);
+   while($res_busca_nome=mysqli_fetch_assoc($con_busca_nome)){
+     
+      $id_professor=$res_busca_nome['id_professores'];
+      $ano_letivo=date("Y");
+      }
+     
+    $sql_1 = "SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner JOIN categoria cat on c.id_categoria=cat.id_categoria WHERE id_professores='$id_professor' and cat.categoria='$selec'";
+   $result = mysqli_query($conexao, $sql_1);
+     while($res_1 = mysqli_fetch_assoc($result)){
+   ?>
+     <option value="<?php echo $res_1['id_disciplinas']; ?>"><?php echo $res_1['disciplina']." <|> ".$res_1['curso']; ?></option>
+     <?php } ?>
+     </select>
+     </div>
+         </div>
+         <div class="col-md-4 col-sm-12">
+           <div class="form-group">
+             <label for="exampleFormControlInput1">Bimestre</label>     
+       
+   <select name="bimestre" size="1">
+    <?php 
+    $d=@$_POST['dis'];
+    $buscaUnidade="SELECT * FROM unidades where unidade not in (select bimestre from avaliacao_teste where id_disciplina='$d' )";
+    $conUnidade=mysqli_query($conexao,$buscaUnidade);
+    while($resUnidade=mysqli_fetch_assoc($conUnidade)){
+    ?>
+     <option value="<?php echo $resUnidade['unidade'];?>"><?php echo $resUnidade['unidade'];?>&ordm; Bimestre</option>
+    <?php } ?>
+   </select>
+   </div>
+</div>
+<div class="col-md-4 col-sm-12">
+           <div class="form-group">
+             <label for="exampleFormControlInput1">Data da aplicação</label>
+             <input type="text" name="aplicacao" value="<?php echo date("d/m/Y"); ?>">
+</div>
+</div>
+</div>
+<div class="col-md-4 col-sm-12">
+           <div class="form-group">
+             <label for="exampleFormControlInput1">Informações adicionais</label>
+             <textarea name="detalhes" cols="" rows="" value="<?php echo $sql_1;?>"></textarea>
+             <input type="hidden" name="code" value="<?php echo $code;?>">
+             </div>
+</div>
+<div class="col-md-4 col-sm-12">
+           <div class="form-group">
+           <input class="input" type="submit" name="button" id="button" value="Cadastrar">
+           </div>
+</div>
+
+ </form>
 <?php } ?>
 </div><!-- box -->
 

@@ -101,7 +101,7 @@ if(mysqli_num_rows($result_2) == ''){
 	if(mysqli_num_rows($result_4) == ''){
 	?>
     <td><input name="nota" type="text" id="nota" size="6" disabled></td>
-    <td><input type="submit" name="button" id="button" value="Concretizar" onclick="alert('Insirindo nota ')"></td>
+    <td><input type="submit" name="button" id="button" value="Concretizar" onclick="alert('inserindo nota ')"></td>
 
     <?php }else{ while($res_4 = mysqli_fetch_assoc($result_4 )){ ?>
     <td><h3><?php echo $res_4['nota']; ?></h3></td>
