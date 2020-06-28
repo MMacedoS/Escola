@@ -16,6 +16,7 @@ window.print()
 <H1>Lista de Alunos</H1>
 <?php 
 $painel_atual="admin";
+header('Content-Type: text/html; charset=utf-8');
 require "../config.php"; 
 
 $s = base64_decode($_GET['s']);

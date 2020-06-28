@@ -7,8 +7,7 @@
 
 
 <link rel="shortcut icon" href="../image/logo_ist.gif">
-<title>Painél do Aluno</title>
-<link rel="stylesheet" type="text/css" href="css/index.css"/>
+<title>Painel do Aluno</title>
 </head>
 
 <body>
@@ -26,15 +25,15 @@ $ano=Date('Y');
     <h1><strong>Frequência Escolar</strong> </h1>
     <li><strong>Presenças:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE matricula = '$code' AND presente = 'SIM' and ano_letivo='$ano'")); ?></li>
     <li><strong>Faltas justificadas:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE  matricula = '$code' AND presente = 'JUSTIFICADA' and ano_letivo='$ano'")); ?></li>
-    <li><strong>Faltas não justificada:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE  matricula = '$code' AND presente = 'NAO' and ano_letivo='$ano'")) / 3; ?></li>
+    <li><strong>Faltas não justificada:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE  matricula = '$code' AND presente = 'Falta' and ano_letivo='$ano'")); ?></li>
    </ul>
    </div>
   
     <div class="card-2">
    <ul>
     <h1><strong>Setor Financeiro</strong></h1>
-    <li><strong>Pagamento(s) confirmado(s):</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM mensalidades WHERE matricula = '$code' AND status = 'Pagamento Confirmado'")); ?></li>
-    <li><strong>Cobrança ainda não quitadas:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM mensalidades WHERE matricula = '$code' AND status = 'Aguarda Pagamento'")); ?></li>
+    <li><strong>Pagamento(s) confirmado(s):</strong>  <?php //echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM mensalidades WHERE matricula = '$code' AND status = 'Pagamento Confirmado'")); ?></li>
+    <li><strong>Cobrança ainda não quitadas:</strong>  <?php //echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM mensalidades WHERE matricula = '$code' AND status = 'Aguarda Pagamento'")); ?></li>
    </ul> 
    </div>
  <div class="card-3">

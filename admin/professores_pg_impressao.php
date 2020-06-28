@@ -15,7 +15,7 @@ window.print()
 <H1> <center> Lista de Professores</center></H1>
 <div id="box">
 <?php
-$painel_atual="admin";
+$painel_atual="admin"; header('Content-Type: text/html; charset=UTF-8');
 require "../config.php"; 
 
 $s = base64_decode($_GET['s']);

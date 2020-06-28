@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<?php require "topo.php"; ?>
+<?php header('Content-Type: text/html; charset=UTF-8'); require "topo.php"; ?>
 <div id="caixa_preta">
 </div><!-- caixa_preta -->
 

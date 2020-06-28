@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="with=device-width,initial-scale=1">
 <link rel="shortcut icon" href="../image/logo_ist.gif">
-<title>Painél do Professor</title>
+<title>Administração do Professor</title>
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
 </head>
 
@@ -16,7 +16,14 @@
 <div id="caixa_preta">
 </div><!-- caixa_preta -->
 <?php if (!isset($_GET['selec'])) {
-  ?><script>alert('Se deseja acessar todas as avaliações para cadastrar e lançar notas, escolha uma categoria no botão acima ao lado do botão sair.');</script><?php
+  ?>
+  <div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">Atenção!</h4>
+  <p>Se deseja acessar todas as avaliações para cadastrar e lançar notas, escolha uma categoria no botão acima ao lado do botão sair.</p>
+  <hr>
+  
+</div>
+  <?php
 }?>
 <div id="box">
 

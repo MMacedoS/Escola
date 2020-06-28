@@ -34,10 +34,10 @@ $con_busca=mysqli_query($conexao,$busca_prova);
 while($res_busca=mysqli_fetch_assoc($con_busca)){
 $disciplina=$res_busca['id_disciplina'];}?>
 <?php 
-$buscaDis="SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos WHERE d.id_disciplinas='$disciplina'";
+$buscaDis="SELECT l.nome,c.curso FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner join lista_disc l on d.disciplina=l.id_lista WHERE d.id_disciplinas='$disciplina'";
 $conDis=mysqli_query($conexao,$buscaDis);
 while($resDis=mysqli_fetch_assoc($conDis)){
-  $disc=$resDis['disciplina'];
+  $disc=$resDis['nome'];
   $curso=$resDis['curso'];
 }
  ?>
@@ -48,15 +48,17 @@ function setFocus() {
 </script> 
 <div id="caixa_preta">
 </div><!-- caixa_preta -->
+
 <div id="box" onLoad="setFocus()">
 <div class="div-responsive">
 <br>
 <h1><a class="a3" rel="stylesheet" href="correcao_atividades.php?pg=atividade_bimestral&selec=<?php echo $selec; ?>&id=<?php echo $id; ?>">Atualizar Pagina</a></h1>
 <br>
- <h1>Abaixo segue a lista dos alunos desta disciplina:  <?php echo $disc."  ".$curso;?>.       <h1>LANÇAR NOTA TAREFAS/ATIVIDADES:</h1></h1>
-
-
-<?php
+ <h1>Abaixo, segue os alunos desta disciplina:  <?php echo $disc."  ".$curso;?>.       <h1>Lançar a nota da 1ª Ava</h1></h1>
+ <?php if(isset($_GET['r'])){
+  echo '<div class="alert alert-primary" role="alert">
+Nota inserida!
+</div>';} 
 
 $sql_1 = "SELECT * FROM atividades_bimestrais WHERE id_ativ_bim = '$id'";
 $result = mysqli_query($conexao, $sql_1);
@@ -69,7 +71,7 @@ $result = mysqli_query($conexao, $sql_1);
 $sql_2 = "SELECT * FROM estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes WHERE ce.id_cursos = '$curso' and ce.ano_letivo='$ano' order by e.nome asc";
 $result_2 = mysqli_query($conexao, $sql_2);
 if(mysqli_num_rows($result_2) == ''){
-	echo "<h2>Nem um aluno cadastrado neste curso</h2>";
+  echo '<h2><font color="blue">não possui alunos cadastrados nesta turma</font></h2>';
 }else{
 		while($res_2 = mysqli_fetch_assoc($result_2)){
 ?> 
@@ -133,38 +135,135 @@ $date=Date('Y');
 //   }
 //   	$prova = "[".$a."]".$prova;
 //  }
+switch ($bimestre) {
+  case '1':
+    # code...
+    if(($nota>3 && $_GET['selec']!="1")){
+      ?>
+      <script>
+        alert('Nota Maxima 3.0 para este trabalho');
+      </script>
+      <?php
+      echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
+    }elseif($nota>2 && $_GET['selec']=="1"){ ?>
+      <script>
+        alert('Nota Maxima 2.0 para esta atividade');
+      </script>
+      <?php
+      echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
+      }else{
+              $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'";
+              $result_verifica = mysqli_query($conexao, $sql_verifica);
+                  if(mysqli_num_rows($result_verifica)==0){
+                  $sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', '$id','$date')";
+                   mysqli_query($conexao, $sql_3);
+                          $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades estão sendo divulgadas','tarefas')";
+                          mysqli_query($conexao, $sql_4);
+            //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+     
+                      echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id&r';</script>";
+                      }else{
+                          ?>
+                          <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+                          <?php
+                      }
+       }
+    break;
+    case '2':
+      # code...
+      if(($nota>2 && $_GET['selec']!="1")){
+        
+        ?><script>
+        alert('Nota Maxima 2.0 para este trabalho');
+      </script><?php
+       
+        echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
+        
+    }else{
+              $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'";
+              $result_verifica = mysqli_query($conexao, $sql_verifica);
+                  if(mysqli_num_rows($result_verifica)==0){
+                  $sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', '$id','$date')";
+                   mysqli_query($conexao, $sql_3);
+                          $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades estão sendo divulgadas','tarefas')";
+                          mysqli_query($conexao, $sql_4);
+            //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+     
+                      echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id&r';</script>";
+                      }//if mysqli
+                      else{
+                          ?>
+                          <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+                          <?php
+                      }///else mysqli
+      }
+      break;
+      case '3':
+        # code...
+        if(($nota>2 && $_GET['selec']!="1")){
+          ?>
+          <script>
+            alert('Nota Maxima 2.0 para este trabalho');
+          </script>
+          <?php
+          echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
+      }else{
+                $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'";
+                $result_verifica = mysqli_query($conexao, $sql_verifica);
+                    if(mysqli_num_rows($result_verifica)==0){
+                    $sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', '$id','$date')";
+                     mysqli_query($conexao, $sql_3);
+                            $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades estão sendo divulgadas','tarefas')";
+                            mysqli_query($conexao, $sql_4);
+              //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+       
+                        echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id&r';</script>";
+                        }//if mysqli
+                        else{
+                            ?>
+                            <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+                            <?php
+                        }///else mysqli
+        }
+        break;
+        case '4':
+          # code...
+          if(($nota>2 && $_GET['selec']!="1")){
+            ?>
+            <script>
+              alert('Nota Maxima 2.0 para este trabalho');
+            </script>
+            <?php
+            echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
+        }else{
+                  $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'";
+                  $result_verifica = mysqli_query($conexao, $sql_verifica);
+                      if(mysqli_num_rows($result_verifica)==0){
+                      $sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', '$id','$date')";
+                       mysqli_query($conexao, $sql_3);
+                              $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades estão sendo divulgadas','tarefas')";
+                              mysqli_query($conexao, $sql_4);
+                //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+         
+                          echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id&r';</script>";
+                          }//if mysqli
+                          else{
+                              ?>
+                              <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+                              <?php
+                          }///else mysqli
+          }
+          break;
+  
+}
+if($bimestre!=1){
 
-if(($nota>1 && $_GET['selec']!="fundamental-inicial")){
-  ?>
-  <script>
-    alert('Nota Maxima 1.0 para este trabalho');
-  </script>
-  <?php
-  echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
-}elseif($nota>2 && $_GET['selec']=="fundamental-inicial"){ ?>
-  <script>
-    alert('Nota Maxima 2.0 para esta atividade');
-  </script>
-  <?php
-  echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
-  }else{
- $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'";
-$result_verifica = mysqli_query($conexao, $sql_verifica);
-if(mysqli_num_rows($result_verifica)==0){
-$sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', '$id','$date')";
- mysqli_query($conexao, $sql_3);
-$sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades estão sendo divulgadas','tarefas')";
-mysqli_query($conexao, $sql_4);
-//  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
- 
- echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
-}else{
-    ?>
-    <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
-    <?php
-}
-}
-}
+}///if do bimestre 
+else{
+  ///else de veirifacação de vlor de nota
+}//else de fim de bimestre
+
+}///primeiro if
 ?> 
 <script>
        (function( $ ) {

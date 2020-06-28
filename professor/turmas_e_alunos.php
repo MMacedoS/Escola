@@ -14,10 +14,10 @@
 </div><!-- caixa_preta -->
 
 <div id="box">
-<h1>Abaixo mostra seu histórico de disciplinas e alunos!</h1>
+<h1>Abaixo, observa-se seu histórico de disciplinas e alunos!</h1>
 <?php
 
- $sql_1 = "SELECT d.*,c.curso FROM disciplinas d inner join cursos c on c.id_cursos=d.id_cursos WHERE id_professores = '$id_professor'";
+ $sql_1 = "SELECT d.*,c.curso FROM disciplinas d inner join cursos c on c.id_cursos=d.id_cursos WHERE id_professores = '$id_professor' order by c.id_categoria asc";
  $result = mysqli_query($conexao, $sql_1);
 if(mysqli_num_rows($result) == ''){
 	echo "Você não ministra nenhuma disciplina!";
@@ -27,8 +27,15 @@ if(mysqli_num_rows($result) == ''){
 ?>	
  <table class="users" id="table-responsive" border="0">
   <tr>
-    <td width="400"><strong>Disciplina ministrada:</strong> <?php echo $res_1['disciplina'].' '.$res_1['curso'];; ?></td>
-    <td width="300"><strong>Total de alunos desta disciplina:</strong><?php 
+    <td width="400"><strong>Disciplina ministrada:</strong> <?php $b_disc=$res_1['disciplina'];
+      $buscar_d="SELECT l.id_lista,l.nome,c.categoria FROM lista_disc l inner join categoria c on c.id_categoria=l.categoria where l.id_lista='$b_disc'";
+      $busca_con=mysqli_query($conexao,$buscar_d);
+      while($busca_r=mysqli_fetch_assoc($busca_con)){
+        echo $busca_r['nome'];
+        
+    echo ' '.$res_1['curso']; 
+    echo ' '.$busca_r['categoria'];  } ?></td>
+    <td width="300"><strong>Total de alunos:</strong><?php 
 	$sql_2 = "SELECT * from estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes where ce.id_cursos='$curso'";
 	echo mysqli_num_rows(mysqli_query($conexao, $sql_2)); ?></td>
     <td width="123">

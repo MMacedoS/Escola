@@ -3,7 +3,7 @@ require_once("Control/conexao.php");
 @session_start();
 
 if(empty($_POST['usuario']) || empty($_POST['senha'])){
-	header("location:index.php");
+	header("Location: index.php?login=0");
 }
 
 $usuario = $_POST['nome'];
@@ -20,55 +20,65 @@ $dados = $res->fetchAll(PDO::FETCH_ASSOC);
 $linhas = count($dados);
 
 
-
-if($linhas > 0){
+if($senha==$dados[0]['senha']){
+	if($linhas > 0){
 	
-	$_SESSION['code']=$dados[0]['code'];;
-    $_SESSION['nome']=$dados[0]['nome'];
-    $_SESSION['painel']=$dados[0]['painel'];
+		$_SESSION['code']=$dados[0]['code'];;
+		$_SESSION['nome']=$dados[0]['nome'];
+		$_SESSION['painel']=$dados[0]['painel'];
+		$tempolimite=1600;
+		$_SESSION['registro']=time();
+		$_SESSION['limite']=$tempolimite;
+		
+		switch ($_SESSION['painel']) {
+			
+				case 'admin':
+				
+					header("location:admin/index.php");
+						break;
+			
+						case 'Aluno':
+				
+							header("location:aluno/aluno.html");
+								break;
+			
+								case 'professor':
+				
+									header("location:professor/index.php");
+										break;
+			
+										case 'secretaria':
+				
+											header("location:secretaria/index.php");
+												break;
+												case 'tesouraria':
+				
+													header("location:tesouraria/index.php");
+														break;
 
-	if($_SESSION['painel'] == 'admin'){
-		header("location:admin/index.php");
-		exit();
-	}
-
-	if($_SESSION['painel'] == 'Aluno'){
-		header("location:aluno/aluno.html");
-		exit();
-	}
-
-	if($_SESSION['painel'] == 'professor'){
-		header("location:professor/index.php");
-		exit();
-	}
-
-	if($_SESSION['painel'] == 'secretaria'){
-		header("location:secretaria/index.php");
-		exit();
-	}
-
-
-	if($_SESSION['painel'] == 'tesouraria'){
-		header("location:tesouraria/index.php");
-		exit();
-	}
-
-
-
-	if($_SESSION['painel'] == 'portaria'){
-		header("location:portaria/tela.php");
-		exit();
-	}
-
-
-
-
-	
+														case 'Coordenacao':
+				
+															header("location:coordenacao/index.php");
+																break;
+											
+			
+			default:
+				# code...
+				break;
+		}
+				
+	}else{
+		// echo "<script language='javascript'>window.alert('Dados Incorretos!!'); </script>";
+		// echo "<script language='javascript'>window.location='index.php?login'; </script>";
+		header("Location: index.php?login=1");
+		
+	} 
 }else{
-	echo "<script language='javascript'>window.alert('Dados Incorretos!!'); </script>";
-	echo "<script language='javascript'>window.location='index.php'; </script>";
-	
-} 
+	// echo "<script language='javascript'>window.alert('Dados Incorretos!!'); </script>";
+	// echo "<script language='javascript'>window.location='index.php?login'; </script>";
+	header("Location: index.php?login=1");
+}
+
 
 
  ?>

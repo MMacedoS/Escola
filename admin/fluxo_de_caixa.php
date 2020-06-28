@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<?php require "topo.php"; $data=date('d/m/Y H:i:s');?>
+<?php require header('Content-Type: text/html; charset=UTF-8');"topo.php"; $data=date('d/m/Y H:i:s');?>
 <div id="caixa_preta">
 </div><!-- caixa_preta -->
 

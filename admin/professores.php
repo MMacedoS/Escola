@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <?php require_once("topo.php");   ?>
+    <?php header('Content-Type: text/html; charset=UTF-8'); require_once("topo.php");   ?>
     <title>Professores</title>
 
     <link rel="shortcut icon" href="../image/logo_ist.gif">

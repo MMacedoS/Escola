@@ -1,13 +1,15 @@
 <?php 
 $painel_atual="admin";
-require_once "../config.php";
+require_once "../config.php"; 
+header('Content-Type: text/html; charset=UTF-8');
 require "../gerador_cobranca.php"; 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="pt-br">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″>
 <meta name="viewport" content="with=device-width,initial-scale=1">
 
 <link rel="shortcut icon" href="../image/logo_ist.gif">
@@ -71,11 +73,13 @@ require "../gerador_cobranca.php";
                 
             </li>
               
-            <li> <a href="">Turmas e Disciplinas</a>
+            <li> <a href="">Serviços</a>
                 <ul>
+                    <li><a href="cursos_e_disciplinas.php?pg=cad_disc">Cadastrar Disciplina</a></li>                    
                     <li><a href="cursos_e_disciplinas.php?pg=curso">Cadastrar Turma</a></li>
-                    <li><a href="cursos_e_disciplinas.php?pg=disciplina">Cadastrar Disciplina</a></li>
+                    <li><a href="cursos_e_disciplinas.php?pg=disciplina">Professor e Disciplina</a></li>
                     <li><a href="cursos_e_disciplinas.php?pg=cursoedisciplinas">Cursos & Disciplinas</a></li>
+                    <li><a href="cursos_e_disciplinas.php?pg=unidade">Criar Bimestres</a></li>
                 </ul>
             </li>
             <li><a href="professores.php?pg=todos">Professores</a></li>  

@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="css/mostrar_resultado.css"/>
 <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/> -->
  <?php $painel_atual="admin";
-    require_once("../config.php"); $ano=Date('Y'); ?>
+    header('Content-Type: text/html; charset=UTF-8'); require_once("../config.php"); $ano=Date('Y'); ?>
 </head>
 
 <body>
@@ -203,9 +203,14 @@ $sql_1 = mysqli_query($conexao, "SELECT * FROM estudantes WHERE matricula = '$q'
 
 <table width="750" border="0">
   <tr>
-    <td colspan="5"><h1>Informações acadêmicas</h1></td>
+    <td colspan="5"><h1>Informações Escolares</h1>
+    <h2>Frequências</h2>
+    </td>
+   
   </tr>
   <tr>
+  <hr>
+    
     <td width="208"><strong>Presenças:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE matricula = '$q' and ano_letivo='$ano' AND presente = 'SIM' ")); ?></td>
     <td colspan="2"><strong>Faltas:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE matricula = '$q' and ano_letivo='$ano' AND presente = 'NÃO' ")); ?></td>
     <td colspan="2"><strong>Faltas justificadas:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE matricula = '$q' and ano_letivo='$ano' AND presente = 'JUSTIFICADA' ")); ?></td>
@@ -264,12 +269,12 @@ $sql_1 = mysqli_query($conexao, "SELECT * FROM estudantes WHERE matricula = '$q'
   </tr>
  <?php
  $curso = $_GET['curso'];
- $sql_3 = mysqli_query($conexao, "SELECT * FROM disciplinas WHERE id_cursos = '$curso'");
+ $sql_3 = mysqli_query($conexao, "SELECT l.nome,d.id_disciplinas,c.curso FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner join lista_disc l on d.disciplina=l.id_lista  WHERE c.id_cursos = '$curso'");
  	while($res_3 = mysqli_fetch_assoc($sql_3)){
 		$disciplina = $res_3['id_disciplinas'];
  ?> 
   <tr>
-    <td><?php echo $res_3['disciplina']; ?></td>
+    <td><?php echo $res_3['nome']; ?></td>
     <td>
     <?php
      $sql_4 = mysqli_query($conexao, "SELECT * FROM notas_bimestres WHERE bimestre = '1' AND id_disciplinas = '$disciplina' AND code = '$q'");			
@@ -370,7 +375,7 @@ $sql_5 = mysqli_query($conexao, "SELECT * FROM mensalidades WHERE matricula = '$
   <tr>
     <td><?php echo $res_5['code']; ?></td>
     <td><?php echo $res_5['status']; ?></td>
-    <td>R$ <?php echo number_format($res_5['valor'],2); ?></td>
+    <td>R$ <?php echo number_format(@$res_5['valor'],2); ?></td>
     <td><?php echo $res_5['data_pagamento']; ?></td>
     <td><?php echo $res_5['metodo_pagamento']; ?></td>
   </tr>

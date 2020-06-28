@@ -7,7 +7,7 @@
 <?php require_once "../config.php";require_once "../gerador_cobranca.php"; $code; ?>
 <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="css/topo.css" rel="stylesheet" type="text/css" />
-<title>To Learn - Administração do Professor</title>
+<title>Administração do Professor</title>
 <link rel="shortcut icon" href="../image/logo_ist.gif">
 <script language="javascript" src="../js/jquery-1.7.2.min.js"></script>
 <script src="../js/lightbox.js"></script>
@@ -61,7 +61,7 @@ function refresh()
 }
 </script>
  <div id="mostra_login">
-  <h1><strong>Olá Professor(a):
+  <h1><strong>Olá, Professor(a)
      
    <?php 
     
@@ -72,14 +72,28 @@ function refresh()
        $id_professor=$res_busca_nome['id_professores'];
        $ano_letivo=date("Y");
        }
-    ?> Seu código é:</strong> <?php echo @$code; ?>
+    ?>, seu código é:</strong> <?php echo @$code."."; ?>
       Escolha uma <strong>Categoria:</strong>
       <form name='incluir' ... />
        <select class="custom-select" name="selec" LANGUAGE="JAVASCRIPT" ONCHANGE="submit()" >
          <?php
-             if (isset($_GET['selec'])){?>
-             <option value="<?php echo $_GET['selec']; ?>"><?php echo $_GET['selec'];?></option>
-             <?php } ?>
+            
+             switch ($_GET['selec']){
+               case '1':
+                echo '<option value="">Fundamental Anos Iniciais</option>';
+                 break;
+                 case '2':
+                  echo '<option value="">Fundamental Anos Finais</option>';
+                   break;
+                   case '3':
+                    echo '<option value="">Ensino Médio Inicial</option>';
+                     break;
+                     case '4':
+                      echo '<option value="">Ensino Médio Final</option>';
+                       break;
+              
+             }
+             ?>
          <option value="">Selecione aqui.</option>
       <?php  
       $sql_busca_cur="SELECT DISTINCT cat.categoria,cat.id_categoria FROM disciplinas d inner join professores p on d.id_professores=p.id_professores inner join cursos c on d.id_cursos=c.id_cursos inner join categoria cat on c.id_categoria=cat.id_categoria where code='$code'";
@@ -89,7 +103,7 @@ function refresh()
           
           ?>    
       
-      <option value=<?php echo $res_busca_cur["categoria"]; ?>><?php echo $res_busca_cur["categoria"]; ?></option>
+      <option value=<?php echo $res_busca_cur["id_categoria"]; ?>><?php echo $res_busca_cur["categoria"]; ?></option>
       
       
       
@@ -106,60 +120,84 @@ function refresh()
     <label for="bt_menu">&#9776;</label>
     <nav class="menu">
         <ul>
-        <li><a href="index.php">HOME</a></li>
+        <li><a href="index.php">Inicio</a></li>
         
                 
             </li>
               
             <li> <a href="turmas_e_alunos.php?selec=nada selecionado">Turmas e Alunos</a>
+            <ul>
+            <li><a href="frequencias_geral.php?pg=frequencia&selec=<?php echo @$_GET['selec'];?>&code=<?php echo $code;?>">Gerar Frequência</a></li>
+            </ul>
                 
             </li>
             <li><a href="">Todas as Avaliações</a>
     <?php 
-     if((isset($_GET['selec'])&& $_GET['selec']=='fundamental-inicial')){
-    ?>
+    if (@$_GET['selec']) {
+      $variable=$_GET['selec'];
+      # code...
+    
+    switch ($variable) {
+      case '1':
+        ?>
     <ul>
-     <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>">Atividades/tarefas</a></li>
-     <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<?php echo $_GET['selec']; ?>">Trabalhos/Atividades Praticas</a></li>
-     <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec']; ?>">Provas</a></li>
+     <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Atividades/tarefas</a></li>
+     <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<?php echo $_GET['selec']; ?>&code=<?php echo $code;?>">Trabalhos/Atividades Praticas</a></li>
+     <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec']; ?>&code=<?php echo $code;?>">Provas</a></li>
      <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Lançar Nota Bimestre</a></li>
      <li><a href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
     </ul>
      <?php 
-     } elseif((isset($_GET['selec']))&&(($_GET['selec']=="ensino-medio-inicial")||($_GET['selec']=="fundamental-final"))){ ?>      
+        break;
+        case '2':
+          ?>      
+          <ul>
+          <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">1ª Ava</a></li>
+         <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">2ª Ava</a></li>
+         <li><a href="todas_teste.php?pg=teste&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">3ª Ava</a></li>     
+         <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">4ª Ava</a></li>
+         <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Visualizar Nota Bimestre</a></li>
+         <li><a href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
+        </ul>
+    
+          <?php
+          break;
+          case '3':
+            ?>      
       <ul>
-     <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>">Atividades/tarefas</a></li>
-     <li><a href="todas_pro_inter.php?pg=projetos-interdisciplinar&selec=<?php echo $_GET['selec'];?>">Projetos (Inter)Disciplinar COC</a></li>
-     <li><a href="todas_pro_trans.php?pg=projetos-transversal&selec=<?php echo $_GET['selec'];?>">Projeto Transversal</a></li>
-     <li><a href="todas_coc.php?pg=coc&selec=<?php echo $_GET['selec'];?>">Avaliação Nacional do COC</a></li>
-     <li><a href="todas_teste.php?pg=teste&selec=<?php echo $_GET['selec'];?>">Teste</a></li>
-     <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec'];?>">Prova</a></li>
-     <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Lançar Nota Bimestre</a></li>
+      <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">1ª Ava</a></li>
+        <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">2ª Ava</a></li>
+         <li><a href="todas_teste.php?pg=teste&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">3ª Ava</a></li>     
+         <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">4ª Ava</a></li>
+         <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Visualizar Nota Bimestre</a></li>
      <li><a href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
     </ul>
 
-      <?php }elseif((isset($_GET['selec']))&&($_GET['selec']=='ensino-medio-final')){ ?>
+      <?php
+            break;
+            case '4':
+              ?>
       
-      <ul>
-     <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>">Atividades/tarefas</a></li>
-     <li><a href="todas_simulados.php?pg=simulados&selec=<?php echo $_GET['selec'];?>">Simulados</a></li>
-     <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<?php echo $_GET['selec'];?>">Trabalho_Individual</a></li>
-     <li><a href="todas_teste.php?pg=teste&selec=<?php echo $_GET['selec'];?>">Teste</a></li>
-     <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec'];?>">Prova</a></li>
-     <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Lançar Nota Bimestre</a></li>
-     <li><a href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
-     <!-- <li><a href="gerar_pdf.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Distribuição das Notas</a></li>  -->
-    </ul>
+              <ul>
+              <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">1ª Ava</a></li>
+              <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">2ª Ava</a></li>
+              <li><a href="todas_teste.php?pg=teste&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">3ª Ava</a></li>     
+              <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">4ª Ava</a></li>
+              <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Visualizar Nota Bimestre</a></li>
+             <li><a href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
+             <!-- <li><a href="gerar_pdf.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Distribuição das Notas</a></li>  -->
+            </ul>
+              
+              <?php
+                break;
       
-      <?php }elseif(!isset($_GET['selec'])){
-
-         ?>
-         <script>
-    alert("<?php echo $_GET['selec'];?>");
-    </script>
-    <?php }  ?>
+    
+    }
+  }
+   ?>
    </li>
    <li><a href="suporte_tecnico.php?selec=nada selecionado">Suporte Escolar</a></li>
+   
         </ul>
         
 

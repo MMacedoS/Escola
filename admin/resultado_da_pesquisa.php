@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<?php require "topo.php"; ?>
+<?php require "topo.php"; header('Content-Type: text/html; charset=UTF-8'); ?>
 <div id="caixa_preta">
 </div><!-- caixa_preta -->
 

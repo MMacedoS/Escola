@@ -15,7 +15,8 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
   
   <script src="js/jquery.maskedinput-1.3.js" type="text/javascript"></script>
-    <?php require_once("topo.php");
+    <?php header('Content-Type: text/html; charset=UTF-8');
+    require_once("topo.php");
     
     ?>
     <?php $agora = date('Y-m-d');?>

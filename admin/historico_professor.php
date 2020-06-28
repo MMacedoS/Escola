@@ -9,7 +9,7 @@
     <title>Historico Professor</title>
     
 
-    <?php $painel_atual="admin";
+    <?php $painel_atual="admin"; header('Content-Type: text/html; charset=UTF-8');
     require_once("../config.php"); ?>
 </head>
 <body>

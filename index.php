@@ -21,81 +21,35 @@
 <div id="logo">
  <img id="img" src="image/logo_ist.gif">   
 </div>
+<?php if(isset($_GET['login']) && $_GET['login']==0){ ?>
+
+<p align="center" class="alert-danger">email ou senha sem preencher!</p>
+
+<?php } ?>
+
+<?php if(isset($_GET['login']) && $_GET['login']==1){ ?>
+
+<p align="center"  class="alert-danger">Usuário ou senha inválida!</p>
+
+<?php } ?>
+<?php if(isset($_GET['login']) && $_GET['login']==3){ ?>
+
+<p align="center"  class="alert-danger">Tempo de espera ultrapassado, tente logar novamente!</p>
+
+<?php } ?>
+<?php if(isset($_GET['login']) && $_GET['login']==4){ ?>
+
+<p align="center"  class="alert-danger">Tente logar novamente!</p>
+
+<?php } ?>
+<?php if(isset($_GET['login']) && $_GET['login']==5){ ?>
+
+<p align="center"  class="alert-danger">Você não possui permissão para acessar!</p>
+
+<?php } ?>
+
 <div id="caixa_login">
-    <?php  if (isset($_POST['button'])) {
-        // # code...
-        // $nome=$_POST['nome'];
-        //  $password=preg_replace('/[^[:alnum:]_]/', '',$_POST['password']);
-        // if ($nome=="") {
-        //     # code...
-        //     echo "<h2>email de acesso invalido!</h2>";
-        // } else if ($password==""){
-        //     # code...
-        //     echo "<h2>Por favor , digite a senha!</h2>";
-
-        // }else {
-        //     # code...
-        //     $sql= "select * from login where nome= '$nome'
-        //     and senha='$password'";
-
-        //     $resultado=mysqli_query($conexao, $sql);
-        //     if (mysqli_num_rows($resultado)>0) {
-
-        //         # code...
-
-        //         while($res_1=mysqli_fetch_assoc($resultado)){
-        //             $status = $res_1['status'];
-        //             $code =$res_1['code'];
-        //             $senha =$res_1['senha'];
-        //             $nome =$res_1['nome'];
-        //             $painel =$res_1['painel'];
-
-        //             if ($status == 'inativo'){
-        //             echo "<h2> Você está inativo, procure a administração!! </h2>";
-
-        //                 }else{
-                            
-        //                         # code...
-        //                         session_start();
-        //                         $_SESSION['code']=$code;
-        //                         $_SESSION['nome']=$nome;
-        //                         $_SESSION['painel']=$painel;
-                
-        //                         if($painel=='admin'){
-        //                             echo "<script language='javascript'> window.location='admin'; </script>";
-        //                         } else if($painel=='Aluno'){
-        //                             echo "<script language='javascript'> window.location='aluno'; </script>";
-                
-        //                         }else if($painel=='professor'){
-        //                             echo "<script language='javascript'> window.location='professor'; </script>";
-                
-        //                         }
-        //                         else if($painel=='secretaria'){
-        //                             echo "<script language='javascript'> window.location='secretaria'; </script>";
-                
-        //                         }
-        //                         else if($painel=='tesouraria'){
-        //                             echo "<script language='javascript'> window.location='tesouraria'; </script>";
-                
-        //                         }
-                
-                            
-        //                 }
-
-        //         }
-               
-        //     }else{
-            ?>
-               
-            <?php
-    //         } 
-            
-    //     }
-
-        
-    } 
     
-    ?>
     <form name="form" action="autenticar.php" method="post">
         <table>
         <tr>
@@ -111,7 +65,7 @@
         </tr>
         <tr>
             
-        <td><img src="https://cdn0.iconfinder.com/data/icons/ui-icons-pack/100/ui-icon-pack-14-512.png" width="16px" id="olho" class="olho">
+        <td><img src="https://cdn0.iconfinder.com/data/icons/ui-icons-pack/100/ui-icon-pack-14-512.png" width="16px" id="olho" align="right" class="olho">
         <input type="password" id="pass" name="password"></td>
         </tr>
         <tr>

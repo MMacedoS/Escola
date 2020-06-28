@@ -1,34 +1,38 @@
+<meta charset="utf-8">
 <?php
+header('Content-Type: text/html; charset=UTF-8');
 date_default_timezone_set('America/Sao_Paulo');
 function connectar(){
-    // $servidor ="mysql873.umbler.com";
-    // $usuario="kamaur";
-    // $senha="kamaur2711";
-    // $banco="ist";
-$servidor = 'localhost';
-$usuario = 'root';
-$senha = '';
-$banco = 'ist';
+    $servidor ="mysql873.umbler.com";
+    $usuario="kamaur";
+    $senha="kamaur2711";
+    $banco="ist";
+// $servidor = 'localhost';
+// $usuario = 'root';
+// $senha = '';
+// $banco = 'ist';
 
-    $con= new mysqli($servidor,$usuario,$senha,$banco);
+	$con= new mysqli($servidor,$usuario,$senha,$banco);
+	$con->set_charset("utf8");
     return $con;
 }
 $conexao=connectar();
 
+
 //DADOS PARA CONEXÃO COM BANCO DE DADOS LOCAL
 
-$host = 'localhost';
-$usuario = 'root';
-$senha = '';
-$banco = 'ist';
+// $host = 'localhost';
+// $usuario = 'root';
+// $senha = '';
+// $banco = 'ist';
 
 
 //DADOS PARA CONEXÃO COM BANCO DE DADOS HOSPEDADA
 
-// $host = 'mysql669.umbler.com';
-// $usuario = 'garradeaguia';
-// $senha = 'kamaur2711';
-// $banco = 'sismed';
+$host = 'mysql669.umbler.com';
+$usuario = 'garradeaguia';
+$senha = 'kamaur2711';
+$banco = 'sismed';
 
 
 //VALORES PARA A COMBOBOX DE PAGINAÇÃO
@@ -55,8 +59,8 @@ $tempo_atualizacao_tela_chamadas = 3;
 date_default_timezone_set('America/Sao_Paulo');
 
 try {
-	$pdo = new PDO("mysql:dbname=$banco;host=$host", "$usuario", "$senha");
-
+	$pdo = new PDO("mysql:dbname=$banco;host=$host", "$usuario", "$senha",array(PDO::MYSQL_ATTR_INIT_COMMAND=>"SET NAMES utf8"));
+	
 	//conexao mysql para o backyp
 	$conn = mysqli_connect($host, $usuario, $senha, $banco);
 } catch (Exception $e) {
