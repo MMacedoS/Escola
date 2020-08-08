@@ -1,18 +1,18 @@
 <?php $painel_atual = "Coordenacao";?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <?php require_once "../config.php";require_once "../gerador_cobranca.php"; $code; ?>
 <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="css/topo.css" rel="stylesheet" type="text/css" />
+<link href="css/topos.css" rel="stylesheet" type="text/css" />
 <title>Coordenação</title>
-<link rel="shortcut icon" href="../image/logo_ist.gif">
+<link rel="shortcut icon" href="../image/logo.png">
 <script language="javascript" src="../js/jquery-1.7.2.min.js"></script>
 <script src="../js/lightbox.js"></script>
 <link href="../css/lightbox.css" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style1.css">
 
 
 <link rel="stylesheet" href="../jquery.superbox.css" type="text/css" media="all" />
@@ -43,7 +43,7 @@
 		});
 
 	</script>
-    
+
 </head>
 
 <body>
@@ -51,7 +51,7 @@
  
  <div id="logo">
    
-  <img id="img" src="../image/logo_ist.gif" />
+  <img id="img" src="../image/logo.png" />
  </div><!-- logo -->
  <script language="JavaScript">
 function refresh() 
@@ -217,7 +217,7 @@ function refresh()
   }
    ?>
    </li>
-   <li><a href="suporte_tecnico.php?selec=nada selecionado">Suporte Escolar</a></li>
+   <li><a href="suporte_tecnico.php?selec=<?php echo $_GET['selec'];?>">Suporte Escolar</a></li>
    
         </ul>
         

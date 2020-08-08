@@ -6,7 +6,7 @@ $painel_atual= "tesouraria";
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 
 <title>To Learn - Tesouraria - <?php $nome = $_SESSION['nome']; echo $nome; ?> </title>
 <link href="css/index.css" rel="stylesheet" type="text/css" />
@@ -52,9 +52,9 @@ $result_1 = mysqli_query($conexao, $sql_1);
     <td><strong>Curso:</strong></td>
   </tr>
   <tr>
-    <td><?php //echo $res_1['turno']; ?></td>
+    <td><php //echo $res_1['turno']; ?></td>
     <td><?php echo $res_1['tel_cobranca']; ?></td>
-    <td><?php //echo $res_1['serie']; ?></td>
+    <td><php //echo $res_1['serie']; ?></td>
   </tr>
   <tr>
    

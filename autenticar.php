@@ -10,10 +10,11 @@ $usuario = $_POST['nome'];
 $senha = $_POST['password'];
 
 
-$res = $pdo->prepare("SELECT * from login where nome = :usuario and senha_rec = :senha ");
+$res = $pdo->prepare("SELECT * from login where nome = :usuario and senha_rec = :senha and status=:status");
 
 $res->bindValue(":usuario", $usuario);
 $res->bindValue(":senha", md5($senha));
+$res->bindValue(":status",'Ativo');
 $res->execute();
 
 $dados = $res->fetchAll(PDO::FETCH_ASSOC);
@@ -26,7 +27,7 @@ if($senha==$dados[0]['senha']){
 		$_SESSION['code']=$dados[0]['code'];;
 		$_SESSION['nome']=$dados[0]['nome'];
 		$_SESSION['painel']=$dados[0]['painel'];
-		$tempolimite=1600;
+		$tempolimite=300;
 		$_SESSION['registro']=time();
 		$_SESSION['limite']=$tempolimite;
 		
@@ -39,7 +40,8 @@ if($senha==$dados[0]['senha']){
 			
 						case 'Aluno':
 				
-							header("location:aluno/aluno.html");
+							// header("location:aluno/aluno.html");
+							header("location:aluno/index.php");
 								break;
 			
 								case 'professor':
@@ -60,6 +62,11 @@ if($senha==$dados[0]['senha']){
 				
 															header("location:coordenacao/index.php");
 																break;
+
+																case 'tela':
+				
+																	header("location:site/index.php");
+																		break;
 											
 			
 			default:
@@ -70,13 +77,15 @@ if($senha==$dados[0]['senha']){
 	}else{
 		// echo "<script language='javascript'>window.alert('Dados Incorretos!!'); </script>";
 		// echo "<script language='javascript'>window.location='index.php?login'; </script>";
-		header("Location: index.php?login=1");
+		header("Location: login.php?login=1");
+		exit();
 		
 	} 
 }else{
 	// echo "<script language='javascript'>window.alert('Dados Incorretos!!'); </script>";
 	// echo "<script language='javascript'>window.location='index.php?login'; </script>";
-	header("Location: index.php?login=1");
+	header("Location: login.php?login=1");
+	exit();
 }
 
 

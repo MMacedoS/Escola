@@ -2,15 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <title>Suporte Escolar</title>
-<link rel="shortcut icon" href="../image/logo_ist.gif">
+<link rel="shortcut icon" href="../image/logo.png">
 <link rel="stylesheet" type="text/css" href="css/suporte_tecnico.css"/>
 </head>
 
 <body>
 
-<?php header('Content-Type: text/html; charset=UTF-8'); require "topo.php"; ?>
+<?php header('Content-Type: text/html; charset=UTF-8'); require "topo.php"; $ano=Date('Y');?>
 
 <div id="caixa_preta">
 </div><!-- caixa_preta -->
@@ -32,7 +32,7 @@
         <option value="SECRETARIA" style="background-color:#F3F781;">SECRETARIA</option>
        <option value="PROFESSOR">PROFESSORES</option>
        <?php      
-		$sql_2 = "SELECT DISTINCT p.code,p.nome from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020";
+		$sql_2 = "SELECT DISTINCT p.code,p.nome from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo='$ano'";
 		$result_2 = mysqli_query($conexao, $sql_2);
 			while($res_2 = mysqli_fetch_assoc($result_2)){
         $serie=$res_2['id_cursos'];
@@ -42,7 +42,7 @@
                 
        <option value=""><strong> ALUNOS DE CLASSE</strong></option>
        <?php
-       $sql_3 = "SELECT DISTINCT e.matricula,e.nome, c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and e.status='ativo'";
+       $sql_3 = "SELECT DISTINCT e.matricula,e.nome, c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo='$ano' and e.status='Ativo'";
 	   $result_3 = mysqli_query($conexao, $sql_3);
 	   	while($res_3 = mysqli_fetch_assoc($result_3)){
 	   ?>
@@ -242,7 +242,7 @@ if($result_4 == ''){
 
 
 
- $sql_1 = "SELECT DISTINCT p.nome from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and e.matricula=587418";
+ $sql_1 = "SELECT DISTINCT p.nome from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo='$ano' and e.matricula=587418";
 	   $result_1 = mysqli_query($conexao, $sql_1);
 	   	while($res_1 = mysqli_fetch_assoc($result_1)){
 			$professor = $res_1['nome'];

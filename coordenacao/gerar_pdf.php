@@ -2,7 +2,7 @@
 
 <?php
     include('pdf/mpdf.php');
-    $painel_atual = "professor"; 
+    $painel_atual = "Coordenacao"; 
     require_once "../config.php";
     $id=$_GET['id'];
     $ano=Date('Y');
@@ -71,7 +71,7 @@ tr:nth-of-type(5) td:nth-of-type(1) {
     
 </style>';
 ///pode remover o costumer e as bordas que a table fica ajustada tambem 
-$pagina.='<link rel="shortcut icon" href="../image/logo_ist.gif">';
+$pagina.='<link rel="shortcut icon" href="../image/logo.png">';
     $pagina.="<body>";
     $pagina.='<h1 align="center">Planilha de Notas:'.$nomed.' '.$nomec.'</h1>';    
     $pagina.='<table id="customers" class=".table-responsive{-sm|-md|-lg|-xl} table"  border="1" cellpadding="5" cellspacing="4" bgcolor="#FFF4EA">';

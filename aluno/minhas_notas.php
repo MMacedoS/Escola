@@ -2,11 +2,90 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <title>Minhas Notas</title>
-<link rel="shortcut icon" href="../image/logo_ist.gif">
+<link rel="shortcut icon" href="../image/logo.png">
 <link rel="stylesheet" type="text/css" href="css/minhas_notas.css"/>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+<style>
+    .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    position: unset !important;
+}
+       .customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 97%;
+        }
+        .text-overflow-dynamic-container {
+    position: relative;
+    max-width: 100%;
+    padding: 0 !important;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    vertical-align: text-bottom !important;
+}
+.text-overflow-dynamic-ellipsis {
+    position: absolute;
+    white-space: nowrap;
+    overflow-y: visible;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    max-width: 100%;
+    min-width: 0;
+    width:100%;
+    top: 0;
+    left: 0;
+}
+.text-overflow-dynamic-container:after,
+.text-overflow-dynamic-ellipsis:after {
+    content: '-';
+    display: inline;
+    visibility: hidden;
+    width: 0;
+}
+
+        .diminuir {
+          display: block;
+          white-space: normal;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          height: 40px;          
+          
+        }
+        #button {
+            margin: 0px !important;
+            width:50px !important;
+        }
+        
+        .customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .customers th {
+            width:10%;
+        }
+        textarea {
+            width: 100%!important;
+            height: 50px!important;
+            padding: 10px!important;
+            
+        }
+        
+        .customers tr:nth-child(even){background-color: #f2f2f2;}
+        
+        .customers tr:hover {background-color: #ddd;}
+        
+        .customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -17,14 +96,17 @@
 
 <div id="box">
 <?php if($_GET['pg'] == 'trabalhos'){ ?>
-<h1><strong>Notas da 1ª avaliação e tarefas em cada bimestre</strong></h1>
-<table class="table table-responsive" height="400" border="0">
+<h1><strong>Notas da 1ª avaliação das avaliação em cada bimestre</strong></h1>
+<table class="customers" height="400" border="0">
   <tr>
-    <td ><strong>DISCIPLINA<br /><br /></strong></td>
-    <td ><strong>1º Bimestre</strong></td>
-    <td ><strong>2º Bimestre</strong></td>
-    <td ><strong>3º Bimestre</strong></td>
-    <td ><strong>4º Bimestre</strong></td>
+    <th rowspan="2" ><strong>DISCIPLINA<br /><br /></strong></th>
+	<th colspan="4"><strong>BIMESTRES<br /><br /></strong></th>
+	</tr>
+	<tr>
+    <th ><strong>1º </strong></th>
+    <th><strong>2º </strong></th>
+    <th ><strong>3º </strong></th>
+    <th ><strong>4º </strong></th>
   </tr>
 <?php
 $sql_1 = "SELECT * FROM disciplinas d inner join lista_disc l on l.id_lista=d.disciplina WHERE d.id_cursos = '$serie' ORDER BY l.nome ASC";
@@ -119,13 +201,16 @@ $result_5 = mysqli_query($conexao, $sql_5);
 
 <?php if($_GET['pg'] == 'provas'){ ?>
 <h1><strong>Notas da 4ª Avaliação em cada bimestre</strong></h1>
-<table class="table table-responsive" height="400" border="0">
+<table class="customers" height="400" border="0">
   <tr>
-    <td ><strong>DISCIPLINA<br /><br /></strong></td>
-    <td ><strong>1º Bimestre</strong></td>
-    <td ><strong>2º Bimestre</strong></td>
-    <td ><strong>3º Bimestre</strong></td>
-    <td ><strong>4º Bimestre</strong></td>
+    <th rowspan="2" ><strong>DISCIPLINA<br /><br /></strong></th>
+	<th colspan="4"><strong>BIMESTRES<br /><br /></strong></th>
+	</tr>
+	<tr>
+    <th ><strong>1º </strong></th>
+    <th><strong>2º </strong></th>
+    <th ><strong>3º </strong></th>
+    <th ><strong>4º </strong></th>
   </tr>
 <?php
 $sql_1 = "SELECT * FROM disciplinas d inner join lista_disc l on l.id_lista=d.disciplina WHERE d.id_cursos = '$serie' ORDER BY l.nome ASC";
@@ -235,13 +320,16 @@ $result_5 = mysqli_query($conexao, $sql_5);
 <!-- coc -->
 <?php if($_GET['pg'] == 'coc'){ ?>
 <h1><strong>Notas 2ª Avaliação em cada bimestre</strong></h1>
-<table class="table table-responsive" height="400" border="0">
+<table class="customers" height="400" border="0">
   <tr>
-    <td ><strong>DISCIPLINA<br /><br /></strong></td>
-    <td ><strong>1º Bimestre</strong></td>
-    <td ><strong>2º Bimestre</strong></td>
-    <td ><strong>3º Bimestre</strong></td>
-    <td ><strong>4º Bimestre</strong></td>
+    <th rowspan="2" ><strong>DISCIPLINA<br /><br /></strong></th>
+	<th colspan="4"><strong>BIMESTRES<br /><br /></strong></th>
+	</tr>
+	<tr>
+    <th ><strong>1º </strong></th>
+    <th><strong>2º </strong></th>
+    <th ><strong>3º </strong></th>
+    <th ><strong>4º </strong></th>
   </tr>
 <?php
 $sql_1 = "SELECT * FROM disciplinas d inner join lista_disc l on l.id_lista=d.disciplina WHERE d.id_cursos = '$serie' ORDER BY l.nome ASC";
@@ -339,13 +427,16 @@ $result_5 = mysqli_query($conexao, $sql_5);
 <!-- teste -->
 <?php if($_GET['pg'] == 'teste'){ ?>
 <h1><strong>Notas da 3ª Avaliação em cada bimestre</strong></h1>
-<table class="table table-responsive" height="400" border="0">
+<table class="customers" height="400" border="0">
   <tr>
-    <td ><strong>DISCIPLINA<br /><br /></strong></td>
-    <td ><strong>1º Bimestre</strong></td>
-    <td ><strong>2º Bimestre</strong></td>
-    <td ><strong>3º Bimestre</strong></td>
-    <td ><strong>4º Bimestre</strong></td>
+    <th rowspan="2" ><strong>DISCIPLINA<br /><br /></strong></th>
+	<th colspan="4"><strong>BIMESTRES<br /><br /></strong></th>
+	</tr>
+	<tr>
+    <th ><strong>1º </strong></th>
+    <th><strong>2º </strong></th>
+    <th ><strong>3º </strong></th>
+    <th ><strong>4º </strong></th>
   </tr>
 <?php
 $sql_1 = "SELECT * FROM disciplinas d inner join lista_disc l on l.id_lista=d.disciplina WHERE d.id_cursos = '$serie' ORDER BY l.nome ASC";
@@ -454,7 +545,7 @@ $result_5 = mysqli_query($conexao, $sql_5);
       }
   ?>
     
-  <option value="">Selecione uma bimestre</option>
+  <option value="">Selecione</option>
     
   <?php   
     $selec_uni="SELECT * FROM unidades";
@@ -472,16 +563,22 @@ $result_5 = mysqli_query($conexao, $sql_5);
 </h1>
 </form>
 <div class="table-responsive">
-<table	class="table-responsive" border="0">
+<table	class="customers" border="0">
   <tr>
-    <td><strong>DISCIPLINA<br /><br /></strong></td>
-    <td><strong>1ªAVA</strong></td>
-    <td><strong>2ªAVA</strong></td>	
-    <td><strong>3ªAVA</strong></td>
-    <td><strong>4ªAVA</strong></td>
-    <td><strong>Paralela</strong></td>
-    <td><strong>Media</strong></td>	
-    <td><strong>Situação</strong></td>
+    <th rowspan="2"><strong>DISCIPLINA<br /><br /></strong></th>
+	<th colspan="7"><strong>ATIVIDADES</strong></th>
+	</tr>
+	<tr>
+    <th><strong>1ª</strong></th>
+    <th><strong>2ª</strong></th>	
+    <th><strong>3ª</strong></th>
+    <th><strong>4ª</strong></th>
+    <th ><span class="text-overflow-dynamic-container">
+        <span class="text-overflow-dynamic-ellipsis"><strong>Paralela</strong></span> </span></th>
+    <th><span class="text-overflow-dynamic-container">
+        <span class="text-overflow-dynamic-ellipsis"><strong>Media</strong></span> </span></th>	
+    <th><span class="text-overflow-dynamic-container">
+        <span class="text-overflow-dynamic-ellipsis"><strong>Situação</strong></span> </span></th>
 	
   </tr>
 <?php
@@ -521,7 +618,7 @@ $result_8 = mysqli_query($conexao, $sql_8);
 		echo "<h2>Aguarde</h2>";
 	}else{
 		while($res_2 = mysqli_fetch_assoc($result_2)){
-				$nota = number_format($res_2['nota'],2);
+				$nota = number_format($res_2['nota'],1);
 				
 				if($nota >= 7){
 					echo "<h2><strong>$nota</strong></h2>";
@@ -540,7 +637,7 @@ $result_8 = mysqli_query($conexao, $sql_8);
 		echo "<h2>Aguarde</h2>";
 	}else{
 		while($res_5 = mysqli_fetch_assoc($result_5)){
-				$nota = number_format($res_5['nota'],2);
+				$nota = number_format($res_5['nota'],1);
 				
 				if($nota >= 7){
 					echo "<h2><strong>$nota</strong></h2>";
@@ -557,7 +654,7 @@ $result_8 = mysqli_query($conexao, $sql_8);
 		echo "<h2>Aguarde</h2>";
 	}else{
 		while($res_6 = mysqli_fetch_assoc($result_6)){
-				$nota = number_format($res_6['nota'],2);
+				$nota = number_format($res_6['nota'],1);
 				
 				if($nota >= 7){
 					echo "<h2><strong>$nota</strong></h2>";
@@ -574,7 +671,7 @@ $result_8 = mysqli_query($conexao, $sql_8);
 		echo "<h2>Aguarde</h2>";
 	}else{
 		while($res_7 = mysqli_fetch_assoc($result_7)){
-				$nota = number_format($res_7['nota'],2);
+				$nota = number_format($res_7['nota'],1);
 				
 				if($nota >= 7){
 					echo "<h2><strong>$nota</strong></h2>";
@@ -588,15 +685,15 @@ $result_8 = mysqli_query($conexao, $sql_8);
     <td>
 	<?php
     if(mysqli_num_rows($result_para) == ''){
-		echo "<h2>0</h2>";
+		echo "<h3><strong>.</strong></h3>";
 	}else{
 		while($res_para = mysqli_fetch_assoc($result_para)){
-				$nota = number_format($res_para['nota'],2);
+				$nota = number_format($res_para['nota'],1);
 				
-				if($nota >= 7){
+				if($nota > 0){
 					echo "<h2><strong>$nota</strong></h2>";
 				}else{
-					echo "<h3><strong>$nota</strong></h3>";
+					echo "<h3><strong>ND</strong></h3>";
 				}
 				
 			}
@@ -608,7 +705,7 @@ $result_8 = mysqli_query($conexao, $sql_8);
 		echo "<h2>Aguarde</h2>";
 	}else{
 		while($res_8 = mysqli_fetch_assoc($result_8)){
-				$nota = number_format($res_8['nota'],2);
+				$nota = number_format($res_8['nota'],1);
 				
 				if($nota >= 7){
 					echo "<h2><strong>$nota</strong></h2>";
@@ -648,14 +745,18 @@ $result_8 = mysqli_query($conexao, $sql_8);
 
 <?php if($_GET['pg'] == 'bimestrais'){ ?>
 <h1><strong>Suas notas bimestrais</strong></h1>
-<table class="table-responsive" border="0">
+<table class="customers" border="0">
   <tr>
-    <td class="td"><strong>DISCIPLINA</strong></td>
-		<td class="td"><strong>1º Bimestre</strong></td>
-    <td class="td"><strong>2º Bimestre</strong></td>
-    <td class="td"><strong>3º Bimestre</strong></td>
-    <td class="td"><strong>4º Bimestre</strong></td>
-    <td class="td"><strong>Resultado</strong></td>
+    <th rowspan="2"><strong>DISCIPLINA</strong></th>
+	<th colspan="5"><strong>Bimestres</strong></th>
+	</tr>
+	<tr>
+	<th align="center"><strong>1º</strong></th>
+    <th><strong>2º</strong></th>
+    <th><strong>3º</strong></th>
+    <th><strong>4º</strong></th>
+    <th><span class="text-overflow-dynamic-container">
+        <span class="text-overflow-dynamic-ellipsis"><strong>Resultado</strong></span></span></th>
   </tr>
 <?php
 $sql_1 = "SELECT * FROM disciplinas d inner join lista_disc l on l.id_lista=d.disciplina WHERE d.id_cursos = '$serie' ORDER BY l.nome ASC";
@@ -680,14 +781,14 @@ $result_6 = mysqli_query($conexao, $sql_6);
 		
 ?>  
   <tr>
-    <td class="td"><?php echo $res_1['nome']; ?></td>  
-    <td class="td">
+    <td><?php echo $res_1['nome']; ?></td>  
+    <td>
     <?php
     if(mysqli_num_rows($result_2) == ''){
 		echo "<h2>Aguarde</h2>";
 	}else{
 		while($res_2 = mysqli_fetch_assoc($result_2)){
-				$nota = number_format($res_2['nota'],2);
+				$nota = number_format($res_2['nota'],1);
 				
 				if($nota >= 7){
 					echo "<h2><strong>$nota</strong></h2>";
@@ -698,13 +799,13 @@ $result_6 = mysqli_query($conexao, $sql_6);
 			}
 	}?>
     </td>
-    <td class="td">
+    <td>
     <?php
     if(mysqli_num_rows($result_3) == ''){
 		echo "<h2>Aguarde</h2>";
 	}else{
 		while($res_3 = mysqli_fetch_assoc($result_3)){
-				$nota = number_format($res_3['nota'],2);
+				$nota = number_format($res_3['nota'],1);
 				
 				if($nota >= 7){
 					echo "<h2><strong>$nota</strong></h2>";
@@ -715,13 +816,13 @@ $result_6 = mysqli_query($conexao, $sql_6);
 			}
 	}?>
     </td>
-    <td class="td">
+    <td>
     <?php
     if(mysqli_num_rows($result_4) == ''){
 		echo "<h2>Aguarde</h2>";
 	}else{
 		while($res_4 = mysqli_fetch_assoc($result_4)){
-				$nota = number_format($res_4['nota'],2);
+				$nota = number_format($res_4['nota'],1);
 				
 				if($nota >= 7){
 					echo "<h2><strong>$nota</strong></h2>";
@@ -732,13 +833,13 @@ $result_6 = mysqli_query($conexao, $sql_6);
 			}
 	}?>
     </td>
-    <td class="td"> 
+    <td> 
     <?php
     if(mysqli_num_rows($result_5) == ''){
 		echo "<h2>Aguarde</h2>";
 	}else{
 		while($res_5 = mysqli_fetch_assoc($result_5)){
-				$nota = number_format($res_5['nota'],2);
+				$nota = number_format($res_5['nota'],1);
 				
 				if($nota >= 7){
 					echo "<h2><strong>$nota</strong></h2>";
@@ -749,12 +850,12 @@ $result_6 = mysqli_query($conexao, $sql_6);
 			}
 	}?>
     </td>    
-			<td class="td"><?php
+			<td><?php
     if(mysqli_num_rows($result_6)==''){
 		echo "<h2>Aguarde</h2>";
 	}else{
 		while($res_6 = mysqli_fetch_assoc($result_6)){
-				$nota = number_format($res_6['media'],2);
+				$nota = number_format($res_6['media'],1);
 				
 				if($nota >= 28){
 					echo "<h2><strong>$nota</strong></h2>";
@@ -768,7 +869,7 @@ $result_6 = mysqli_query($conexao, $sql_6);
   </tr>
 <?php } ?>  
   <tr>
-    <td colspan="6"><img src="img/menu_topo.png" width="900" height="1"></td>
+    <!-- <td colspan="6"><img src="img/menu_topo.png" width="900" height="1"></td> -->
   </tr>
 </table>
 <h4>OBS:arraste para o lado!</h4>

@@ -2,10 +2,79 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <title>Suporte Escolar</title>
-<link rel="shortcut icon" href="../image/logo_ist.gif">
+<link rel="shortcut icon" href="../image/logo.png">
 <link rel="stylesheet" type="text/css" href="css/suporte_tecnico.css"/>
+<style>
+    .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    position: unset !important;
+}
+       .customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 97%;
+        }
+        
+        .customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .text-overflow-dynamic-container {
+    position: relative;
+    max-width: 100%;
+    padding: 0 !important;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    vertical-align: text-bottom !important;
+}
+.text-overflow-dynamic-ellipsis {
+    position: absolute;
+    white-space: nowrap;
+    overflow-y: visible;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    max-width: 100%;
+    min-width: 0;
+    width:100%;
+    top: 0;
+    left: 0;
+}
+.text-overflow-dynamic-container:after,
+.text-overflow-dynamic-ellipsis:after {
+    content: '-';
+    display: inline;
+    visibility: hidden;
+    width: 0;
+}
+
+        .diminuir {
+          display: block;
+          white-space: normal;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          height: 40px;          
+          
+        }
+        .customers th {
+            width:31%;
+        }
+        
+        .customers tr:nth-child(even){background-color: #f2f2f2;}
+        
+        .customers tr:hover {background-color: #ddd;}
+        
+        .customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -17,20 +86,20 @@
 
 <div id="box">
  <h1><strong>Histórico de chamados</strong></h1>
- <a href="suporte_tecnico.php?acao=abrir_chamado" class="a_1">Abrir chamado</a>
- <table class="users" id="table-responsive" border="0">
-<?php if(@$_GET['acao'] == 'abrir_chamado'){ ?>
+ <a href="suporte_tecnico.php?acao=abrir_chamado&selec=<?php echo @$_GET['selec'];?>" class="a_1">Abrir chamado</a>
+ <table class="customers" border="0">
+<?php if(@$_GET['acao'] == 'abrir_chamado'){ $ano=Date('Y');?>
 
   <tr>
-  <td>	 
+  <th>	 
      <form name="enviar_mensagem" method="post" action="" enctype="multipart/form-data">
 	  Selecione o setor que você quer enviar esta mensagem
      <select name="setor" size="1" id="select">
-       <option value="COORDENAÇÃO" style="background-color:#F3F781;">COORDENAÇÃO</option>
+        <option value="<?php if($_GET['selec']==1){echo "COORDENAÇÃO-2";}else{echo "COORDENAÇÃO-1";}?>" style="background-color:#F3F781;">COORDENAÇÃO</option>
         <option value="" style="background-color:#F3F781;"></option>
        <option value="PROFESSOR">PROFESSORES</option>
        <?php      
-		$sql_2 = "SELECT DISTINCT p.code,p.nome from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020";
+		$sql_2 = "SELECT DISTINCT p.code,p.nome from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo='$ano'";
 		$result_2 = mysqli_query($conexao, $sql_2);
 			while($res_2 = mysqli_fetch_assoc($result_2)){
         $serie=$res_2['id_cursos'];
@@ -38,9 +107,9 @@
         <option value="<?php echo $res_2['code']; ?>" style="background-color:#81F79F;"><?php echo $res_2['nome'] ?></option>
        <?php } ?>
                 
-       <option value=""><strong> COLEGAS DE CLASSE</strong></option>
+       <option value=""><strong> Estudantes</strong></option>
        <?php
-       $sql_3 = "SELECT DISTINCT e.matricula,e.nome, c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and p.code='$code' and e.status='ativo'";
+       $sql_3 = "SELECT DISTINCT e.matricula,e.nome, c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos where ce.ano_letivo='$ano' and c.id_categoria=".@$_GET['selec']." and e.status='ativo'";
 	   $result_3 = mysqli_query($conexao, $sql_3);
 	   	while($res_3 = mysqli_fetch_assoc($result_3)){
 	   ?>
@@ -50,10 +119,11 @@
      
      <br />Digite sua mensagem
      <textarea name="mensagem"></textarea>
+     <input type="hidden" name="selec" value="<?php echo @$_GET['selec'];?>">
 	 <input class="input" type="submit" name="enviar_mensagem" value="Enviar" />
      </form>
      <hr>
-  </td>
+  </th>
   </tr>
 <?php } ?>
   <tr>
@@ -63,35 +133,39 @@
     <td align="center"><hr></td>
   </tr>
   <tr>
-    <td align="center">
+    <th align="center">
     <?php
-    $sql_5 = "SELECT * FROM central_mensagem WHERE emissor = '$code' or receptor='$code' order by id desc";
+    $sql_5 = "SELECT * FROM central_mensagem WHERE emissor = 'COORDENAÇÃO-2' or receptor='COORDENAÇÃO-2' order by id desc";
 	$result_5 = mysqli_query($conexao, $sql_5);
 	if(mysqli_num_rows($result_5) == ''){
 		echo "Não existe nenhuma mensagem";
 	}else{
 	?>
-     <table class="users" id="table-responsive" border="0">
+     <table class="customers" border="0">
       <tr>
-      <td ><strong>Emissor:</strong></td>
-        <td ><strong>Receptor:</strong></td>
-        <td ><strong>Status:</strong></td>
-        <td ><strong>Data:</strong></td>
-        <td ><strong>Data da resposta:</strong></td>
+      <th ><strong>Emissor:</strong></th>
+        <th ><strong>Receptor:</strong></th>
+        <th ><strong>Status:</strong></th>
+        <th ><strong>Data:</strong></th>
       <?php while($res_5 = mysqli_fetch_assoc($result_5)){ ?>
       <tr>
-      <td><?php $you=$res_5['emissor']; if($you==$code){ echo "VOCÊ";}else{echo $you;}; ?></td>
-      <td><?php $you=$res_5['receptor']; if($you==$code){ echo "VOCÊ";}else{echo $you;}; ?></td>
-        <td><?php echo $res_5['status']; ?></td>
-        <td><?php echo $res_5['date']; ?></td>
+      <td><span class="text-overflow-dynamic-container">
+        <span class="text-overflow-dynamic-ellipsis"><?php $you=$res_5['emissor']; if($you==$code){ echo "VOCÊ";}else{echo $you;}; ?></span></span></td>
+      <td><span class="text-overflow-dynamic-container">
+        <span class="text-overflow-dynamic-ellipsis"><?php $you=$res_5['receptor']; if($you==$code){ echo "VOCÊ";}else{echo $you;}; ?></span></span></td>
+        <td><span class="text-overflow-dynamic-container">
+        <span class="text-overflow-dynamic-ellipsis"><?php echo $res_5['status']; ?></span></span></td>
+        <td><?php echo $res_5['date']; ?></td>        
+        </tr>
+        <tr>
         <td><?php echo $res_5['data_resposta']; ?></td>
-        <td width="80">
-        <a href="suporte_tecnico.php?acao=responder&id=<?php echo $res_5['id']; ?>"><img src="../image/confirma.png" width="22" border="0" title="responder" /></a>
-        <a href="suporte_tecnico.php?acao=ticket&id=<?php echo $res_5['id']; ?>"><img src="../image/visualizar16.gif"  border="0" title="Vizualizar chamada" /></a> |
-        <a href="suporte_tecnico.php?acao=fechar&id=<?php echo $res_5['id']; ?>"><img src="../image/deleta.png" width="22" border="0" title="Excluir chamado" /></a>
+        <td><a href="suporte_tecnico.php?acao=responder&id=<?php echo $res_5['id']; ?>"><img src="../image/confirma.png" width="22" border="0" title="responder" /></a></td>
+        <td><a href="suporte_tecnico.php?acao=ticket&id=<?php echo $res_5['id']; ?>"><img src="../image/visualizar16.gif"  border="0" title="Vizualizar chamada" /></a> </td>
+        <td><a href="suporte_tecnico.php?acao=fechar&id=<?php echo $res_5['id']; ?>"><img src="../image/deleta.png" width="22" border="0" title="Excluir chamado" /></a></td>
         
       
-        </td>
+        </th>
+
         </tr>
       	
       <?php } if(@$_GET['acao'] == 'ticket'){
@@ -137,7 +211,7 @@
 if(@$_GET['acao'] == 'responder'){
   $id=$_GET['id'];
   if(isset($_GET['novaresposta'])){$sql_1 = "SELECT * FROM central_mensagem WHERE id='$id'";}else{
-$sql_1 = "SELECT * FROM central_mensagem WHERE id='$id' and receptor='$code' and resposta='' ";}
+$sql_1 = "SELECT * FROM central_mensagem WHERE id='$id' and receptor='COORDENAÇÃO-2' and resposta='' ";}
 $result = mysqli_query($conexao, $sql_1);
 	while($res_1 = mysqli_fetch_assoc($result)){
 ?>
@@ -145,25 +219,23 @@ $result = mysqli_query($conexao, $sql_1);
 <form name="button" method="post" action="" enctype="multipart/form-data">
 <table class="users" id="table-responsive" border="0">
   <tr>
-    <td><strong>Data:</strong></td>
-    <td><strong>Nº de matricula do aluno:</strong></td>
+    <th><strong>Data:</strong></th>
+    <th><strong>Nº de matricula do aluno:</strong></th>
   </tr>
   <tr>
     <td><?php echo $res_1['date']; ?></td>
-    <td><?php echo $res_1['emissor']; ?></td>
-    
+    <td><?php echo $res_1['emissor']; ?></td>    
   </tr>
   <tr>
-    <td><strong>Mensagem:</strong></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <th><strong>Mensagem:</strong></th>
+    <th></th>
   </tr>
   <tr>
-    <td colspan="3"><?php echo $res_1['mensagem']; ?></td>
+    <td colspan="2"><?php echo $res_1['mensagem']; ?></td>
   </tr>
   <tr>
-    <td colspan="3"><label for="textarea"></label>
-    <textarea name="resp" id="textarea" cols="110" rows="5"></textarea></td>
+    <th colspan="2"><label for="textarea"></label>
+    <textarea name="resp" id="textarea" cols="110" rows="5"></textarea></th>
   </tr>
   
   <input type="hidden" name="id" value="<?php echo $id; ?>" />
@@ -172,7 +244,6 @@ $result = mysqli_query($conexao, $sql_1);
   <?php } ?> 
   <tr>
     <td><input class="input" type="submit" name="resposta" id="button" value="Enviar"></td>
-    <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
 </table>
@@ -195,7 +266,7 @@ mysqli_query($conexao, $sql_2);
 
 
 
-echo "<script language='javascript'>window.alert('Mensagem respondida com sucesso!');window.location='suporte_tecnico.php';</script>";
+echo "<script language='javascript'>window.alert('Mensagem respondida com sucesso!');window.location='suporte_tecnico.php?selec=".@$_GET['selec']."';</script>";
 
 
 }?>
@@ -207,14 +278,14 @@ $setor = $_GET['setor'];
 $mensagem = $_GET['mensagem'];
 $date = date("d/m/Y H:i:s");
 	
-$sql_4 = "INSERT INTO central_mensagem (date, status, emissor, receptor, mensagem) VALUES ('$date', 'Aguarde resposta', '$code', '$setor', '$mensagem')";
+$sql_4 = "INSERT INTO central_mensagem (date, status, emissor, receptor, mensagem) VALUES ('$date', 'Aguarde resposta', 'COORDENAÇÃO-2', '$setor', '$mensagem')";
 $result_4 = mysqli_query($conexao, $sql_4);
 if($result_4 == ''){
-	echo "<script language='javascript'>window.alert('Ocorreu um erro!');window.location='suporte_tecnico.php';</script>";
+	echo "<script language='javascript'>window.alert('Ocorreu um erro!');window.location='suporte_tecnico.php?selec=".@$_GET['selec']."';</script>";
 }else{
   switch ($setor) {
-    case 'COORDENAÇÃO':
-      $sql_1 = "SELECT DISTINCT c.id_cursos,c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and p.code='$code'";
+    case 'COORDENAÇÃO-2':
+      $sql_1 = "SELECT DISTINCT c.id_cursos,c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo='$ano' and p.code='$code'";
 	   $result_1 = mysqli_query($conexao, $sql_1);
 	   	while($res_1 = mysqli_fetch_assoc($result_1)){
       
@@ -223,7 +294,7 @@ if($result_4 == ''){
 		}
     echo $sql_5 = "INSERT INTO mural_coordenacao (date, status, curso, id_cursos, titulo) VALUES ('$date', 'Ativo','$turma','$id', 'Existe uma nova mensagem enviada pelo aluno para ser respondida')";
     mysqli_query($conexao, $sql_5);
-    echo "<script language='javascript'>window.alert('Mensagem enviada com sucesso!');window.location='suporte_tecnico.php';</script>";
+    echo "<script language='javascript'>window.alert('Mensagem enviada com sucesso!');window.location='suporte_tecnico.php?selec=".@$_GET['selec']."';</script>";
    
   break;
     
@@ -231,7 +302,7 @@ if($result_4 == ''){
     
      $sql_66 = "INSERT INTO mural_professor (date, status, id_cursos, titulo) VALUES ('$date', 'Ativo', '1', 'Existe uma nova mensagem enviada pelo aluno para ser respondida')";
       mysqli_query($conexao, $sql_66);
-      echo "<script language='javascript'>window.alert('Mensagem enviada com sucesso!');window.location='suporte_tecnico.php';</script>";
+      echo "<script language='javascript'>window.alert('Mensagem enviada com sucesso!');window.location='suporte_tecnico.php?selec=".@$_GET['selec']."';</script>";
       break;
   }//fim while
  
@@ -242,10 +313,11 @@ if($result_4 == ''){
 
 
 <?php if(@$_GET['acao'] == 'fechar'){
+$sql_6=$pdo->prepare("DELETE FROM central_mensagem WHERE id=:id");
+$sql_6->bindValue(':id',$_GET['id']);
+$sql_6->execute();
 
-$sql_6 = "DELETE FROM central_mensagem WHERE id = ".$_GET['id']."";
-mysqli_query($conexao, $sql_6);
-echo "<script language='javascript'>window.location='suporte_tecnico.php';</script>";
+echo "<script language='javascript'>window.location='suporte_tecnico.php?selec=".@$_GET['selec']."';</script>";
 }?>
 
 </div><!-- box -->

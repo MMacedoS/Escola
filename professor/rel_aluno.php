@@ -20,7 +20,7 @@
                 font-size: 18px;
             }
         </style>';
-        $pagina.='<link rel="shortcut icon" href="../image/logo_ist.gif">';
+        $pagina.='<link rel="shortcut icon" href="../image/logo.png">';
             $pagina.="<body>";
             $pagina.='<h2 align="center">Lista de Reprovados em '.$nomed.' Turma '.$nomec.'</h2>';    
             $pagina.='<table align="center" class="table-responsive table"  border="1" cellpadding="5" cellspacing="4" bgcolor="#FFF4EA">';
@@ -80,7 +80,7 @@
                 font-size: 18px;
             }
         </style>';
-        $pagina.='<link rel="shortcut icon" href="../image/logo_ist.gif">';
+        $pagina.='<link rel="shortcut icon" href="../image/logo.png">';
             $pagina.="<body>";
             $pagina.='<h2 align="center">Lista de Reprovados em '.$nomed.' Turma '.$nomec.'</h2>';    
             $pagina.='<table align="center" class="table-responsive table"  border="1" cellpadding="5" cellspacing="4" bgcolor="#FFF4EA">';

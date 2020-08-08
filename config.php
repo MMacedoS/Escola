@@ -1,5 +1,6 @@
 
 <?php 
+
 date_default_timezone_set('America/Sao_Paulo');
     if(@$_GET['acao']=='quebra'){
         @session_start();
@@ -8,7 +9,8 @@ date_default_timezone_set('America/Sao_Paulo');
        $_SESSION['painel']='';
        session_destroy();
        
-        echo "<script language='javascript'> window.location='index.php'; </script>";
+        header("Location:login.php");
+        exit();
     }
 ?>
 <?php
@@ -34,7 +36,8 @@ if($segundos > $_SESSION['limite']){
     session_destroy();
 //    echo "<script language='javascript'> window.location='../index.php?logout';
 //      </script>";
-header("Location: ../index.php?login=3");
+header("Location: ../login.php?login=3");
+exit();
     
 }else{
     
@@ -45,31 +48,36 @@ if(session_status()==PHP_SESSION_NONE){
    session_destroy();
 //    echo "<script language='javascript'> window.location='../index.php?login';
 //      </script>";
-header("Location: ../index.php?login=3");
-    
+header("Location: ../login.php?login=3");
+    exit();
 }else{
 
 if (empty($code)) {
     # code...
     // // echo "<script language='javascript'> window.location='../index.php?login';
     //  </script>";
-    header("Location: ../index.php?login=4");
+    header("Location: ../login.php?login=4");
+
  session_destroy();
+ exit();
 
 } else if(empty($nome)){
     # code...
     // echo "<script language='javascript'> window.location='../index.php?login'; </script>";
-    header("Location: ../index.php?login=4");
+    header("Location: ../login.php?login=4");
          session_destroy();
+         exit();
 }else if(empty($painel)){
      session_destroy();     
     // echo "<script language='javascript'> window.location='../index.php?login'; </script>";
-    header("Location: ../index.php?login=4");
+    header("Location: ../login.php?login=4");
+    exit();
 }else if ($painel_atual!=$painel){
                 
             //    echo "<script language='javascript'> window.location='../index.php?erro'; </script>";
-            header("Location: ../index.php?login=5");
+            header("Location: ../login.php?login=5");
                 session_destroy();
+                exit();
     }
    
 

@@ -49,6 +49,7 @@ body{
 
 span.test2 {
   writing-mode: vertical-rl; 
+  font-size: 8px;
 }
 #customers {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -84,7 +85,7 @@ $pagina.='</head>
 
 // <!-- aqui começa tudo sobre a tabela -->
 
-  $busca=$pdo->prepare("SELECT distinct ch.date_day,l.nome FROM chamadas_em_sala ch inner join estudantes e on e.matricula=ch.matricula inner join disciplinas d on d.id_disciplinas=ch.id_disciplinas inner join lista_disc l on d.disciplina=l.id_lista where d.id_disciplinas=:id and bimestre=:bimestre order by ch.date_day asc");
+  $busca=$pdo->prepare("SELECT distinct ch.date_day,l.nome,c.curso FROM chamadas_em_sala ch inner join estudantes e on e.matricula=ch.matricula inner join disciplinas d on d.id_disciplinas=ch.id_disciplinas inner join lista_disc l on d.disciplina=l.id_lista inner join cursos c on d.id_cursos=c.id_cursos where d.id_disciplinas=:id and bimestre=:bimestre order by ch.date_day asc");
   $busca->bindValue(':id',$disc);
   $busca->bindValue(':bimestre',$bimestre);
   $busca->execute();
@@ -96,7 +97,7 @@ $pagina.='</head>
 <td rowspan="2"  class="nome" bgcolor="#efefef"><strong>Alunos</strong></td>';
 
       
-$pagina.=' <td bgcolor="#efefef" colspan='.$dado.' align="center"><h5><strong>Planilha da Frequência Ano: '.$ano.' '.$dados[0]['nome'].' '.$bimestre.' bimestre</h5></td>';
+$pagina.=' <td bgcolor="#efefef" colspan='.$dado.' align="center"><h5><strong>Planilha da Frequência Ano: '.$ano.' Turma: '.$dados[0]['curso'].' '.$dados[0]['nome'].' '.$bimestre.' bimestre</h5></td>';
    
 
 $pagina.=' <td bgcolor="#efefef" rowspan="2"><strong>Presença</strong></td>

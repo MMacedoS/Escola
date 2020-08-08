@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <link rel="stylesheet" type="text/css" href="css/todas_as_avaliacoes.css"/>
 <title>Trabalhos</title>
 
-<link rel="shortcut icon" href="../image/logo_ist.gif">
+<link rel="shortcut icon" href="../image/logo.png">
 </head>
 
 <body>
@@ -21,7 +21,7 @@
     $code=$_GET['code'];
  ?>
 <div class="row" id="row_button">
-<!-- <br /><a class="a2" rel="superbox[iframe][350x400]" href="cadastrar_trabalho.php?tipo=trabalhos&code=<?php //echo $id_professor; ?>&selec=<?php //echo $selec;?>">Cadastrar Atividade</a> -->
+<!-- <br /><a class="a2" rel="superbox[iframe][350x400]" href="cadastrar_trabalho.php?tipo=trabalhos&code=<php //echo $id_professor; ?>&selec=<php //echo $selec;?>">Cadastrar Atividade</a> -->
 <br /><a class="a3" rel="stylesheet" href="todas_as_trabalhos.php?pg=trabalhos&selec=<?php echo $selec;?>&code=<?php echo $code?>">Atualizar Pagina</a>
 </div>
 <script language="JavaScript">
@@ -158,10 +158,10 @@ if(mysqli_num_rows($result)==''){
      <td><h3><?php echo $res_1['bimestre']; ?></h3></td>
   </tr>
   <tr>
-    <!-- <td><a rel="superbox[iframe][350x400]" href="editar_trabalho.php?id=<?php// echo $res_1['id_ava_coc']; ?>&code=<?php //echo $code; ?>&selec=<?php //echo $selec;?>">Editar</a></td> -->
+    <!-- <td><a rel="superbox[iframe][350x400]" href="editar_trabalho.php?id=<?php// echo $res_1['id_ava_coc']; ?>&code=<php //echo $code; ?>&selec=<php //echo $selec;?>">Editar</a></td> -->
     <td colspan="3"><a href="correcao_trabalho.php?pg=trabalhos&selec=<?php echo $_GET['selec']; ?>&id=<?php echo $res_1['id_ava_coc']; ?>">Lançar notas</a></td>
     <td></td>
-    <!-- <td><a href="todas_as_trabalhos.php?pg=excluir&id=<?php //echo $res_1['id_ava_coc']; ?>&selec=<?php// echo $_GET['selec']; ?>&code=<?php //echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td> -->
+    <!-- <td><a href="todas_as_trabalhos.php?pg=excluir&id=<php //echo $res_1['id_ava_coc']; ?>&selec=<?php// echo $_GET['selec']; ?>&code=<php //echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td> -->
   </tr>  
   </table> 
  

@@ -2,10 +2,44 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <title>Atividades</title>
-<link rel="shortcut icon" href="../image/logo_ist.gif">
+<link rel="shortcut icon" href="../image/logo.png">
 <link rel="stylesheet" type="text/css" href="css/correcao_prova.css"/>
+<style>
+    .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    position: unset !important;
+}
+       #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 97%;
+        }
+        #button {
+            margin: 0px !important;
+            width:50px !important;
+        }
+        
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        #customers th {
+            width:32%;
+        }
+        
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+        
+        #customers tr:hover {background-color: #ddd;}
+        
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 
 <?php require "topo.php";
@@ -68,7 +102,7 @@ $result = mysqli_query($conexao, $sql_1);
 		$bimestre = $res_1['bimestre'];
     $ano=Date("Y");
 		
-$sql_2 = "SELECT * FROM estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes WHERE ce.id_cursos = '$curso' and ce.ano_letivo='$ano' order by e.nome asc";
+$sql_2 = "SELECT * FROM estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes WHERE ce.id_cursos = '$curso' and ce.ano_letivo='$ano' and e.status='Ativo' order by e.nome asc";
 $result_2 = mysqli_query($conexao, $sql_2);
 if(mysqli_num_rows($result_2) == ''){
   echo '<h2><font color="blue">não possui alunos cadastrados nesta turma</font></h2>';
@@ -82,19 +116,17 @@ if(mysqli_num_rows($result_2) == ''){
 <input type="hidden" name="code_aluno" value="<?php echo $res_2['matricula']; ?>" />
 <input type="hidden" name="id" value="<?php echo $id; ?>" />
 <input type="hidden" name="selec" value="<?php echo $selec; ?>" />
-<table class="users" id="table-responsive" border="0">
+<table id="customers" border="0">
   <tr>
-    <td width="107">Código:</td>
-    <td width="302">Nome do aluno:</td>
-    <td width="200">D. aplicação:</td>
-    <td width="144">Bimestre:</td>
-    <td width="156">Nota:</td>
-    <td>&nbsp;</td>
+    <th>Código:</th>
+    <th>Aluno:</th>
+    <th>Bimestre:</th>
+    <th>Nota:</th>
+    <!-- <th>&nbsp;</th> -->
   </tr>
   <tr>
     <td><h3><?php echo $code_aluno = $res_2['matricula']; ?></h3></td>
     <td><h3><?php echo $res_2['nome']; ?></h3></td>
-    <td><h3><?php echo $res_1['data_aplicacao']; ?></h3></td>
     <td><h3><?php echo $bimestre = $res_1['bimestre']; ?>º</h3></td>
     
     <?php
@@ -102,14 +134,18 @@ if(mysqli_num_rows($result_2) == ''){
 	$result_4 = mysqli_query($conexao, $sql_4);
 	if(mysqli_num_rows($result_4) == ''){
 	?>
-    <td><input name="nota" type="text" id="nota" size="6" disabled></td>
-    <td><input type="submit" name="button" id="button" value="Concretizar" onclick="alert('inserindo nota ')"></td>
+    <td><input name="nota" type="text" id="nota" size="3" disabled></td>
+    </tr>
+    <tr>
+    <td><input type="submit" name="button" id="button" value="Inserir" onclick="alert('inserindo nota ')"></td>
 
     <?php }else{ while($res_4 = mysqli_fetch_assoc($result_4 )){ ?>
     <td><h3><?php echo $res_4['nota']; ?></h3></td>
+    </tr>
+    <tr>
    <td><a href="alterar_nota_trabalho.php?pg=atividade_bimestral&id=<?php echo $res_4['id_atividade'];?>&aluno=<?php echo $res_2['matricula']; ?>&disciplina=<?php echo $res_1['id_disciplina']; ?>&bimestre=<?php echo $res_1['bimestre'];  ?>&professor=<?php echo $res_1['professor'];  ?>&nota=<?php echo $res_4['nota']; ?>&selec=<?php echo $_GET['selec'];?>" rel="superbox[iframe][400x100]"><img src="../image/ico-editar.png" width="30" border="0" title="Alterar a nota" /></a></td>
-   <td>&nbsp;</td>
-   <td>&nbsp;</td>
+   <!-- <td>&nbsp;</td>
+   <td>&nbsp;</td> -->
    <td><a href="correcao_atividades.php?pg=atividade_bimestral&id=<?php echo $id; ?>&selec=<?php echo $selec; ?>&idNota=<?php echo $res_4['id_notas_atividades'];?>&deleta=sim"><img src="../image/deleta.png" width="30" border="0" title="deleta nota" /></a></td>
     <?php }} ?>
   </tr>
@@ -183,7 +219,7 @@ switch ($bimestre) {
               $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'";
               $result_verifica = mysqli_query($conexao, $sql_verifica);
                   if(mysqli_num_rows($result_verifica)==0){
-                  $sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', '$id','$date')";
+                  $sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota,prova, id_atividade,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota','$professor', '$id','$date')";
                    mysqli_query($conexao, $sql_3);
                           $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades estão sendo divulgadas','tarefas')";
                           mysqli_query($conexao, $sql_4);

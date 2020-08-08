@@ -3,12 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <?php require_once "../config.php";require_once "../gerador_cobranca.php"; $code; ?>
 <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="css/topo.css" rel="stylesheet" type="text/css" />
+<link href="css/toposs.css" rel="stylesheet" type="text/css" />
 <title>Administração do Professor</title>
-<link rel="shortcut icon" href="../image/logo_ist.gif">
+<link rel="shortcut icon" href="../image/logo.png">
 <script language="javascript" src="../js/jquery-1.7.2.min.js"></script>
 <script src="../js/lightbox.js"></script>
 <link href="../css/lightbox.css" rel="stylesheet" />
@@ -43,15 +43,27 @@
 		});
 
 	</script>
-    
+  <style>
+  #form {
+    /* margin: auto; */
+    margin-left: 0;
+    margin-right: 0;
+
+}
+.btn-voltar {
+    display: none;
+    position: fixed;
+    margin-top: 70vh;
+    margin-left: 15rem;}
+  </style>
 </head>
 
 <body>
 <div id="box_topo">
- 
- <div id="logo">
+ <div class="row">
+ <div class="logo col-sm-6">
    
-  <img id="img" src="../image/logo_ist.gif" />
+  <img id="img" src="../image/logo.png" />
  </div><!-- logo -->
  <script language="JavaScript">
 function refresh() 
@@ -60,36 +72,43 @@ function refresh()
     incluir.submit();
 }
 </script>
- <div id="mostra_login">
-  <h1><strong>Olá, Professor(a)
-     
+</div>
+ <div class="mostra_login col-sm-6">
+ <div class="row">
+ <div class="col-sm-6">
+  <label for=""> Olá, Professor(a)
+  
    <?php 
     
     $sql_busca_nome="select nome,id_professores from professores where code='$code'";
     $con_busca_nome=mysqli_query($conexao,$sql_busca_nome);
     while($res_busca_nome=mysqli_fetch_assoc($con_busca_nome)){
-       echo $nome_professor=$res_busca_nome['nome'];
+       echo $nome_professor=substr($res_busca_nome['nome'],0,9).'...';
        $id_professor=$res_busca_nome['id_professores'];
        $ano_letivo=date("Y");
        }
-    ?>, seu código é:</strong> <?php echo @$code."."; ?>
-      Escolha uma <strong>Categoria:</strong>
-      <form name='incluir' ... />
+    ?>,
+    </label>
+    </div>
+    <div class="col-sm-6 ml-2">
+    <div class="row">
+      <form id="form" name='incluir' ... />
+      <label for="">Escolha uma Categoria:</label>
        <select class="custom-select" name="selec" LANGUAGE="JAVASCRIPT" ONCHANGE="submit()" >
          <?php
             
              switch ($_GET['selec']){
                case '1':
-                echo '<option value="">Fundamental Anos Iniciais</option>';
+                echo '<option value="1">Fundamental Anos Iniciais</option>';
                  break;
                  case '2':
-                  echo '<option value="">Fundamental Anos Finais</option>';
+                  echo '<option value="2">Fundamental Anos Finais</option>';
                    break;
                    case '3':
-                    echo '<option value="">Ensino Médio Inicial</option>';
+                    echo '<option value="3">Ensino Médio Inicial</option>';
                      break;
                      case '4':
-                      echo '<option value="">Ensino Médio Final</option>';
+                      echo '<option value="4">Ensino Médio Final</option>';
                        break;
               
              }
@@ -109,29 +128,37 @@ function refresh()
       
     <?php } ?>
     </select>
-     <button type="button" color="red" onclick="window.location='../config.php?acao=quebra';">SAIR</button>
-    </h1>
-  
-
+     <!-- <button type="button" color="red" onclick="window.location='../config.php?acao=quebra';">SAIR</button> -->
+     </div>  
+     </div>
+     </div>
  </div><!-- mostra_login -->
+ </div>
 </div><!-- box_topo -->
-<div id="menu">
+
+<!-- navegação -->
+<div class="btn-voltar" data-container="botao-voltar">
+  <a href="" class="btn-voltar-link">
+    voltar para o topo
+  </a>
+</div>
+<div id="menu" data-container="menu">
 <input type="checkbox" id="bt_menu" />
     <label for="bt_menu">&#9776;</label>
     <nav class="menu">
         <ul>
-        <li><a href="index.php">Inicio</a></li>
+        <li class="col-sm-2"><a href="index.php">Inicio</a></li>
         
                 
             </li>
               
-            <li> <a href="turmas_e_alunos.php?selec=nada selecionado">Turmas e Alunos</a>
+            <li class="col-sm-3"> <a href="turmas_e_alunos.php?selec=<?php echo @$_GET['selec'];?>">Turmas e Alunos</a>
             <ul>
             <li><a href="frequencias_geral.php?pg=frequencia&selec=<?php echo @$_GET['selec'];?>&code=<?php echo $code;?>">Gerar Frequência</a></li>
             </ul>
                 
             </li>
-            <li><a href="">Todas as Avaliações</a>
+            <li class="col-sm-3"><a href="">Todas as Avaliações</a>
     <?php 
     if (@$_GET['selec']) {
       $variable=$_GET['selec'];
@@ -196,8 +223,8 @@ function refresh()
   }
    ?>
    </li>
-   <li><a href="suporte_tecnico.php?selec=nada selecionado">Suporte Escolar</a></li>
-   
+   <li class="col-sm-2"><a href="suporte_tecnico.php?selec=nada selecionado">Suporte Escolar</a></li>
+   <li class="col-sm-2"><a href="../config.php?acao=quebra">Sair</a></li>   
         </ul>
         
 
@@ -205,3 +232,24 @@ function refresh()
     </div>
 </body>
 </html>
+
+
+<script >
+$(document).ready(function(){
+  var _containerBtn=$('[data-container="botao-voltar"]');
+
+  $(window).scroll(function(){
+    if($(this).scrollTop()>70){
+      _containerBtn.fadeIn(500);
+    }else{
+      _containerBtn.fadeOut(0);
+    }
+  });
+
+  _containerBtn.click(function(){
+    $("html,body").animate({scrollTop:0},800);
+    return false;
+  });
+});
+
+</script>

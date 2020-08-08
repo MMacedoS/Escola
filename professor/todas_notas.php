@@ -2,11 +2,45 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <link rel="stylesheet" type="text/css" href="css/todas_as_avaliacoes.css"/>
 <title>Provas</title>
 
-<link rel="shortcut icon" href="../image/logo_ist.gif">
+<link rel="shortcut icon" href="../image/logo.png">
+<style>
+    .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    position: unset !important;
+}
+       #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 97%;
+        }
+        #button {
+            margin: 0px !important;
+            width:50px !important;
+        }
+        
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        #customers th {
+            width:17%;
+        }
+        
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+        
+        #customers tr:hover {background-color: #ddd;}
+        
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -21,8 +55,8 @@
     $code=$_GET['code'];
  ?>
 <!-- <div class="row" id="row_button">
-<br /><a class="a2" rel="superbox[iframe][850x350]" href="cadastrar_atividades.php?tipo=atividade_bimestral&code=<?php echo $id_professor; ?>">Cadastrar Atividade</a>
-<br /><a class="a3" rel="stylesheet" href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $selec;?>">Atualizar Pagina</a>
+<br /><a class="a2" rel="superbox[iframe][850x350]" href="cadastrar_atividades.php?tipo=atividade_bimestral&code=php echo $id_professor; ?>">Cadastrar Atividade</a>
+<br /><a class="a3" rel="stylesheet" href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=php echo $selec;?>">Atualizar Pagina</a>
 </div> -->
 <script language="JavaScript">
 function refresh() 
@@ -58,12 +92,12 @@ if(mysqli_num_rows($result)==''){
 	while($res_1 = mysqli_fetch_assoc($result)){
     // echo $sql_1;
 ?> 
-<table class="users" id="table-responsive" border="0">
+<table id="customers" border="0">
   <tr>
-    <td width="187">Disciplina</td>
-    <td width="323">Curso</td>
-    <td width="200">Quantidade de Aluno</td>
-    <td></td>
+    <th>Disciplina</th>
+    <th>Curso</th>
+    <th>Quantidade de Aluno</th>
+    <th></th>
   </tr>
   <tr>
     <td><h3><?php echo $res_1['nome'];  ?></h3></td>

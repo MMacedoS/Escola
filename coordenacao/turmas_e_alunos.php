@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <!---<link href="css/turmas_e_alunos.css" rel="stylesheet" type="text/css" />--->
 
-<link rel="shortcut icon" href="../image/logo_ist.gif">
+<link rel="shortcut icon" href="../image/logo.png">
 <style>
 #filtro{
   /* margin-left: -15rem!important; */
@@ -89,7 +89,7 @@
                   
                 </form>
             <?php if(isset($_GET['button'])){
-
+if(@$_GET['disciplina']){
 $tipo = $_GET['disciplina'];
 $serie = $_GET['turma'];
 
@@ -97,7 +97,7 @@ $s=$_GET['selet'];
 
 echo "<script language='javascript'>window.location='turmas_e_alunos.php?selec=$s&disciplina=$tipo&turma=$serie&filtro=1';</script>";
 
-}?>
+}}?>
 <!-- fim do filtro -->
 <h1>Abaixo, observa-se o historico de chamadas!</h1>
 <?php
@@ -106,12 +106,13 @@ echo "<script language='javascript'>window.location='turmas_e_alunos.php?selec=$
 if(!@$_GET['filtro']){
 	echo "Nenhuma disciplina!";
 }else{
+  if(@$_GET['disciplina']){
   $curso=$_GET['turma'];
   $dis=$_GET['disciplina'];
   // header("Location:fazer_chamada.php?curso=$curso&dis=$dis");
   echo "<script language='javascript'>window.location='fazer_chamada.php?dis=$dis&curso=$curso';</script>";
 
-  } ?>
+  }} ?>
 </div><!-- box -->
 
 <?php require "rodape.php"; ?>

@@ -6,7 +6,7 @@
    
     <title>Administração</title>
 
-    <link rel="shortcut icon" href="../image/logo_ist.gif">
+    <link rel="shortcut icon" href="../image/logo.png">
 
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 </head>

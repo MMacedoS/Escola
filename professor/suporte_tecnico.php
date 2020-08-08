@@ -2,15 +2,95 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <title>Suporte Escolar</title>
-<link rel="shortcut icon" href="../image/logo_ist.gif">
+<link rel="shortcut icon" href="../image/logo.png">
 <link rel="stylesheet" type="text/css" href="css/suporte_tecnico.css"/>
+<style>
+    .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    position: unset !important;
+}
+       .customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 97%;
+        }
+        .text-overflow-dynamic-container {
+    position: relative;
+    max-width: 100%;
+    padding: 0 !important;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    vertical-align: text-bottom !important;
+}
+.text-overflow-dynamic-ellipsis {
+    position: absolute;
+    white-space: nowrap;
+    overflow-y: visible;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    max-width: 100%;
+    min-width: 0;
+    width:100%;
+    top: 0;
+    left: 0;
+}
+.text-overflow-dynamic-container:after,
+.text-overflow-dynamic-ellipsis:after {
+    content: '-';
+    display: inline;
+    visibility: hidden;
+    width: 0;
+}
+
+        .diminuir {
+          display: block;
+          white-space: normal;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          height: 40px;          
+          
+        }
+        #button {
+            margin: 0px !important;
+            width:50px !important;
+        }
+        
+        .customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .customers th {
+            width:32%;
+        }
+        textarea {
+            width: 100%!important;
+            height: 50px!important;
+            padding: 10px!important;
+            
+        }
+        
+        .customers tr:nth-child(even){background-color: #f2f2f2;}
+        
+        .customers tr:hover {background-color: #ddd;}
+        
+        .customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
 
-<?php require "topo.php"; ?>
+<?php require "topo.php"; 
+$ano=Date('Y');?>
 
 <div id="caixa_preta">
 </div><!-- caixa_preta -->
@@ -18,19 +98,22 @@
 <div id="box">
  <h1><strong>Histórico de chamados</strong></h1>
  <a href="suporte_tecnico.php?acao=abrir_chamado" class="a_1">Abrir chamado</a>
- <table class="users" id="table-responsive" border="0">
+ <table class="customers" border="0">
 <?php if(@$_GET['acao'] == 'abrir_chamado'){ ?>
 
-  <tr>
-  <td>	 
+    
      <form name="enviar_mensagem" method="post" action="" enctype="multipart/form-data">
-	  Selecione o setor que você quer enviar esta mensagem
+     <tr>  
+    <th>
+    Selecione </th></tr>
+    <tr>
+    <th>
      <select name="setor" size="1" id="select">
-       <option value="COORDENAÇÃO" style="background-color:#F3F781;">COORDENAÇÃO</option>
+       <option value="COORDENAÇÃO-2" style="background-color:#F3F781;">COORDENAÇÃO</option>
         <option value="" style="background-color:#F3F781;"></option>
        <option value="PROFESSOR">PROFESSORES</option>
        <?php      
-		$sql_2 = "SELECT DISTINCT p.code,p.nome from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020";
+		$sql_2 = "SELECT DISTINCT p.code,p.nome from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo='$ano'";
 		$result_2 = mysqli_query($conexao, $sql_2);
 			while($res_2 = mysqli_fetch_assoc($result_2)){
         $serie=$res_2['id_cursos'];
@@ -40,30 +123,38 @@
                 
        <option value=""><strong> COLEGAS DE CLASSE</strong></option>
        <?php
-       $sql_3 = "SELECT DISTINCT e.matricula,e.nome, c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and p.code='$code' and e.status='ativo'";
+       $sql_3 = "SELECT DISTINCT e.matricula,e.nome, c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo='$ano' and p.code='$code' and e.status='Ativo'";
 	   $result_3 = mysqli_query($conexao, $sql_3);
 	   	while($res_3 = mysqli_fetch_assoc($result_3)){
 	   ?>
         <option value="<?php echo $res_3['matricula']; ?>" style="background-color:#58FAF4;"><?php echo $res_3['nome']; ?></option>
         <?php } ?>
      </select>
-     
-     <br />Digite sua mensagem
+     </th>
+     </tr>
+     <tr>     
+     <th>
+     Digite sua mensagem
+     </th>
+     </tr>
+     <tr>
+     <th>
      <textarea name="mensagem"></textarea>
-	 <input class="input" type="submit" name="enviar_mensagem" value="Enviar" />
+     </th>
+      <tr>
+	 </tr><th><input class="input" type="submit" name="enviar_mensagem" value="Enviar" /></th>
      </form>
-     <hr>
-  </td>
+
   </tr>
 <?php } ?>
   <tr>
     <td  align="left">Abaixo segue seu relatório de chamadas</td>
   </tr>
   <tr>
-    <td align="center"><hr></td>
+    <td align="center"></td>
   </tr>
   <tr>
-    <td align="center">
+    <th align="center">
     <?php
     $sql_5 = "SELECT * FROM central_mensagem WHERE emissor = '$code' or receptor='$code' order by id desc";
 	$result_5 = mysqli_query($conexao, $sql_5);
@@ -71,27 +162,30 @@
 		echo "Não existe nenhuma mensagem";
 	}else{
 	?>
-     <table class="users" id="table-responsive" border="0">
+     <table class="customers" id="" border="0">
       <tr>
-      <td ><strong>Emissor:</strong></td>
-        <td ><strong>Receptor:</strong></td>
-        <td ><strong>Status:</strong></td>
-        <td ><strong>Data:</strong></td>
-        <td ><strong>Data da resposta:</strong></td>
+      <th ><strong>Emissor:</strong></th>
+        <th ><strong>Receptor:</strong></th>
+        <th><strong>Status:</strong></th>
+        <th ><strong>Data:</strong></th>
       <?php while($res_5 = mysqli_fetch_assoc($result_5)){ ?>
       <tr>
-      <td><?php $you=$res_5['emissor']; if($you==$code){ echo "VOCÊ";}else{echo $you;}; ?></td>
-      <td><?php $you=$res_5['receptor']; if($you==$code){ echo "VOCÊ";}else{echo $you;}; ?></td>
-        <td><?php echo $res_5['status']; ?></td>
+      <td><span class="text-overflow-dynamic-container">
+        <span class="text-overflow-dynamic-ellipsis"><?php $you=$res_5['emissor']; if($you==$code){ echo "VOCÊ";}else{echo $you;}; ?></span></span></td>
+      <td><span class="text-overflow-dynamic-container">
+        <span class="text-overflow-dynamic-ellipsis"><?php $you=$res_5['receptor']; if($you==$code){ echo "VOCÊ";}else{echo $you;}; ?></span></span></td>
+        <td><span class="text-overflow-dynamic-container">
+        <span class="text-overflow-dynamic-ellipsis"><?php echo $res_5['status']; ?></span></span></td>
         <td><?php echo $res_5['date']; ?></td>
+       
+        </tr>
+        <tr>
         <td><?php echo $res_5['data_resposta']; ?></td>
-        <td width="80">
-        <a href="suporte_tecnico.php?acao=responder&id=<?php echo $res_5['id']; ?>"><img src="../image/confirma.png" width="22" border="0" title="responder" /></a>
-        <a href="suporte_tecnico.php?acao=ticket&id=<?php echo $res_5['id']; ?>"><img src="../image/visualizar16.gif"  border="0" title="Vizualizar chamada" /></a> |
-        <a href="suporte_tecnico.php?acao=fechar&id=<?php echo $res_5['id']; ?>"><img src="../image/deleta.png" width="22" border="0" title="Excluir chamado" /></a>
-        
+        <td><a href="suporte_tecnico.php?acao=responder&id=<?php echo $res_5['id']; ?>"><img src="../image/confirma.png" width="22" border="0" title="responder" /></a></td>
+        <td><a href="suporte_tecnico.php?acao=ticket&id=<?php echo $res_5['id']; ?>"><img src="../image/visualizar16.gif"  border="0" title="Vizualizar chamada" /></a></td>
+        <td><a href="suporte_tecnico.php?acao=fechar&id=<?php echo $res_5['id']; ?>"><img src="../image/deleta.png" width="22" border="0" title="Excluir chamado" /></a></td>       
       
-        </td>
+        </th>
         </tr>
       	
       <?php } if(@$_GET['acao'] == 'ticket'){
@@ -120,7 +214,7 @@
         </tr>
         <?php } ?>
       	<tr><br />
-        <td colspan="6"><hr></td>
+       
         </tr>
       <?php }}} ?>
     </table>
@@ -143,26 +237,23 @@ $result = mysqli_query($conexao, $sql_1);
 ?>
  
 <form name="button" method="post" action="" enctype="multipart/form-data">
-<table class="users" id="table-responsive" border="0">
+<table class="customers" id="" border="0">
   <tr>
-    <td><strong>Data:</strong></td>
-    <td><strong>Nº de matricula do aluno:</strong></td>
+    <th><strong>Data:</strong></th>
+    <th><strong>Código:</strong></th>
   </tr>
   <tr>
     <td><?php echo $res_1['date']; ?></td>
-    <td><?php echo $res_1['emissor']; ?></td>
-    
+    <td><?php echo $res_1['emissor']; ?></td>    
   </tr>
   <tr>
-    <td><strong>Mensagem:</strong></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <th><strong>Mensagem:</strong></th>
   </tr>
   <tr>
-    <td colspan="3"><?php echo $res_1['mensagem']; ?></td>
+    <td colspan="1"><?php echo $res_1['mensagem']; ?></td>
   </tr>
   <tr>
-    <td colspan="3"><label for="textarea"></label>
+    <td colspan="2"><label for="textarea"></label>
     <textarea name="resp" id="textarea" cols="110" rows="5"></textarea></td>
   </tr>
   
@@ -172,7 +263,6 @@ $result = mysqli_query($conexao, $sql_1);
   <?php } ?> 
   <tr>
     <td><input class="input" type="submit" name="resposta" id="button" value="Enviar"></td>
-    <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
 </table>
@@ -214,7 +304,7 @@ if($result_4 == ''){
 }else{
   switch ($setor) {
     case 'COORDENAÇÃO':
-      $sql_1 = "SELECT DISTINCT c.id_cursos,c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and p.code='$code'";
+      $sql_1 = "SELECT DISTINCT c.id_cursos,c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo='$ano' and p.code='$code'";
 	   $result_1 = mysqli_query($conexao, $sql_1);
 	   	while($res_1 = mysqli_fetch_assoc($result_1)){
       

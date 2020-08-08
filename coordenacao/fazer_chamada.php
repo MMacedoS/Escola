@@ -4,10 +4,10 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="with=device-width,initial-scale=1">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
     <title>Chamada</title>
 
-    <link rel="shortcut icon" href="../image/logo_ist.gif">
+    <link rel="shortcut icon" href="../image/logo.png">
     <link rel="stylesheet" type="text/css" href="css/fazerchamada.css" />
     <style>
             #customers {
@@ -19,6 +19,9 @@
         #customers td, #customers th {
             border: 1px solid #ddd;
             padding: 8px;
+        }
+        #customers th {
+            width:44%;
         }
         
         #customers tr:nth-child(even){background-color: #f2f2f2;}
@@ -100,14 +103,14 @@
         echo $resDisc['nome'];
    }
    ?>
-                <!-- <a background-color="blue" id="h1_a" rel="superbox[iframe][900x500]" href="fazer_rapida.php?curso=<?php echo $_GET['curso'];?>&dis=<?php echo $_GET['dis'];?>&turno=<?php echo $_GET['turno'];?>"><img title="chamada rapida" border="0" src="../image/confirma.png" width="50" /></a> -->
+                <!-- <a background-color="blue" id="h1_a" rel="superbox[iframe][900x500]" href="fazer_rapida.php?curso=<php echo $_GET['curso'];?>&dis=<php echo $_GET['dis'];?>&turno=<php echo $_GET['turno'];?>"><img title="chamada rapida" border="0" src="../image/confirma.png" width="50" /></a> -->
             </h1>
             <?php
 
 $date = date("d/m/Y H:i:s");
 $dis = base64_decode($_GET['dis']);
 
-    $sql_1=$pdo->prepare("SELECT * from estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes where ce.id_cursos=:cursos order by e.nome asc");
+    $sql_1=$pdo->prepare("SELECT * from estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes where ce.id_cursos=:cursos and e.status='Ativo' order by e.nome asc");
     $sql_1->bindValue(':cursos',$curso);
     $sql_1->execute();
     $dados=$sql_1->fetchAll();
@@ -121,11 +124,14 @@ if($resultado==0 ){
 
             <form name="button" method="POST" enctype="multipart/form-data" action="">
 
-                <table id="customers" class="table" border="0">
+                <table id="customers" border="0">
                     <tr>
-                        <th width="94"><strong>Código:</strong></th>
-                        <th width="350"><strong>Nome:</strong></th>
+                 
+                        <th ><strong>Código:</strong></th>
+                        <th ><strong>Nome:</strong></th>
                         <th colspan="2"><strong>Presente?</strong></th>
+                        
+                       
                     </tr>
                     <input type="hidden" name="curso" value="<?php echo  base64_encode($curso); ?>">
                     <input type="hidden" name="dis" value="<?php echo  base64_encode($dis); ?>">
@@ -148,7 +154,7 @@ if($resultado==0 ){
 
                         if($qtde_chamada==0){
     ?>
-                        <td width="315">
+                        <td>
                             <div class="switch">
 
                                 <input type="checkbox" name="checkbox[]" id="option"
@@ -172,7 +178,7 @@ if($resultado==0 ){
            }
            ?>
                         </td>
-                        <td width="62">
+                        <td>
                             <a
                                 href="fazer_chamada.php?selec=nadaselecionado&pg=excluir&curso=<?php echo $_GET['curso']?>&dis=<?php echo $_GET['dis']?>&cha=<?php echo base64_encode($chamada); ?>&data=<?php echo $_GET['cha'];?>"><img
                                     border="0" src="../image/deleta.png" width="22" /></a>

@@ -71,7 +71,7 @@ tr:nth-of-type(5) td:nth-of-type(1) {
     
 </style>';
 ///pode remover o costumer e as bordas que a table fica ajustada tambem 
-$pagina.='<link rel="shortcut icon" href="../image/logo_ist.gif">';
+$pagina.='<link rel="shortcut icon" href="../image/logo.png">';
     $pagina.="<body>";
     $pagina.='<h1 align="center">Planilha de Notas:'.$nomed.' '.$nomec.'</h1>';    
     $pagina.='<table id="customers" class=".table-responsive{-sm|-md|-lg|-xl} table"  border="1" cellpadding="5" cellspacing="4" bgcolor="#FFF4EA">';
@@ -105,7 +105,7 @@ $pagina.='<link rel="shortcut icon" href="../image/logo_ist.gif">';
     $unidade-=1;
     }//finalizando whilw lista atividades
     $pagina.="</tr>";
-            $sql="SELECT * FROM estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes WHERE ce.id_cursos = '$curso' and ce.ano_letivo='$ano' order by e.nome asc";
+            $sql="SELECT * FROM estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes WHERE ce.id_cursos = '$curso' and ce.ano_letivo='$ano' and e.status='Ativo' order by e.nome asc";
             $con=mysqli_query($conexao,$sql);
             while($res=mysqli_fetch_assoc($con)){///listando os alunoss
     $pagina.="<tr>";

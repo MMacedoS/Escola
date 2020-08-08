@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
-<link rel="shortcut icon" href="../image/logo_ist.gif">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
+<link rel="shortcut icon" href="../image/logo.png">
 <title>Coordenação</title>
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
 </head>
@@ -16,7 +16,14 @@
 <div id="caixa_preta">
 </div><!-- caixa_preta -->
 <?php if (!isset($_GET['selec'])) {
-  ?><script>alert('Se deseja acessar todas as avaliações para cadastrar e lançar notas, escolha uma categoria no botão acima ao lado do botão sair.');</script><?php
+  ?>
+  <div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">Alerta!</h4>
+  <p>Se deseja acessar todas as avaliações para cadastrar e lançar notas, escolha uma categoria no botão acima ao lado do botão sair.</p>
+  <hr>
+  
+</div>
+  <?php
 }?>
 <div id="box">
 
@@ -70,15 +77,15 @@
     <h1><strong>Suporte Escolar</strong></h1>
     <li><strong>Mensagens aguardando resposta:</strong> <?php 
     $sql_2=$pdo->prepare('SELECT * FROM central_mensagem WHERE receptor =:code AND status =:status');
-    $sql_2->bindValue(':code',$code);
-    $sql_2->bindValue(':status','Aguarda resposta');
+    $sql_2->bindValue(':code','COORDENAÇÃO-2');
+    $sql_2->bindValue(':status','Aguarde resposta');
     $sql_2->execute();
     $dados=$sql_2->fetchAll();
     echo count($dados);
     // echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem WHERE receptor = '$code' AND status = 'Aguarda resposta'")).'  '; ?></li>
     <li><strong>Mensagens respondidas:</strong>  <?php 
     $sql_2=$pdo->prepare('SELECT * FROM central_mensagem WHERE receptor = :code AND status =:status');
-    $sql_2->bindValue(':code',$code);
+    $sql_2->bindValue(':code','COORDENAÇÃO-2');
     $sql_2->bindValue(':status','Respondida');
     $sql_2->execute();
     $dados=$sql_2->fetchAll();
@@ -86,7 +93,7 @@
     // echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM central_mensagem WHERE receptor = '$code' AND status = 'Respondida'")); ?></li>
     <li><strong>Todas as mensagens:</strong>  <?php 
     $sql_2=$pdo->prepare('SELECT * FROM central_mensagem WHERE receptor =:code');
-    $sql_2->bindValue(':code',$code);
+    $sql_2->bindValue(':code','COORDENAÇÃO-2');
     $sql_2->execute();
     $dados=$sql_2->fetchAll();
     echo count($dados);

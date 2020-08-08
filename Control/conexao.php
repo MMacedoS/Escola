@@ -3,14 +3,14 @@
 header('Content-Type: text/html; charset=UTF-8');
 date_default_timezone_set('America/Sao_Paulo');
 function connectar(){
-    $servidor ="mysql873.umbler.com";
-    $usuario="kamaur";
-    $senha="kamaur2711";
-    $banco="ist";
-// $servidor = 'localhost';
-// $usuario = 'root';
-// $senha = '';
-// $banco = 'ist';
+    // $servidor ="mysql873.umbler.com";
+    // $usuario="kamaur";
+    // $senha="kamaur2711";
+    // $banco="ist";
+$servidor = 'localhost';
+$usuario = 'root';
+$senha = '';
+$banco = 'escolaist';
 
 	$con= new mysqli($servidor,$usuario,$senha,$banco);
 	$con->set_charset("utf8");
@@ -21,18 +21,18 @@ $conexao=connectar();
 
 //DADOS PARA CONEXÃO COM BANCO DE DADOS LOCAL
 
-// $host = 'localhost';
-// $usuario = 'root';
-// $senha = '';
-// $banco = 'ist';
+$host = 'localhost';
+$usuario = 'root';
+$senha = '';
+$banco = 'escolaist';
 
 
 //DADOS PARA CONEXÃO COM BANCO DE DADOS HOSPEDADA
 
-$host = 'mysql669.umbler.com';
-$usuario = 'garradeaguia';
-$senha = 'kamaur2711';
-$banco = 'sismed';
+// $host = 'mysql669.umbler.com';
+// $usuario = 'garradeaguia';
+// $senha = 'kamaur2711';
+// $banco = 'sismed';
 
 
 //VALORES PARA A COMBOBOX DE PAGINAÇÃO
@@ -43,7 +43,8 @@ $opcao3 = 10;
 
 //VARIAVEL PARA DEFINIR O CAMINHO DO SISTEMA
 // $url_sistema = 'http://sistemapdvteste-com-br.umbler.net';
-$url_sistema = 'http://mmsescolar.com.br';
+// $url_sistema = 'http://mmsescolar.com.br';
+$url_sistema='localhost/SistemaCopia/';
 // $url_sistema = 'http://garradeaguia-com-br.umbler.net';
 
 $email_adm = 'mauricio.jorro@hotmail.com';

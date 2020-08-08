@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Estudante</title>
 
-    <link rel="shortcut icon" href="../image/logo_ist.gif">
+    <link rel="shortcut icon" href="../image/logo.png">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
   
 

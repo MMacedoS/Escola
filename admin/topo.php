@@ -10,9 +10,9 @@ require "../gerador_cobranca.php";
 <head>
 
 <meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″>
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 
-<link rel="shortcut icon" href="../image/logo_ist.gif">
+<link rel="shortcut icon" href="../image/logo.png">
 <link href="css/topo.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -55,7 +55,7 @@ require "../gerador_cobranca.php";
 <div id="box_topo">
  
  <div id="logo">
-  <img id="img" src="../image/logo_ist.gif">  
+  <img id="img" src="../image/logo.png">  
  </div><!-- logo -->
 
  
@@ -82,7 +82,11 @@ require "../gerador_cobranca.php";
                     <li><a href="cursos_e_disciplinas.php?pg=unidade">Criar Bimestres</a></li>
                 </ul>
             </li>
-            <li><a href="professores.php?pg=todos">Professores</a></li>  
+            <li><a href="professores.php?pg=todos">Professores</a>
+                <ul>
+                <li><a href="professores.php?pg=coord">Coordenador</a></li>
+                </ul>
+            </li>  
                 
             <li><a href="estudantes.php?pg=todos">Estudantes</a></li>
             <li><a href="setor_financeiro.php">Setor Financeiro</a></li>

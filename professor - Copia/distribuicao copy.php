@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/distribuicao.css">
-    <link rel="shortcut icon" href="../image/logo_ist.gif">
+    <link rel="shortcut icon" href="../image/logo.png">
     <title>Distribuição de Notas</title>
     <?php require_once "../config.php"; ?>
 </head>
@@ -187,7 +187,7 @@ $mediaFinal=0;
     while($resTrans=mysqli_fetch_assoc($conTrans)){
     $media1=$media1+$resTrans['nota'];
     ?>
-    <td bgcolor="#FFFFFF" class="at" align="center"><font color="#090000"><?php //echo $resTrans['nota'];?></font></td>
+    <td bgcolor="#FFFFFF" class="at" align="center"><font color="#090000"><php //echo $resTrans['nota'];?></font></td>
     <?php 
     
      }

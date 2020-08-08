@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <title>Detalhes da Busca</title>
 <link rel="stylesheet" type="text/css" href="css/mostrar_resultado.css"/>
 <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/> -->
@@ -176,8 +176,8 @@ $sql_1 = mysqli_query($conexao, "SELECT * FROM estudantes WHERE matricula = '$q'
     <td><strong>Atendimento Especial:</strong></td>
   </tr>
   <tr>
-    <td><?php //echo $res_1['serie']; ?></td>
-    <td><?php //echo $res_1['turno']; ?></td>
+    <td><php //echo $res_1['serie']; ?></td>
+    <td><php //echo $res_1['turno']; ?></td>
     <td><?php echo $res_1['atendimento_especial']; ?></td>
   </tr>
   <tr>

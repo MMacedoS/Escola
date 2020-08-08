@@ -16,7 +16,7 @@
         font-size: 10px;
     }
 </style>';
-$pagina.='<link rel="shortcut icon" href="../image/logo_ist.gif">';
+$pagina.='<link rel="shortcut icon" href="../image/logo.png">';
     $pagina.="<body>";
     $pagina.='<h3 align="center">Distribuição Notas de:'.$nomed.$nomec.'</h3>';  
     

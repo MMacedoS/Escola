@@ -2,9 +2,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <title>Correçao de Prova</title>
 <link rel="stylesheet" type="text/css" href="css/correcao_prova.css"/>
+<style>
+    .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    position: unset !important;
+}
+       #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 97%;
+        }
+        #button {
+            margin: 0px !important;
+            width:50px !important;
+        }
+        
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        #customers th {
+            width:15%;
+        }
+        
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+        
+        #customers tr:hover {background-color: #ddd;}
+        
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 
 <?php require "topo.php";
@@ -77,7 +111,6 @@ while($resDis=mysqli_fetch_assoc($conDis)){
 <input type="hidden" name="pg" value="notas">
 <input type="hidden" name="id" value="<?php echo $id; ?>">
 </h1>
-<p></p>
 <script>
 $(document).ready(function(){
   $("#cooler").change(function(){
@@ -139,7 +172,7 @@ if(mysqli_num_rows($result) == ''){
 <input type="hidden" name="code_aluno" value="<?php echo $res_2['code']; ?>" />
 <input type="hidden" name="id" value="<?php echo $id; ?>" />
 <input type="hidden" name="selec" value="<?php echo $selec; ?>" />
-<table class="users" id="table-responsive" border="0">
+<table id="customers" border="0">
   <tr>
       <!-- while estudante -->
       <?php
@@ -151,12 +184,10 @@ if(mysqli_num_rows($result) == ''){
         ?>
 
 
-     <td width="302">Nome do aluno:</td>
-    <td width="200">Disciplinas:</td>
-    <td width="144">Bimestre:</td>
-    <td width="200">Nota do Bimestre</td>
-    <td width="100">Paralela</td>
-    <td width="100">Conselho:</td>
+    <th>Aluno:</th>
+    <th>Disciplinas:</th>
+    <th>Bimestre:</th>
+    <th>Nota:</th>
     
   </tr>
   <tr>
@@ -182,12 +213,13 @@ if(mysqli_num_rows($result) == ''){
 	 while($res_4 = mysqli_fetch_assoc($result_4 )){ ?>
     <?php if($res_4['nota']>=7){ ?>
     <td bgcolor="#58FA58" align="center"><font><h3><?php echo $res_4['nota']; ?></h3></font></td>
-    <td bgcolor="#58FA58" align="center"></td>
-    <td bgcolor="#58FA58" align="center"></td>
+   
    <?php }else{?>
     <td bgcolor="#FA5858" align="center"><font><h3><?php echo $res_4['nota']; ?></h3></font></td>
     <?php if($res_4['bimestre']==4){
     }else{ ?>
+    </tr>
+    <tr>
    <td align="center"><a href="alterar_nota_trabalho.php?pg=ponto_extra&selec=<?php echo $selec;?>&id=<?php echo $res_4['id_disciplinas'];?>&aluno=<?php echo $res_2['code']; ?>&disciplina=<?php echo $res_2['id_disciplinas']; ?>&bimestre=<?php echo $res_2['bimestre'];  ?>&professor=<?php echo $code;  ?>&nota=<?php echo $res_4['nota']; ?>" rel="superbox[iframe][400x100]"><img src="../image/ico-editar.png" border="0" title="Alterar a nota" /></a></td>
     <td><a target="_blank" href="lancar_notas.php?pg=notas&selec=<?php echo $selec;?>&id=<?php echo $res_4['id_disciplinas'];?>&info" >Inserir conselho</a></td>
    

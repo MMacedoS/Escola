@@ -2,15 +2,97 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <title>Suporte Escolar</title>
-<link rel="shortcut icon" href="../image/logo_ist.gif">
+<link rel="shortcut icon" href="../image/logo.png">
 <link rel="stylesheet" type="text/css" href="css/suporte_tecnico.css"/>
+<style>
+    .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    position: unset !important;
+}
+       .customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 97%;
+        }
+        .text-overflow-dynamic-container {
+    position: relative;
+    max-width: 100%;
+    padding: 0 !important;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    vertical-align: text-bottom !important;
+}
+.text-overflow-dynamic-ellipsis {
+    position: absolute;
+    white-space: nowrap;
+    overflow-y: visible;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    max-width: 100%;
+    min-width: 0;
+    width:100%;
+    top: 0;
+    left: 0;
+}
+.text-overflow-dynamic-container:after,
+.text-overflow-dynamic-ellipsis:after {
+    content: '-';
+    display: inline;
+    visibility: hidden;
+    width: 0;
+}
+
+        .diminuir {
+          display: block;
+          white-space: normal;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          height: 40px;          
+          
+        }
+        #button {
+            margin: 0px !important;
+            width:50px !important;
+        }
+        
+        .customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .customers th {
+            width:32%;
+        }
+        textarea {
+            width: 100%!important;
+            height: 50px!important;
+            padding: 10px!important;
+            
+        }
+        
+        .customers tr:nth-child(even){background-color: #f2f2f2;}
+        
+        .customers tr:hover {background-color: #ddd;}
+        
+        .customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: blue;
+        }
+    </style>
 </head>
 
 <body>
 
-<?php require "topo.php"; ?>
+<?php require "topo.php"; 
+$ano=Date('Y');
+$code_a=@$code;
+?>
 
 <div id="caixa_preta">
 </div><!-- caixa_preta -->
@@ -18,7 +100,8 @@
 <div id="box">
  <h1><strong>Histórico de chamados</strong></h1>
  <a href="suporte_tecnico.php?acao=abrir_chamado" class="a_1">Abrir chamado</a>
-<table class="users" id="table-responsive" border="0">
+ <br><br>
+<table class="customers" border="0">
 <?php if(@$_GET['acao'] == 'abrir_chamado'){ ?>
 
 <?php if(isset($_POST['enviar_mensagem'])){
@@ -33,35 +116,33 @@ $result_4 = mysqli_query($conexao, $sql_4);
 if($result_4 == ''){
 	echo "<script language='javascript'>window.alert('Ocorreu um erro!');window.location='suporte_tecnico.php';</script>";
 }else{
-  switch ($setor) {
-    case 'COORDENAÇÃO':
-      $sql_1 = "SELECT DISTINCT c.id_cursos,c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and e.matricula='$code'";
+  if ($setor=='COORDENAÇÃO-2') {
+      $sql_1 = "SELECT DISTINCT c.id_cursos,c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo='$ano' and e.matricula='$code'";
 	   $result_1 = mysqli_query($conexao, $sql_1);
 	   	while($res_1 = mysqli_fetch_assoc($result_1)){
       
       $turma=$res_1['curso'];
       $id=$res_1['id_cursos'];
 		}
-    echo $sql_5 = "INSERT INTO mural_coordenacao (date, status, curso, id_cursos, titulo) VALUES ('$date', 'Ativo','$turma','$id', 'Existe uma nova mensagem enviada pelo aluno para ser respondida')";
+     $sql_5 = "INSERT INTO mural_coordenacao (date, status, curso, id_cursos, titulo) VALUES ('$date', 'Ativo','$turma','$id', 'Existe uma nova mensagem enviada pelo aluno para ser respondida')";
     mysqli_query($conexao, $sql_5);
     echo "<script language='javascript'>window.alert('Mensagem enviada com sucesso!');window.location='suporte_tecnico.php';</script>";
    
-  break;
-    
-    default:
-    $sql_1 = "SELECT DISTINCT p.nome,c.id_cursos,c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and p.code='$setor' and e.matricula='$code';";
+  exit();
+  }else{
+    $sql_1 = "SELECT DISTINCT p.nome,c.id_cursos,c.curso from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo='$ano' and p.code='$setor' and e.matricula='$code';";
     $result_1 = mysqli_query($conexao, $sql_1);
       while($res_1 = mysqli_fetch_assoc($result_1)){
      $professor = $res_1['nome'];
      $turma=$res_1['curso'];
      $id=$res_1['id_cursos'];
-     $sql_66 = "INSERT INTO mural_professor (date, status, id_cursos, titulo) VALUES ('$date', 'Ativo', '$id', 'Existe uma nova mensagem enviada pelo aluno para ser respondida')";
+     //$sql_66 = "INSERT INTO mural_professor (date, status, id_cursos, titulo) VALUES ('$date', 'Ativo', '$id', 'Existe uma nova mensagem enviada pelo aluno para ser respondida')";
       mysqli_query($conexao, $sql_66);
       echo "<script language='javascript'>window.alert('Mensagem enviada com sucesso!');window.location='suporte_tecnico.php';</script>";
-      break;
+      exit();
+    }
   }//fim while
  
-  }//switch
   }/// if insert mensagem
   } //primeiro if do enviar?>
 
@@ -71,11 +152,11 @@ if($result_4 == ''){
      <form name="enviar_mensagem" method="post" action="" enctype="multipart/form-data">
 	  Selecione o setor que você quer enviar esta mensagem
      <select name="setor" size="1" id="select">
-       <option value="COORDENAÇÃO" style="background-color:#F3F781;">COORDENAÇÃO</option>
+       <option value="COORDENAÇÃO-2" style="background-color:#F3F781;">COORDENAÇÃO</option>
         <option value="" style="background-color:#F3F781;"></option>
        <option value="PROFESSOR">PROFESSORES</option>
        <?php      
-		$sql_2 = "SELECT DISTINCT c.id_cursos,p.code,p.nome from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and e.matricula=587418";
+		$sql_2 = "SELECT DISTINCT c.id_cursos,p.code,p.nome from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=$ano and e.matricula=$code_a and e.status='Ativo'";
 		$result_2 = mysqli_query($conexao, $sql_2);
 			while($res_2 = mysqli_fetch_assoc($result_2)){
         $serie=$res_2['id_cursos'];
@@ -85,7 +166,7 @@ if($result_4 == ''){
                 
        <option value=""><strong> COLEGAS DE CLASSE</strong></option>
        <?php
-       $sql_3 = "SELECT DISTINCT e.matricula,e.nome from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=2020 and c.id_cursos='$serie'";
+       $sql_3 = "SELECT DISTINCT e.matricula,e.nome from cursos c INNER join cursos_estudantes ce on ce.id_cursos=c.id_cursos INNER JOIN estudantes e on e.id_estudantes=ce.id_estudantes INNER JOIN disciplinas d on d.id_cursos=c.id_cursos INNER JOIN professores p on p.id_professores=d.id_professores where ce.ano_letivo=$ano and c.id_cursos='$serie'";
 	   $result_3 = mysqli_query($conexao, $sql_3);
 	   	while($res_3 = mysqli_fetch_assoc($result_3)){
 	   ?>
@@ -102,13 +183,13 @@ if($result_4 == ''){
   </tr>
 <?php } ?>
   <tr>
-    <td width="826" align="left">Abaixo segue seu relatório de chamadas</td>
+    <td align="left">Abaixo segue seu relatório de chamadas</td>
   </tr>
   <tr>
     <td align="center"><hr></td>
   </tr>
   <tr>
-    <td align="center">
+    <th align="center">
     <?php
     $sql_5 = "SELECT * FROM central_mensagem WHERE emissor = '$code' or receptor='$code' order by id desc";
 	$result_5 = mysqli_query($conexao, $sql_5);
@@ -116,28 +197,31 @@ if($result_4 == ''){
 		echo "Não existe nenhuma mensagem";
 	}else{
 	?>
-     <table id="table-responsive" border="0">
+     <table class="customers" border="0">
       <tr>
-        <td width="100"><strong>Emissor:</strong></td>
-        <td width="120"><strong>Receptor:</strong></td>
-        <td width="150"><strong>Status:</strong></td>
-        <td width="150"><strong>Data:</strong></td>
-        <td width="100"><strong>Data da resposta:</strong></td>
+        <th><strong>Emissor:</strong></th>
+        <th><strong>Receptor:</strong></th>
+        <th><strong>Status:</strong></th>
+        <th><strong>Data:</strong></th>
       <?php while($res_5 = mysqli_fetch_assoc($result_5)){ ?>
       <tr>
-      <td><?php $you=$res_5['emissor']; if($you==$code){ echo "VOCÊ";}else{echo $you;}; ?></td>
-      <td><?php echo $res_5['receptor']; ?></td>
-        <td><?php echo $res_5['status']; ?></td>
+      <td><span class="text-overflow-dynamic-container">
+        <span class="text-overflow-dynamic-ellipsis"><?php $you=$res_5['emissor']; if($you==$code){ echo "VOCÊ";}else{echo $you;}; ?></span> </span></td>
+      <td><span class="text-overflow-dynamic-container">
+        <span class="text-overflow-dynamic-ellipsis"><?php echo $res_5['receptor']; ?></span> </span></td>
+        <td><span class="text-overflow-dynamic-container">
+        <span class="text-overflow-dynamic-ellipsis"><?php echo $res_5['status']; ?></span> </span></td>
         <td><?php echo $res_5['date']; ?></td>
         
+        </tr>
+        <tr>
         <td><?php echo $res_5['data_resposta']; ?></td>
-        <td width="80">
-        <a href="suporte_tecnico.php?acao=responder&id=<?php echo $res_5['id']; ?>"><img src="../image/confirma.png" width="22" border="0" title="responder" /></a>
-        <a href="suporte_tecnico.php?acao=ticket&id=<?php echo $res_5['id']; ?>"><img src="../image/visualizar16.gif"  border="0" title="Vizualizar chamada" /></a> |
-        <a href="suporte_tecnico.php?acao=fechar&id=<?php echo $res_5['id']; ?>"><img src="../image/deleta.png" width="22" border="0" title="Excluir chamado" /></a>
-        
+        <td><a href="suporte_tecnico.php?acao=responder&id=<?php echo $res_5['id']; ?>"><img src="../image/confirma.png" width="22" border="0" title="responder" /></a></td>
+        <td><a href="suporte_tecnico.php?acao=ticket&id=<?php echo $res_5['id']; ?>"><img src="../image/visualizar16.gif"  border="0" title="Vizualizar chamada" /></a> </td>
+        <td><a href="suporte_tecnico.php?acao=fechar&id=<?php echo $res_5['id']; ?>"><img src="../image/deleta.png" width="22" border="0" title="Excluir chamado" /></a></td>
+        </tr>
       
-        </td>
+        </th>
         </tr>
       	
       <?php } if(@$_GET['acao'] == 'ticket'){

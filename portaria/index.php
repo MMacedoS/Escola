@@ -1,12 +1,14 @@
-<?php $painel_atual="portaria";?>
+<?php //$painel_atual="portaria";
+
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <title>Portaria</title>
 <link rel="stylesheet" type="text/css" href="css/stilo.css"/>
-<?php require "../config.php"; ?>
+<?php //qrequire "../config.php"; ?>
 </head>
 
 <body>

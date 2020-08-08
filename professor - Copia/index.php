@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="with=device-width,initial-scale=1">
-<link rel="shortcut icon" href="../image/logo_ist.gif">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
+<link rel="shortcut icon" href="../image/logo.png">
 <title>Administração do Professor</title>
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
 </head>

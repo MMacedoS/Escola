@@ -9,7 +9,7 @@
     <?php header('Content-Type: text/html; charset=UTF-8'); require_once("topo.php");   ?>
     <title>Professores</title>
 
-    <link rel="shortcut icon" href="../image/logo_ist.gif">
+    <link rel="shortcut icon" href="../image/logo.png">
 
 
     <link rel="stylesheet" href="../jquery.superbox.css" type="text/css" media="all" />
@@ -19,13 +19,396 @@
     <script type="text/javascript" src="../jquery.superbox-min.js"></script>
 
     <script src="js/jquery.maskedinput-1.3.js" type="text/javascript"></script>
+    <style>
+    .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    position: unset !important;
+}
+       #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 97%;
+        }
+        
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        #customers th {
+            width:20%;
+        }
+        
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+        
+        #customers tr:hover {background-color: #ddd;}
+        
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
 
     <div id="caixa_preta">
     </div><!-- caixa_preta-->
+    <?php if(@$_GET['pg']=='coord'){   ?>
+    <div class="box_professores">
+        <br /><br />
+        <a href="professores.php?pg=coord&cadastra=sim" class="a2">
+            Cadastrar Coordenador
+        </a>
+        <?php if(@$_GET['cadastra']=='sim'){ ?>
+        <br /><br />
+        <h1>Cadastrar Disciplina</h1>
+        <?php if(isset($_POST['cadastra'])){
+                    $L_disc=$_POST['disc'];
+                    $l_cate=$_POST['cate'];
+                    $ano=Date('Y');
+                    $res = $pdo->prepare("select * from coordenador where code=:L_disc and categoria=:l_cate");
+                        $res->bindValue(':L_disc',$L_disc);
+                        $res->bindValue(':l_cate',$l_cate);
+                        $res->execute();    
+                        $dados = $res->fetchAll(PDO::FETCH_ASSOC);
+                        $con_verif = count($dados);
+                      if($con_verif==0){
+                        if($L_disc!=''){
+                        $res=$pdo->prepare("INSERT INTO coordenador (code,categoria,ano_letivo) values(:nome,:categoria,:ano)");
+                        $res->bindvalue(":nome",$L_disc);
+                        $res->bindvalue(":categoria",$l_cate);
+                        $res->bindvalue(":ano",$ano);
+                        $res->execute();
+                        echo "<script language='javascript'>window.alert('Este coordenador para esta categoria ja foi cadastrado');</script>";
+                        }else{
+                            echo "<script language='javascript'>window.alert('coordenador vazio');</script>";
+                        }
+                    }else{
+                 echo "<script language='javascript'>window.alert('Este coordenador para esta categoria ja foi cadastrado');</script>";
+                    }
+                } ?>
+        <form name="form1" method="post" action="">
+            <table id="customers" border="0">
 
+                <tr>
+                    <th>Coordenador</th>
+                    <th>Categoria</th>
+                    <th>&nbsp;</th>
+                </tr>
+
+                <tr>
+                    <td><select name="disc" size="1" id="categoria">
+                            <?php 
+                                    $sql_cat = $pdo->prepare("select * from funcionarios where profissao=:coor");
+                                    $sql_cat->bindValue(':coor','Coordenacao');
+                                    $sql_cat->execute();    
+                                    
+                                    while($bus_categoria=$sql_cat->fetch()){
+                                    
+                                    ?>
+                            <option value="<?php echo $bus_categoria['code'] ?>">
+                                <?php echo $bus_categoria['nome'] ?></option>
+                            <?php } ?>
+                        </select></td>
+                    <td>
+                        <select name="cate" size="1" id="categoria">
+                            <?php 
+                                    $sql_cat = $pdo->prepare("select * from categoria");
+                                    $sql_cat->execute();    
+                                    
+                                    while($bus_categoria=$sql_cat->fetch()){
+                                    
+                                    ?>
+                            <option value="<?php echo $bus_categoria['id_categoria'] ?>">
+                                <?php echo $bus_categoria['categoria'] ?></option>
+                            <?php } ?>
+                        </select>
+                    </td>
+                    <td><input class="input" type="submit" name="cadastra" id="button"
+                            value="Cadastrar"></td>
+                </tr>
+
+            </table>
+        </form>
+        <br />
+        <?php die;}
+             else {?>
+        <?php if(@$_GET['cadastra']=='nao'){?>
+        <br /><br />
+        <h1>Atualiza Coordenação</h1>
+        <?php
+           $id=$_GET['id'];
+                    $sql_edit = $pdo->prepare("select * from coordenador where id_coor=:id");
+                    $sql_edit->bindValue(':id',$id);
+                    $sql_edit->execute();                        
+                    while($edit_curso=$sql_edit->fetch()){
+                    ?>
+        <?php if(isset($_POST['atualiza'])){
+                     $L_disc=$_POST['disc'];
+                     $l_cate=$_POST['cate'];
+                      $res = $pdo->prepare("select * from coordenador where code=:L_disc and categoria=:l_cate");
+                        $res->bindValue(':L_disc',$L_disc);
+                        $res->bindValue(':l_cate',$l_cate);
+                        $res->execute();    
+                        $dados = $res->fetchAll(PDO::FETCH_ASSOC);
+                        $con_verif = count($dados);
+                     if($con_verif==0){
+                        $res=$pdo->prepare("UPDATE coordenador set code=:code,categoria=:categoria where id_coor=:lista");
+                        $res->bindvalue(":code",$L_disc);
+                        $res->bindvalue(":categoria",$l_cate);
+                        $res->bindvalue(":lista",$id);
+                        $res->execute();
+                     echo "<script language='javascript'>window.alert('coordenacao atualizada com sucesso!');</script>";
+                       echo "<script language='javascript'>window.location='professores.php?pg=coord';</script>";
+                   
+                }else{
+                    echo "<script language='javascript'>window.alert('Esta coordenação ja existe!');</script>";
+                }
+                } ?>
+        <form name="form1" method="post" action="">
+            <table id="customers" border="0">
+
+                <tr>
+                    <th>Coordenador</th>
+                    <th>Categoria</th>
+                    <th>&nbsp;</th>
+                </tr>
+
+                <tr>
+                <td>
+                <select name="disc" size="1">
+
+                        <?php 
+                                $cate=$edit_curso['code'];
+                                $sql_edit = $pdo->prepare("select * from funcionarios where code=:cate");
+                                $sql_edit->bindValue(':cate',$cate);
+                                $sql_edit->execute();    
+                                
+                                while($res_cat=$sql_edit->fetch()){
+                            ?>
+                        <option value="<?php echo $edit_curso['code'];?>"><?php echo $res_cat['nome'];?>
+                        </option>
+                        <?php }
+                                $sql_cat = $pdo->prepare("select * from funcionarios where profissao=:coor");
+                                $sql_cat->bindValue('coor','Coordenacao');
+                                $sql_cat->execute();    
+                                
+                            while($res_cat=$sql_cat->fetch()){
+                            ?>
+                        ?>
+
+                        <option value="<?php echo $res_cat['code'];?>"><?php echo $res_cat['nome'];?>
+                        </option>
+
+                        <?php } ?>
+                        </select>
+
+                    <td>
+                        <select name="cate" size="1" id="categoria">
+
+                            <?php 
+                                     $cate=$edit_curso['categoria'];
+                                     $sql_edit = $pdo->prepare("select * from categoria where id_categoria=:cate");
+                                     $sql_edit->bindValue(':cate',$cate);
+                                     $sql_edit->execute();    
+                                     
+                                    while($res_cat=$sql_edit->fetch()){
+                                   ?>
+                            <option value="<?php echo $edit_curso['categoria'];?>"><?php echo $res_cat['categoria'];?>
+                            </option>
+                            <?php }
+                                    $sql_cat = $pdo->prepare("select * from categoria");
+                                    $sql_cat->execute();    
+                                    
+                                   while($res_cat=$sql_cat->fetch()){
+                                   ?>
+                            ?>
+
+                            <option value="<?php echo $res_cat['id_categoria'];?>"><?php echo $res_cat['categoria'];?>
+                            </option>
+
+                            <?php } ?>
+                        </select>
+
+                    </td>
+
+                    <td class="row-1 row-cur"><input class="input" type="submit" name="atualiza" id="button"
+                            value="Atualizar"></td>
+                </tr>
+
+            </table>
+            <?php } ?>
+        </form>
+        <br />
+
+        <?php
+             die;}}
+             ?>
+        <!--visualizar coordenador lista cadastrados -->
+
+        <br /><br />
+        <h1>Disciplinas</h1>
+        <form name="button" method="post" action="" enctype="multipart/form-data">
+            <table class="users" id="customers" border="0">
+                <tr>
+                    <th colspan="2"><strong>Categoria</strong></th>
+                </tr>
+                <tr>
+                    
+                    <td>
+                    <select name="categoria" size="1" id="categoria">
+
+                                    <?php 
+                                    if(@$_GET['disc']){
+                                            $cate=$_GET['disc'];
+                                            $sql_edit = $pdo->prepare("select * from categoria where id_categoria=:cate");
+                                            $sql_edit->bindValue(':cate',$cate);
+                                            $sql_edit->execute();    
+                                            
+                                            while($res_cat=$sql_edit->fetch()){
+                                        ?>
+                                    <option value="<?php echo $res_cat['id_categoria'];?>"><?php echo $res_cat['categoria'];?>
+                                    </option>
+                                    <?php }///fim while
+                                    }////qfim if
+                                            $sql_cat = $pdo->prepare("select * from categoria");
+                                            $sql_cat->execute();    
+                                            
+                                        while($res_cat=$sql_cat->fetch()){
+                                        ?>
+                                    ?>
+
+                                    <option value="<?php echo $res_cat['id_categoria'];?>"><?php echo $res_cat['categoria'];?>
+                                    </option>
+
+                                    <?php } ?>
+                                    </select>
+                    </td>
+                    <td><input class="input" type="submit" name="btn_disc" id="button" value="Filtrar"></td>
+                </tr>
+            </table>
+        </form>
+        <?php if(isset($_POST['btn_disc'])){
+
+
+$serie = $_POST['categoria'];
+
+$s = base64_encode('filtro');
+
+echo "<script language='javascript'>window.location='professores.php?pg=coord&lista=$s&disc=$serie';</script>";
+
+}?>
+        <?php 
+                // $s = base64_decode($_GET['s']);;
+                    if(isset($_GET['lista'])){ 
+                        $tipo=@$_GET['status'];
+                        $categ=$_GET['disc'];
+                        if($tipo==''){
+                                $s=$pdo->prepare("SELECT  coor.*,f.nome from funcionarios f INNER join coordenador coor on coor.code=f.code where categoria=:cate  order by f.nome asc ");
+                                $s->bindValue(':cate',$cate);
+                                $s->execute(); 
+                                $dados=$s->fetchAll();
+                                $con_verif = count($dados);
+                        }
+                        
+                    }else{
+                        $stmt = $pdo->prepare("SELECT  coor.*,f.nome from funcionarios f INNER join coordenador coor on coor.code=f.code");
+                        $stmt->execute(); 
+                        $dados=$stmt->fetchAll();
+                        $con_verif = count($dados);
+                    }
+
+                if($con_verif==0){
+                    echo "<h2>No momento não existe!</h2><br><br>";
+                }else{
+
+                ?>
+        <table id="customers" border="0">
+
+            <tr>
+                <th><strong>Coordenador:</strong></th>
+                <th> <strong> Categoria:</strong></th>
+                <th>Ano Letivo</th>
+                <th colspan="2">&nbsp;</th>
+            </tr>
+
+
+            <?php foreach($dados as $res_1){
+                    // $cursos_id=$res_1['id_lista'];
+                ?>
+
+            <tr>
+                <td class="row-cur">
+                    <h3>
+                        <?php echo $disc = $res_1['nome'];
+                        $id_cat=$res_1['categoria'];
+                        ?>
+                    </h3>
+                </td>
+                <td class="row-cod">
+                    <h3>
+                    <?php 
+                            $categoria=$res_1['categoria'];
+                            $busca_cat=$pdo->prepare("SELECT categoria FROM  categoria WHERE id_categoria=:categoria");
+                            $busca_cat->bindValue(':categoria',$categoria);
+                            $busca_cat->execute();
+                        while ($res_cate=$busca_cat->fetch()){
+                            echo $res_cate['categoria'];
+                        }
+                         ?>
+                    </h3>
+                </td>
+                <td>
+                <?php echo $disc = $res_1['ano_letivo'];
+                       
+                        ?>
+                </td>
+                <td >
+                    <a class="a"
+                        href="professores.php?pg=coord&deleta=cur&id=<?php echo @$res_1['id_coor'];?>">
+                        <img title="Excluir curso" src="img/deleta.jpg" width="18" heigth="18" border="0" alt=""></a>
+                </td>
+                <td >
+                    <a class="a"
+                        href="professores.php?pg=coord&cadastra=nao&id=<?php echo $res_1['id_coor'];?>"><img
+                            title="Editar dados Cadastrais" src="../image/ico-editar.png" width="18" height="18"
+                            border="0"></a>
+                </td>
+            </tr>
+            <?php }?>
+
+        </table>
+
+        <br /><br />
+                    <?php  }  
+         ?>
+
+        <!-- <!deleção das disciplinas > -->
+        <?php 
+        if (@$_GET['deleta']=='cur') {
+            # code...
+            $id=@$_GET['id'];
+            try {
+                //code...
+            
+            $sql_3=$pdo->prepare("delete from coordenador where id_coor=:id");
+            $sql_3->bindValue('id',$id);
+            $sql_3->execute();
+            echo "<script language='javascript'>window.location='professores.php?pg=coord';</script>";
+        } catch (\Throwable $th) {
+            //throw $th;
+            echo "<script language='javascript'>alert('erro ao apagar $th');</script>";
+        }
+            
+
+                
+        }?>
+
+    </div>
+    <!--box_curso-->
+    <?php } ?>
     <!-- <!exibir tabela de professores cadastrados> -->
 
         <?php if(@$_GET['pg']=='todos'){ ?>
