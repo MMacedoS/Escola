@@ -3,14 +3,10 @@
 setlocale(LC_ALL,'pt_BR.utf8');
 date_default_timezone_set('America/Sao_Paulo');
 function connectar(){
-    // $servidor ="mysql873.umbler.com";
-    // $usuario="kamaur";
-    // $senha="kamaur2711";
-    // $banco="ist";
-$servidor = 'mysql669.umbler.com';
-$usuario = 'ist';
-$senha = 'kamaur2711';
-$banco = 'escolaist';
+    $servidor ="localhost";
+    $usuario="root";
+    $senha="";
+    $banco="escolaist";
 
 	$con= new mysqli($servidor,$usuario,$senha,$banco);
 	$con->set_charset("utf8");
@@ -20,9 +16,9 @@ $conexao=connectar();
 
 //DADOS PARA CONEXÃO COM BANCO DE DADOS LOCAL
 
-$host = 'mysql669.umbler.com';
-$usuario = 'ist';
-$senha = 'kamaur2711';
+$host = 'localhost';
+$usuario = 'root';
+$senha = '';
 $banco = 'escolaist';
 
 

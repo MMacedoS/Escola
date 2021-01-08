@@ -1,8 +1,9 @@
 <?php
-define('HOST','mysql669.umbler.com');
+
+define('HOST','localhost');
 define('BANCO','escolaist');
-define('USUARIO','ist');
-define('SENHA','kamaur2711');
+define('USUARIO','root');
+define('SENHA','');
 
 class Produto_class{
 
