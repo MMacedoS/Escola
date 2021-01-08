@@ -45,28 +45,17 @@
      
     <li><strong>Disciplinas ministradas por curso: </strong> <?php
     
-    
-     echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM disciplinas WHERE id_professores = '$id_professor'")); ?></li>
+    $disciplinas=$pdo->query("SELECT * FROM disciplinas WHERE id_professores = '$id_professor'");
+    $disciplinas=$disciplinas->fetchAll(PDO::FETCH_ASSOC);
+    $disciplinas=count($disciplinas);
+     echo $disciplinas; ?></li>
     <li><strong>Você ministra aula para
     
     <?php
-    
-  $sql_1 = mysqli_query($conexao, "SELECT * FROM disciplinas WHERE id_professores = '$id_professor'");
-  $total_alunos = 0;
-		while($res_1 = mysqli_fetch_assoc($sql_1)){
-			
-      $curso = $res_1['id_cursos'];
-      
-      //TRAZER DA FORMA CORRETA O TOTAL DE ALUNOS DE CADA PROFESSOR
-   $result_tot_alunos = mysqli_query($conexao, "SELECT * from estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes where ce.id_cursos='$curso'");
-   $linhas_tot_alunos = mysqli_num_rows($result_tot_alunos);
-   
-   $total_alunos = ($total_alunos + $linhas_tot_alunos);
-
-			
-    }
-    
-    echo $total_alunos;
+    // echo $id_professor;
+    $sql_1=$pdo->query("SELECT count(e.id_estudantes) as qtde from estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes inner join cursos c on c.id_cursos=ce.id_cursos inner join disciplinas d on d.id_cursos=c.id_cursos where d.id_professores='$id_professor' and e.status='Ativo' and ce.ano_letivo='$ano_letivo'");
+    $sql_1=$sql_1->fetchAll(PDO::FETCH_ASSOC);
+    echo $sql_1[0]['qtde'];
 	
 	?>
     

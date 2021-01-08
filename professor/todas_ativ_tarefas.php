@@ -71,7 +71,15 @@ function refresh()
             
             <?php
             $res=0;
-            $ano=Date('Y');
+           
+            if(isset($_GET['ano'])){
+               $ano=$_GET['ano'];
+            }else{
+              $ano=Date('Y');  
+            }
+
+
+
              if (isset($_GET['busca'])){
              
              ?>
@@ -118,7 +126,7 @@ function refresh()
             
             <?php
             $res=0;
-            $ano=Date('Y');
+            // $ano=Date('Y');
              if (isset($_GET['buscab'])){
              
              ?>
@@ -159,6 +167,11 @@ function refresh()
 <?php     
     }} ?>
 </select>
+  <select name="ano" id="" onchange="refresh()">
+    <option value="<?=@$_GET['ano']?>"><?=@$_GET['ano']?></option>
+    <option value="<?=$ano-1?>"><?=$ano-1?></option>
+    <option value="<?=$ano?>"><?=$ano?></option>
+  </select>
 <input type="hidden" name="pg" value="atividades_bimestrais">
 <!-- <input type="hidden" name="selec" value="<?php echo $selec?>"> -->
 <input type="hidden" name="code" value="<?php echo $code;?>">
@@ -239,7 +252,7 @@ if(mysqli_num_rows($result)==''){
   </tr>
   <tr>
     <!-- <td><a rel="superbox[iframe][350x400]" href="editar_atividade.php?id=<php //echo $res_1['id_ativ_bim'];?>&code=<php //echo $code; ?>&selec=<php //echo $selec;?>">Editar</a></td> -->
-    <td colspan="3"><a href="correcao_atividades.php?pg=atividade_bimestral&selec=<?php echo $_GET['selec']; ?>&id=<?php echo $res_1['id_ativ_bim']; ?>">Lançar notas</a></td>
+    <td colspan="3"><a href="correcao_atividades.php?pg=atividade_bimestral&selec=<?php echo $_GET['selec']; ?>&id=<?php echo $res_1['id_ativ_bim']; ?>&ano=<?=$ano?>">Lançar notas</a></td>
     <td></td>
     <!-- <td><a href="todas_ativ_tarefas.php?pg=excluir&id=<php //echo $res_1['id_ativ_bim']; ?>&selec=<php //echo $_GET['selec']; ?>&code=<php// echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td> -->
   </tr>  

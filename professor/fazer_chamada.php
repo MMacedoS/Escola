@@ -65,6 +65,7 @@
 <body>
 
     <?php require_once ("topo.php"); $q_c=0;
+    $ano=Date('Y');
      date_default_timezone_set('America/Sao_Paulo');
      function data($data){
         return date("d-m-Y", strtotime($data));
@@ -94,14 +95,19 @@
 
         <h1>Turma: <strong>
                 <?php $curso = base64_decode($_GET['curso']);
+                $dis=base64_decode($_GET['dis']);
                 $num=0; 
-    $buscaCurso="SELECT * from cursos where id_cursos='$curso'";
-    $busca=$conCurso=mysqli_query($conexao,$buscaCurso);
-    if($busca){
-    while($resCurso=mysqli_fetch_assoc($conCurso)){
+                $buscaCurso=$pdo->query("SELECT l.nome,c.curso,c.turno from cursos c inner join disciplinas d on d.id_cursos=c.id_cursos inner join lista_disc l on l.id_lista=d.disciplina where d.id_disciplinas='$dis'");
+                $buscaCurso=$buscaCurso->fetchAll(PDO::FETCH_ASSOC);
+                $busca=count($buscaCurso);        
+    if($busca>0){
+        foreach($buscaCurso as $key=>$resCurso){
           $cursos=$resCurso['curso'];
           $turno=$resCurso['turno'];
-    };echo $cursos.'  '."".$turno;}else{
+          $disciplina=$resCurso['nome'];
+    }
+    echo $cursos.'  '."".$turno;
+    }else{
             ?><script>
                 alert('erro ao buscar os cursos');
                 </script><?php
@@ -133,13 +139,7 @@
             </form>
           
             <h1>disciplina:
-                <?php $dis=base64_decode($_GET['dis']);
-   $buscaDis="SELECT l.nome FROM disciplinas d inner join lista_disc l on d.disciplina=l.id_lista where d.id_disciplinas='$dis'";
-   $conDis=mysqli_query($conexao,$buscaDis);
-   while($resDisc=mysqli_fetch_assoc($conDis)){
-        echo $resDisc['nome'];
-   }
-   ?>
+                <?php echo $disciplina; ?>
                 <!-- <a background-color="blue" id="h1_a" rel="superbox[iframe][900x500]" href="fazer_rapida.php?curso=<php echo $_GET['curso'];?>&dis=<php echo $_GET['dis'];?>&turno=<php echo $_GET['turno'];?>"><img title="chamada rapida" border="0" src="../image/confirma.png" width="50" /></a> -->
             </h1>
             <?php
@@ -147,7 +147,7 @@
 $date = date("d/m/Y H:i:s");
 $dis = base64_decode($_GET['dis']);
 
-    $sql_1=$pdo->prepare("SELECT * from estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes where ce.id_cursos=:cursos and e.status='Ativo' order by nome asc");
+    $sql_1=$pdo->prepare("SELECT * from estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes where ce.id_cursos=:cursos and e.status='Ativo' and ce.ano_letivo='$ano' order by nome asc");
     $sql_1->bindValue(':cursos',$curso);
     $sql_1->execute();
     $dados=$sql_1->fetchAll();

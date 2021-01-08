@@ -52,31 +52,29 @@
 <div id="box">
 <h1>Abaixo, observa-se seu histórico de disciplinas e alunos!</h1>
 <?php
-
- $sql_1 = "SELECT d.*,c.curso FROM disciplinas d inner join cursos c on c.id_cursos=d.id_cursos WHERE id_professores = '$id_professor' order by c.id_categoria asc";
- $result = mysqli_query($conexao, $sql_1);
-if(mysqli_num_rows($result) == ''){
+$sql_1=$pdo->query("SELECT l.nome,c.curso,c.id_cursos,d.id_disciplinas FROM disciplinas d inner join cursos c on c.id_cursos=d.id_cursos inner join
+lista_disc l on d.disciplina=l.id_lista inner join categoria cat on cat.id_categoria=l.categoria 
+WHERE d.id_professores = '$id_professor' order by c.ordem asc");
+$sql_1=$sql_1->fetchAll(PDO::FETCH_ASSOC);
+$qtde=count($sql_1);
+ $ano=Date('Y');
+ 
+if($qtde == 0){
 	echo "Você não ministra nenhuma disciplina!";
 }else{
-	while($res_1 = mysqli_fetch_assoc($result)){
+	foreach($sql_1 as $key=>$res_1){
 		$curso = $res_1['id_cursos'];
 ?>	
  <table id="customers" border="0">
   <tr>
-    <td><strong>Disciplina ministrada:</strong> <?php $b_disc=$res_1['disciplina'];
-      $buscar_d="SELECT l.id_lista,l.nome,c.categoria FROM lista_disc l inner join categoria c on c.id_categoria=l.categoria where l.id_lista='$b_disc'";
-      $busca_con=mysqli_query($conexao,$buscar_d);
-      while($busca_r=mysqli_fetch_assoc($busca_con)){
-        echo $busca_r['nome'];
-        
-    echo ' '.$res_1['curso']; 
-    echo ' '.$busca_r['categoria'];  } ?></td>
+    <td><strong>Disciplina ministrada:</strong> <?=$res_1['nome']." ".$res_1['curso']." "?></td>
     <td><strong>Total de alunos:</strong><?php 
-	$sql_2 = "SELECT * from estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes where ce.id_cursos='$curso'";
-	echo mysqli_num_rows(mysqli_query($conexao, $sql_2)); ?></td>
+    $sql_2=$pdo->query("SELECT count(e.id_estudantes)as qtde from estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes where ce.id_cursos='$curso' and ce.ano_letivo='$ano'");
+    $sql_2=$sql_2->fetchAll(PDO::FETCH_ASSOC);
+    echo $sql_2[0]['qtde']; ?></td>
     <td >
     
-    <button id="button" type="button" color="red" onclick="window.location='fazer_chamada.php?selec=<?php echo @$_GET['selec'];?>&curso=<?php echo base64_encode($res_1['id_cursos']); ?>&dis=<?php echo base64_encode($res_1['id_disciplinas']); ?>'">Realizar Chamada</button>
+    <button id="button" type="button" color="red" onclick="window.location='fazer_chamada.php?selec=<?=@$_GET['selec'];?>&curso=<?php echo base64_encode($res_1['id_cursos']); ?>&dis=<?=base64_encode($res_1['id_disciplinas']); ?>'">Realizar Chamada</button>
     
     </td>
   </tr>

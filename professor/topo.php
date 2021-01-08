@@ -163,12 +163,9 @@ function refresh()
    <?php 
 
     
-
-    $sql_busca_nome="select nome,id_professores from professores where code='$code'";
-
-    $con_busca_nome=mysqli_query($conexao,$sql_busca_nome);
-
-    while($res_busca_nome=mysqli_fetch_assoc($con_busca_nome)){
+    $sql_busca_nome=$pdo->query("select nome,id_professores from professores where code='$code'");
+    $sql_busca_nome=$sql_busca_nome->fetchAll(PDO::FETCH_ASSOC);
+    foreach($sql_busca_nome as $key=>$res_busca_nome){
 
        echo $nome_professor=substr($res_busca_nome['nome'],0,9).'...';
 
@@ -234,7 +231,7 @@ function refresh()
 
       <?php  
 
-      $sql_busca_cur="SELECT DISTINCT cat.categoria,cat.id_categoria FROM disciplinas d inner join professores p on d.id_professores=p.id_professores inner join cursos c on d.id_cursos=c.id_cursos inner join categoria cat on c.id_categoria=cat.id_categoria where code='$code'";
+      $sql_busca_cur="SELECT DISTINCT cat.categoria,cat.id_categoria FROM disciplinas d inner join professores p on d.id_professores=p.id_professores inner join cursos c on d.id_cursos=c.id_cursos inner join categoria cat on c.id_categoria=cat.id_categoria where code='$code' order by c.ordem asc";
 
        $con_busca_cur=mysqli_query($conexao,$sql_busca_cur);
 

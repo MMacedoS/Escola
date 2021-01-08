@@ -10,7 +10,7 @@
 
     $id=$_GET['id'];
 
-    $ano=Date('Y');
+    $ano=$_GET['ano'];
 
     $curso=$_GET['curso'];
 

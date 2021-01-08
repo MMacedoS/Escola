@@ -10,7 +10,7 @@ $nota4= @$_GET['nota4'];
 $bimestre = @$_GET['bimestre'];
 $disciplina = @$_GET['disciplina'];
 // $prova = $_FILES['prova']['name'];
-$date=Date('Y');
+$date=@$_GET['ano'];
 
 switch ($bimestre) {
   case '1':
