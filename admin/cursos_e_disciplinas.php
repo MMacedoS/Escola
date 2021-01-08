@@ -446,7 +446,7 @@ echo "<script language='javascript'>window.location='cursos_e_disciplinas.php?pg
         <?php if(isset($_POST['atualiza'])){
                      $curso=$_POST['curso'];
                      $turno=$_POST['turno'];
-                     $categoria=$_POST['categoria'];
+                     $categoria=$_POST['cate'];
                      $sql_verif=$pdo->prepare("SELEC * FROM cursos where curso=:curso and turno=:turno and id_categoria=:categoria");
                      $sql_verif->bindValue(':curso',$curso);
                      $sql_verif->bindValue(':turno',$turno);
@@ -464,7 +464,7 @@ echo "<script language='javascript'>window.location='cursos_e_disciplinas.php?pg
                                 $sql->bindValue(':curso',$curso);
                                 $sql->bindValue(':turno',$turno);
                                 $sql->bindValue('categoria',$categoria);
-                                $sql->bindValue(':id',$_GET['id']);
+                                $sql->bindValue(':id',$id);
                                 $sql->execute();
                                 echo "<script language='javascript'>window.alert('Curso atualizado com sucesso!');</script>";
                                 echo "<script language='javascript'>window.location='cursos_e_disciplinas.php?pg=curso';</script>";
@@ -630,18 +630,19 @@ echo "<script language='javascript'>window.location='cursos_e_disciplinas.php?pg
                                 $s=$pdo->prepare("SELECT * FROM cursos WHERE id_categoria=:categoria ORDER BY curso ASC");
                                 $s->bindValue(':categoria',$c_cate);
                                 $s->execute();
-                                $dados= $s->fetch();
-                                $s="SELECT * from cursos where  id_categoria='$c_cate'  order by curso asc ";
-                                $sql_1 = mysqli_query($conexao, $s);
+                                $dados= $s->fetchAll(PDO::FETCH_ASSOC);
+                                // $s="SELECT * from cursos where  id_categoria='$c_cate'  order by curso asc ";
+                                // $sql_1 = mysqli_query($conexao, $s);
                         }else{          
-                            $s="SELECT * from cursos where id_cursos ='$c_turma' order by curso asc ";
-                            $sql_1 = mysqli_query($conexao, $s);
-                        
+                            // $s="SELECT * from cursos where id_cursos ='$c_turma' order by curso asc ";
+                            // $sql_1 = mysqli_query($conexao, $s);
+                            
                         }
                         
                     }else{
                         $s=$pdo->prepare("SELECT * FROM cursos ORDER BY id_categoria ASC");
                         $s->execute();
+                        $dados= $s->fetchAll(PDO::FETCH_ASSOC);
                         
                     } ?>
         <table class="users" id="table-responsive" border="0">
@@ -653,8 +654,8 @@ echo "<script language='javascript'>window.location='cursos_e_disciplinas.php?pg
                 <td class="row-4 row-ID">&nbsp;</td>
             </tr>
 
-
-            <?php while($res_1 = $s->fetch()){
+          
+            <?php foreach($dados as $res_1){
                     $cursos_id=$res_1['id_categoria'];
                 ?>
 
@@ -884,43 +885,43 @@ echo "<script language='javascript'>window.location='cursos_e_disciplinas.php?pg
                                                      $inseri->execute();
                                                     // fim atividades bimestrais
                                                         // atividades coc.
-                                                        $inseri=$pdo->prepare("INSERT INTO avaliacao_coc (ano_letivo,bimestre,id_disciplina, id_curso,professor,data_aplicacao,data)
-                                                        values(:ano,:bimestre,:disciplina,:curso,:professor,:data_aplica,:data)");
+                                                        // $inseri=$pdo->prepare("INSERT INTO avaliacao_coc (ano_letivo,bimestre,id_disciplina, id_curso,professor,data_aplicacao,data)
+                                                        // values(:ano,:bimestre,:disciplina,:curso,:professor,:data_aplica,:data)");
                                                 
-                                                        $inseri->bindvalue(":ano",$ano);
-                                                        $inseri->bindvalue(":bimestre",$unidade);
-                                                        $inseri->bindvalue(":disciplina",$dado['id_disciplinas']);
-                                                        $inseri->bindvalue(":curso",$dado['id_cursos']);
-                                                        $inseri->bindvalue(":professor",$dado['code']);
-                                                        $inseri->bindvalue(":data_aplica",$data);
-                                                        $inseri->bindvalue(":data",$date_hoje);                        
-                                                         $inseri->execute();
+                                                        // $inseri->bindvalue(":ano",$ano);
+                                                        // $inseri->bindvalue(":bimestre",$unidade);
+                                                        // $inseri->bindvalue(":disciplina",$dado['id_disciplinas']);
+                                                        // $inseri->bindvalue(":curso",$dado['id_cursos']);
+                                                        // $inseri->bindvalue(":professor",$dado['code']);
+                                                        // $inseri->bindvalue(":data_aplica",$data);
+                                                        // $inseri->bindvalue(":data",$date_hoje);                        
+                                                        //  $inseri->execute();
                                                         // fim atividades coc
                                                             // atividades teste.
-                                                    $inseri=$pdo->prepare("INSERT INTO avaliacao_teste (ano_letivo,bimestre,id_disciplina, id_curso,professor,data_aplicacao,data)
-                                                    values(:ano,:bimestre,:disciplina,:curso,:professor,:data_aplica,:data)");
+                                                    // $inseri=$pdo->prepare("INSERT INTO avaliacao_teste (ano_letivo,bimestre,id_disciplina, id_curso,professor,data_aplicacao,data)
+                                                    // values(:ano,:bimestre,:disciplina,:curso,:professor,:data_aplica,:data)");
                                             
-                                                    $inseri->bindvalue(":ano",$ano);
-                                                    $inseri->bindvalue(":bimestre",$unidade);
-                                                    $inseri->bindvalue(":disciplina",$dado['id_disciplinas']);
-                                                    $inseri->bindvalue(":curso",$dado['id_cursos']);
-                                                    $inseri->bindvalue(":professor",$dado['code']);
-                                                    $inseri->bindvalue(":data_aplica",$data);
-                                                    $inseri->bindvalue(":data",$date_hoje);                        
-                                                     $inseri->execute();
+                                                    // $inseri->bindvalue(":ano",$ano);
+                                                    // $inseri->bindvalue(":bimestre",$unidade);
+                                                    // $inseri->bindvalue(":disciplina",$dado['id_disciplinas']);
+                                                    // $inseri->bindvalue(":curso",$dado['id_cursos']);
+                                                    // $inseri->bindvalue(":professor",$dado['code']);
+                                                    // $inseri->bindvalue(":data_aplica",$data);
+                                                    // $inseri->bindvalue(":data",$date_hoje);                        
+                                                    //  $inseri->execute();
                                                     // fim atividades teste
                                                         // atividades prova.
-                                                        $inseri=$pdo->prepare("INSERT INTO avaliacao_prova (ano_letivo,bimestre,id_disciplina, id_curso,professor,data_aplicacao,data)
-                                                        values(:ano,:bimestre,:disciplina,:curso,:professor,:data_aplica,:data)");
+                                                        // $inseri=$pdo->prepare("INSERT INTO avaliacao_prova (ano_letivo,bimestre,id_disciplina, id_curso,professor,data_aplicacao,data)
+                                                        // values(:ano,:bimestre,:disciplina,:curso,:professor,:data_aplica,:data)");
                                                 
-                                                        $inseri->bindvalue(":ano",$ano);
-                                                        $inseri->bindvalue(":bimestre",$unidade);
-                                                        $inseri->bindvalue(":disciplina",$dado['id_disciplinas']);
-                                                        $inseri->bindvalue(":curso",$dado['id_cursos']);
-                                                        $inseri->bindvalue(":professor",$dado['code']);
-                                                        $inseri->bindvalue(":data_aplica",$data);
-                                                        $inseri->bindvalue(":data",$date_hoje);                        
-                                                        $inseri->execute();
+                                                        // $inseri->bindvalue(":ano",$ano);
+                                                        // $inseri->bindvalue(":bimestre",$unidade);
+                                                        // $inseri->bindvalue(":disciplina",$dado['id_disciplinas']);
+                                                        // $inseri->bindvalue(":curso",$dado['id_cursos']);
+                                                        // $inseri->bindvalue(":professor",$dado['code']);
+                                                        // $inseri->bindvalue(":data_aplica",$data);
+                                                        // $inseri->bindvalue(":data",$date_hoje);                        
+                                                        // $inseri->execute();
                                                         // fim atividades prova
                                                             // $query ="INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas, matricula, presente, ano_letivo) VALUES ('$date', '$date_hoje','$dis', '$dado', 'SIM','$ano')";
                                                             // mysqli_query($conexao, $query);

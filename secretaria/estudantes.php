@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Estudante</title>
     
-<link rel="shortcut icon" href="../image/logo.png">
+<link rel="shortcut icon" href="../image/logo_ist.gif">
     <?php require_once("topo.php");?>
 
 </head>

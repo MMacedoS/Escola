@@ -33,7 +33,7 @@ $result_2 = mysqli_query($conexao, $sql_2);
 	while($res_2 = mysqli_fetch_assoc($result_2)){
 		$curso = $res_2['id_cursos'];
 
-$verifica_busca="SELECT * FROM avaliacao_teste where professor='$code' and id_curso='$curso' and bimestre='$bimestre' and ano_letivo='$ano_letivo'";
+$verifica_busca="SELECT * FROM avaliacao_teste where id_disciplina='$dis' and professor='$code' and id_curso='$curso' and bimestre='$bimestre' and ano_letivo='$ano_letivo'";
 $con_verifica=mysqli_query($conexao,$verifica_busca);
 if(mysqli_num_rows($con_verifica)==0){	
 $sql_3 = "INSERT INTO avaliacao_teste (data, status, professor,id_curso, id_disciplina, detalhes, bimestre,ano_letivo, data_aplicacao)
@@ -63,7 +63,7 @@ echo "<script language='javascript'>window.alert('atividade ja existe! Click em 
      
      <?php
       if($_POST['dis']!=''){
-       $sql_rec_curso="SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner JOIN categoria cat on c.id_categoria=cat.id_categoria WHERE cat.categoria='$selec' and d.id_disciplinas=".$_POST['dis'];
+       $sql_rec_curso="SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner JOIN categoria cat on c.id_categoria=cat.id_categoria WHERE cat.id_categoria='$selec' and d.id_disciplinas=".$_POST['dis'];
        $result_rec_curso = mysqli_query($conexao,$sql_rec_curso);
        while($r2=mysqli_fetch_assoc($result_rec_curso)){
            ?>
@@ -82,7 +82,7 @@ echo "<script language='javascript'>window.alert('atividade ja existe! Click em 
       $ano_letivo=date("Y");
       }
      
-    $sql_1 = "SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner JOIN categoria cat on c.id_categoria=cat.id_categoria WHERE id_professores='$id_professor' and cat.categoria='$selec'";
+    $sql_1 = "SELECT * FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner JOIN categoria cat on c.id_categoria=cat.id_categoria WHERE id_professores='$id_professor' and cat.id_categoria='$selec'";
    $result = mysqli_query($conexao, $sql_1);
      while($res_1 = mysqli_fetch_assoc($result)){
    ?>

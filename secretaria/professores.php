@@ -8,7 +8,7 @@
 <?php require_once("topo.php");   ?>
     <title>Professores</title>
     
-<link rel="shortcut icon" href="../image/logo.png">
+<link rel="shortcut icon" href="../image/logo_ist.gif">
 </head>
 <body>
 

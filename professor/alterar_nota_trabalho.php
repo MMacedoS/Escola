@@ -342,13 +342,13 @@ foreach($dados as $dado){
   $id_paralela=$dado['id_paralela'];
 }
 if($qtde==0){
-  if($nota>=$notaAntiga && $nota>2){?>
+  if($nota<0 || $nota>2){?>
     <script>
         alert('Nota Maxima 2 para esta paralela');
       </script>
       <?php
     
-    }elseif($nota>=$notaAntiga && $nota<=2){
+    }elseif($nota<=2){
       if($selec=="1"){
         $sql=$pdo->prepare('INSERT INTO  paralela (code,id_disciplina,bimestre,ano_letivo,nota) VALUES (:code,:dis,:bimestre,:ano,:nota)');
         $sql->bindValue(':code',$code_aluno);
@@ -358,7 +358,7 @@ if($qtde==0){
         $sql->bindValue(':nota',$nota);
         $sql->execute();
     
-       echo "A nota deste aluno foi alterada com sucesso!!!";
+        echo "A nota deste aluno foi alterada com sucesso!!! clique no botão <Atualizar pagina> ou recarregue a pagina! ";
     }else{
       $sql=$pdo->prepare("INSERT INTO  paralela (code,id_disciplina,bimestre,ano_letivo,nota) VALUES (?,?,?,?,?)");
       $sql->bindValue(1,$code_aluno);
@@ -368,19 +368,19 @@ if($qtde==0){
       $sql->bindValue(5,$nota);
       $sql->execute();
     
-    echo "A nota deste aluno foi alterada com sucesso!!!";
+      echo "A nota deste aluno foi alterada com sucesso!!! clique no botão <Atualizar pagina> ou recarregue a pagina! ";
     }
     
     }
     
 }else{
-  if($nota>=$notaAntiga && $nota>2){?>
+  if($nota<0 || $nota>2){?>
     <script>
         alert('Nota Maxima 2 para esta paralela');
       </script>
       <?php
     
-    }elseif($nota>=$notaAntiga && $nota<=2){
+    }elseif($nota<=2){
       if($selec=="1"){
         $sql=$pdo->prepare('UPDATE paralela SET code=?,id_disciplina=?,bimestre=?,ano_letivo=?,nota=? where id_paralela=?');
         $sql->bindValue(1,$code_aluno);
@@ -393,7 +393,7 @@ if($qtde==0){
     // $sql = "UPDATE notas_ava_coc set nota=nota+'$nota' where id_disciplina='$disciplina' AND code='$code_aluno' AND bimestre='$bimestre'";
     // mysqli_query($conexao, $sql);
     
-    echo "A nota deste aluno foi alterada com sucesso!!!";
+    echo "A nota deste aluno foi alterada com sucesso!!! clique no botão <Atualizar pagina> ou recarregue a pagina! ";
     }else{
     // $sql = "UPDATE notas_ava_teste set nota=nota+'$nota' where id_disciplina='$disciplina' AND code='$code_aluno' AND bimestre='$bimestre'";
     // mysqli_query($conexao, $sql);
@@ -405,7 +405,7 @@ if($qtde==0){
         $sql->bindValue(5,$nota);
         $sql->bindValue(6,$id_paralela);
         $sql->execute();
-    echo "A nota deste aluno foi alterada com sucesso!!!";
+    echo "A nota deste aluno foi alterada com sucesso!!! clique no botão <Atualizar pagina> ou recarregue a pagina! ";
     }
     
     }

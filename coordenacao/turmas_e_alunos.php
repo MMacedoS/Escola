@@ -5,7 +5,7 @@
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <!---<link href="css/turmas_e_alunos.css" rel="stylesheet" type="text/css" />--->
 
-<link rel="shortcut icon" href="../image/logo.png">
+<link rel="shortcut icon" href="../image/logo_ist.gif">
 <style>
 #filtro{
   /* margin-left: -15rem!important; */

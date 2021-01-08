@@ -160,50 +160,67 @@ $date=Date('Y');
 
 switch($bimestre){
   case '1':
-    if(($nota>3 && $_GET['selec']!="1")){
-      ?>
-      <script>
-        alert('Nota Maxima 2.0 no primeiro  bimestre');
-      </script>  
-      <?php
-      echo "<script language='javascript'>window.location='correcao_provas.php?pg=provas&selec=$selec&id=$id';</script>";
-    }else{    
-        $sql_3 = "INSERT INTO notas_ava_prova (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', $id,'$date')";
-        mysqli_query($conexao, $sql_3);
-        $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das provas estão sendo divulgadas','provas')";
-        mysqli_query($conexao, $sql_4);
-    //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
-     
-     echo "<script language='javascript'>window.location='correcao_provas.php?pg=provas&selec=$selec&id=$id';</script>";
-    
-    }///else encadeado
+    // bimestre
+ // bimestre
+ if((($nota>2 && $_GET['selec']!="1") || ($nota>4 && $_GET['selec']=="1") )){
+  ?>
+  <script>
+    alert('Esta nota esta acima do valor deste bimestre, entre em contato com o seu coordenador!');
+  </script>  
+  <?php
+  echo "<script language='javascript'>window.location='correcao_provas.php?pg=provas&selec=$selec&id=$id';</script>";
+}else
+{
+  $sql_verifica = "SELECT * FROM notas_ava_prova WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'";
+  $result_verifica = mysqli_query($conexao, $sql_verifica);
+  if(mysqli_num_rows($result_verifica)==0){
+    $sql_3 = "INSERT INTO notas_ava_prova (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', $id,'$date')";
+    mysqli_query($conexao, $sql_3);
+    $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das provas estão sendo divulgadas','provas')";
+    mysqli_query($conexao, $sql_4);
+//  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+ 
+echo "<script language='javascript'>window.location='correcao_provas.php?pg=provas&selec=$selec&id=$id';</script>";
+}else{
+  ?>
+   <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+  <?php
+}
+}
+    // bimestre
     break;
 
     case '2':
-      if(($nota>4 && $_GET['selec']!="1")){
+
+
+      // 2 BIMESTRE
+      if((($nota>4 && $_GET['selec']>=3) || ($nota>3 && $_GET['selec']=="1") || ($nota>3 && $_GET['selec']=="2") )){
         ?>
         <script>
-          alert('Nota Maxima 4.0 no primeiro  bimestre');
+          alert('Esta nota esta acima do valor deste bimestre, entre em contato com o seu coordenador!');
         </script>  
         <?php
         echo "<script language='javascript'>window.location='correcao_provas.php?pg=provas&selec=$selec&id=$id';</script>";
-      }elseif($nota>3 && $_GET['selec']==2){ ?>
-        <script>
-          alert('Nota Maxima 3.0 para este bimestre, fund. Anos finais');
-        </script>
-          <?php
-          echo "<script language='javascript'>window.location='correcao_provas.php?pg=provas&selec=$selec&id=$id';</script>";
-        }else{    
+      }else
+      {
+        $sql_verifica = "SELECT * FROM notas_ava_prova WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'";
+        $result_verifica = mysqli_query($conexao, $sql_verifica);
+        if(mysqli_num_rows($result_verifica)==0){
           $sql_3 = "INSERT INTO notas_ava_prova (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', $id,'$date')";
           mysqli_query($conexao, $sql_3);
           $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das provas estão sendo divulgadas','provas')";
           mysqli_query($conexao, $sql_4);
       //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
        
-       echo "<script language='javascript'>window.location='correcao_provas.php?pg=provas&selec=$selec&id=$id';</script>";
+      echo "<script language='javascript'>window.location='correcao_provas.php?pg=provas&selec=$selec&id=$id';</script>";
+      }else{
+        ?>
+         <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+        <?php
+      }
+      }
+      // BIMESTRE
       
-      }///else encadeado
-  
       break;
 
       case '3':

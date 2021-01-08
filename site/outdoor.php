@@ -90,11 +90,17 @@ a {
 </head>
 <body>
     <section>
-    <a href="produtos.php">Ver Todos os Outdoors</a>
+    <a href="listaOutdoor.php">Ver Todos os Outdoors</a>
     <form action="" enctype="multipart/form-data" method="post">
-        <h1>Envio de Imagens</h1>
+        <h1>Envio de Outdoors</h1>
         <label for="nome">Nome do Produto</label>
         <input type="text" name="nome" id="nome">
+
+        <label for="nome">Link</label>
+        <input type="text" name="link" id="link">
+
+        <label for="nome">Titulo</label>
+        <input type="text" name="titulo" id="titulo">
 
         <label for="des">Descrição</label>
        <textarea name="desc" id="desc"></textarea>
@@ -129,6 +135,8 @@ a {
 
             $nome= addslashes($_POST['nome']);
             $descricao= addslashes($_POST['desc']);
+            $link= addslashes($_POST['link']);
+            $titulo= addslashes($_POST['titulo']);
             $fotos=array();
 
             // var_dump($_FILES['foto']);
@@ -194,9 +202,9 @@ if(!empty($nome) && !empty($descricao)){
     require 'classes/Produto_class.php';
     $p= new Produto_class();
     $p-> ExecutaConexao();
-    $p->enviarOutdoor($nome,$descricao,$fotos);
+    $p->enviarOutdoor($nome,$link,$titulo,$descricao,$fotos);
     ?>
-    <script> alert('Produto cadastrado com sucesso!!');</script>
+    <script> alert('Album cadastrado com sucesso!!');</script>
     <!-- <script>window.location='index.php'</script> -->
     <?php
 }else{

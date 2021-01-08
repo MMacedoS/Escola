@@ -1,6 +1,6 @@
 <?php
     include('pdf/mpdf.php');
-    $painel_atual = "professor"; 
+    $painel_atual = "Coordenacao"; 
     require_once "../config.php";
     $id=$_GET['id'];
     $ano=Date('Y');

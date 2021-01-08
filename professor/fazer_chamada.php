@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
     <title>Chamada</title>
-
+    
     <link rel="shortcut icon" href="../image/logo.png">
     <link rel="stylesheet" type="text/css" href="css/fazer_chamada.css" />
     <style>
@@ -24,11 +24,15 @@
             padding: 8px;
         }
         #customers td {
-            width:46%;
+            width:30%;
         }
         .switch {
             width: 70px !important;
             
+        }
+        
+        .opcao{
+            display:none;
         }
         #button{
          
@@ -49,6 +53,13 @@
             color: white;
         }
     </style>
+   <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!-- Bootstrap core JS-->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+   
 </head>
 
 <body>
@@ -73,6 +84,7 @@
 
       }
     ?>
+    
     <div id="caixa_preta">
     </div>
     <!-- caixa_preta -->
@@ -81,7 +93,8 @@
 
 
         <h1>Turma: <strong>
-                <?php $curso = base64_decode($_GET['curso']); 
+                <?php $curso = base64_decode($_GET['curso']);
+                $num=0; 
     $buscaCurso="SELECT * from cursos where id_cursos='$curso'";
     $busca=$conCurso=mysqli_query($conexao,$buscaCurso);
     if($busca){
@@ -96,13 +109,26 @@
       
       ?></strong>
             <form>
-                <div>
+                <div class="">
                     <label for="festa">Escolha uma data:</label>
                     <input type="date" id="festa" onchange="submit();" name="cha" min="<?php echo $a;?>-01-01"
                         max="<?php echo $hoj;?>" value="<?php echo @$time; ?>" required>
                     <span class="validity"></span>
                     <input type="hidden" name="curso" value="<?php echo $_GET['curso']; ?>">
                     <input type="hidden" name="dis" value="<?php echo $_GET['dis']; ?>">
+                    <label for="fest">Bimestre:</label>
+                    <select name="bimestre" id="" class="">
+                    <?php if(@$_GET['bimestre']){
+                       echo '<option value="'.$_GET['bimestre'].'">'.$_GET['bimestre'].'º bimestre</option>'; 
+                    }
+                    $bimestre=$pdo->query('SELECT * FROM unidades');
+                    $bimestre=$bimestre->fetchAll();
+                    foreach($bimestre as $value)
+                    {
+                        echo '<option value="'.$value['unidade'].'">'.$value['unidade'].'º bimestre</option>'; 
+                    }
+                    ?>
+                    </select>
                 </div>
             </form>
           
@@ -114,7 +140,7 @@
         echo $resDisc['nome'];
    }
    ?>
-                <!-- <a background-color="blue" id="h1_a" rel="superbox[iframe][900x500]" href="fazer_rapida.php?curso=<?php echo $_GET['curso'];?>&dis=<?php echo $_GET['dis'];?>&turno=<?php echo $_GET['turno'];?>"><img title="chamada rapida" border="0" src="../image/confirma.png" width="50" /></a> -->
+                <!-- <a background-color="blue" id="h1_a" rel="superbox[iframe][900x500]" href="fazer_rapida.php?curso=<php echo $_GET['curso'];?>&dis=<php echo $_GET['dis'];?>&turno=<php echo $_GET['turno'];?>"><img title="chamada rapida" border="0" src="../image/confirma.png" width="50" /></a> -->
             </h1>
             <?php
 
@@ -130,7 +156,8 @@ if($resultado==0 ){
 	 echo "<h2><font color='#fff' size='2px'>Não existe nenhum aluno cadastrado nesta disciplina!</font></h2>";
 }else if($resultado>=1){
  foreach ($dados as $res_1) {
-	 $code_aluno = $res_1['matricula'];
+     $code_aluno = $res_1['matricula'];
+     $num=$num+1;
 ?>
 
             <form name="button" method="POST" enctype="multipart/form-data" action="">
@@ -139,11 +166,12 @@ if($resultado==0 ){
                     <tr>
                         <th width="94"><strong>Código:</strong></th>
                         <th width="350"><strong>Nome:</strong></th>
-                        <th colspan="2"><strong>Presente?</strong></th>
-                        <th colspan="2"><strong></strong></th>
-                        <th></th>
+                        <th colspan="4"><strong>Falta? <?php //echo $num;?></strong></th>
+                        
                     </tr>
                     <input type="hidden" name="curso" value="<?php echo  base64_encode($curso); ?>">
+                    <input type="hidden" name="dis" value="<?php echo  base64_encode($dis); ?>">
+                    <input type="hidden" name="bimestre" value="<?=@$_GET['bimestre']; ?>">
                     <input type="hidden" name="dis" value="<?php echo  base64_encode($dis); ?>">
                     <tr>
                         <td>
@@ -163,36 +191,82 @@ if($resultado==0 ){
                             $qtde_chamada=count($dados_chamada);                   
 
                         if($qtde_chamada==0){
-    ?>
-                        <td width="315">
-                            <div class="switch">
+    ?>      
+                        <td colspan="4">
+                        
+                        <div class="switch">
 
-                                <input type="checkbox" name="checkbox[]" id="option"
-                                    value="<?php echo $res_1['matricula']; ?>">
-                                <label for="option"><span></span></label>
-                            </div>
+                            <input type="checkbox" name="check" class="check"
+                                value="true">
+                            <label for="option"><span></span></label>
+                            </div>   
+                            <div class="row">
+                            <?php $verif=$pdo->query("SELECT cargaHoraria_diaria FROM disciplinas where id_disciplinas=".$dis);                            
+                                $verif=$verif->fetch();
+                                 $v=$verif[0]+1;
+                                 for ($i=1; $i <$v ; $i++) { 
+                                     # code...
+                                     echo' <label class="opcao">'.$i.'
+                                     <input type="checkbox" name="checkbox[]" class="opcao"  id="ok1" value="'.$code_aluno.';'.$i.'" />
+                                         </label>';
+                                 }
+                                ?>
+                           
+                                <!-- <label class="opcao"> 2
+                            <input type="checkbox" name="checkbox[]" class="opcao" id="ok2"  value="<= $code_aluno.';2';?>"/>
+                                </label>
+                                <label class="opcao"> 3
+                            <input type="checkbox" name="checkbox[]" class="opcao" id="ok3"  value="<= $code_aluno.';3';?>"/>
+                                </label>
+                                <label class="opcao"> 4
+                            <input type="checkbox" name="checkbox[]" class="opcao"  id="ok4" value="<= $code_aluno.';4';?>"/>
+                                </label> -->
+                                <label class="opcao"> FJ
+                            <input type="checkbox" name="checkbox2[]" class="opcao" value="<?= $code_aluno.';FJ';?>"/>
+                                </label>
+                                </div>   
+   
+    
+   
 
-                        </td>
-                        <td><strong></strong></td>
-                        <td><strong></strong></td>
+                            </td>
+                            <script>
+    
+    $(".check").click(function(){
+        var n=(this).value;
+        if(n=="true"){
+            $(".opcao").css("display","block");
+            $(".switch").css("display","none");
+            $(this).val("false");
+        }
+            else{
+                $(".opcao").css("display","block");
+                    $(this).val("true");
+            }
+            
+        
+        });
+
+    </script>
+                       
                         <?php 
       
        
           }//fechamento do if falta
          else{ ?>
                         <td>
-                            <?php echo "presença: "; 
-          
+                            <?php           
            foreach($dados_chamada as $mostrar_chamada){
-                    echo $mostrar_chamada['presente'];
+                    echo $mostrar_chamada['falta']." ".$mostrar_chamada['obs'];
                     $chamada=$mostrar_chamada['id'];
+                    $data=$mostrar_chamada['date_day'];
                     $q_c=$q_c+1;
            }
            ?>
                         </td>
                         <td width="62">
                             <a
-                                href="fazer_chamada.php?selec=nadaselecionado&pg=excluir&curso=<?php echo $_GET['curso']?>&dis=<?php echo $_GET['dis']?>&cha=<?php echo base64_encode($chamada); ?>"><img
+                                href="fazer_chamada.php?selec=nadaselecionado&pg=excluir&curso=<?php echo $_GET['curso']?>&dis=<?php echo $_GET['dis']?>&cha=<?php echo base64_encode($chamada); ?>&data=<?=$data;?>"><img
                                     border="0" src="../image/deleta.png" width="22" /></a>
                         </td>
 
@@ -206,7 +280,7 @@ if($resultado==0 ){
                 <?php }
 
 ?>
-                <input type="submit" class="btn btn-primary" name="inserir" id="" value="Inserir dados"
+                <input type="submit" class="btn btn-primary" name="inserir" id="" value="Guardar"
                     onclick="alert('concluindo chamada');">
             </form>
             <?php 
@@ -214,6 +288,7 @@ if($resultado==0 ){
 // $code_aluno = $_GET['code_aluno'];	
 // $nome = $_GET['nome'];	
 $curso =base64_decode($_POST['curso']);
+$bimestre=$_POST['bimestre'];
 
 $c=$_GET['curso'];
 // @$presensa = $_GET['presenca'];
@@ -251,9 +326,21 @@ echo "<script language='javascript'>window.location='fazer_chamada.php?curso=$c&
 
 
 $chgeckboxes = @$_POST['checkbox'];
-$chgeckboxes1 = @$_GET['checkboxf'];
-$chgeckboxes2 = @$_GET['checkboxj'];
+$chgeckboxes2 = @$_POST['checkbox2'];
+echo count($chgeckboxes);
+echo "<br/>";
 
+    # code...
+  
+foreach($chgeckboxes as $ch){
+    $dados= explode(";", $ch);
+       # code...
+       echo $dados[0]."\n";
+       
+   
+
+
+}
 
 
   $busca_aluno =$pdo->prepare("SELECT * from estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes where ce.id_cursos=:curso and e.status='Ativo' order by e.nome asc");
@@ -266,26 +353,40 @@ $chgeckboxes2 = @$_GET['checkboxj'];
                  $con_chamada= mysqli_query($conexao, $sql_chamada2);
                  if(mysqli_num_rows($con_chamada)==''){
                   
-                $query ="INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas, matricula, presente, ano_letivo,bimestre) VALUES ('$date', '$date_hoje','$dis', '$code_a', 'SIM','$ano','$unidade')";
+                $query ="INSERT INTO chamadas_em_sala (date, date_day, id_disciplinas, matricula, falta, ano_letivo,bimestre,responsavel) VALUES ('$date', '$date_hoje','$dis', '$code_a', '0','$ano','$bimestre','professor')";
                 mysqli_query($conexao, $query);
+                
                    
                  }
 }
-if(!empty($chgeckboxes)){
-  foreach( $chgeckboxes AS $dado ){      
-      
-    $res=$pdo->prepare("UPDATE `chamadas_em_sala` SET `presente` =:situacao WHERE date_day=:d and matricula=:code and id_disciplinas=:dis and ano_letivo=:ano and bimestre=:unidade");
+foreach($chgeckboxes AS $dados ){      
+    $dado= explode(";", $dados); 
+  
+    $res=$pdo->prepare("UPDATE `chamadas_em_sala` SET `falta` =:situacao WHERE date_day=:d and matricula=:code and id_disciplinas=:dis and ano_letivo=:ano and bimestre=:unidade");
       $res->bindvalue(":d",$date_hoje);
       $res->bindvalue(":dis",$dis);
       $res->bindvalue(":unidade",$unidade);
-      $res->bindvalue(":code",$dado);
-      $res->bindvalue(":situacao",'FALTA');
+      $res->bindvalue(":code",$dado[0]);
+      $res->bindvalue(":situacao",$dado[1]);
       $res->bindvalue(":ano",$ano);
       $res->execute();
+ 
+}
+foreach($chgeckboxes2 AS $just ){      
+    $justificada= explode(";", $just);
+    $res=$pdo->prepare("UPDATE `chamadas_em_sala` SET `obs` =:situacao WHERE date_day=:d and matricula=:code and id_disciplinas=:dis and ano_letivo=:ano and bimestre=:unidade");
+      $res->bindvalue(":d",$date_hoje);
+      $res->bindvalue(":dis",$dis);
+      $res->bindvalue(":unidade",$unidade);
+      $res->bindvalue(":code",$justificada[0]);
+      $res->bindvalue(":situacao",$justificada[1]);
+      $res->bindvalue(":ano",$ano);
+      $res->execute();
+ 
 
 }
       
-}
+
 
 echo "<script language='javascript'>window.location='fazer_chamada.php?curso=$c&dis=$d&cha=$datahoje&c';</script>";
  
@@ -301,12 +402,14 @@ if(isset($_GET['pg'])=='excluir'){
 $chamada= base64_decode($_GET['cha']);	
 $curso = $_GET['curso'];
 $ano=Date('Y');
+$datahoje=@$_GET['data'];
 $res = $pdo->prepare("delete from chamadas_em_sala where id=:id ");
 
 $res->bindValue(":id", $chamada);
 $res->execute();
 $disc=($_GET['dis']);
-	echo "<script language='javascript'>window.location='fazer_chamada.php?curso=$curso&dis=$disc';</script>";
+
+	echo "<script language='javascript'>window.location='fazer_chamada.php?curso=$curso&dis=$disc&cha=$datahoje';</script>";
   }
 
  ?>
@@ -328,3 +431,4 @@ $disc=($_GET['dis']);
 </body>
 
 </html>
+

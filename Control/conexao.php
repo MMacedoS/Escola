@@ -1,15 +1,15 @@
-<meta charset="utf-8">
+
 <?php
-header('Content-Type: text/html; charset=UTF-8');
+setlocale(LC_ALL,'pt_BR.utf8');
 date_default_timezone_set('America/Sao_Paulo');
 function connectar(){
     // $servidor ="mysql873.umbler.com";
     // $usuario="kamaur";
     // $senha="kamaur2711";
     // $banco="ist";
-$servidor = 'localhost';
-$usuario = 'root';
-$senha = '';
+$servidor = 'mysql669.umbler.com';
+$usuario = 'ist';
+$senha = 'kamaur2711';
 $banco = 'escolaist';
 
 	$con= new mysqli($servidor,$usuario,$senha,$banco);
@@ -18,36 +18,28 @@ $banco = 'escolaist';
 }
 $conexao=connectar();
 
-
 //DADOS PARA CONEXÃO COM BANCO DE DADOS LOCAL
 
-$host = 'localhost';
-$usuario = 'root';
-$senha = '';
+$host = 'mysql669.umbler.com';
+$usuario = 'ist';
+$senha = 'kamaur2711';
 $banco = 'escolaist';
 
 
-//DADOS PARA CONEXÃO COM BANCO DE DADOS HOSPEDADA
-
-// $host = 'mysql669.umbler.com';
-// $usuario = 'garradeaguia';
-// $senha = 'kamaur2711';
-// $banco = 'sismed';
 
 
 //VALORES PARA A COMBOBOX DE PAGINAÇÃO
-$opcao1 = 5;
-$opcao2 = 8;
-$opcao3 = 10;
+$opcao1 = 8;
+$opcao2 = 16;
+$opcao3 = 50;
 
 
 //VARIAVEL PARA DEFINIR O CAMINHO DO SISTEMA
-// $url_sistema = 'http://sistemapdvteste-com-br.umbler.net';
-// $url_sistema = 'http://mmsescolar.com.br';
-$url_sistema='localhost/SistemaCopia/';
-// $url_sistema = 'http://garradeaguia-com-br.umbler.net';
 
-$email_adm = 'mauricio.jorro@hotmail.com';
+$url_sistema = 'https://www.escolaisttucano.com.br';
+
+
+$email_adm = 'contato@escolaisttucano.com.br';
 
 $cidade = 'Bahia';
 
@@ -60,8 +52,12 @@ $tempo_atualizacao_tela_chamadas = 3;
 date_default_timezone_set('America/Sao_Paulo');
 
 try {
-	$pdo = new PDO("mysql:dbname=$banco;host=$host", "$usuario", "$senha",array(PDO::MYSQL_ATTR_INIT_COMMAND=>"SET NAMES utf8"));
-	
+    $dsn="mysql:host=$host;dbname=$banco;charset=utf8";
+    $opcoes=array(PDO::MYSQL_ATTR_INIT_COMMAND=>'SET NAMES UTF8');
+    $pdo=new PDO($dsn,$usuario,$senha,$opcoes);
+    // $pdo = new PDO("mysql:dbname=$banco;host=$host", "$usuario", "$senha");
+// 	$pdo->set_charset("utf8");
+
 	//conexao mysql para o backyp
 	$conn = mysqli_connect($host, $usuario, $senha, $banco);
 } catch (Exception $e) {
@@ -71,16 +67,17 @@ try {
 <?php 
 ///envioar email 
 function enviar($to,$acesso){
-    $url_sistema = 'http://mmsescolar.com.br';
-    $email_adm = 'mauricio.jorro@hotmail.com';
-	$subject = 'Acesso de Senha Ist';
+    $url_sistema = 'https://escolaisttucano.com.br';
+    $email_adm = 'contato@escolaisttucano.com.br';
+	$subject = 'Acesso ao Novo Sistema de notas do  Ist';
 
 	$message = "
 
 	Olá $to!! 
 	<br><br> Sua senha é <b>$acesso </b>
-
+	<br>Para acessar o sistema utilize esta senha como esta ai acima, para alterar a senha acesse o sistema.
 	<br><br> Ir Para o Sistema -> <a href='$url_sistema'  target='_blank'> Clique Aqui </a>
+	
 
 	";
 

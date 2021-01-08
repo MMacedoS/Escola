@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <title>Cadastro de Teste</title>
-<link rel="shortcut icon" href="../image/logo.png">
+<link rel="shortcut icon" href="../image/logo_ist.gif">
 <link rel="stylesheet" type="text/css" href="css/cadastrar_prova.css"/>
 <?php require "../config.php"; $code; ?>
 </head>

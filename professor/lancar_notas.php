@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
+<link rel="shortcut icon" href="../image/logo.png">
 <title>Correçao de Prova</title>
 <link rel="stylesheet" type="text/css" href="css/correcao_prova.css"/>
 <style>
@@ -50,14 +51,14 @@ if(isset($_GET['id'])){
 else{
   $id=$_POST['id'];
 }
-$busca_prova="SELECT * FROM `notas_bimestres` where id_disciplinas='$id'";
-$con_busca=mysqli_query($conexao,$busca_prova);
-while($res_busca=mysqli_fetch_assoc($con_busca)){
+$busca_prova=$pdo->query("SELECT * FROM `notas_bimestres` where id_disciplinas='$id'");
+$busca_prova=$busca_prova->fetchAll(PDO::FETCH_ASSOC);
+foreach($busca_prova as $key=>$res_busca){
 $disciplina=$res_busca['id_disciplinas'];}?>
 <?php 
-$buscaDis="SELECT *,l.nome,l.id_lista FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner join lista_disc l on l.id_lista=d.disciplina WHERE d.id_disciplinas='$id'";
-$conDis=mysqli_query($conexao,$buscaDis);
-while($resDis=mysqli_fetch_assoc($conDis)){
+$buscaDis=$pdo->query("SELECT *,l.nome,l.id_lista FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner join lista_disc l on l.id_lista=d.disciplina WHERE d.id_disciplinas='$id'");
+$buscaDis=$buscaDis->fetchAll(PDO::FETCH_ASSOC);
+foreach($buscaDis as $key=>$resDis){
   $disc=$resDis['disciplina'];
   $curso=$resDis['curso'];
   $id_curso=$resDis['id_cursos'];
@@ -94,12 +95,13 @@ while($resDis=mysqli_fetch_assoc($conDis)){
       }
   ?>
     
-  <option value="">Selecione uma bimestre</option>
+  <option value="">Selecione</option>
     
-  <?php   
-    $selec_uni="SELECT * FROM unidades";
-    $con_unidade=mysqli_query($conexao,$selec_uni);
-    while($res_unidade=mysqli_fetch_assoc($con_unidade)){
+  <?php  
+    $selec_uni=$pdo->query("SELECT * FROM unidades"); 
+    $selec_uni=$selec_uni->fetchAll(PDO::FETCH_ASSOC);
+    foreach($selec_uni as $key=>$res_unidade){
+      
       ?>
         <option value="<?php echo $res_unidade['unidade'];?>"><?php echo $res_unidade['unidade'];?></option>
     <?php
@@ -146,11 +148,13 @@ $(document).ready(function(){
 <?php
 if(isset($_GET['busca'])){
   $res=$_GET['busca'];
-  $sql_1 = "SELECT * FROM `notas_bimestres` where id_disciplinas='$id' and bimestre=$res";
+  $sql_1=$pdo->query("SELECT * FROM `notas_bimestres` where id_disciplinas='$id' and bimestre=$res");
+  
 }else{
-$sql_1 = "SELECT * FROM `notas_bimestres` where id_disciplinas='$id' and bimestre=1";
+  $sql_1=$pdo->query("SELECT * FROM `notas_bimestres` where id_disciplinas='$id' and bimestre=1");
+
 }
-$result = mysqli_query($conexao, $sql_1);
+
 	// while($res_1 = mysqli_fetch_assoc($result)){
 	// 	$disciplinas = $res_1['id_disciplinas'];
 	// 	$aluno = $res_1['code'];
@@ -160,10 +164,14 @@ $result = mysqli_query($conexao, $sql_1);
 		
 // $sql_2 = "SELECT e.nome,e.matricula,c.curso,d.disciplina,d.id_disciplinas FROM estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes inner JOIN cursos c on c.id_cursos=ce.id_cursos INNER JOIN disciplinas d on d.id_cursos=c.id_cursos WHERE d.id_disciplinas ='$disciplinas' and ce.ano_letivo='$ano' and e.status='Ativo'";
 // $result_2 = mysqli_query($conexao, $sql_2);
-if(mysqli_num_rows($result) == ''){
+$sql_1=$sql_1->fetchAll(PDO::FETCH_ASSOC);
+$qtdeDados=count($sql_1);
+
+if($qtdeDados== 0){
 	echo "<h3>Nenhuma média disponível neste curso</h3>";
 }else{
-		while($res_2 = mysqli_fetch_assoc($result)){
+  foreach($sql_1 as $key=> $res_2){
+		
 ?> 
  
 <form name="" method="get" action="" enctype="multipart/form-data">
@@ -177,10 +185,9 @@ if(mysqli_num_rows($result) == ''){
       <!-- while estudante -->
       <?php
       $code_aluno = $res_2['code'];
-      $busca_aluno="SELECT nome, matricula FROM estudantes WHERE matricula='$code_aluno' and status='Ativo' ORDER BY nome asc";
-      $con_aluno=mysqli_query($conexao,$busca_aluno);
-      while($res_aluno=mysqli_fetch_assoc($con_aluno)){
-        
+      $busca_aluno=$pdo->query("SELECT nome, matricula FROM estudantes WHERE matricula='$code_aluno' and status='Ativo' ORDER BY nome asc");
+      $busca_aluno=$busca_aluno->fetchAll(PDO::FETCH_ASSOC);
+      foreach($busca_aluno as $key=>$res_aluno){      
         ?>
 
 
@@ -198,20 +205,31 @@ if(mysqli_num_rows($result) == ''){
 
       }?></h3></td>
     <td><h3><?php $disc=$res_2['id_disciplinas'];
-       $busca_dis="SELECT l.nome,c.curso FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner join lista_disc l on d.disciplina=l.id_lista WHERE d.id_disciplinas='$disc'";
-      $con_dis=mysqli_query($conexao,$busca_dis);
-      while($res_disc=mysqli_fetch_assoc($con_dis)){
-        echo $nomed=$res_disc['nome'];
+    $busca_dis=$pdo->query("SELECT l.nome,c.curso FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner join lista_disc l on d.disciplina=l.id_lista WHERE d.id_disciplinas='$disc'");
+    $busca_dis=$busca_dis->fetchAll(PDO::FETCH_ASSOC);
+    foreach($busca_dis as $key=>$res_disc){
+            echo $nomed=$res_disc['nome'];
       }
   
      ?></h3></td>    
     <td><h3><?php echo $bimestre = $res_2['bimestre']; ?>º</h3></td>
     
     <?php
-    $sql_4 = "SELECT * FROM notas_bimestres WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplinas='$id'";
-	$result_4 = mysqli_query($conexao, $sql_4);
-	 while($res_4 = mysqli_fetch_assoc($result_4 )){ ?>
-    <?php if($res_4['nota']>=7){ ?>
+    // verificando paraleela existe
+    $sql_para=$pdo->query("SELECT id_paralela,nota FROM paralela WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$id'");
+    $sql_para=$sql_para->fetchAll(PDO::FETCH_ASSOC);
+      foreach($sql_para as $key=>$res_para){
+       $notaParalela=$res_para['nota'];
+       $idParalela=$res_para['id_paralela'];
+      }
+      $verifica=count($sql_para);
+
+    // buscando notas bimestre
+    $sql_4=$pdo->query("SELECT * FROM notas_bimestres WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplinas='$id'");
+    $sql_4=$sql_4->fetchAll(PDO::FETCH_ASSOC);
+      foreach($sql_4 as $key=>$res_4){
+	 ?>
+    <?php if($res_4['nota']>=7 && $verifica==0){ ?>
     <td bgcolor="#58FA58" align="center"><font><h3><?php echo $res_4['nota']; ?></h3></font></td>
    
    <?php }else{?>
@@ -220,7 +238,15 @@ if(mysqli_num_rows($result) == ''){
     }else{ ?>
     </tr>
     <tr>
-   <td align="center"><a href="alterar_nota_trabalho.php?pg=ponto_extra&selec=<?php echo $selec;?>&id=<?php echo $res_4['id_disciplinas'];?>&aluno=<?php echo $res_2['code']; ?>&disciplina=<?php echo $res_2['id_disciplinas']; ?>&bimestre=<?php echo $res_2['bimestre'];  ?>&professor=<?php echo $code;  ?>&nota=<?php echo $res_4['nota']; ?>" rel="superbox[iframe][400x100]"><img src="../image/ico-editar.png" border="0" title="Alterar a nota" /></a></td>
+     <?php
+       
+          if($verifica==0){
+     ?> 
+        <td align="center"><a href="alterar_nota_trabalho.php?pg=ponto_extra&selec=<?php echo $selec;?>&id=<?php echo $res_4['id_disciplinas'];?>&aluno=<?php echo $res_2['code']; ?>&disciplina=<?php echo $res_2['id_disciplinas']; ?>&bimestre=<?php echo $res_2['bimestre'];  ?>&professor=<?php echo $code;  ?>&nota=<?php echo $res_4['nota']; ?>" rel="superbox[iframe][400x100]"><img width="30" height="30" src="../image/ico-editar.png" border="0" title="Alterar a nota" /></a></td>
+          <?php }else{
+           ?>
+         <td align="center"><a href="lancar_notas.php?pg=notas&selec=<?php echo $selec;?>&id=<?php echo $res_4['id_disciplinas'];?>&apagar=1&paralela=<?=$idParalela?>"><?= $notaParalela?><img src="../image/deleta.png" width="30" border="0" title="Alterar a nota" /></a></td>
+          <?php }?>
     <td><a target="_blank" href="lancar_notas.php?pg=notas&selec=<?php echo $selec;?>&id=<?php echo $res_4['id_disciplinas'];?>&info" >Inserir conselho</a></td>
    
     <?php } //if bimestre
@@ -236,32 +262,48 @@ if(mysqli_num_rows($result) == ''){
 
 <?php if(isset($_GET['button'])){
 
-$code_aluno = $_GET['code_aluno'];
-$nota = $_GET['nota'];
-$bimestre = $_GET['bimestre'];
-$disciplina = $_GET['disciplina'];
-$prova = $_FILES['prova']['name'];
-$date=Date('Y');
-if(file_exists("../trabalhos_alunos/$prova")){
-	$a = 1;
-	while(file_exists("../trabalhos_alunos/[$a]$prova")){
-	$a++;
-  }
-  	$prova = "[".$a."]".$prova;
- }
+// $code_aluno = $_GET['code_aluno'];
+// $nota = $_GET['nota'];
+// $bimestre = $_GET['bimestre'];
+// $disciplina = $_GET['disciplina'];
+// $prova = $_FILES['prova']['name'];
+// $date=Date('Y');
+// if(file_exists("../trabalhos_alunos/$prova")){
+// 	$a = 1;
+// 	while(file_exists("../trabalhos_alunos/[$a]$prova")){
+// 	$a++;
+//   }
+//   	$prova = "[".$a."]".$prova;
+//  }
 
- $sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,prova) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', $id,'$prova')";
- mysqli_query($conexao, $sql_3);
-$sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades estão sendo divulgadas','tarefas')";
-mysqli_query($conexao, $sql_4);
- (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+//  $sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,prova) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', $id,'$prova')";
+//  mysqli_query($conexao, $sql_3);
+// $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades estão sendo divulgadas','tarefas')";
+// mysqli_query($conexao, $sql_4);
+//  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
  
- echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
+//  echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
 
 }?> 
 <?php if(isset($_GET['info'])){
   echo "<script>alert('Em breve esta pagina estará disponivel');</script>";
-}?>
+}elseif(isset($_GET['apagar'])){
+  $idpara=$_GET['paralela'];
+    $delete=$pdo->prepare("DELETE FROM paralela where id_paralela=:paralela");
+    $delete->bindValue(':paralela',$idpara);
+    $delete->execute();
+    if($delete){
+      echo "<script>alert('apagado com sucesso!!')</script>";
+      echo "<script language='javascript'>window.location='lancar_notas.php?pg=notas&selec=".$_GET['selec']."&id=".$_GET['id']."';</script>";
+    }else{
+      echo "<script language='javascript'>window.location='lancar_notas.php?pg=notas&selec=".$_GET['selec']."&id=".$_GET['id']."';</script>";
+    }
+}
+
+
+
+
+?>
 <?php require "rodape.php"; ?>
 
 <body>

@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS contrato(
+    contrato_id INT AUTO_INCREMENT PRIMARY KEY,
+    ano INT NOT NULL,
+    nome_um VARCHAR(400) NOT NULL,
+    rg_um VARCHAR(11) NOT NULL,
+    cpf_um VARCHAR(11) NOT NULL,
+    endereco_um VARCHAR(255) NOT NULL,
+    nome_dois VARCHAR(400) NOT NULL,
+    rg_dois VARCHAR(11) NOT NULL,
+    cpf_dois VARCHAR(11) NOT NULL,
+    endereco_dois VARCHAR(255) NOT NULL,
+    ano_serie VARCHAR(100) NOT NULL,
+    turno VARCHAR(60) NOT NULL,
+    img_um VARCHAR(150) NOT NULL,
+    img_dois VARCHAR(150) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    matricula VARCHAR(255) NOT NULL,
+    id_estudantes INT(11) NOT NULL,
+    ordem INT(11) NOT NULL,
+    FOREIGN KEY (id_estudantes) REFERENCES estudantes (id_estudantes) 
+);

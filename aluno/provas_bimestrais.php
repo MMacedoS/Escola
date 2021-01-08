@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <?php require_once "../config.php"; ?>
-<link rel="shortcut icon" href="../image/logo.png">
+<link rel="shortcut icon" href="../image/logo_ist.gif">
 <link href="css/provas_bimestrais.css" rel="stylesheet" type="text/css" />
 </head>
 

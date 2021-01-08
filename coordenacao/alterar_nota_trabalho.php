@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<?php $painel_atual = "professor"; ?>
+<?php $painel_atual = "Coordenacao"; ?>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
@@ -342,13 +342,13 @@ foreach($dados as $dado){
   $id_paralela=$dado['id_paralela'];
 }
 if($qtde==0){
-  if($nota>=$notaAntiga && $nota>2){?>
+  if($nota<0 || $nota>2){?>
     <script>
         alert('Nota Maxima 2 para esta paralela');
       </script>
       <?php
     
-    }elseif($nota>=$notaAntiga && $nota<=2){
+    }elseif($nota<=2){
       if($selec=="1"){
         $sql=$pdo->prepare('INSERT INTO  paralela (code,id_disciplina,bimestre,ano_letivo,nota) VALUES (:code,:dis,:bimestre,:ano,:nota)');
         $sql->bindValue(':code',$code_aluno);
@@ -358,29 +358,29 @@ if($qtde==0){
         $sql->bindValue(':nota',$nota);
         $sql->execute();
     
-       echo "A nota deste aluno foi alterada com sucesso!!!";
+        echo "A nota deste aluno foi alterada com sucesso!!! clique no botão <Atualizar pagina> ou recarregue a pagina! ";
     }else{
-      $sql=$pdo->prepare("INSERT INTO  paralela (code,id_disciplina,bimestre,ano_letivo,nota) VALUES (?,?,?,?,?)");
-      $sql->bindValue(1,$code_aluno);
-      $sql->bindValue(2,$disciplina);
-      $sql->bindValue(3,$bimestre);
-      $sql->bindValue(4,$ano);
-      $sql->bindValue(5,$nota);
-      $sql->execute();
+      $sql=$pdo->prepare('INSERT INTO  paralela (code,id_disciplina,bimestre,ano_letivo,nota) VALUES (:code,:dis,:bimestre,:ano,:nota)');
+        $sql->bindValue(':code',$code_aluno);
+        $sql->bindValue(':dis',$disciplina);
+        $sql->bindValue(':bimestre',$bimestre);
+        $sql->bindValue(':ano',$ano);
+        $sql->bindValue(':nota',$nota);
+        $sql->execute();
     
-    echo "A nota deste aluno foi alterada com sucesso!!!";
+        echo "A nota deste aluno foi alterada com sucesso!!! clique no botão <Atualizar pagina> ou recarregue a pagina! ";
     }
     
     }
     
 }else{
-  if($nota>=$notaAntiga && $nota>2){?>
+  if($nota<0 || $nota>2){?>
     <script>
         alert('Nota Maxima 2 para esta paralela');
       </script>
       <?php
     
-    }elseif($nota>=$notaAntiga && $nota<=2){
+    }elseif($nota<=2){
       if($selec=="1"){
         $sql=$pdo->prepare('UPDATE paralela SET code=?,id_disciplina=?,bimestre=?,ano_letivo=?,nota=? where id_paralela=?');
         $sql->bindValue(1,$code_aluno);
@@ -393,7 +393,7 @@ if($qtde==0){
     // $sql = "UPDATE notas_ava_coc set nota=nota+'$nota' where id_disciplina='$disciplina' AND code='$code_aluno' AND bimestre='$bimestre'";
     // mysqli_query($conexao, $sql);
     
-    echo "A nota deste aluno foi alterada com sucesso!!!";
+    echo "A nota deste aluno foi alterada com sucesso!!! clique no botão <Atualizar pagina> ou recarregue a pagina! ";
     }else{
     // $sql = "UPDATE notas_ava_teste set nota=nota+'$nota' where id_disciplina='$disciplina' AND code='$code_aluno' AND bimestre='$bimestre'";
     // mysqli_query($conexao, $sql);
@@ -405,7 +405,7 @@ if($qtde==0){
         $sql->bindValue(5,$nota);
         $sql->bindValue(6,$id_paralela);
         $sql->execute();
-    echo "A nota deste aluno foi alterada com sucesso!!!";
+        echo "A nota deste aluno foi alterada com sucesso!!! clique no botão <Atualizar pagina> ou recarregue a pagina! ";
     }
     
     }
@@ -416,7 +416,7 @@ die;
 	
 }?>
 
-<em>Nota abaixo corresponde ao restante para atingir a média do bimestre, será add em Nota do teste</em>
+<em>Nota abaixo corresponde ao restante para atingir a média do bimestre, será add em Nota na tabela Paralela</em>
 <form name="" method="post" action="" enctype="multipart/form-data">
 <?php if($_GET['nota']>=7){?>
 	<h2>média atingida</h2>

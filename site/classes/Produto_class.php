@@ -1,8 +1,8 @@
 <?php
-define('HOST','localhost');
+define('HOST','mysql669.umbler.com');
 define('BANCO','escolaist');
-define('USUARIO','root');
-define('SENHA','');
+define('USUARIO','ist');
+define('SENHA','kamaur2711');
 
 class Produto_class{
 
@@ -92,9 +92,10 @@ class Produto_class{
         }
         return $dados;
     }
-    public function buscarGaleria()
+    
+    public function ImagensEstrutura()
     {
-        $cmd= $this->pdo->query('SELECT *,(SELECT nome_imagem from imagens i where i.id_album=album.id_album LIMIT 1) as foto_capa from album where nome_album="estrutura"');
+        $cmd= $this->pdo->query('SELECT nome_imagem from imagens i inner join album a on i.id_album=a.id_album where nome_album="estrutura"');
         if($cmd->rowCount()>0)
         {
             $dados=$cmd->fetchAll(PDO::FETCH_ASSOC);
@@ -103,10 +104,9 @@ class Produto_class{
         }
         return $dados;
     }
-
-    public function ImagensEstrutura()
+    public function buscarGaleria()
     {
-        $cmd= $this->pdo->query('SELECT nome_imagem from imagens i inner join album a on i.id_album=a.id_album where nome_album="estrutura"');
+        $cmd= $this->pdo->query('SELECT *,(SELECT nome_imagem from imagens i where i.id_album=album.id_album LIMIT 1) as foto_capa from album where nome_album="estrutura"');
         if($cmd->rowCount()>0)
         {
             $dados=$cmd->fetchAll(PDO::FETCH_ASSOC);

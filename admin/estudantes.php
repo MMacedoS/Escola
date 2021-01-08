@@ -96,7 +96,7 @@
     <div id="box_aluno">
         <br /><br />
         <div class="row">
-            <a class="a2" href="estudantes.php?pg=cadastra&bloco=1">Cadastrar novo aluno </a>
+            <a class="a2" href="estudantes.php?pg=cadastra&bloco=1">Cadastrar Aluno </a>
             <!-- <form class="form" method="post" action="estudantes.php?pg=todos">
                 <input type="text" class="pesq" name="nome" value="" placeholder="pesquise o aluno...">
                 <input class="pesq" type="submit" value="Pesquisar">
@@ -117,7 +117,7 @@
         ?> <option value="<?php echo $_GET['turma']; ?>"><?php $sql_2 = mysqli_query($conexao, "SELECT curso FROM cursos where id_cursos='$t'");
 	  	   while($res_2 = mysqli_fetch_assoc($sql_2)){ echo $res_2['curso'];}}?></option>
       <?php
-      $sql_2 = mysqli_query($conexao, "SELECT * FROM cursos");
+      $sql_2 = mysqli_query($conexao, "SELECT * FROM cursos order by curso asc");
 	  	while($res_2 = mysqli_fetch_assoc($sql_2)){
 	  ?>
        <option value="<?php echo $res_2['id_cursos']; ?>"><?php echo $res_2['curso']; ?></option>      
@@ -138,7 +138,7 @@ $s = base64_encode('filtro');
 echo "<script language='javascript'>window.location='estudantes.php?pg=todos&s=$s&status=$tipo&turma=$serie';</script>";
 
 }?>
-        <h1>Alunos que estão cadastrados</h1>
+        <h1>Alunos Cadastrados</h1>
         <?php
 if(isset($_GET['s'])){ 
     $tipo=$_GET['status'];
@@ -529,6 +529,7 @@ $sql_mensal = "INSERT INTO mensalidades (code, matricula, d_cobranca, vencimento
 
 $cadastra=mysqli_query($conexao, $sql_mensal);
 if($cadastra){
+echo "<script language='javascript'>window.alert('Dados cadastrados com sucesso! Click em OK para avançar');</script>";
 echo "<script language='javascript'>window.location='estudantes.php?pg=cadastra&bloco=3';</script>";
 }else{
   ?><script>
@@ -566,7 +567,7 @@ else{?>
                             <td>
                                 <select name="serie" id="serie">
                                     <?php
-      $sql_4 = "SELECT * FROM cursos";
+      $sql_4 = "SELECT * FROM cursos ORDER BY curso asc";
 	  $resultado = mysqli_query($conexao, $sql_4);
 	  	while($res_1 = mysqli_fetch_assoc($resultado)){
 	  ?>
@@ -637,6 +638,9 @@ else{?>
                                     </li>
                                 </ul>
                                 <a href="estudantes.php?pg=todos">Clique aqui para voltar para página inicial</a>
+                                <br/>
+                                <a  href="estudantes.php?pg=cadastra&bloco=1">Cadastrar mais!!</a>
+                               
                             </h4>
                         </td>
                     </tr>

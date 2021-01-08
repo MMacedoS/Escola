@@ -8,7 +8,7 @@
 
 <body>
 <div id="box_rodape">
- <h1 class="h1">MMSCHOLL - Desenvolvido por Mauricio Macedo</h1>
+ <h1 class="h1">ESCOLAIST - Desenvolvido por Mauricio Macedo</h1>
 </div><!-- box_rodape -->
 </body>
 </html>

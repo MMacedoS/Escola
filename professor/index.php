@@ -4,9 +4,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
-<link rel="shortcut icon" href="../image/logo.png">
+<link rel="shortcut icon" href="../image/logo_ist.gif">
 <title>Administração do Professor</title>
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
+
+<style>
+
+.card-2 {
+    background-color: #eb3d00 !important;
+}
+#a{
+  color:#003dff !important;
+}
+</style>
 </head>
 
 <body>
@@ -33,7 +43,7 @@
    <ul>
     <h1><strong>Turmas & Alunos</strong></h1>
      
-    <li><strong>Disciplinas ministradas por você: </strong> <?php
+    <li><strong>Disciplinas ministradas por curso: </strong> <?php
     
     
      echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM disciplinas WHERE id_professores = '$id_professor'")); ?></li>
@@ -69,7 +79,7 @@
    <ul>
     <h1><strong>Informações de acesso</strong> </h1>
     <li><strong>Seu código de acesso:</strong> <?php echo $code; ?></li>
-    <li><strong>Senha:</strong>***** <a rel="superbox[iframe][285x100]" href="altera_senha.php?code=<?php echo $code; ?>">Alterar</a></li>
+    <li><strong>Senha:</strong>***** <a rel="superbox[iframe][285x100]" href="altera_senha.php?code=<?php echo $code; ?>" id="a">Alterar</a></li>
    </ul> 
    <br>
    </div>

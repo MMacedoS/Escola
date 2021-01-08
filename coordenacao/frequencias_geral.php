@@ -126,7 +126,7 @@ if(@$_GET['disciplina']){
 $disc=$_GET['disciplina'];
 $situacao=$_GET['bimestre'];
 
-echo "<script>window.open('test1.php?pg=rp&id=$disc&bimestre=$situacao', '_blank');</script>";
+echo "<script>window.open('plan_frequencia.php?pg=rp&id=$disc&bimestre=$situacao', '_blank');</script>";
 }
 }
 ?>

@@ -23,9 +23,16 @@ $ano=Date('Y');
  <div class="card-1">
    <ul>
     <h1><strong>Frequência Escolar</strong> </h1>
-    <li><strong>Presenças:</strong> <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE matricula = '$code' AND presente = 'SIM' and ano_letivo='$ano'")); ?></li>
-    <li><strong>Faltas justificadas:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE  matricula = '$code' AND presente = 'JUSTIFICADA' and ano_letivo='$ano'")); ?></li>
-    <li><strong>Faltas não justificada:</strong>  <?php echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM chamadas_em_sala WHERE  matricula = '$code' AND presente = 'Falta' and ano_letivo='$ano'")); ?></li>
+    <li><strong>Presenças:</strong> <?php 
+    $presenca=$pdo->query("SELECT * FROM chamadas_em_sala WHERE matricula = '$code' AND falta = '0' and ano_letivo='$ano'");
+    $presenca=$presenca->fetchAll();
+    echo count($presenca);?></li>
+    <li><strong>Faltas:</strong>  <?php $falta=$pdo->query("SELECT * FROM chamadas_em_sala WHERE matricula = '$code' AND falta > '0' and ano_letivo='$ano'");
+    $falta=$falta->fetchAll();
+    echo count($falta); ?></li>
+    <li><strong>Faltas justificada:</strong>  <?php $justificada=$pdo->query("SELECT * FROM chamadas_em_sala WHERE matricula = '$code' AND obs = 'justificada' and ano_letivo='$ano'");
+    $justificada=$justificada->fetchAll();
+    echo count($justificada); ?></li>
    </ul>
    </div>
   

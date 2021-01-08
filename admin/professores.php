@@ -9,7 +9,7 @@
     <?php header('Content-Type: text/html; charset=UTF-8'); require_once("topo.php");   ?>
     <title>Professores</title>
 
-    <link rel="shortcut icon" href="../image/logo.png">
+    <link rel="shortcut icon" href="../image/logo_ist.gif">
 
 
     <link rel="stylesheet" href="../jquery.superbox.css" type="text/css" media="all" />

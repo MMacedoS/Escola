@@ -12,7 +12,7 @@ require "../gerador_cobranca.php";
 <meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″>
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 
-<link rel="shortcut icon" href="../image/logo.png">
+<link rel="shortcut icon" href="image/logo.png">
 <link href="css/topo.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">

@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/todas_as_avaliacoes.css" />
     <title>Provas</title>
 
-    <link rel="shortcut icon" href="../image/logo.png">
+    <link rel="shortcut icon" href="../image/logo_ist.gif">
 </head>
 
 <body>
@@ -56,9 +56,9 @@
                     <label for="exampleFormControlInput1">Selecione uma Situação</label>
                     <select name="situacao" class="form-control col-sm-12">
                             <option value="">Notas</option>
-                            <option value="ap">Aprovados</option>
-                            <option value="rp">Reprovados</option>
-                            <option value="ae">Aprovados por adição extra </option>
+                            <!--<option value="ap">Aprovados</option>-->
+                            <!--<option value="rp">Reprovados</option>-->
+                            <!--<option value="ae">Aprovados por adição extra </option>-->
                     </select>
                     </div>
                     </div>

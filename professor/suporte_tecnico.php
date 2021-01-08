@@ -84,6 +84,21 @@
             background-color: #4CAF50;
             color: white;
         }
+        .col-sm-3{
+        min-height: 1px;
+        margin-top: -6px;
+        padding-right: 0px !important;
+       padding-left: 0px !important; 
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-device-width: 480px) and (min-device-width: 320px){
+#box_topo {
+    width: 100%;
+    height: 50px;
+    margin: 30px 0 90px 0px !important;
+}
+
+}
+
     </style>
 </head>
 

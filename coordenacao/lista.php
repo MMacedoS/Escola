@@ -4,11 +4,11 @@
 <?php
 
 include_once ('pdf/mpdf.php');
-$painel_atual = "admin"; 
+$painel_atual = "Coordenacao"; 
 require_once "../config.php";
 $disc="Ativo";
 $pagina.='<!DOCTYPE html>';
-$painel_atual = "professor";
+$painel_atual = "Coordenacao";
 $pagina.='<html lang="pt_br">';
 $pagina.='<head>
     <meta charset="UTF-8">
@@ -105,8 +105,12 @@ $pagina.=' <th  class="nome" bgcolor="#efefef"><strong>Senha</strong></th>
 
 
 
-$chamada_aluno=$pdo->prepare("SELECT l.nome as email, e.nome,c.curso, l.senha from login l inner join estudantes e on l.code=e.matricula inner join cursos_estudantes ce on ce.id_estudantes=e.id_estudantes inner join cursos c on c.id_cursos =ce.id_cursos where e.status=:status order by e.nome asc");
+$chamada_aluno=$pdo->prepare("select l.senha, e.nome,l.nome as email, c.curso from login l inner join estudantes e on l.code=e.matricula 
+inner join cursos_estudantes ce on e.id_estudantes=ce.id_estudantes
+inner join cursos c on ce.id_cursos=c.id_cursos
+ where e.status=:status and c.id_categoria=:cate order by c.curso asc");
 $chamada_aluno->bindValue(':status',$disc);
+$chamada_aluno->bindValue(':cate',1);
 $chamada_aluno->execute();
 $alunos=$chamada_aluno->fetchAll();
 $dado_alunos=count($alunos);

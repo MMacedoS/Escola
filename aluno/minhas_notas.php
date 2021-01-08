@@ -1,15 +1,18 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <title>Minhas Notas</title>
-<link rel="shortcut icon" href="../image/logo.png">
+<link rel="shortcut icon" href="../image/logo_ist.gif">
 <link rel="stylesheet" type="text/css" href="css/minhas_notas.css"/>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
 <style>
     .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
     position: unset !important;
+}
+#box h1 {
+      color: black !important;
 }
        .customers {
             font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -719,7 +722,7 @@ $result_8 = mysqli_query($conexao, $sql_8);
 	<td>
 	<?php
     if(mysqli_num_rows($result_8) == ''){
-		echo "<h2>Aguarade</h2>";
+		echo "<h2>Aguarde</h2>";
 	}else{
 						
 				if($nota >= 7){
@@ -756,7 +759,7 @@ $result_8 = mysqli_query($conexao, $sql_8);
     <th><strong>3º</strong></th>
     <th><strong>4º</strong></th>
     <th><span class="text-overflow-dynamic-container">
-        <span class="text-overflow-dynamic-ellipsis"><strong>Resultado</strong></span></span></th>
+        <span class="text-overflow-dynamic-ellipsis"><strong>Média Final</strong></span></span></th>
   </tr>
 <?php
 $sql_1 = "SELECT * FROM disciplinas d inner join lista_disc l on l.id_lista=d.disciplina WHERE d.id_cursos = '$serie' ORDER BY l.nome ASC";
@@ -855,12 +858,18 @@ $result_6 = mysqli_query($conexao, $sql_6);
 		echo "<h2>Aguarde</h2>";
 	}else{
 		while($res_6 = mysqli_fetch_assoc($result_6)){
+		        
 				$nota = number_format($res_6['media'],1);
-				
-				if($nota >= 28){
-					echo "<h2><strong>$nota</strong></h2>";
+               
+                
+				if($nota >= 27.6 && $nota<=27.9){
+				    $nota=28;
+				}
+				 $media=round($nota/4,1);
+				if($nota>=28){
+					echo "<h2><strong>$media</strong></h2>";
 				}else{
-					echo "<h3><strong>$nota</strong></h3>";
+					echo "<h3><strong>$media</strong></h3>";
 				}
 				
 			}

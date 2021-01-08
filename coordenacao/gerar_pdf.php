@@ -71,19 +71,44 @@ tr:nth-of-type(5) td:nth-of-type(1) {
     
 </style>';
 ///pode remover o costumer e as bordas que a table fica ajustada tambem 
-$pagina.='<link rel="shortcut icon" href="../image/logo.png">';
-    $pagina.="<body>";
-    $pagina.='<h1 align="center">Planilha de Notas:'.$nomed.' '.$nomec.'</h1>';    
+// $pagina.='<link rel="shortcut icon" href="../image/logo.png">';
+//     $pagina.="<body>";
+//     $pagina.='<h1 align="center">Planilha de Notas:'.$nomed.' '.$nomec.'</h1>';    
+$pagina.='<table id="customers" width="100%">
+<tr>
+   
+    <th width="33%" colspan="3"  style="font-size: 18;" align="center"><strong>Instituto Social de Tucano</strong></th>
+   
+</tr>
+<tr>
+    <td width="50%" colspan="3" align="center">Distribuição de Notas</td>
+   
+</tr>
+<tr>
+    <td width="50%">Turma:<strong> '.$nomec.'</strong></td>
+    <td width="25%" align="center">Disciplina: '.$nomed.'</td>
+    <td width="25%" style="text-align: right;">Ano: '.$ano.'</td>
+</tr>
+</table>
+';
     $pagina.='<table id="customers" class=".table-responsive{-sm|-md|-lg|-xl} table"  border="1" cellpadding="5" cellspacing="4" bgcolor="#FFF4EA">';
     $pagina.="<tr>";
-    $pagina.='<td rowspan="2" class="nome" bgcolor="#efefef"><strong>Alunos</strong></td>';
+    $pagina.='<td rowspan="2" width="20%" class="nome" bgcolor="#efefef"><strong>Alunos</strong></td>';
     
-    $select="SELECT DISTINCT bimestre FROM `notas_bimestres` where id_disciplinas='$id' and ano_letivo='$ano' ";
-        $con_select=mysqli_query($conexao, $select);
-        $unidade=mysqli_num_rows($con_select);
-        while($res_con=mysqli_fetch_assoc($con_select)){
-            $arrayEmails[]= $res_con["bimestre"];
+      $select=$pdo->query("SELECT DISTINCT bimestre FROM `notas_bimestres` where id_disciplinas='$id' and ano_letivo='$ano' ");
+      $cons_bimestre=$select->fetchAll();
+      $unidade=count($cons_bimestre);
+      
 
+
+    // $select="SELECT DISTINCT bimestre FROM `notas_bimestres` where id_disciplinas='$id' and ano_letivo='$ano' ";
+        // $con_select=mysqli_query($conexao, $select);
+        // $unidade=mysqli_num_rows($con_select);
+        // while($res_con=mysqli_fetch_assoc($con_select)){
+          foreach($cons_bimestre as $res_con){
+            $arrayEmails[]= $res_con['bimestre'];
+            // echo $res_con['bimestre'];
+            
     $pagina.='<td bgcolor="#efefef" colspan="7" align="center"><strong>'.$res_con['bimestre'].' Unidade </strong></td>';}//finalizando lista de unidades na tablea
     $pagina.='<td bgcolor="#efefef" rowspan="2"><strong>TO</strong></td>';
     $pagina.='<td bgcolor="#efefef" rowspan="2"><strong>MF</strong></td>';
@@ -105,109 +130,140 @@ $pagina.='<link rel="shortcut icon" href="../image/logo.png">';
     $unidade-=1;
     }//finalizando whilw lista atividades
     $pagina.="</tr>";
-            $sql="SELECT * FROM estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes WHERE ce.id_cursos = '$curso' and ce.ano_letivo='$ano' order by e.nome asc";
-            $con=mysqli_query($conexao,$sql);
-            while($res=mysqli_fetch_assoc($con)){///listando os alunoss
+            $sql_estudante=$pdo->query("SELECT * FROM estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes WHERE ce.id_cursos = '$curso' and ce.ano_letivo='$ano' order by e.nome asc");
+            $con_estudante=$sql_estudante->fetchAll();
+            // var_dump($con_estudante);
+
+            // $sql="SELECT * FROM estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes WHERE ce.id_cursos = '$curso' and ce.ano_letivo='$ano' order by e.nome asc";
+            // $con=mysqli_query($conexao,$sql);
+            // while($res=mysqli_fetch_assoc($con)){///listando os alunoss
+            foreach($con_estudante as $res){
     $pagina.="<tr>";
     $pagina.='<td bgcolor="#FFFFFF" class="at" align="left"><font color="#090000">'. $res['nome'].'</font></td>';
     $pagina.="</tr>"; 
-                    // listando notas atividades
+  // listando notas atividades
     for($i=0;$i< count($arrayEmails);$i++){
-     $sqlTrans="select nota from notas_atividades where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula'];
-    $conTrans=mysqli_query($conexao,$sqlTrans);
-    if(mysqli_num_rows($conTrans)==""){
+      $sqlAtiv=$pdo->query("select nota from notas_atividades where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula']);
+    //  $sqlTrans="select nota from notas_atividades where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula'];
+    $conAtiv=$sqlAtiv->fetchAll();
+    $countAtiv=count($conAtiv);
+    // $conTrans=mysqli_query($conexao,$sqlTrans);
+    // if(mysqli_num_rows($conTrans)==""){
+      if($countAtiv==""){
         $media1=0;
         
         $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="blue">aguarda</font></td>';
             
         }else{
     
-    while($resTrans=mysqli_fetch_assoc($conTrans)){
-    $media1=$media1+$resTrans['nota'];
+    // while($resTrans=mysqli_fetch_assoc($conTrans)){
+      foreach($conAtiv as $resAtiv){
+    $media1=$media1+$resAtiv['nota'];
     
-    $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#090000">'.$resTrans['nota'].'</font></td>';
+    $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#090000">'.$resAtiv['nota'].'</font></td>';
 
     
      }
      }///finalizando lista atividades
-    //  p-i
+    
    //  <!-- coc -->:
-   $sqlTrans="select nota from notas_ava_coc where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula'];
-   $conTrans=mysqli_query($conexao,$sqlTrans);
-   if(mysqli_num_rows($conTrans)==""){
+     $sqlCoc=$pdo->query("select nota from notas_ava_coc where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula']);
+     $conCoc=$sqlCoc->fetchAll();
+     $countCoc=count($conCoc);
+  //  $sqlTrans="select nota from notas_ava_coc where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula'];
+  //  $conTrans=mysqli_query($conexao,$sqlTrans);
+   if($countCoc==""){
       $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="blue">aguarda</font></td>';
 
        }else{
-   
-   while($resTrans=mysqli_fetch_assoc($conTrans)){
-   $media1=$media1+$resTrans['nota'];
-   $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#090000">'.$resTrans['nota'].'</font></td>';
+   foreach ($conCoc as $resCoc) {
+  //  while($resTrans=mysqli_fetch_assoc($conTrans)){
+   $media1=$media1+$resCoc['nota'];
+   $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#090000">'.$resCoc['nota'].'</font></td>';
     }
     }
     //  <!-- teste -->
 
-    
-    $sqlTrans="select nota from notas_ava_teste where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula'];
-    $conTrans=mysqli_query($conexao,$sqlTrans);
-    if(mysqli_num_rows($conTrans)==""){
+    $sqlTeste=$pdo->query("select nota from notas_ava_teste where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula']);
+    $conTeste=$sqlTeste->fetchAll();
+    $countTeste=count($conTeste);
+    // $sqlTrans="select nota from notas_ava_teste where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula'];
+    // $conTrans=mysqli_query($conexao,$sqlTrans);
+    if($countTeste==""){
         
             $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="blue">aguarda</font></td>';
             
         }else{
     
-    while($resTrans=mysqli_fetch_assoc($conTrans)){
-    $media1=$media1+$resTrans['nota'];
+
+          foreach($conTeste as $resTeste){
+    // while($resTrans=mysqli_fetch_assoc($conTrans)){
+    $media1=$media1+$resTeste['nota'];
     
-    $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#090000">'.$resTrans['nota'].'</font></td>';
+    $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#090000">'.$resTeste['nota'].'</font></td>';
        
      }
      }
     
     //  <!-- prova -->
      
-         
-         $sqlTrans="select nota from notas_ava_prova where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula'];
-         $conTrans=mysqli_query($conexao,$sqlTrans);
-        if(mysqli_num_rows($conTrans)==""){
+         $sqlProva=$pdo->query("select nota from notas_ava_prova where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula']);
+        //  $sqlTrans="select nota from notas_ava_prova where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula'];
+        $conProva=$sqlProva->fetchAll();
+        $countProva=count($conProva);
+        //  $conTrans=mysqli_query($conexao,$sqlTrans);
+        if($countProva==""){
              
             $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="blue">aguarda</font></td>';
                  
              }else{
          
-         while($resTrans=mysqli_fetch_assoc($conTrans)){
-         $media1=$media1+$resTrans['nota'];
+        //  while($resTrans=mysqli_fetch_assoc($conTrans)){
+          foreach($conProva as $resProva){
+         $media1=$media1+$resProva['nota'];
          
-         $pagina.='<td bgcolor="#FFFFFF"  class="at" align="center"><font color="#090000">'.$resTrans['nota'].'</font></td>'; 
+         $pagina.='<td bgcolor="#FFFFFF"  class="at" align="center"><font color="#090000">'.$resProva['nota'].'</font></td>'; 
          
           }
           }
           //  <!-- pARALELA -->:
-         $sqlTrans="select nota from paralela where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula'];
-         $conTrans=mysqli_query($conexao,$sqlTrans);
-         if(mysqli_num_rows($conTrans)==""){
+         $sqlPara=$pdo->query("select nota from paralela where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula']);
+        //  $sqlTrans="select nota from paralela where bimestre=".$arrayEmails[$i]." and id_disciplina='$id' and code=".$res['matricula'];
+        $conPara=$sqlPara->fetchAll();
+        $countPara=count($conPara);
+        //  $conTrans=mysqli_query($conexao,$sqlTrans);
+         if($countPara==""){
             $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="blue">0</font></td>';
 
              }else{
-         
-         while($resTrans=mysqli_fetch_assoc($conTrans)){
-         $media1=$media1+$resTrans['nota'];
-         $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#090000">'.$resTrans['nota'].'</font></td>';
+         foreach($conPara as $resPara){
+        //  while($resTrans=mysqli_fetch_assoc($conTrans)){
+         $media1=$media1+$resPara['nota'];
+         $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#090000">'.$resPara['nota'].'</font></td>';
           }
           }
           
            //  <!-- notas_bimestres -->:
-         $sqlTrans="select nota from notas_bimestres where bimestre=".$arrayEmails[$i]." and id_disciplinas='$id' and code=".$res['matricula'];
-         $conTrans=mysqli_query($conexao,$sqlTrans);
-         if(mysqli_num_rows($conTrans)==""){
+           $sqlNota_bimestre=$pdo->query("select nota from notas_bimestres where bimestre=".$arrayEmails[$i]." and id_disciplinas='$id' and code=".$res['matricula']);
+        //  $sqlTrans="select nota from notas_bimestres where bimestre=".$arrayEmails[$i]." and id_disciplinas='$id' and code=".$res['matricula'];
+        $conNota_bimestre=$sqlNota_bimestre->fetchAll();
+        $countNota_bimestre=count($conNota_bimestre);
+        //  $conTrans=mysqli_query($conexao,$sqlTrans);
+         if($countNota_bimestre==""){
             $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="blue">aguarda</font></td>';
 
              }else{
-         
-         while($resTrans=mysqli_fetch_assoc($conTrans)){
-         $media1=$resTrans['nota'];
-         if($media1>=7){
-         $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#01DF01">'.$resTrans['nota'].'</font></td>';}else{
-            $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#FF0000">'.$resTrans['nota'].'</font></td>';
+         foreach($conNota_bimestre as $resNota_bimestre){
+        //  while($resTrans=mysqli_fetch_assoc($conTrans)){
+         $media1=$resNota_bimestre['nota'];
+         if($media1==6.9){
+           $media1=7.0;
+           $atualizaMedia=$pdo->query("UPDATE notas_bimestres set nota='7.0' where bimestre=".$arrayEmails[$i]." and id_disciplinas='$id' and code=".$res['matricula']);           
+           
+           $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#01DF01">'.$media1.'</font></td>';
+         }else if($media1>=7){
+         $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#01DF01">'.$resNota_bimestre['nota'].'</font></td>';}else{
+            $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#FF0000">'.$resNota_bimestre['nota'].'</font></td>';
          }
 
           }
@@ -219,24 +275,32 @@ $pagina.='<link rel="shortcut icon" href="../image/logo.png">';
           
 
 }//finalizando lista de alunos
-    $sqlTrans="select media from resultado_final where id_disciplinas='$id' and code=".$res['matricula'];
-         $conTrans=mysqli_query($conexao,$sqlTrans);
-         if(mysqli_num_rows($conTrans)==""){
+    $sqlFinal=$pdo->query("select media from resultado_final where id_disciplinas='$id' and code=".$res['matricula']);
+    $conFinal=$sqlFinal->fetchAll();
+    $countFinal=count($conFinal);
+    // $sqlTrans="select media from resultado_final where id_disciplinas='$id' and code=".$res['matricula'];
+        //  $conTrans=mysqli_query($conexao,$sqlTrans);
+         if($countFinal==""){
             $pagina.='<td bgcolor="#FFFFFF" class="at"><font color="#090000">0</font></td>';
         }else{
          
-            while($resTrans=mysqli_fetch_assoc($conTrans)){
-            $media1=$resTrans['media'];
-            $media=$media1/4;
+          foreach($conFinal as $resFinal){
+          // while($resTrans=mysqli_fetch_assoc($conTrans)){
+            $media1=$resFinal['media'];
+           
+            if($media1>=27.6 && $media1<=27.9){
+                $media1=28.00;
+            }
+             $media=round($media1/4,1);
             if($media1>=28){
                 
-            $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#01DF01">'.$resTrans['media'].'</font></td>';
-            $pagina.='<td bgcolor="green" class="at"><font color="#090000">'.$media.'</font></td>';
-            $pagina.='<td bgcolor="#FFAAA" class="at"><font color="#090000">AP</font></td>';
+            $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#01DF01">'.$resFinal['media'].'</font></td>';
+            $pagina.='<td bgcolor="green" class="at" align="center"><font color="#090000">'.$media.'</font></td>';
+            $pagina.='<td bgcolor="#FFAAA" class="at" align="center" ><font color="#090000">AP</font></td>';
         }else{
-            $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#FF0000">'.$resTrans['media'].'</font></td>';
-            $pagina.='<td bgcolor="#FFFFFF" class="at"><font color="#090000">'.number_format($media,2,",",".").'</font></td>';
-            $pagina.='<td bgcolor="#FFAAA" class="at"><font color="#090000">RP</font></td>';
+            $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#FF0000">'.$resFinal['media'].'</font></td>';
+            $pagina.='<td bgcolor="#FFFFFF" class="at" align="center"><font color="#090000">'.number_format($media,2,",",".").'</font></td>';
+            $pagina.='<td bgcolor="#FFAAA" class="at" align="center"><font color="#090000">RP</font></td>';
             }//if media
    
              }//whileee
@@ -273,7 +337,7 @@ $pagina.='<link rel="shortcut icon" href="../image/logo.png">';
 
     $mpdf->Output($arquivo, 'I');
 
-
+// echo $pagina;
 
 ?>
 <script>

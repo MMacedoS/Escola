@@ -1,6 +1,6 @@
 <?php require_once "Control/conexao.php";
-require 'site/classes/produto_class.php';
-$p= new Produto_class();
+require_once 'site/classes/Produto_class.php';
+$p= new produto_class();
 $p-> ExecutaConexao();
 $id="5";
 // if(isset($_GET['id'])&& !empty($_GET['id'])){
@@ -35,12 +35,11 @@ $outdoor=$p->buscarOutdoors();
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
         type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
     <style>
 
     </style>
 </head>
-
 <body id="page-top">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
@@ -61,7 +60,7 @@ $outdoor=$p->buscarOutdoors();
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
                             href="#about">Nossa História</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-                            href="#contact">Contato</a></li>
+                            href="#contact">Contato</a></li>                   
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
                             href="login.php">Acesso Interno</a></li>
                 </ul>
@@ -103,25 +102,29 @@ $outdoor=$p->buscarOutdoors();
                     <?php 
                 // foreach($dadosImagem as $value){
                     ?>
-                    <a href="<?= $outdoor[$c]['descricao']?>" target="_blank" rel="noopener noreferrer">
+                    <a href="<?= $outdoor[$c]['link']?>" target="_blank" rel="noopener noreferrer">
                     <img id="image" src="anexos/outdoor/<?= $outdoor[$c]['foto_capa'];?>" alt="">
                     <!-- <div class="slide_item_desc">
                     <h1>es=< $slide." ";?>opa</h1>
                     <p>sçdlasçdlçasldasçdlçsadlsaçdlsçad</p>
                 </div> -->
+                    <p><?=$outdoor[$c]['titulo']?></p>
+                
                 </a>
-                </article>
+                    </article>
+                    
                 <?php  }?>
 
 
                 <!-- <div id="imagens">
-            <div class="caixa-img"><img id="image" src="anexos/outdoor/<?php echo $value['nome_imagem']?>" alt=""></div>
+            <div class="caixa-img"><img id="image" src="anexos/outdoor/<php echo $value['nome_imagem']?>" alt=""></div>
         </div> -->
-                <?php 
-        //}?>
+                <!-- <php 
+        //}?> -->
 
 
-
+       
+              
             </div>
             <!-- Masthead Subheading-->
             <!-- <p class="masthead-subheading font-weight-light mb-0">Escola de qualidade - Dedicação - Educação </p> -->
@@ -202,19 +205,8 @@ $outdoor=$p->buscarOutdoors();
                     </div>
                 </div>
                 <!-- Portfolio Item 6-->
-                <div class="col-md-6 col-lg-4">
-                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal6">
-                        <div
-                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <h5 class="tit">Nossos Professores</h5>
-                        <img class="img-fluid" src="assets/img/portfolio/1.png" alt="" />
-                    </div>
-                </div>
-            </div>
-            <div class="row ">
+                
+           
                 <!-- Portfolio Item 1-->
                 <div class="col-md-6 col-lg-4 mb-5">
                     <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
@@ -227,30 +219,7 @@ $outdoor=$p->buscarOutdoors();
                         <img class="img-fluid" src="assets/img/portfolio/15.png" alt="" />
                     </div>
                 </div>
-                <!-- Portfolio Item 2-->
-                <div class="col-md-6 col-lg-4 mb-5">
-                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
-                        <div
-                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <h5 class="tit">Projetos</h5>
-                        <img class="img-fluid" src="assets/img/portfolio/22.png" alt="" />
-                    </div>
-                </div>
-                <!-- Portfolio Item 3-->
-                <div class="col-md-6 col-lg-4 mb-5">
-                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
-                        <div
-                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <h5 class="tit">Ciclos de Ensino</h5>
-                        <img class="img-fluid" src="assets/img/portfolio/19.png" alt="" />
-                    </div>
-                </div>
+                <div class="row ml-2">
                 <!-- Portfolio Item 4-->
                 <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
                     <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModalcoc">
@@ -260,20 +229,21 @@ $outdoor=$p->buscarOutdoors();
                                     class="fas fa-plus fa-3x"></i></div>
 
                         </div>
-                        <h5 class="tit">COC</h5>
+                        <h5 class="tit">Sistema COC</h5>
                         <img class="img-fluid" src="assets/img/portfolio/coc.png" alt="" />
                     </div>
                 </div>
                 <!-- Portfolio Item 5-->
-                <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
-                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal5">
+                <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+                    <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModalPositivo">
                         <div
                             class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="portfolio-item-caption-content text-center text-white"><i
                                     class="fas fa-plus fa-3x"></i></div>
+
                         </div>
-                        <h5 class="tit">Eventos</h5>
-                        <img class="img-fluid" src="assets/img/portfolio/17.png" alt="" />
+                        <h5 class="tit">Sistema Positivo</h5>
+                        <img class="img-fluid" src="assets/img/portfolio/positiv.png" alt="" />
                     </div>
                 </div>
                 <!-- Portfolio Item 6-->
@@ -304,7 +274,7 @@ $outdoor=$p->buscarOutdoors();
                 <div class="divider-custom-line"></div>
             </div>
             <!-- About Section Content-->
-            <div class="row">
+            <div class="row ml-2">
                 <div class="ml-auto">
                     <p class="lead">
                         <p>Enquanto pessoas comuns, tivemos certo dia, o sonho de abrirmos um espaço - uma escola - onde
@@ -363,14 +333,15 @@ $outdoor=$p->buscarOutdoors();
             <div class="page-section-heading text-center text-secondary mb-0">
                 <h4>Endereço:
                     <p>Avenida Francisco Araújo de Souza, s/n.</p>
-                    <p>Centro-cep 487930-000.</p>
+                    <p>Centro-cep 48790-000.</p>
                     <p>Ponto de referência: Ao lado da Rodoviária.</p>
                 </h4>
             </div>
-            <div class="page-section-heading text-center   text-secondary mb-0">
+            <div class="page-section-heading text-center text-secondary mb-0">
                 <h4>E-mail:</h4>
+                 <p style="font-size:18px;width:80%"> institutosocialdetucano@gmail.com</p>
             </div>
-            <p class="text-center text-secondary"> institutosocialdetucano@gmail.com</p>
+           
         </div>
     </section>
     <!-- Footer-->
@@ -437,7 +408,7 @@ $outdoor=$p->buscarOutdoors();
                                     <div class="divider-custom-line"></div>
                                 </div>
                                 <!-- Portfolio Modal - Image-->
-                                <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cabin.png" alt="" />
+                                <img class="img-fluid rounded mb-5" src="" alt="" />
                                 <!-- Portfolio Modal - Text-->
                                 <p class="mb-5">Para ler todo o conteúdo do Regimento Escolar, visualizar todos os
                                     Títulos, Capítulos e Sessões, clicar ao lado, em formato PDF. Atenção está priobido
@@ -907,7 +878,7 @@ $outdoor=$p->buscarOutdoors();
                             <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title-->
                                 <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0"
-                                    id="portfolioModal6Label">Sistema COC de Ensino</h2>
+                                    id="portfolioModal6Label">Convênio Sistema COC de Ensino</h2>
                                 <!-- Icon Divider-->
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
@@ -927,6 +898,54 @@ $outdoor=$p->buscarOutdoors();
 
                                 <div class="mb-5">
                                     <a class="text-uppercase" target="_blank" href="https://www.coc.com.br">clique e
+                                        saiba mais</a>
+                                </div>
+                                <button class="btn btn-primary" data-dismiss="modal">
+                                    <i class="fas fa-times fa-fw"></i>
+                                    Fechar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Portfolio Modal 6-->
+    <div class="portfolio-modal modal fade" id="portfolioModalPositivo" tabindex="-1" role="dialog"
+        aria-labelledby="portfolioModal6Label" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                </button>
+                <div class="modal-body text-center">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Portfolio Modal - Title-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0"
+                                    id="portfolioModal6Label">Convênio</h2>
+                                <!-- Icon Divider-->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <!-- Portfolio Modal - Image-->
+                                <img class="img-fluid rounded mb-5" src="assets/img/portfolio/positiv.png" alt="" />
+                                <!-- Portfolio Modal - Text-->
+                                <h2 class="portfolio-modal-title text-secondary mb-5" id="portfolioModal6Label">Você imagina que a educação
+                                        pode transformar o mundo?
+                                    Nós também.</h2>
+                                <p class="mb-5">Acreditamos que um mundo melhor nasce nas salas de aula. Por isso, 
+                                unimos nossa experiência pedagógica às melhores práticas de gestão para apoiar as 
+                                escolas na grande missão de ensinar crianças e jovens a aprender a aprender.
+                                Com metodologia e materiais inovadores, transformamos alunos em protagonistas
+                                 do próprio aprendizado para que estejam preparados para os desafios do futuro.</p>
+
+                                <div class="mb-5">
+                                    <a class="text-uppercase" target="_blank" href="https://sistemapositivo.com.br">clique e
                                         saiba mais</a>
                                 </div>
                                 <button class="btn btn-primary" data-dismiss="modal">
@@ -1119,7 +1138,8 @@ $outdoor=$p->buscarOutdoors();
                                                         # code...
                                                         ?>
                                         <div class="col-lg-3 col-md-4 col-6">
-                                            <a href="imagem.php?id=<?= $value['id_album'];?>"
+                                            <!-- <a href="imagem.php?id=<= $value['id_album'];?>" -->
+                                            <a href="galeria.php?galeria=<?= $value['id_album'];?>"
                                                 class="d-block mb-4 h-100">
                                                 <img class="img-fluid img-thumbnail"
                                                     src="anexos/imagens-internas/<?= $value['foto_capa'];?>" alt="">
@@ -1216,6 +1236,40 @@ $outdoor=$p->buscarOutdoors();
             </div>
         </div>
     </div>
+
+
+    <?php
+
+if(isset($_GET['galeria'])){
+    
+    ?>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<?php }
+?>
+
     <!-- fim galeria -->
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
     <!-- Bootstrap core JS-->
@@ -1229,6 +1283,8 @@ $outdoor=$p->buscarOutdoors();
     <!-- <script src="assets/mail/jqBootstrapValidation.js"></script> -->
     <!-- <script src="assets/mail/contact_me.js"></script> -->
     <!-- Core theme JS-->
+
+
 
 </body>
 

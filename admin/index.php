@@ -10,7 +10,7 @@ $painel_atual = "admin"; ?>
 <link rel="stylesheet" type="text/css" href="css/index.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
 <title>Painel da Admin</title>
-<link rel="shortcut icon" href="../image/logo.png">
+<link rel="shortcut icon" href="../image/logo_ist.gif">
 </head>
 
 <body>

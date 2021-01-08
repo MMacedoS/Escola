@@ -147,22 +147,21 @@ function refresh()
         </div>
 
     </div>
-                           
-                       
-                            
-                                               
-                  
-                </form>
-            <?php if(isset($_GET['button'])){
-if(isset($_GET['disciplina'])){
-$tipo = $_GET['disciplina'];
-$serie = $_GET['turma'];
+</form>
 
-$s=$_GET['selet'];
+<?php if(isset($_GET['button'])){
+              if(isset($_GET['disciplina'])){
+              $tipo = $_GET['disciplina'];
+              $serie = $_GET['turma'];
 
-echo "<script language='javascript'>window.location='todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=$s&disciplina=$tipo&turma=$serie&filtro=1';</script>";
+              $s=$_GET['selet'];
 
-} }
+        echo "<script language='javascript'>window.location='todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=$s&disciplina=$tipo&turma=$serie&filtro=1';</script>";
+
+
+
+      } 
+    }
 }?>
 <!-- fim do filtro -->
 
@@ -175,18 +174,22 @@ $ensino=$_GET['selec'];
 if(isset($_GET['disciplina'])){
   $res=base64_decode($_GET['turma']);
   $code=base64_decode($_GET['disciplina']);
-  $sql_1  = "SELECT ati.*, cat.categoria FROM atividades_bimestrais ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where id_disciplina='$code' and cat.id_categoria='$ensino' and ati.id_curso='$res' and ano_letivo='$ano' ORDER BY id_ativ_bim DESC";
+  $sql_1=$pdo->query("SELECT ati.*, cat.categoria FROM atividades_bimestrais ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where id_disciplina='$code' and cat.id_categoria='$ensino' and ati.id_curso='$res' and ano_letivo='$ano' ORDER BY id_ativ_bim DESC");
+
+  // $sql_1  = "SELECT ati.*, cat.categoria FROM atividades_bimestrais ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where id_disciplina='$code' and cat.id_categoria='$ensino' and ati.id_curso='$res' and ano_letivo='$ano' ORDER BY id_ativ_bim DESC";
 
 }else{
- $sql_1  = "SELECT ati.*, cat.categoria FROM atividades_bimestrais ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where id_disciplina='$code' and cat.id_categoria='$ensino' and ano_letivo='$ano' ORDER BY id_ativ_bim DESC";
+  $sql_1 = $pdo->query("SELECT ati.*, cat.categoria FROM atividades_bimestrais ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where id_disciplina='$code' and cat.id_categoria='$ensino' and ano_letivo='$ano' ORDER BY id_ativ_bim DESC");
+//  $sql_1  = "SELECT ati.*, cat.categoria FROM atividades_bimestrais ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where id_disciplina='$code' and cat.id_categoria='$ensino' and ano_letivo='$ano' ORDER BY id_ativ_bim DESC";
 }// fim if busca
  
-$result = mysqli_query($conexao, $sql_1);
-
-if(mysqli_num_rows($result)==''){
+$result =$sql_1->fetchAll(PDO::FETCH_ASSOC);
+$count_dados=count($result);
+if($count_dados==0){
   echo '<h2><font color="blue">No momento não existe!</font></h2>';
 }else{
-	while($res_1 = mysqli_fetch_assoc($result)){
+  foreach($result as $key=>$res_1){
+	// while($res_1 = mysqli_fetch_assoc($result)){
 ?> 
 <table  id="customers" border="0">
   <tr>
@@ -199,19 +202,26 @@ if(mysqli_num_rows($result)==''){
     <td><h3><?php echo $res_1['id_ativ_bim']; ?></h3></td>
     <td><h3><?php echo $res_1['data']; ?></h3></td>
     <td><h3><?php $DIS=$res_1['id_disciplina'];
-    $buscaDisc="SELECT l.nome,c.curso FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner join lista_disc l on d.disciplina=l.id_lista WHERE d.id_disciplinas='$DIS'";
-    $conDisc=mysqli_query($conexao,$buscaDisc);
-    while($resDisc=mysqli_fetch_assoc($conDisc)){
+    $buscaDisc=$pdo->query("SELECT l.nome,c.curso FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner join lista_disc l on d.disciplina=l.id_lista WHERE d.id_disciplinas='$DIS'");
+
+    // $buscaDisc="SELECT l.nome,c.curso FROM disciplinas d inner JOIN cursos c on d.id_cursos=c.id_cursos inner join lista_disc l on d.disciplina=l.id_lista WHERE d.id_disciplinas='$DIS'";
+    // $conDisc=mysqli_query($conexao,$buscaDisc);
+    $conDisc=$buscaDisc->fetchAll(PDO::FETCH_ASSOC);
+    
+    foreach($conDisc as $key=>$resDisc){
+    // while($resDisc=mysqli_fetch_assoc($conDisc)){
       echo $resDisc['nome']." - ".$resDisc['curso'];
+      // var_dump($resDisc);
     }
     ?></h3></td>
     <td><h3><?php echo $res_1['bimestre']; ?></h3></td>
   </tr>
   <tr>
     <!-- <td><a rel="superbox[iframe][350x400]" href="editar_atividade.php?id=<php //echo $res_1['id_ativ_bim'];?>&code=<php //echo $code; ?>&selec=<php //echo $selec;?>">Editar</a></td> -->
-    <td colspan="3"><a href="correcao_atividades.php?pg=atividade_bimestral&selec=<?php echo $_GET['selec']; ?>&id=<?php echo $res_1['id_ativ_bim']; ?>">Lançar notas</a></td>
+   
+    <td colspan="3"><a id="lancar_notas" href="correcao_atividades.php?pg=atividade_bimestral&selec=<?php echo $_GET['selec']; ?>&id=<?php echo $res_1['id_ativ_bim']; ?>">Lançar notas</a></td>
     <td></td>
-    <!-- <td><a href="todas_ativ_tarefas.php?pg=excluir&id=<php //echo $res_1['id_ativ_bim']; ?>&selec=<php //echo $_GET['selec']; ?>&code=<?php// echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td> -->
+    <!-- <td><a href="todas_ativ_tarefas.php?pg=excluir&id=<php //echo $res_1['id_ativ_bim']; ?>&selec=<php //echo $_GET['selec']; ?>&code=<php// echo $code; ?>"><img src="../image/deleta.png" width="22" border="0" /></a></td> -->
   </tr>  
   </table> 
  

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width">
 <link rel="stylesheet" type="text/css" href="css/todas_as_avaliacoes.css"/>
-<title>Trabalhos</title>
+<title>2º AT</title>
 
 <link rel="shortcut icon" href="../image/logo.png">
 <style>
@@ -52,9 +52,10 @@
 <?php if($_GET['pg'] == 'trabalhos'){
     $selec=$_GET['selec'];
     $code=$_GET['code'];
+    $ano=Date('Y');
  ?>
 <div class="row" id="row_button">
-<!-- <br /><a class="a2" rel="superbox[iframe][350x400]" href="cadastrar_trabalho.php?tipo=trabalhos&code=?php //echo $id_professor; ?>&selec=<php //echo $selec;?>">Cadastrar Atividade</a> -->
+<!-- <br /><a class="a2" rel="superbox[iframe][350x400]" href="cadastrar_trabalho.php?tipo=trabalhos&code=<php echo $id_professor; ?>&selec=<php echo $selec;?>">Cadastrar Atividade</a> -->
 <br /><a class="a3" rel="stylesheet" href="todas_as_trabalhos.php?pg=trabalhos&selec=<?php echo $selec;?>&code=<?php echo $code?>">Atualizar Pagina</a>
 </div>
 <script language="JavaScript">
@@ -67,24 +68,26 @@ function refresh()
 
 <form name='incluir' ... />
 <h1>Turmas:
- <select name="busca" id="cooler">  <!--  Função para recarregar a página com o grupo escolhido  -->
+<select name="busca" id="cooler">  <!--  Função para recarregar a página com o grupo escolhido  -->
             
             <?php
             $res=0;
+            $ano=Date('Y');
              if (isset($_GET['busca'])){
              
              ?>
               <option value="<?php echo $_GET['busca']; ?>"><?php 
                $busca=$_GET['busca'];
-               $sql_select="SELECT DISTINCT c.id_cursos,c.curso FROM avaliacao_coc ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and c.id_cursos='$busca' and ati.ano_letivo=2020 ORDER BY ati.id_ava_coc DESC";
+               $sql_select="SELECT DISTINCT c.id_cursos,c.curso FROM avaliacao_coc  ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and c.id_cursos='$busca' and ati.ano_letivo='$ano' ORDER BY c.curso  DESC";
             $result1=mysqli_query($conexao,$sql_select);   
+            
             
             while($mos_rs1=mysqli_fetch_assoc($result1)){
               echo $mos_rs1['curso'];
               
               }?></option> 
             <?php
-             $sql_select="SELECT DISTINCT c.id_cursos,c.curso FROM avaliacao_coc ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.id_categoria='$selec' and ati.ano_letivo=2020 ORDER BY ati.id_ava_coc DESC";
+             $sql_select="SELECT DISTINCT c.id_cursos,c.curso FROM avaliacao_coc  ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.id_categoria='$selec' and ati.ano_letivo='$ano' ORDER BY c.curso  DESC";
             $result1=mysqli_query($conexao,$sql_select);   
             
             while($mos_rs1=mysqli_fetch_assoc($result1)){
@@ -96,10 +99,11 @@ function refresh()
               </option>
               <?php }
               }else{ 
-              $sql_select="SELECT DISTINCT c.id_cursos,c.curso FROM avaliacao_coc ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.id_categoria='$selec' and ati.ano_letivo=2020 ORDER BY ati.id_ava_coc DESC";
+              $sql_select="SELECT DISTINCT c.id_cursos,c.curso FROM avaliacao_coc  ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.id_categoria='$selec' and ati.ano_letivo='$ano' ORDER BY c.curso DESC";
             $result1=mysqli_query($conexao,$sql_select);   
             
             ?><option value="0">Todas</option><?php
+            echo $sql_select;
             while($mos_rs1=mysqli_fetch_assoc($result1)){
            
             ?>
@@ -110,6 +114,51 @@ function refresh()
 <?php     
     }} ?>
 </select>
+
+<select name="buscab" id="cooler">  <!--  Função para recarregar a página com o grupo escolhido  -->
+            
+            <?php
+            $res=0;
+            $ano=Date('Y');
+             if (isset($_GET['buscab'])){
+             
+             ?>
+              <option value="<?php echo $_GET['buscab']; ?>"><?php 
+               $busca=$_GET['buscab'];
+               $sql_select="SELECT DISTINCT unidade FROM unidades where unidade='$busca' ORDER BY unidade DESC";
+            $result1=mysqli_query($conexao,$sql_select);   
+            
+            
+            while($mos_rs1=mysqli_fetch_assoc($result1)){
+              echo $mos_rs1['unidade'];
+              
+              } ?> Bimestre</option> 
+            <?php
+             $sql_select="SELECT DISTINCT unidade FROM unidades ORDER BY unidade DESC";
+            $result1=mysqli_query($conexao,$sql_select);   
+            
+            while($mos_rs1=mysqli_fetch_assoc($result1)){
+           
+            ?>
+                          
+              <option value="<?php echo $mos_rs1['unidade']; ?>">
+              <?php echo $mos_rs1['unidade']; ?>
+              </option>
+              <?php }
+              }else{ 
+              $sql_select="SELECT DISTINCT unidade FROM unidades ORDER BY unidade DESC";
+            $result1=mysqli_query($conexao,$sql_select);   
+            
+            ?><?php
+            while($mos_rs1=mysqli_fetch_assoc($result1)){
+           
+            ?>
+                          
+              <option value="<?php echo $mos_rs1['unidade']; ?>">
+              <?php echo $mos_rs1['unidade']." bimestre"; ?>
+              </option>
+<?php     
+    }} ?>
 <input type="hidden" name="pg" value="trabalhos">
 <input type="hidden" name="selec" value="<?php echo $selec?>">
 <input type="hidden" name="code" value="<?php echo $code;?>">
@@ -147,20 +196,21 @@ $(document).ready(function(){
 <?php
 
 if(isset($_GET['selec'])){
-$ensino=$_GET['selec'];
-
-if(isset($_GET['busca'])){
-  $res=$_GET['busca'];
-  $sql_1  = "SELECT ati.*, cat.categoria FROM avaliacao_coc ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.id_categoria='$ensino' and ati.id_curso='$res' and ano_letivo=2020 ORDER BY id_ava_coc DESC";
-
-}else{
-  $sql_1  = "SELECT ati.*, cat.categoria FROM avaliacao_coc ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.id_categoria='$ensino' and ano_letivo=2020 ORDER BY id_ava_coc DESC";
-}//fim if busca
- }else{
-
-  $sql_1 = "SELECT ati.*, cat.categoria FROM avaliacao_coc ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor=$code and ano_letivo='2020' ORDER BY id_ava_coc DESC";
- }
-$result = mysqli_query($conexao, $sql_1);
+  $ensino=$_GET['selec'];
+  if(isset($_GET['busca'])){
+    $res=$_GET['busca'];
+    $b=$_GET['buscab'];
+    $sql_1  = "SELECT ati.*, cat.categoria FROM avaliacao_coc  ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.id_categoria='$ensino' and ati.id_curso='$res' and ati.ano_letivo='$ano' and ati.bimestre='$b' ORDER BY c.curso  DESC";
+  
+  }else{
+    $b=@$_GET['buscab'];
+   $sql_1  = "SELECT ati.*, cat.categoria FROM avaliacao_coc  ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.id_categoria='$ensino' and ati.ano_letivo='$ano' or ati.bimestre='$b' ORDER BY c.curso  DESC";
+  }// fim if busca
+   }else{
+  
+  $sql_1 = "SELECT ati.*, cat.categoria FROM avaliacao_coc  ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor=$code  and ano_letivo='$ano' ORDER BY c.curso  DESC";
+   }
+  $result = mysqli_query($conexao, $sql_1);
 
 if(mysqli_num_rows($result)==''){
 	 echo '<h2><font color="blue">No momento não existe!</font></h2>';	 

@@ -27,7 +27,7 @@ if($senha==$dados[0]['senha']){
 		$_SESSION['code']=$dados[0]['code'];;
 		$_SESSION['nome']=$dados[0]['nome'];
 		$_SESSION['painel']=$dados[0]['painel'];
-		$tempolimite=300;
+		$tempolimite=900;
 		$_SESSION['registro']=time();
 		$_SESSION['limite']=$tempolimite;
 		
@@ -42,25 +42,31 @@ if($senha==$dados[0]['senha']){
 				
 							// header("location:aluno/aluno.html");
 							header("location:aluno/index.php");
+				// 			header("location:man.html");
+							
+                                // session_destroy();
+							
 								break;
 			
 								case 'professor':
 				
 									header("location:professor/index.php");
+									// header("location:man.html");
 										break;
 			
 										case 'secretaria':
 				
 											header("location:secretaria/index.php");
 												break;
-												case 'tesouraria':
+												case 'financeiro':
 				
-													header("location:tesouraria/index.php");
+													header("location:financeiro/index.php");
 														break;
 
 														case 'Coordenacao':
 				
 															header("location:coordenacao/index.php");
+															// header("location:man.html");
 																break;
 
 																case 'tela':

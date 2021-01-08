@@ -45,7 +45,7 @@
                             $con_disc=mysqli_query($conexao,$sql_disc);
                             while($res_dis=mysqli_fetch_assoc($con_disc)){
                             ?>
-                        <option value="<?php echo $res_dis['disciplina'];?>">
+                        <option value="<?php echo $res_dis['id_disciplinas'];?>">
                             <?php echo $res_dis['nome']." ";?><?php echo $res_dis['curso']?></option>
                         <?php }?>
                     </select>
@@ -56,7 +56,7 @@
                     <label for="exampleFormControlInput1">Selecione um Bimestre</label>
                     
                         <select name="bimestre" class="form-control col-sm-12" id=""><?php 
-                        $code=87415978;
+                        // $code=87415978;
 
                         $sql_disc="select * from unidades";
                         $con_disc=mysqli_query($conexao,$sql_disc);
@@ -79,10 +79,10 @@
 if(isset($_GET['button'])){
     // $go_to_url é o link do banner
 
-$disc=$_GET['disciplina'];
-$situacao=$_GET['bimestre'];
+$disc=base64_encode($_GET['disciplina']);
+$situacao=base64_encode($_GET['bimestre']);
 
-echo "<script>window.open('test1.php?pg=rp&id=$disc&bimestre=$situacao', '_blank');</script>";
+echo "<script>window.open('plan_frequencia.php?pg=rp&id=$disc&bimestre=$situacao', '_blank');</script>";
 }
 ?>
                 <?php require "rodape.php"; ?>

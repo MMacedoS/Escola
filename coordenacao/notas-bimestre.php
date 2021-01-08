@@ -72,7 +72,7 @@ tr:nth-of-type(5) td:nth-of-type(1) {
       }
     
 </style>';
-// $pagina.='<link rel="shortcut icon" href="../image/logo.png">';
+// $pagina.='<link rel="shortcut icon" href="../image/logo_ist.gif">';
     $pagina.="<body>";
     $pagina.='<h1 align="center">Planilha de Notas:'.$nomed.' '.$nomec.'</h1>';    
     $pagina.='<table id="customers" class="table-responsive{-sm|-md|-lg|-xl} table"  border="1" cellpadding="5" cellspacing="4" bgcolor="#FFF4EA">';

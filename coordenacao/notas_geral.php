@@ -98,9 +98,9 @@
                     <label for="exampleFormControlInput1">Selecione um tipo</label>
                     <select name="situacao" class="form-control col-sm-12">
                             <option value="">Notas</option>
-                            <option value="ap">Aprovados</option>
-                            <option value="rp">Reprovados</option>
-                            <option value="ae">Aprovados por adição extra </option>
+                            <!--<option value="ap">Aprovados</option>-->
+                            <!--<option value="rp">Reprovados</option>-->
+                            <!--<option value="ae">Aprovados por adição extra </option>-->
                     </select>
                     </div>
                     </div>
@@ -150,7 +150,7 @@ switch ($situacao) {
                                 echo "<script>window.open('gerar_pdf.php?id=$disc&curso=$curso&nomed=$nomed&nomec=$nomec', '_blank');</script>";
                                 break;
                                 case '4':
-                                    echo "<script>window.open('rel_final.php?id=$disc&curso=$curso&nomed=$nomed&nomec=$nomec', '_blank');</script>";
+                                    echo "<script>window.open('gerar_pdf.php?id=$disc&curso=$curso&nomed=$nomed&nomec=$nomec', '_blank');</script>";
                                     break;
                 }
         break;

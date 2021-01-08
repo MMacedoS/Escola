@@ -161,7 +161,7 @@ if(isset($_POST['recuperar-senha'])){
 
 	//AQUI VAI O CÓDIGO DE ENVIO DO EMAIL
 	$to = $email_usuario;
-	$subject = 'Recuperação de Senha SysMedical';
+	$subject = 'Recuperação de Senha EscolaIST';
 
 	$message = "
 

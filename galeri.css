@@ -1,0 +1,148 @@
+@charset "utf-8";
+
+/* galeria */
+
+ul#album-galeria {
+    width: 100%;
+    margin: -5em 0 0 30px;
+    padding: 50px;
+    overflow: hidden;
+    list-style: none;
+}
+
+ul#album-galeria li {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    border: 1px solid black;
+    background-color: white;
+    list-style: none;
+    float: left;
+}
+
+ul#album-galeria li:hover {
+    -webkit-transform: scale(1.5);
+}
+
+.container.box {
+    margin-top: 1rem;
+    margin-bottom: -2rem;
+}
+
+.center {
+    margin: auto
+}
+
+ul#album-galeria li span {
+    opacity: 0;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    background-color: rgba(0, 0, 0, .3);
+    font-size: 9pt;
+    line-height: 370px;
+    padding: 5px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .4);
+    -webkit-transition: all 0.4s;
+}
+
+ul#album-galeria li:hover span {
+    opacity: 0;
+}
+
+ul#album-galeria li img.galeria {
+    width: 100%;
+    height: 100%;
+}
+
+ul#album-galeria li#foto {
+    background-position: 50% 50%;
+    background-size: 400px 400px;
+    background-color: white;
+    display: inline-block;
+}
+
+ul#album-galeria li#foto:hover {
+    background-position: 0px 0px;
+    background-size: 200px 200px;
+}
+
+
+/* paginaçao */
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,300);
+ :root {
+    --black: #130f0d;
+    --primary: hsl(32, 98%, 56%);
+    --white: #f0f0f9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*,
+button,
+input {
+    font-family: 'Roboto', sans-serif;
+}
+
+section#paginate {
+    height: 100vh;
+    /*background-color: var(--black);
+        color: var(--white);*/
+}
+
+
+/*header {
+        display: flex;
+        justify-content: center;
+
+        background-color: hsl(32, 89%,  8%);
+
+        box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 0.2);
+        padding: 16px;
+    }*/
+
+#paginate {
+    width: 100%;
+    margin: 32px auto;
+}
+
+#paginate .list .item {
+    border-bottom: 1px solid hsl(32, 98%, 12%);
+    padding: 16px 32px;
+}
+
+#paginate .list .item:hover {
+    background-color: rgba(153, 15, 15, 0.04);
+}
+
+#paginate .controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+#paginate .controls div {
+    cursor: pointer;
+    /* border: 1px solid #eee; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14;
+}
+
+#paginate .controls div:not(.numbers),
+#paginate .controls div.numbers div {
+    width: 40px;
+    height: 40px;
+    border: solid 1px hsl(32, 98%, 12%);
+}
+
+#paginate .controls div.numbers div:hover,
+#paginate .controls div.numbers div.active {
+    color: var(--primary);
+}

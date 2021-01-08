@@ -1,0 +1,205 @@
+body {
+    background: rgb(204,204,204); 
+  }
+  page[size="A4"] {
+    background: white;
+    width: 21cm;
+    /*height: 29.7cm;*/
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5cm;
+    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+    padding: 4% 3.5%;
+  }
+  page[size="A4"] form div.container h3{
+      text-align: center;
+  }
+  page[size="A4"] form div.container div.paragraph{
+    text-align: justify;
+    text-justify: inter-word;
+    text-indent: 0; 
+    margin-top: 0.83em;
+    line-height: 1.5em;
+    /*margin-top: 15px;*/
+  }
+  table{
+    margin-top: 1.5%;
+    border-collapse: collapse;
+  }
+  th, td{
+    border: 1px solid black;
+    font-weight: 600;
+  }
+  tr{
+    padding: 2%;
+  }
+  b.under{
+    text-decoration: underline;
+  }
+
+  div.footer{
+    margin-top: 6.5%;
+    width: 100%;
+  }
+  div.ass{
+    margin-top: 6.0%;
+  }
+  div.ass-tes{
+    margin-top: 5.0%;
+    display: flex;
+    align-items: baseline;
+  }
+  div.line{
+    width: 100%;
+    background-color: black;
+    height: 1px;
+  }
+  div.line-serrilhada{
+    width: 55%;
+    /*height: 1px;*/
+    border-top: black dashed 1px;
+    margin-right: 1.0%;
+  }
+  div.line-serrilhada-rg{
+    width: 30%;
+    border-top: black dashed 1px;
+  }
+  div.ass-tes span.label{
+    margin-right: 1.0%;
+  }
+
+  button.float{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 2%;
+    margin-right: 2%;
+  }
+  
+  button.float span{
+    padding-left: 10%;
+    padding-right: 7%;
+    /* font-size: 12pt;
+    font-weight: 600; */
+  }
+  button.float svg{
+    width: 20px;
+    height: 30px;
+  }
+  button.save{
+    padding-right: 2%;
+    padding-left: 1.3%;
+    padding-top: 0.3%;
+    padding-bottom: 0.4%;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  button.save:hover{
+    background-color: #46b8da;
+    border-color: #5bc0de;
+  }
+
+  div.assinaturas{
+    display: flex;
+  }
+
+  .assinatura{
+    background-color: #dfc8ca;
+    width: 49%;
+    height: 9vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 0.2%;
+  }
+
+  div.margin-right{
+    margin-right: 1%;
+  }
+  div.margin-left{
+    margin-left: 1%;
+  }
+
+  .ass_file{
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 59vh;
+    height: 9vh;
+  }
+
+  .ass_file + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.ass_file + .label-file{
+  color: #f1e5e6;
+  background-color: #d3394c;
+  max-width: 80%;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.225rem 0.7rem;
+  width: 50%;
+}
+
+.assinatura .label-file svg{
+  fill: white;
+}
+
+img.assinatura{
+  width: 62%;
+  height: 9vh;
+  object-fit: cover;
+  display: none;
+}
+
+div.preview{
+  display: none;
+}
+
+.close{
+  position: absolute;
+  margin-right: 0;
+  width: 28px;
+  height: 30px;
+  right: 0;
+  background-color: #d3394c;
+  cursor: pointer;
+}
+.close svg{
+  fill: white;
+}
+.close1{
+  position: relative;
+}
+
+  .ass_file:focus + label,
+  .ass_file + label:hover {
+      /* background-color: red; */
+  }
+
+
+  @media print {
+    body, page[size="A4"] {
+      margin: 0;
+      box-shadow: 0;
+    }
+  }

@@ -8,11 +8,11 @@
 <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="css/topos.css" rel="stylesheet" type="text/css" />
 <title>Coordenação</title>
-<link rel="shortcut icon" href="../image/logo.png">
+<link rel="shortcut icon" href="../image/logo_ist.gif">
 <script language="javascript" src="../js/jquery-1.7.2.min.js"></script>
 <script src="../js/lightbox.js"></script>
 <link href="../css/lightbox.css" rel="stylesheet" />
-<link rel="stylesheet" href="css/style1.css">
+<link rel="stylesheet" href="css/estilo.css">
 
 
 <link rel="stylesheet" href="../jquery.superbox.css" type="text/css" media="all" />
@@ -80,7 +80,7 @@ function refresh()
       <form name='incluir' ... />
        <select class="custom-select" name="selec" LANGUAGE="JAVASCRIPT" ONCHANGE="submit()" >
          <?php
-            if(@$_GET['selet']){
+            if(@$_GET['selet'] && $_GET['selec']==''){
               switch ($_GET['selet']){
                 case '1':
                  echo '<option value="">Fundamental Anos Iniciais</option>';
@@ -96,7 +96,7 @@ function refresh()
                         break;
                        }
             }else{
-             switch ($_GET['selec']){
+             switch (@$_GET['selec']){
                case '1':
                 echo '<option value="">Fundamental Anos Iniciais</option>';
                  break;
@@ -146,9 +146,12 @@ function refresh()
                 
             </li>
               
-            <li> <a href="turmas_e_alunos.php?selec=<?php echo @$_GET['selec'];?>">Turmas e Alunos</a>
+            <li> <a href="turmas_e_alunos.php?selec=<?php echo @$_GET['selec'];?>">Turmas e Alunos<span class="badge badge-light" style="font-size:6px; background-color:red;">*</span></a>
             <ul>
             <li><a href="frequencias_geral.php?pg=frequencia&selec=<?php echo @$_GET['selec'];?>&code=<?php echo $code;?>">Gerar Frequência</a></li>
+            <li><a href="cargaHoraria.php?selec=<?php echo @$_GET['selec'];?>">Carga Diaria AULA</a></li>
+            <li><a href="valor_atividades.php?selec=<?php echo @$_GET['selec'];?>">Valor Atividades</a></li>
+            <li><a href="turmas_conselho.php?selec=<?php echo @$_GET['selec'];?>">Finalizar Conselho<span class="badge badge-light" style="font-size:6px; background-color:red;">*</span></a></li>
             </ul>
                 
             </li>
@@ -162,23 +165,24 @@ function refresh()
       case '1':
         ?>
     <ul>
-     <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Atividades/tarefas</a></li>
-     <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<?php echo $_GET['selec']; ?>&code=<?php echo $code;?>">Trabalhos/Atividades Praticas</a></li>
-     <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec']; ?>&code=<?php echo $code;?>">Provas</a></li>
-     <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Lançar Nota Bimestre</a></li>
-     <li><a href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
+     <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Lançar Notas</a></li>
+     <!-- <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<php echo $_GET['selec']; ?>&code=<php echo $code;?>">Trabalhos/Atividades Praticas</a></li>
+     <li><a href="todas_provas.php?pg=provas&selec=<php echo $_GET['selec']; ?>&code=<php echo $code;?>">Provas</a></li> -->
+     <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Lançar nota Apredizagem</a></li>
+      <li><a href="notafinal.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Recuperação<span class="badge badge-light" style="font-size:6px; background-color:red;">*</span></a></li>
     </ul>
      <?php 
         break;
         case '2':
           ?>      
           <ul>
-         <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">1ª Ava</a></li>
-         <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">2ª Ava</a></li>
-         <li><a href="todas_teste.php?pg=teste&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">3ª Ava</a></li>     
-         <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">4ª Ava</a></li>
+         <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Lançar Notas</a></li>
+         <!-- <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<php echo $_GET['selec'];?>&code=<php echo $code;?>">2ª Ava</a></li>
+         <li><a href="todas_teste.php?pg=teste&selec=<php echo $_GET['selec'];?>&code=<php echo $code;?>">3ª Ava</a></li>     
+         <li><a href="todas_provas.php?pg=provas&selec=<php echo $_GET['selec'];?>&code=<php echo $code;?>">4ª Ava</a></li> -->
          <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Visualizar Nota Bimestre</a></li>
-         <li><a href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
+          <li><a href="notafinal.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Recuperação<span class="badge badge-light" style="font-size:6px; background-color:red;">*</span></a></li>
+        
         </ul>
     
           <?php
@@ -186,12 +190,13 @@ function refresh()
           case '3':
             ?>      
       <ul>
-      <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">1ª Ava</a></li>
-        <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">2ª Ava</a></li>
-         <li><a href="todas_teste.php?pg=teste&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">3ª Ava</a></li>     
-         <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">4ª Ava</a></li>
+      <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Lançar Notas</a></li>
+        <!-- <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<php echo $_GET['selec'];?>&code=<php echo $code;?>">2ª Ava</a></li>
+         <li><a href="todas_teste.php?pg=teste&selec=<php echo $_GET['selec'];?>&code=<php echo $code;?>">3ª Ava</a></li>     
+         <li><a href="todas_provas.php?pg=provas&selec=<php echo $_GET['selec'];?>&code=<php echo $code;?>">4ª Ava</a></li> -->
          <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Visualizar Nota Bimestre</a></li>
-     <li><a href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
+          <li><a href="notafinal.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Recuperação<span class="badge badge-light" style="font-size:6px; background-color:red;">*</span></a></li>
+     
     </ul>
 
       <?php
@@ -200,12 +205,13 @@ function refresh()
               ?>
       
               <ul>
-              <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">1ª Ava</a></li>
-              <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">2ª Ava</a></li>
-              <li><a href="todas_teste.php?pg=teste&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">3ª Ava</a></li>     
-              <li><a href="todas_provas.php?pg=provas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">4ª Ava</a></li>
+              <li><a href="todas_ativ_tarefas.php?pg=atividades_bimestrais&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Lançar Notas</a></li>
+              <!-- <li><a href="todas_as_trabalhos.php?pg=trabalhos&selec=<php echo $_GET['selec'];?>&code=<php echo $code;?>">2ª Ava</a></li>
+              <li><a href="todas_teste.php?pg=teste&selec=<php echo $_GET['selec'];?>&code=<php echo $code;?>">3ª Ava</a></li>     
+              <li><a href="todas_provas.php?pg=provas&selec=<php echo $_GET['selec'];?>&code=<php echo $code;?>">4ª Ava</a></li> -->
               <li><a href="todas_notas.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Visualizar Nota Bimestre</a></li>
-             <li><a href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
+               <li><a href="notafinal.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Recuperação<span class="badge badge-light" style="font-size:6px; background-color:red;">*</span></a></li>
+             
              <!-- <li><a href="gerar_pdf.php?pg=notas&selec=<?php echo $_GET['selec'];?>">Distribuição das Notas</a></li>  -->
             </ul>
               
@@ -217,7 +223,14 @@ function refresh()
   }
    ?>
    </li>
-   <li><a href="suporte_tecnico.php?selec=<?php echo $_GET['selec'];?>">Suporte Escolar</a></li>
+    <li><a href="">Relatório<span class="badge badge-light" style="font-size:6px; background-color:green;">*</span></a>
+      <ul>
+        <li><a href="relatorios.php?selec=<?php echo @$_GET['selec'];?>">LISTA AP/RP</a></li>
+        <li><a href="relatorios_aluno.php?selec=<?php echo @$_GET['selec'];?>">Boletim Aluno</a></li>
+        <li><a href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição das Notas</a></li>
+      </ul>
+  </li>
+   <li><a href="suporte_tecnico.php?selec=<?php echo @$_GET['selec'];?>">Suporte Escolar</a></li>
    
         </ul>
         

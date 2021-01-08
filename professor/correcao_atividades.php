@@ -25,7 +25,7 @@
             padding: 8px;
         }
         #customers th {
-            width:32%;
+            width:2%;
         }
         
         #customers tr:nth-child(even){background-color: #f2f2f2;}
@@ -53,15 +53,6 @@ else{
 }
 
 
-if(isset($_GET['deleta']) && ($_GET['deleta']=='sim')){
-$idnota=$_GET['idNota'];
-$deleta_nota="DELETE FROM notas_atividades where id_notas_atividades='$idnota'";
-$deleta_nota=mysqli_query($conexao,$deleta_nota);
-if($deleta_nota){
- echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
-
-}//fim se deleta
-}
 
 $busca_prova="SELECT id_disciplina from atividades_bimestrais where id_ativ_bim='$id'";
 $con_busca=mysqli_query($conexao,$busca_prova);
@@ -86,73 +77,10 @@ function setFocus() {
 <div id="box" onLoad="setFocus()">
 <div class="div-responsive">
 <br>
-<h1><a class="a3" rel="stylesheet" href="correcao_atividades.php?pg=atividade_bimestral&selec=<?php echo $selec; ?>&id=<?php echo $id; ?>">Atualizar Pagina</a></h1>
+<h1><a id="carrega" class="a3" rel="stylesheet" href="correcao_atividades.php?pg=atividade_bimestral&selec=<?php echo $selec; ?>&id=<?php echo $id; ?>">Atualizar Pagina</a></h1>
 <br>
  <h1>Abaixo, segue os alunos desta disciplina:  <?php echo $disc."  ".$curso;?>.       <h1>Lançar a nota da 1ª Ava</h1></h1>
- <?php if(isset($_GET['r'])){
-  echo '<div class="alert alert-primary" role="alert">
-Nota inserida!
-</div>';} 
-
-$sql_1 = "SELECT * FROM atividades_bimestrais WHERE id_ativ_bim = '$id'";
-$result = mysqli_query($conexao, $sql_1);
-	while($res_1 = mysqli_fetch_assoc($result)){
-		$curso = $res_1['id_curso'];
-		$professor = $res_1['professor'];
-		$bimestre = $res_1['bimestre'];
-    $ano=Date("Y");
-		
-$sql_2 = "SELECT * FROM estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes WHERE ce.id_cursos = '$curso' and ce.ano_letivo='$ano' and e.status='Ativo' order by e.nome asc";
-$result_2 = mysqli_query($conexao, $sql_2);
-if(mysqli_num_rows($result_2) == ''){
-  echo '<h2><font color="blue">não possui alunos cadastrados nesta turma</font></h2>';
-}else{
-		while($res_2 = mysqli_fetch_assoc($result_2)){
-?> 
-
-<form name="" method="get" action="" enctype="multipart/form-data">
-<input type="hidden" name="bimestre" value="<?php echo $res_1['bimestre']; ?>" />
-<input type="hidden" name="disciplina" value="<?php echo $res_1['id_disciplina']; ?>" />
-<input type="hidden" name="code_aluno" value="<?php echo $res_2['matricula']; ?>" />
-<input type="hidden" name="id" value="<?php echo $id; ?>" />
-<input type="hidden" name="selec" value="<?php echo $selec; ?>" />
-<table id="customers" border="0">
-  <tr>
-    <th>Código:</th>
-    <th>Aluno:</th>
-    <th>Bimestre:</th>
-    <th>Nota:</th>
-    <!-- <th>&nbsp;</th> -->
-  </tr>
-  <tr>
-    <td><h3><?php echo $code_aluno = $res_2['matricula']; ?></h3></td>
-    <td><h3><?php echo $res_2['nome']; ?></h3></td>
-    <td><h3><?php echo $bimestre = $res_1['bimestre']; ?>º</h3></td>
-    
-    <?php
-  $sql_4 = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_atividade='$id'";
-	$result_4 = mysqli_query($conexao, $sql_4);
-	if(mysqli_num_rows($result_4) == ''){
-	?>
-    <td><input name="nota" type="text" id="nota" size="3" disabled></td>
-    </tr>
-    <tr>
-    <td><input type="submit" name="button" id="button" value="Inserir" onclick="alert('inserindo nota ')"></td>
-
-    <?php }else{ while($res_4 = mysqli_fetch_assoc($result_4 )){ ?>
-    <td><h3><?php echo $res_4['nota']; ?></h3></td>
-    </tr>
-    <tr>
-   <td><a href="alterar_nota_trabalho.php?pg=atividade_bimestral&id=<?php echo $res_4['id_atividade'];?>&aluno=<?php echo $res_2['matricula']; ?>&disciplina=<?php echo $res_1['id_disciplina']; ?>&bimestre=<?php echo $res_1['bimestre'];  ?>&professor=<?php echo $res_1['professor'];  ?>&nota=<?php echo $res_4['nota']; ?>&selec=<?php echo $_GET['selec'];?>" rel="superbox[iframe][400x100]"><img src="../image/ico-editar.png" width="30" border="0" title="Alterar a nota" /></a></td>
-   <!-- <td>&nbsp;</td>
-   <td>&nbsp;</td> -->
-   <td><a href="correcao_atividades.php?pg=atividade_bimestral&id=<?php echo $id; ?>&selec=<?php echo $selec; ?>&idNota=<?php echo $res_4['id_notas_atividades'];?>&deleta=sim"><img src="../image/deleta.png" width="30" border="0" title="deleta nota" /></a></td>
-    <?php }} ?>
-  </tr>
-</table>
-</form>
-
-<?php }}} ?>
+ <div id="listar"></div>
 </div>
 </div><!-- box -->
 
@@ -160,144 +88,691 @@ if(mysqli_num_rows($result_2) == ''){
 
 $code_aluno = $_GET['code_aluno'];
 $nota = $_GET['nota'];
+$nota2 = $_GET['nota2'];
+$nota3 = $_GET['nota3'];
+$nota4= $_GET['nota4'];
 $bimestre = $_GET['bimestre'];
 $disciplina = $_GET['disciplina'];
 // $prova = $_FILES['prova']['name'];
 $date=Date('Y');
-// if(file_exists("../trabalhos_alunos/$prova")){
-// 	$a = 1;
-// 	while(file_exists("../trabalhos_alunos/[$a]$prova")){
-// 	$a++;
-//   }
-//   	$prova = "[".$a."]".$prova;
-//  }
+
 switch ($bimestre) {
   case '1':
     # code...
-    if(($nota>3 && $_GET['selec']!="1")){
+    if($nota!=''){
+      $verifica=$pdo->query("SELECT primeira from valor_ativ where categoria=".$_GET['selec']." limit 1");
+      $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+
+    if($nota>$verifica[0]['primeira']){
+          ?>
+          <script>
+            alert('Esta nota acima de <?=$verifica[0]['primeira']?>, entre em contato com o seu coordenador!');
+            
+          </script>  
+          <?php
+     
+    }else
+    {
+      $sql_verifica =$pdo->query("SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+      $result_verifica = $sql_verifica->fetchAll();
+      $result_verifica= count($result_verifica);
+      if($result_verifica==0){
+        $sql_3 =$pdo->prepare("INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+         VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+        $sql_3->bindValue('codigo',$code_aluno);
+        $sql_3->bindValue('bimestre',$bimestre);
+        $sql_3->bindValue('disciplina',$disciplina);
+        $sql_3->bindValue('nota',$nota);
+        $sql_3->bindValue('id_atividade',$id);
+        $sql_3->bindValue('data',$date);
+        $sql_3->execute();
+        
+        $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+        mysqli_query($conexao, $sql_4);
+    //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+     
+    
+    }else{
+      ?>
+      <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+      <?php
+  }
+    }
+  }
+// trabalho
+if($nota2!=''){
+  $verifica=$pdo->query("SELECT segunda from valor_ativ where categoria=".$_GET['selec']." limit 1");
+  $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+
+if($nota2>$verifica[0]['segunda']){
       ?>
       <script>
-        alert('Nota Maxima 3.0 para este trabalho');
-      </script>
+        alert('Esta nota acima de <?=$verifica[0]['segunda']?>, entre em contato com o seu coordenador!');
+        
+      </script>  
       <?php
-      echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
-    }elseif($nota>2 && $_GET['selec']=="1"){ ?>
-      <script>
-        alert('Nota Maxima 2.0 para esta atividade');
-      </script>
-      <?php
-      echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
-      }else{
-              $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'";
-              $result_verifica = mysqli_query($conexao, $sql_verifica);
-                  if(mysqli_num_rows($result_verifica)==0){
-                  $sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', '$id','$date')";
-                   mysqli_query($conexao, $sql_3);
-                          $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades estão sendo divulgadas','tarefas')";
-                          mysqli_query($conexao, $sql_4);
-            //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+    }else
+    {
+      $sql_verifica =$pdo->query("SELECT * FROM notas_ava_coc WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+      $result_verifica = $sql_verifica->fetchAll();
+      $result_verifica= count($result_verifica);
+      if($result_verifica==0){
+        $sql_3 =$pdo->prepare("INSERT INTO notas_ava_coc (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+         VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+        $sql_3->bindValue('codigo',$code_aluno);
+        $sql_3->bindValue('bimestre',$bimestre);
+        $sql_3->bindValue('disciplina',$disciplina);
+        $sql_3->bindValue('nota',$nota2);
+        $sql_3->bindValue('id_atividade',$id);
+        $sql_3->bindValue('data',$date);
+        $sql_3->execute();
+        
+        $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+        mysqli_query($conexao, $sql_4);
+    //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
      
-                      echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id&r';</script>";
-                      }else{
-                          ?>
-                          <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
-                          <?php
-                      }
-       }
+     
+    }else{
+      ?>
+      <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+      <?php
+  }
+    }
+  }
+    // teste
+    if($nota3!=''){
+      $verifica=$pdo->query("SELECT terceira from valor_ativ where categoria=".$_GET['selec']." limit 1");
+      $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+
+    if($nota3>$verifica[0]['terceira']){
+    ?>
+    <script>
+      alert('Esta nota acima de <?=$verifica[0]['terceira']?>, entre em contato com o seu coordenador!');
+      alert('Atenção:Para o ensino fundamental inicial está liberada a 4º para inserir como 3ª');
+    </script>  
+    <?php
+    }else
+    {
+      $sql_verifica =$pdo->query("SELECT * FROM notas_ava_teste WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+      $result_verifica = $sql_verifica->fetchAll();
+      $result_verifica= count($result_verifica);
+      if($result_verifica==0){
+        $sql_3 =$pdo->prepare("INSERT INTO notas_ava_teste (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+         VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+        $sql_3->bindValue('codigo',$code_aluno);
+        $sql_3->bindValue('bimestre',$bimestre);
+        $sql_3->bindValue('disciplina',$disciplina);
+        $sql_3->bindValue('nota',$nota3);
+        $sql_3->bindValue('id_atividade',$id);
+        $sql_3->bindValue('data',$date);
+        $sql_3->execute();
+        
+        $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+        mysqli_query($conexao, $sql_4);
+    //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+     
+    
+    }else{
+      ?>
+      <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+      <?php
+  }
+    }
+  }
+    // prova
+    if($nota4!=''){
+      $verifica=$pdo->query("SELECT quarta from valor_ativ where categoria=".$_GET['selec']." limit 1");
+      $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+
+    if($nota4>$verifica[0]['quarta']){
+    ?>
+    <script>
+      alert('Esta nota acima de <?=$verifica[0]['quarta']?>, entre em contato com o seu coordenador!');
+      alert('Atenção:Para o ensino fundamental inicial está liberada a 4º para inserir como 3ª');
+    </script>  
+    <?php
+     }else
+    {
+      $sql_verifica =$pdo->query("SELECT * FROM notas_ava_prova WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+      $result_verifica = $sql_verifica->fetchAll();
+      $result_verifica= count($result_verifica);
+      if($result_verifica==0){
+        $sql_3 =$pdo->prepare("INSERT INTO notas_ava_prova (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+         VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+        $sql_3->bindValue('codigo',$code_aluno);
+        $sql_3->bindValue('bimestre',$bimestre);
+        $sql_3->bindValue('disciplina',$disciplina);
+        $sql_3->bindValue('nota',$nota4);
+        $sql_3->bindValue('id_atividade',$id);
+        $sql_3->bindValue('data',$date);
+        $sql_3->execute();
+        
+        $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+        mysqli_query($conexao, $sql_4);
+    //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));    
+    
+    }else{
+      ?>
+      <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+      <?php
+  }
+    }
+    
+  } 
+  echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
     break;
     case '2':
       # code...
-      if(($nota>2 && $_GET['selec']!="1")){
+      if($nota!=''){
+        $verifica=$pdo->query("SELECT primeira from valor_ativ where categoria=".$_GET['selec']." limit 1");
+        $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+  
+      if($nota>$verifica[0]['primeira']){
+      ?>
+      <script>
+        alert('Esta nota acima de <?=$verifica[0]['primeira']?>, entre em contato com o seu coordenador!');
         
-        ?><script>
-        alert('Nota Maxima 2.0 para este trabalho');
-      </script><?php
-       
-        echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
+      </script>  
+      <?php
+         
+        }else
+        {
+          $sql_verifica =$pdo->query("SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+          $result_verifica = $sql_verifica->fetchAll();
+          $result_verifica= count($result_verifica);
+          if($result_verifica==0){
+            $sql_3 =$pdo->prepare("INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+             VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+            $sql_3->bindValue('codigo',$code_aluno);
+            $sql_3->bindValue('bimestre',$bimestre);
+            $sql_3->bindValue('disciplina',$disciplina);
+            $sql_3->bindValue('nota',$nota);
+            $sql_3->bindValue('id_atividade',$id);
+            $sql_3->bindValue('data',$date);
+            $sql_3->execute();
+            
+            $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+            mysqli_query($conexao, $sql_4);
+        //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+         
         
-    }else{
-              $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'";
-              $result_verifica = mysqli_query($conexao, $sql_verifica);
-                  if(mysqli_num_rows($result_verifica)==0){
-                  $sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota,prova, id_atividade,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota','$professor', '$id','$date')";
-                   mysqli_query($conexao, $sql_3);
-                          $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades estão sendo divulgadas','tarefas')";
-                          mysqli_query($conexao, $sql_4);
-            //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
-     
-                      echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id&r';</script>";
-                      }//if mysqli
-                      else{
-                          ?>
-                          <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
-                          <?php
-                      }///else mysqli
+        }else{
+          ?>
+          <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+          <?php
       }
+        }
+      }
+    // trabalho
+    if($nota2!=''){
+      $verifica=$pdo->query("SELECT segunda from valor_ativ where categoria=".$_GET['selec']." limit 1");
+      $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+
+    if($nota2>$verifica[0]['segunda']){
+    ?>
+    <script>
+      alert('Esta nota acima de <?=$verifica[0]['segunda']?>, entre em contato com o seu coordenador!');
+     
+    </script>  
+    <?php
+        }else
+        {
+          $sql_verifica =$pdo->query("SELECT * FROM notas_ava_coc WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+          $result_verifica = $sql_verifica->fetchAll();
+          $result_verifica= count($result_verifica);
+          if($result_verifica==0){
+            $sql_3 =$pdo->prepare("INSERT INTO notas_ava_coc (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+             VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+            $sql_3->bindValue('codigo',$code_aluno);
+            $sql_3->bindValue('bimestre',$bimestre);
+            $sql_3->bindValue('disciplina',$disciplina);
+            $sql_3->bindValue('nota',$nota2);
+            $sql_3->bindValue('id_atividade',$id);
+            $sql_3->bindValue('data',$date);
+            $sql_3->execute();
+            
+            $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+            mysqli_query($conexao, $sql_4);
+        //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+         
+         
+        }else{
+          ?>
+          <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+          <?php
+      }
+        }
+      }
+        // teste
+        if($nota3!=''){
+          $verifica=$pdo->query("SELECT terceira from valor_ativ where categoria=".$_GET['selec']." limit 1");
+          $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+    
+        if($nota3>$verifica[0]['terceira']){
+        ?>
+        <script>
+          alert('Esta nota acima de <?=$verifica[0]['terceira']?>, entre em contato com o seu coordenador!');
+          alert('Atenção:Para o ensino fundamental inicial está liberada a 4º para inserir como 3ª');
+        </script>  
+        <?php
+         
+        }else
+        {
+          $sql_verifica =$pdo->query("SELECT * FROM notas_ava_teste WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+          $result_verifica = $sql_verifica->fetchAll();
+          $result_verifica= count($result_verifica);
+          if($result_verifica==0){
+            $sql_3 =$pdo->prepare("INSERT INTO notas_ava_teste (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+             VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+            $sql_3->bindValue('codigo',$code_aluno);
+            $sql_3->bindValue('bimestre',$bimestre);
+            $sql_3->bindValue('disciplina',$disciplina);
+            $sql_3->bindValue('nota',$nota3);
+            $sql_3->bindValue('id_atividade',$id);
+            $sql_3->bindValue('data',$date);
+            $sql_3->execute();
+            
+            $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+            mysqli_query($conexao, $sql_4);
+        //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+         
+        
+        }else{
+          ?>
+          <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+          <?php
+      }
+        }
+      }
+        // prova
+        if($nota4!=''){
+          $verifica=$pdo->query("SELECT quarta from valor_ativ where categoria=".$_GET['selec']." limit 1");
+          $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+    
+        if($nota4>$verifica[0]['quarta']){
+        ?>
+        <script>
+          alert('Esta nota acima de <?=$verifica[0]['quarta']?>, entre em contato com o seu coordenador!');
+          alert('Atenção:Para o ensino fundamental inicial está liberada a 4º para inserir como 3ª');
+        </script>  
+        <?php
+         }else
+        {
+          $sql_verifica =$pdo->query("SELECT * FROM notas_ava_prova WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+          $result_verifica = $sql_verifica->fetchAll();
+          $result_verifica= count($result_verifica);
+          if($result_verifica==0){
+            $sql_3 =$pdo->prepare("INSERT INTO notas_ava_prova (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+             VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+            $sql_3->bindValue('codigo',$code_aluno);
+            $sql_3->bindValue('bimestre',$bimestre);
+            $sql_3->bindValue('disciplina',$disciplina);
+            $sql_3->bindValue('nota',$nota4);
+            $sql_3->bindValue('id_atividade',$id);
+            $sql_3->bindValue('data',$date);
+            $sql_3->execute();
+            
+            $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+            mysqli_query($conexao, $sql_4);
+        //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));    
+        
+        }else{
+          ?>
+          <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+          <?php
+      }
+        }
+        
+      } 
+      echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
+      
+      //  echo "<script>alert('$nota,$nota2,$nota3,$nota4')</script>";
+      
       break;
       case '3':
         # code...
-        if(($nota>2 && $_GET['selec']!="1")){
+    if($nota!=''){
+      $verifica=$pdo->query("SELECT primeira from valor_ativ where categoria=".$_GET['selec']." limit 1");
+      $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+
+    if($nota>$verifica[0]['primeira']){
           ?>
           <script>
-            alert('Nota Maxima 2.0 para este trabalho');
-          </script>
+            alert('Esta nota acima de <?=$verifica[0]['primeira']?>, entre em contato com o seu coordenador!');
+            
+          </script>  
           <?php
-          echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
-      }else{
-                $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'";
-                $result_verifica = mysqli_query($conexao, $sql_verifica);
-                    if(mysqli_num_rows($result_verifica)==0){
-                    $sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', '$id','$date')";
-                     mysqli_query($conexao, $sql_3);
-                            $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades estão sendo divulgadas','tarefas')";
-                            mysqli_query($conexao, $sql_4);
-              //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
-       
-                        echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id&r';</script>";
-                        }//if mysqli
-                        else{
-                            ?>
-                            <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
-                            <?php
-                        }///else mysqli
-        }
+     
+    }else
+    {
+      $sql_verifica =$pdo->query("SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+      $result_verifica = $sql_verifica->fetchAll();
+      $result_verifica= count($result_verifica);
+      if($result_verifica==0){
+        $sql_3 =$pdo->prepare("INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+         VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+        $sql_3->bindValue('codigo',$code_aluno);
+        $sql_3->bindValue('bimestre',$bimestre);
+        $sql_3->bindValue('disciplina',$disciplina);
+        $sql_3->bindValue('nota',$nota);
+        $sql_3->bindValue('id_atividade',$id);
+        $sql_3->bindValue('data',$date);
+        $sql_3->execute();
+        
+        $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+        mysqli_query($conexao, $sql_4);
+    //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+     
+    
+    }else{
+      ?>
+      <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+      <?php
+  }
+    }
+  }
+// trabalho
+if($nota2!=''){
+  $verifica=$pdo->query("SELECT segunda from valor_ativ where categoria=".$_GET['selec']." limit 1");
+  $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+
+if($nota2>$verifica[0]['segunda']){
+      ?>
+      <script>
+        alert('Esta nota acima de <?=$verifica[0]['segunda']?>, entre em contato com o seu coordenador!');
+        
+      </script>  
+      <?php
+    }else
+    {
+      $sql_verifica =$pdo->query("SELECT * FROM notas_ava_coc WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+      $result_verifica = $sql_verifica->fetchAll();
+      $result_verifica= count($result_verifica);
+      if($result_verifica==0){
+        $sql_3 =$pdo->prepare("INSERT INTO notas_ava_coc (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+         VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+        $sql_3->bindValue('codigo',$code_aluno);
+        $sql_3->bindValue('bimestre',$bimestre);
+        $sql_3->bindValue('disciplina',$disciplina);
+        $sql_3->bindValue('nota',$nota2);
+        $sql_3->bindValue('id_atividade',$id);
+        $sql_3->bindValue('data',$date);
+        $sql_3->execute();
+        
+        $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+        mysqli_query($conexao, $sql_4);
+    //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+     
+     
+    }else{
+      ?>
+      <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+      <?php
+  }
+    }
+  }
+    // teste
+    if($nota3!=''){
+      $verifica=$pdo->query("SELECT terceira from valor_ativ where categoria=".$_GET['selec']." limit 1");
+      $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+
+    if($nota3>$verifica[0]['terceira']){
+    ?>
+    <script>
+      alert('Esta nota acima de <?=$verifica[0]['terceira']?>, entre em contato com o seu coordenador!');
+      alert('Atenção:Para o ensino fundamental inicial está liberada a 4º para inserir como 3ª');
+    </script>  
+    <?php
+    }else
+    {
+      $sql_verifica =$pdo->query("SELECT * FROM notas_ava_teste WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+      $result_verifica = $sql_verifica->fetchAll();
+      $result_verifica= count($result_verifica);
+      if($result_verifica==0){
+        $sql_3 =$pdo->prepare("INSERT INTO notas_ava_teste (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+         VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+        $sql_3->bindValue('codigo',$code_aluno);
+        $sql_3->bindValue('bimestre',$bimestre);
+        $sql_3->bindValue('disciplina',$disciplina);
+        $sql_3->bindValue('nota',$nota3);
+        $sql_3->bindValue('id_atividade',$id);
+        $sql_3->bindValue('data',$date);
+        $sql_3->execute();
+        
+        $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+        mysqli_query($conexao, $sql_4);
+    //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+     
+    
+    }else{
+      ?>
+      <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+      <?php
+  }
+    }
+  }
+    // prova
+    if($nota4!=''){
+      $verifica=$pdo->query("SELECT quarta from valor_ativ where categoria=".$_GET['selec']." limit 1");
+      $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+
+    if($nota4>$verifica[0]['quarta']){
+    ?>
+    <script>
+      alert('Esta nota acima de <?=$verifica[0]['quarta']?>, entre em contato com o seu coordenador!');
+      alert('Atenção:Para o ensino fundamental inicial está liberada a 4º para inserir como 3ª');
+    </script>  
+    <?php
+     }else
+    {
+      $sql_verifica =$pdo->query("SELECT * FROM notas_ava_prova WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+      $result_verifica = $sql_verifica->fetchAll();
+      $result_verifica= count($result_verifica);
+      if($result_verifica==0){
+        $sql_3 =$pdo->prepare("INSERT INTO notas_ava_prova (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+         VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+        $sql_3->bindValue('codigo',$code_aluno);
+        $sql_3->bindValue('bimestre',$bimestre);
+        $sql_3->bindValue('disciplina',$disciplina);
+        $sql_3->bindValue('nota',$nota4);
+        $sql_3->bindValue('id_atividade',$id);
+        $sql_3->bindValue('data',$date);
+        $sql_3->execute();
+        
+        $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+        mysqli_query($conexao, $sql_4);
+    //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));    
+    
+    }else{
+      ?>
+      <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+      <?php
+  }
+    }
+    
+  } 
+  echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
+        # code...
+    
+        
+        
+        
         break;
         case '4':
           # code...
-          if(($nota>2 && $_GET['selec']!="1")){
-            ?>
-            <script>
-              alert('Nota Maxima 2.0 para este trabalho');
-            </script>
-            <?php
-            echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
-        }else{
-                  $sql_verifica = "SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'";
-                  $result_verifica = mysqli_query($conexao, $sql_verifica);
-                      if(mysqli_num_rows($result_verifica)==0){
-                      $sql_3 = "INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo) VALUES ('$code_aluno', '$bimestre', '$disciplina', '$nota', '$id','$date')";
-                       mysqli_query($conexao, $sql_3);
-                              $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das atividades estão sendo divulgadas','tarefas')";
-                              mysqli_query($conexao, $sql_4);
-                //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
-         
-                          echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id&r';</script>";
-                          }//if mysqli
-                          else{
-                              ?>
-                              <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
-                              <?php
-                          }///else mysqli
-          }
+    if($nota!=''){
+      $verifica=$pdo->query("SELECT primeira from valor_ativ where categoria=".$_GET['selec']." limit 1");
+      $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+
+    if($nota>$verifica[0]['primeira']){
+          ?>
+          <script>
+            alert('Esta nota acima de <?=$verifica[0]['primeira']?>, entre em contato com o seu coordenador!');
+            
+          </script>  
+          <?php
+     
+    }else
+    {
+      $sql_verifica =$pdo->query("SELECT * FROM notas_atividades WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+      $result_verifica = $sql_verifica->fetchAll();
+      $result_verifica= count($result_verifica);
+      if($result_verifica==0){
+        $sql_3 =$pdo->prepare("INSERT INTO notas_atividades (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+         VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+        $sql_3->bindValue('codigo',$code_aluno);
+        $sql_3->bindValue('bimestre',$bimestre);
+        $sql_3->bindValue('disciplina',$disciplina);
+        $sql_3->bindValue('nota',$nota);
+        $sql_3->bindValue('id_atividade',$id);
+        $sql_3->bindValue('data',$date);
+        $sql_3->execute();
+        
+        $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+        mysqli_query($conexao, $sql_4);
+    //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+     
+    
+    }else{
+      ?>
+      <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+      <?php
+  }
+    }
+  }
+// trabalho
+if($nota2!=''){
+  $verifica=$pdo->query("SELECT segunda from valor_ativ where categoria=".$_GET['selec']." limit 1");
+  $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+
+if($nota2>$verifica[0]['segunda']){
+      ?>
+      <script>
+        alert('Esta nota acima de <?=$verifica[0]['segunda']?>, entre em contato com o seu coordenador!');
+        
+      </script>  
+      <?php
+    }else
+    {
+      $sql_verifica =$pdo->query("SELECT * FROM notas_ava_coc WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+      $result_verifica = $sql_verifica->fetchAll();
+      $result_verifica= count($result_verifica);
+      if($result_verifica==0){
+        $sql_3 =$pdo->prepare("INSERT INTO notas_ava_coc (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+         VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+        $sql_3->bindValue('codigo',$code_aluno);
+        $sql_3->bindValue('bimestre',$bimestre);
+        $sql_3->bindValue('disciplina',$disciplina);
+        $sql_3->bindValue('nota',$nota2);
+        $sql_3->bindValue('id_atividade',$id);
+        $sql_3->bindValue('data',$date);
+        $sql_3->execute();
+        
+        $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+        mysqli_query($conexao, $sql_4);
+    //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+     
+     
+    }else{
+      ?>
+      <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+      <?php
+  }
+    }
+  }
+    // teste
+    if($nota3!=''){
+      $verifica=$pdo->query("SELECT terceira from valor_ativ where categoria=".$_GET['selec']." limit 1");
+      $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+
+    if($nota3>$verifica[0]['terceira']){
+    ?>
+    <script>
+      alert('Esta nota acima de <?=$verifica[0]['terceira']?>, entre em contato com o seu coordenador!');
+      alert('Atenção:Para o ensino fundamental inicial está liberada a 4º para inserir como 3ª');
+    </script>  
+    <?php
+    }else
+    {
+      $sql_verifica =$pdo->query("SELECT * FROM notas_ava_teste WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+      $result_verifica = $sql_verifica->fetchAll();
+      $result_verifica= count($result_verifica);
+      if($result_verifica==0){
+        $sql_3 =$pdo->prepare("INSERT INTO notas_ava_teste (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+         VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+        $sql_3->bindValue('codigo',$code_aluno);
+        $sql_3->bindValue('bimestre',$bimestre);
+        $sql_3->bindValue('disciplina',$disciplina);
+        $sql_3->bindValue('nota',$nota3);
+        $sql_3->bindValue('id_atividade',$id);
+        $sql_3->bindValue('data',$date);
+        $sql_3->execute();
+        
+        $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+        mysqli_query($conexao, $sql_4);
+    //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));
+     
+    
+    }else{
+      ?>
+      <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+      <?php
+  }
+    }
+  }
+    // prova
+    if($nota4!=''){
+      $verifica=$pdo->query("SELECT quarta from valor_ativ where categoria=".$_GET['selec']." limit 1");
+      $verifica=$verifica->fetchAll(PDO::FETCH_ASSOC);
+
+    if($nota4>$verifica[0]['quarta']){
+    ?>
+    <script>
+      alert('Esta nota acima de <?=$verifica[0]['quarta']?>, entre em contato com o seu coordenador!');
+      alert('Atenção:Para o ensino fundamental inicial está liberada a 4º para inserir como 3ª');
+    </script>  
+    <?php
+     }else
+    {
+      $sql_verifica =$pdo->query("SELECT * FROM notas_ava_prova WHERE code = '$code_aluno' AND bimestre = '$bimestre' and id_disciplina='$disciplina' and ano_letivo='$date'");
+      $result_verifica = $sql_verifica->fetchAll();
+      $result_verifica= count($result_verifica);
+      if($result_verifica==0){
+        $sql_3 =$pdo->prepare("INSERT INTO notas_ava_prova (code, bimestre, id_disciplina, nota, id_atividade,ano_letivo)
+         VALUES (:codigo, :bimestre,:disciplina,:nota,:id_atividade,:data)");
+        $sql_3->bindValue('codigo',$code_aluno);
+        $sql_3->bindValue('bimestre',$bimestre);
+        $sql_3->bindValue('disciplina',$disciplina);
+        $sql_3->bindValue('nota',$nota4);
+        $sql_3->bindValue('id_atividade',$id);
+        $sql_3->bindValue('data',$date);
+        $sql_3->execute();
+        
+        $sql_4 = "INSERT INTO mural_aluno (date, status, id_cursos,matricula, titulo,origem) VALUES ('$date', 'Ativo', '$curso','$code_aluno', 'As notas das 3º AT estão sendo divulgadas','provas')";
+        mysqli_query($conexao, $sql_4);
+    //  (move_uploaded_file($_FILES['prova']['tmp_name'], "../trabalhos_alunos/".$prova));    
+    
+    }else{
+      ?>
+      <script>alert('a nota do aluno ja foi inserida, atualize a pagina!!')</script>
+      <?php
+  }
+    }
+    
+  } 
+  echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
+          # code...
+      
+          
+          
+          
           break;
   
+ 
 }
-if($bimestre!=1){
 
-}///if do bimestre 
-else{
-  ///else de veirifacação de vlor de nota
-}//else de fim de bimestre
+
+echo "<script language='javascript'>window.location='correcao_atividades.php?pg=atividade_bimestral&selec=$selec&id=$id';</script>";
 
 }///primeiro if
 ?> 
@@ -313,6 +788,23 @@ else{
               $("#nota").css('background', 'write');
               $('#nota').attr("disabled", false);
               $('#nota').focus();
+
+              $("#nota2").mask("9.9");
+              
+              $("#nota2").css('background', 'write');
+              $('#nota2').attr("disabled", false);
+              
+
+              $("#nota3").mask("9.9");
+              
+              $("#nota3").css('background', 'write');
+              $('#nota3').attr("disabled", false);
+             
+              $("#nota4").mask("9.9");
+              
+              $("#nota4").css('background', 'write');
+              $('#nota4').attr("disabled", false);
+             
             });
           })(jQuery);
         </script>
@@ -321,3 +813,41 @@ else{
 <body>
 </body>
 </html>
+
+
+<script type="text/javascript">
+    $(document).ready(function(event){     
+            var u_id=<?=$id?>;
+            var u_selec=<?=$selec?>;
+            var u_disci=<?=$disciplina?>;
+            // window.alert(u_id);
+            $.ajax({
+            url:"ajax/listar_atividades.php",
+            method: 'GET',
+            data: {id:u_id,botao:u_selec,disciplina:u_disci},
+            datatype:'json',
+            success:function(result){
+                $('#listar').html(result)
+            },
+              })        
+    })
+
+</script>
+<script type="text/javascript">
+    $('#carrega').click(function(event){
+        event.preventDefault();     
+            var u_id=<?=$id?>;
+            var u_selec=<?=$selec?>;
+            var u_disci=<?=$disciplina?>;
+            // window.alert(u_id);
+            $.ajax({
+            url:"ajax/listar_atividades.php",
+            method: 'GET',
+            data: {id:u_id,botao:u_selec,disciplina:u_disci},
+            datatype:'html',
+            success:function(result){
+                $('#listar').html(result)
+            },
+              })        
+  })
+</script>

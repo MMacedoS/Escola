@@ -8,7 +8,7 @@
     
     <title>Historico Professor</title>
     
-<link rel="shortcut icon" href="../image/logo.png">
+<link rel="shortcut icon" href="../image/logo_ist.gif">
     <?php require_once("../control/conexao.php"); ?>
 </head>
 <body>

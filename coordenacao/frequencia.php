@@ -19,7 +19,7 @@ $pagina.='<head>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/distribuicao.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="shortcut icon" href="../image/logo.png">
+    <link rel="shortcut icon" href="../image/logo_ist.gif">
     <title>Distribuição de Notas</title>';
      
     

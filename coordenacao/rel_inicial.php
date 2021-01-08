@@ -1,7 +1,7 @@
 
 <?php
     include('pdf/mpdf.php');
-    $painel_atual = "professor"; 
+    $painel_atual = "Coordenacao"; 
     require_once "../config.php";
     $id=$_GET['id'];
     $ano=Date('Y');
@@ -17,11 +17,51 @@
     .at{
         font-size: 10px;
     }
-</style>';
-$pagina.='<link rel="shortcut icon" href="../image/logo.png">';
-    $pagina.="<body>";
-    $pagina.='<h3 align="center">Distribuição Notas de:'.$nomed.$nomec.'</h3>';  
     
+    #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ddd;
+      }
+      
+      
+      
+      #customers tr:nth-child(even){background-color: #f2f2f2;}
+      
+      #customers tr:hover {background-color: #ddd;}
+      
+      #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+      }
+      table, th, td {
+        border: 1px solid black;
+      }
+</style>';
+// $pagina.='<link rel="shortcut icon" href="../image/logo.png">';
+//     $pagina.="<body>";
+//     $pagina.='<h3 align="center">Distribuição Notas de:'.$nomed.$nomec.'</h3>';  
+$pagina.='<table id="customers" width="100%">
+<tr>
+   
+    <th width="33%" colspan="3"  style="font-size: 18;" align="center"><strong>Instituto Social de Tucano</strong></th>
+   
+</tr>
+<tr>
+    <td width="50%" colspan="3" align="center">Distribuição de Notas</td>
+   
+</tr>
+<tr>
+    <td width="50%">Turma:<strong> '.$nomec.'</strong></td>
+    <td width="25%" align="center">Disciplina: '.$nomed.'</td>
+    <td width="25%" style="text-align: right;">Ano: '.$ano.'</td>
+</tr>
+</table>
+';
     $pagina.='<table class="table-responsive table"  border="1" cellpadding="5" cellspacing="4" bgcolor="#FFF4EA">';
     $pagina.="<tr>";
     $pagina.='<td rowspan="2" class="nome" bgcolor="#efefef"><strong>Alunos</strong></td>';
