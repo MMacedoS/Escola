@@ -3,6 +3,7 @@ require_once  '../../Control/conexao.php';
     $selec=@$_GET['botao'];
     $id=@$_GET['id'];
     $disciplina=@$_GET['disciplina'];
+    $ano=$_GET['ano'];
     $pagina='';
     $numero=0;
     
@@ -17,7 +18,7 @@ require_once  '../../Control/conexao.php';
         $curso = $res_1['id_curso'];
         $professor = $res_1['professor'];
         $bimestre = $res_1['bimestre'];
-        $ano=Date("Y");
+        ;
     $sql_2=$pdo->query("SELECT * FROM estudantes e INNER JOIN cursos_estudantes ce on e.id_estudantes=ce.id_estudantes WHERE ce.id_cursos = '$curso' and ce.ano_letivo='$ano' and e.status='Ativo' order by e.nome asc");  
     $sql_2=$sql_2->fetchAll(PDO::FETCH_ASSOC);
 
@@ -172,12 +173,13 @@ require_once  '../../Control/conexao.php';
         var nota=$('#nota').val();
         var nota2=$('#nota2').val();
         var nota3=$('#nota3').val();
-        var nota4=$('#nota4').val();
+        var nota4=$('#nota4').val();        
+        var ano=<?=$ano?>;
         // window.alert(code_aluno);
         $.ajax({
             url:"ajax/inserir_atividades.php",
             method: 'GET',
-            data: {bimestre:bimestre,disciplina:disciplina,code_aluno:code_aluno,id:id,selec:selec,nota:nota,nota2:nota2,nota3:nota3,nota4:nota4},
+            data: {bimestre:bimestre,ano:ano,disciplina:disciplina,code_aluno:code_aluno,id:id,selec:selec,nota:nota,nota2:nota2,nota3:nota3,nota4:nota4},
             datatype:'json',
             success:function(result){
                $('#carrega').click();

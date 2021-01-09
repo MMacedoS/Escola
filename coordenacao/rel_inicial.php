@@ -4,7 +4,7 @@
     $painel_atual = "Coordenacao"; 
     require_once "../config.php";
     $id=$_GET['id'];
-    $ano=Date('Y');
+    $ano=$_GET['ano'];
     $curso=$_GET['curso'];
     $nomed=$_GET['nomed'];
     $nomec=$_GET['nomec'];

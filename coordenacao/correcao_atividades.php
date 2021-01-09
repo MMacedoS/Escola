@@ -46,6 +46,7 @@
 if(isset($_GET['id'])){
   $id=$_GET['id'];
   $selec=$_GET['selec'];
+  $ano_letivo=$_GET['ano'];
 
 }
 else{
@@ -110,11 +111,12 @@ function setFocus() {
             var u_id=<?=$id?>;
             var u_selec=<?=$selec?>;
             var u_disci=<?=$disciplina?>;
+            var u_ano=<?=$ano_letivo?>;
             // window.alert(u_id);
             $.ajax({
             url:"ajax/listar_atividades.php",
             method: 'GET',
-            data: {id:u_id,botao:u_selec,disciplina:u_disci},
+            data: {id:u_id,botao:u_selec,ano:u_ano,disciplina:u_disci},
             datatype:'json',
             success:function(result){
                 $('#listar').html(result)
@@ -128,12 +130,13 @@ function setFocus() {
         event.preventDefault();     
             var u_id=<?=$id?>;
             var u_selec=<?=$selec?>;
-            var u_disci=<?=$disciplina?>;
+            var u_disci=<?=$disciplina?>;            
+            var u_ano=<?=$ano_letivo?>;
             // window.alert(u_id);
             $.ajax({
             url:"ajax/listar_atividades.php",
             method: 'GET',
-            data: {id:u_id,botao:u_selec,disciplina:u_disci},
+            data: {id:u_id,botao:u_selec,ano:u_ano,disciplina:u_disci},
             datatype:'html',
             success:function(result){
                 $('#listar').html(result)

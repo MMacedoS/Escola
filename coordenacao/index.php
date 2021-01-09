@@ -41,7 +41,7 @@
     $q_t=$sql_1->fetchAll();
     echo count($q_t);
     //  echo mysqli_num_rows(mysqli_query($conexao, "SELECT * FROM cursos WHERE id_categoria ='$selec'")); ?></li>
-    <li><strong>Você ministra aula para
+    <li><strong>Categoria com
     
     <?php
       

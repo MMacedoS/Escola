@@ -52,6 +52,11 @@
 <?php if($_GET['pg'] == 'atividades_bimestrais'){
     $selec=$_GET['selec'];
     $code=@$_GET['code'];
+    if(isset($_GET['ano'])){
+      $ano=$_GET['ano'];
+   }else{
+     $ano=Date('Y');  
+   }
  ?>
 <div class="row" id="row_button">
 <!-- <br /><a class="a2" rel="superbox[iframe][300x350]" href="cadastrar_atividades.php?tipo=atividade_bimestral&code=<php echo $id_professor; ?>&selec=<php echo $selec;?>">Cadastrar Atividade</a> -->
@@ -66,38 +71,33 @@ function refresh()
 </script>
 
 <form name='atividades' ... />
-<h1>Turmas:
+<h1>
+Ano Letivo: <select name="ano" id="" onchange="refresh()">
+    <option value="<?=@$_GET['ano']?>"><?=@$_GET['ano']?></option>
+    <option value="<?=$ano-1?>"><?=$ano-1?></option>
+    <option value="<?=$ano?>"><?=$ano?></option>
+  </select>
+Turmas:
  <select name="busca" id="cooler">  <!--  Função para recarregar a página com o grupo escolhido  -->
             
             <?php
             $res=0;
-           
-            if(isset($_GET['ano'])){
-               $ano=$_GET['ano'];
-            }else{
-              $ano=Date('Y');  
-            }
-
-
-
              if (isset($_GET['busca'])){
              
              ?>
               <option value="<?php echo $_GET['busca']; ?>"><?php 
                $busca=$_GET['busca'];
-               $sql_select="SELECT DISTINCT c.id_cursos,c.curso FROM atividades_bimestrais ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and c.id_cursos='$busca' and ati.ano_letivo='$ano' ORDER BY c.curso DESC";
-            $result1=mysqli_query($conexao,$sql_select);   
-            
-            
-            while($mos_rs1=mysqli_fetch_assoc($result1)){
+               $sql_select=$pdo->query("SELECT DISTINCT c.id_cursos,c.curso FROM atividades_bimestrais ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and c.id_cursos='$busca' and ati.ano_letivo='$ano' ORDER BY c.curso DESC");
+               $sql_select=$sql_select->fetchAll(PDO::FETCH_ASSOC);
+
+           foreach($sql_select as $key=>$mos_rs1){
               echo $mos_rs1['curso'];
               
               }?></option> 
             <?php
-             $sql_select="SELECT DISTINCT c.id_cursos,c.curso FROM atividades_bimestrais ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.id_categoria='$selec' and ati.ano_letivo='$ano' ORDER BY c.curso DESC";
-            $result1=mysqli_query($conexao,$sql_select);   
-            
-            while($mos_rs1=mysqli_fetch_assoc($result1)){
+            $sql_select=$pdo->query("SELECT DISTINCT c.id_cursos,c.curso FROM atividades_bimestrais ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.id_categoria='$selec' and ati.ano_letivo='$ano' ORDER BY c.curso DESC");
+            $sql_select=$sql_select->fetchAll(PDO::FETCH_ASSOC);
+            foreach($sql_select as $key=>$mos_rs1){
            
             ?>
                           
@@ -106,12 +106,12 @@ function refresh()
               </option>
               <?php }
               }else{ 
-              $sql_select="SELECT DISTINCT c.id_cursos,c.curso FROM atividades_bimestrais ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.id_categoria='$selec' and ati.ano_letivo='$ano' ORDER BY c.curso DESC";
-            $result1=mysqli_query($conexao,$sql_select);   
-            
+                $sql_select=$pdo->query("SELECT DISTINCT c.id_cursos,c.curso FROM atividades_bimestrais ati INNER JOIN cursos c ON c.id_cursos=ati.id_curso INNER JOIN categoria cat on cat.id_categoria=c.id_categoria where professor='$code' and cat.id_categoria='$selec' and ati.ano_letivo='$ano' ORDER BY c.curso DESC");
+                $sql_select=$sql_select->fetchAll(PDO::FETCH_ASSOC);
+
             ?><option value="0">Todas</option><?php
-            echo $sql_select;
-            while($mos_rs1=mysqli_fetch_assoc($result1)){
+            // echo $sql_select;
+            foreach($sql_select as $key=>$mos_rs1){
            
             ?>
                           
@@ -132,19 +132,17 @@ function refresh()
              ?>
               <option value="<?php echo $_GET['buscab']; ?>"><?php 
                $busca=$_GET['buscab'];
-               $sql_select="SELECT DISTINCT unidade FROM unidades where unidade='$busca' ORDER BY unidade DESC";
-            $result1=mysqli_query($conexao,$sql_select);   
-            
-            
-            while($mos_rs1=mysqli_fetch_assoc($result1)){
+               $sql_select=$pdo->query("SELECT DISTINCT unidade FROM unidades where unidade='$busca' ORDER BY unidade DESC");
+               $sql_select=$sql_select->fetchAll(PDO::FETCH_ASSOC);
+               
+            foreach($sql_select as $key=>$mos_rs1){
               echo $mos_rs1['unidade'];
               
               } ?> Bimestre</option> 
             <?php
-             $sql_select="SELECT DISTINCT unidade FROM unidades ORDER BY unidade DESC";
-            $result1=mysqli_query($conexao,$sql_select);   
-            
-            while($mos_rs1=mysqli_fetch_assoc($result1)){
+            $sql_select=$pdo->query("SELECT DISTINCT unidade FROM unidades ORDER BY unidade DESC");
+            $sql_select=$sql_select->fetchAll(PDO::FETCH_ASSOC);
+            foreach($sql_select as $key=>$mos_rs1){
            
             ?>
                           
@@ -153,11 +151,11 @@ function refresh()
               </option>
               <?php }
               }else{ 
-              $sql_select="SELECT DISTINCT unidade FROM unidades ORDER BY unidade DESC";
-            $result1=mysqli_query($conexao,$sql_select);   
-            
+                $sql_select=$pdo->query("SELECT DISTINCT unidade FROM unidades ORDER BY unidade DESC");
+              $sql_select=$sql_select->fetchAll(PDO::FETCH_ASSOC)
+                        
             ?><?php
-            while($mos_rs1=mysqli_fetch_assoc($result1)){
+            foreach($sql_select as $key=>$mos_rs1){
            
             ?>
                           
@@ -165,13 +163,10 @@ function refresh()
               <?php echo $mos_rs1['unidade']." bimestre"; ?>
               </option>
 <?php     
-    }} ?>
+    }
+    } ?>
 </select>
-  <select name="ano" id="" onchange="refresh()">
-    <option value="<?=@$_GET['ano']?>"><?=@$_GET['ano']?></option>
-    <option value="<?=$ano-1?>"><?=$ano-1?></option>
-    <option value="<?=$ano?>"><?=$ano?></option>
-  </select>
+ 
 <input type="hidden" name="pg" value="atividades_bimestrais">
 <!-- <input type="hidden" name="selec" value="<?php echo $selec?>"> -->
 <input type="hidden" name="code" value="<?php echo $code;?>">
