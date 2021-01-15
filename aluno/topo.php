@@ -232,37 +232,6 @@ INNER JOIN categoria cat on c.id_categoria=cat.id_categoria
 
    
 
-          <!-- if($countContrato==0){
-
-           echo '<span class="badge badge-light" style="font-size:6px; background-color:red;">CONTRATO</span></a>';  
-
-           ?>
-
-          <ul>
-
-          <li>
-
-            <a href="Contrato/contrato_cliente.php?id=<?=$id_aluno;?>&matricula=<?=$code?>">Renovar contrato</a>
-
-          </li>
-
-          </ul>
-
-       
-
-          //   echo '
-
-          //   <ul>
-
-          // <li>
-
-          //   <a href="Contrato/contrato_cliente.php?id=<?=$id_aluno;?>&matricula=<?=$code?>">Contrato</a>
-
-          // </li>
-
-          // </ul>
-
-          //   '; -->
 
 
 

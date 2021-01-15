@@ -13,6 +13,8 @@ $id="5";
 $dadosProduto=$p->buscarProdutosPorId($id);
 $dadosImagem=$p->ImagensEstrutura();
 $outdoor=$p->buscarOutdoors();
+$videos=$p->buscaVideos();
+$qtdeVideo=count($videos);
 
 
 ?>
@@ -55,6 +57,8 @@ $outdoor=$p->buscarOutdoors();
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                            href="#noticia">Notícia</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
                             href="#portfolio">Portfolio</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
@@ -131,6 +135,32 @@ $outdoor=$p->buscarOutdoors();
         </div>
     </header>
     <!-- Portfolio Section-->
+<?php if($qtdeVideo!=0){?>
+    <section class="page-section portfolio" id="noticia">
+    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Notícias</h2>
+                <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <div class="container-fluid">
+            <div class="container" id="video"> </div>
+            <center>
+            <div class="paginacao">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">   
+                <?php 
+                $num=0;
+                foreach($videos as $key=>$video){?>
+                    <li class="page-item"><a class="page-link" onclick="busca('<?=$video['name']?>');"><?=$num=$num+1?></a></li>
+                    <?php }?>                 
+                </ul>
+                </nav>
+                </div>
+                </center>
+            </div>
+    </section>
+    <?php } ?>
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
             <!-- Portfolio Section Heading-->
@@ -1289,3 +1319,20 @@ if(isset($_GET['galeria'])){
 </body>
 
 </html>
+<script>
+    $(document).ready(function(){
+        
+    $.post('video.php',function(retorna){
+        $('#video').html(retorna);
+    });
+});
+
+function busca(busca){
+    var dados={busca:busca}
+
+
+    $.post('video.php',dados,function(retorna){
+        $('#video').html(retorna);
+    });
+}
+</script>

@@ -13,8 +13,6 @@
 
 <?php require "topo.php"; ?>
 
-<div id="caixa_preta">
-</div><!-- caixa_preta -->
 <?php if (!isset($_GET['selec'])) {
   ?>
   <div class="alert alert-danger" role="alert">

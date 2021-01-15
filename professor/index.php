@@ -23,8 +23,9 @@
 
 <?php require "topo.php"; ?>
 
-<div id="caixa_preta">
-</div><!-- caixa_preta -->
+<!-- <div id="caixa_preta">
+</div>caixa_preta -->
+<br><br><br><br><br><br>
 <?php if (!isset($_GET['selec'])) {
   ?>
   <div class="alert alert-danger" role="alert">

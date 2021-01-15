@@ -81,8 +81,6 @@
 
 <?php require "topo.php"; ?>
 
-<div id="caixa_preta">
-</div><!-- caixa_preta -->
 
 <div id="box">
  <h1><strong>Histórico de chamados</strong></h1>

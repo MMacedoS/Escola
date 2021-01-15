@@ -1,6 +1,5 @@
 <?php
-
-define('HOST','localhost');
+define('SERVIDOR','localhost');
 define('BANCO','escolaist');
 define('USUARIO','root');
 define('SENHA','');
@@ -14,7 +13,7 @@ class Produto_class{
     private function MontarConexao(){
         try {
             $this->charset=array(PDO::MYSQL_ATTR_INIT_COMMAND=>'SET NAMES utf8');
-            $this->pdo=new PDO("mysql:host=".HOST.";dbname=".BANCO.";",USUARIO,SENHA,$this->charset);
+            $this->pdo=new PDO("mysql:host=".SERVIDOR.";dbname=".BANCO.";",USUARIO,SENHA,$this->charset);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
         } catch (PDOException $th) {
@@ -51,11 +50,13 @@ class Produto_class{
             }
         }
     }
-    public function EnviarOutdoor($nome,$descricao,$fotos=array())
+    public function EnviarOutdoor($nome,$link,$titulo,$descricao,$fotos=array())
     {
-        $cmd=$this->pdo->prepare('INSERT INTO album(nome_album,descricao,status) VALUES (:nome,:desc,:status)');
+        $cmd=$this->pdo->prepare('INSERT INTO album(nome_album,link,descricao,titulo,status) VALUES (:nome,:link,:desc,:titulo,:status)');
         $cmd->bindValue(':nome','Outdoor');
         $cmd->bindValue(':desc',$descricao);
+        $cmd->bindValue(':link',$link);
+        $cmd->bindValue(':titulo',$titulo);
         $cmd->bindValue(':status','1');
         $cmd->execute();
         $id_produto= $this->pdo->LastInsertId();
@@ -93,10 +94,10 @@ class Produto_class{
         }
         return $dados;
     }
-    
-    public function ImagensEstrutura()
+
+    public function buscarComunicado()
     {
-        $cmd= $this->pdo->query('SELECT nome_imagem from imagens i inner join album a on i.id_album=a.id_album where nome_album="estrutura"');
+        $cmd= $this->pdo->query("SELECT *,(SELECT nome_imagem from imagens i where i.id_album=album.id_album LIMIT 1) as foto_capa from album where titulo='Comunicado' and status='1'");
         if($cmd->rowCount()>0)
         {
             $dados=$cmd->fetchAll(PDO::FETCH_ASSOC);
@@ -105,9 +106,23 @@ class Produto_class{
         }
         return $dados;
     }
+
+
     public function buscarGaleria()
     {
         $cmd= $this->pdo->query('SELECT *,(SELECT nome_imagem from imagens i where i.id_album=album.id_album LIMIT 1) as foto_capa from album where nome_album="estrutura"');
+        if($cmd->rowCount()>0)
+        {
+            $dados=$cmd->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            $dados=array();
+        }
+        return $dados;
+    }
+
+    public function ImagensEstrutura()
+    {
+        $cmd= $this->pdo->query('SELECT nome_imagem from imagens i inner join album a on i.id_album=a.id_album where nome_album="estrutura"');
         if($cmd->rowCount()>0)
         {
             $dados=$cmd->fetchAll(PDO::FETCH_ASSOC);
@@ -144,5 +159,27 @@ class Produto_class{
             $dados=array();
         }
         return $dados;
+    }
+    
+    public function buscaVideos()
+    {
+        $cmd= $this->pdo->query("SELECT * from video where status=0");
+        if($cmd->rowCount()>0)
+        {
+            $dados=$cmd->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            $dados=array();
+        }
+        return $dados;
+    }
+    public function EnviarVideo($nome)
+    {
+        $cmd=$this->pdo->prepare('INSERT INTO video(name,status) VALUES (:nome,:status)');
+        $cmd->bindValue(':nome',$nome);
+        $cmd->bindValue(':status','0');
+        $cmd->execute();
+        $id_produto= $this->pdo->LastInsertId();
+
+       
     }
 }

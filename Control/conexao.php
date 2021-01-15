@@ -17,7 +17,7 @@ $conexao=connectar();
 //DADOS PARA CONEXÃO COM BANCO DE DADOS LOCAL
 
 $host = 'localhost';
-$usuario = 'root';
+$usuario ='root';
 $senha = '';
 $banco = 'escolaist';
 

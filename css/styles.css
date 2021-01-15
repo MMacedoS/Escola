@@ -669,6 +669,10 @@ pre code {
     margin-bottom: 2.6rem;
 } */
 
+.paginacao {
+    display: inline-flex;
+}
+
 .row {
     display: flex;
     flex-wrap: wrap;

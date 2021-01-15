@@ -3,6 +3,8 @@ require_once "../Control/conexao.php";
 @session_start();
 $pagina1="Contrato";
     $pagina2="paginas";
+    $pagina3="cadastros";
+    
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +26,16 @@ $pagina1="Contrato";
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    
+                    <!-- Bootstrap core JavaScript-->
+                    <script src="vendor/jquery/jquery.min.js"></script>
+                    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+                    <!-- Core plugin JavaScript-->
+                    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+                    <!-- Custom scripts for all pages-->
+                    <script src="js/sb-admin-2.min.js"></script>
 
 </head>
 
@@ -73,6 +85,22 @@ $pagina1="Contrato";
                         <a class="collapse-item" href="index.php?opcao=<?=$pagina1?>&tipo=contrato_cliente">Assinar Contrato</a>    
                         <a class="collapse-item" href="index.php?opcao=<?=$pagina1?>&tipo=contrato_visual">Visualizar Contrato</a>  
                          <a class="collapse-item" href="index.php?opcao=<?=$pagina2?>&tipo=enviarEmail">Enviar E-mail</a> 
+                    </div>
+                </div>
+            </li>
+             <!-- Nav Item - Pages Collapse Menu -->
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCad" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Cadastros</span>
+                </a>
+                <div id="collapseCad" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="index.php?opcao=<?=$pagina3?>&tipo=turmas">Turmas</a>    
+                        <a class="collapse-item" href="index.php?opcao=<?=$pagina3?>&tipo=professores">Professores</a>    
+                        <a class="collapse-item" href="index.php?opcao=<?=$pagina3?>&tipo=estudantes">Estudantes</a>  
+                         <a class="collapse-item" href="index.php?opcao=<?=$pagina3?>&tipo=disciplinas">Disciplinas</a> 
+                         <a class="collapse-item" href="index.php?opcao=<?=$pagina3?>&tipo=bimestres">Bimestres</a> 
                     </div>
                 </div>
             </li>
@@ -371,6 +399,16 @@ $pagina1="Contrato";
                                                 include_once($pagina2."/".$_GET['tipo'].'.php');
                                             break;
                                     }
+                                break;
+                                case $pagina3:
+                                    switch (@$_GET['tipo']){
+                                        case 'turmas':
+                                            include_once($pagina3."/".$_GET['tipo'].'.php');
+                                        break;
+                                        case 'professores':
+                                            include_once($pagina3."/".$_GET['tipo'].'.php');
+                                        break;
+                                    }
                                
                                 
                             }
@@ -382,15 +420,8 @@ $pagina1="Contrato";
 
 
 
-                    <!-- Bootstrap core JavaScript-->
-                    <script src="vendor/jquery/jquery.min.js"></script>
-                    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-                    <!-- Core plugin JavaScript-->
-                    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-                    <!-- Custom scripts for all pages-->
-                    <script src="js/sb-admin-2.min.js"></script>
 
 </body>
 

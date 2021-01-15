@@ -1,9 +1,3 @@
-* {
-    margin: auto;
-    padding: auto;
-    max-width: 980px;
-}
-
 .box-menu {
     display: flex;
 }
@@ -352,10 +346,6 @@ nav a:hover {
     }
     .dropdown-content {
         margin: 0 40px;
-    }
-    .custom-select {
-        position: initial !important;
-        margin: 0 !important;
     }
 }
 
