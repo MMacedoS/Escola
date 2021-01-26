@@ -1,22 +1,23 @@
 <?php  
- require_once "../../Control/conexao.php"; 
+
+require_once "../bd/funcoes.php";
+  $select=new funcoes; 
 
  
 if(isset($_POST['page']) || isset($_POST['texto'])){
     $param=@$_POST['page'];
     if(@$_POST['texto']){
         $param=@$_POST['texto'];
-        $select=$pdo->query("SELECT * FROM cursos where curso like '%$param%'  order by ordem asc");        
+        $turmas=$select->buscaTurma($param);    
     }else{
-        $select=$pdo->query("SELECT * FROM cursos where id_categoria='$param'  order by ordem asc");  
+        $turmas=$select->buscaCatTurma($param);    
     }
 }else{
     $param=1;
-    $select=$pdo->query("SELECT * FROM cursos where id_categoria='$param'  order by ordem asc");
+    $turmas=$select->buscaCatTurma($param);    
 }
     $pagina="";
     
-    $turmas=$select->fetchAll(PDO::FETCH_ASSOC);
     $qTurmas=count($turmas);
 
     $pagina.='<thead>

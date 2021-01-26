@@ -1,15 +1,15 @@
 <?php
 $pagina="";
-require_once "../../Control/conexao.php";
 
+require_once "../bd/funcoes.php";
+  $select=new funcoes;
+$categoria=$select->buscaQtdeTurma();
 
-$select=$pdo->query("SELECT * FROM categoria order by id_categoria asc");
-$categoria=$select->fetchAll(PDO::FETCH_ASSOC);
 $funcao="Salvar";
 
 if(isset($_POST['user_id'])){    
-    $query=$pdo->query("SELECT * FROM cursos WHERE id_cursos='".$_POST['user_id']."' limit 1");
-    $query=$query->fetchAll(PDO::FETCH_ASSOC);
+    $param=$_POST['user_id'];
+    $query=$select->buscaIdTurma($param);
 
     foreach($query as $key=>$value){
         $nome=$value['curso'];

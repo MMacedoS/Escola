@@ -30,7 +30,7 @@ include_once 'topo.php';
                                     class="fas fa-plus fa-3x"></i></div>
                         </div>
                         <a href="videos.php">
-                        <h5 class="tit text-center">Cadastro Videos Outdoor</h5>
+                        <h5 class="tit text-center">Cadastro Videos Site</h5>
                         <img class="img-fluid" src="../assets/img/portfolio/10.png" alt="" />
                         </a>
                     </div>

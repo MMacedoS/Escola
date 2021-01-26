@@ -1,8 +1,10 @@
 <?php
 $pagina="";
-require_once "../../Control/conexao.php";
-$sql_4 =$pdo->query("SELECT * FROM professores ORDER BY id_professores DESC LIMIT 1");
-$sql_4=$sql_4->fetchAll(PDO::FETCH_ASSOC);
+require_once "../bd/funcoes.php";
+  $select=new funcoes;
+  
+
+$sql_4=$select->buscaCodProfessores();
 $qdados=count($sql_4);
 
 if($qdados== 0){
@@ -14,8 +16,8 @@ if($qdados== 0){
 $funcao="Salvar";
 
 if(isset($_POST['user_id'])){    
-    $query=$pdo->query("SELECT * FROM professores WHERE id_professores='".$_POST['user_id']."' limit 1");
-    $query=$query->fetchAll(PDO::FETCH_ASSOC);
+    
+    $query=$select->buscaIdProfessores($_POST['user_id']);
 
     foreach($query as $key=>$value){
         $nome=$value['nome'];

@@ -1,8 +1,8 @@
 <?php
-define('SERVIDOR','localhost');
-define('BANCO','escolaist');
-define('USUARIO','root');
-define('SENHA','');
+define('SERVER','localhost');
+define('BD','escolaist');
+define('USER','root');
+define('PASS','');
 
 class Produto_class{
 
@@ -13,7 +13,7 @@ class Produto_class{
     private function MontarConexao(){
         try {
             $this->charset=array(PDO::MYSQL_ATTR_INIT_COMMAND=>'SET NAMES utf8');
-            $this->pdo=new PDO("mysql:host=".SERVIDOR.";dbname=".BANCO.";",USUARIO,SENHA,$this->charset);
+            $this->pdo=new PDO("mysql:host=".SERVER.";dbname=".BD.";",USER,PASS,$this->charset);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
         } catch (PDOException $th) {
@@ -164,6 +164,28 @@ class Produto_class{
     public function buscaVideos()
     {
         $cmd= $this->pdo->query("SELECT * from video where status=0");
+        if($cmd->rowCount()>0)
+        {
+            $dados=$cmd->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            $dados=array();
+        }
+        return $dados;
+    }
+    public function buscaVideoOutdoor()
+    {
+        $cmd= $this->pdo->query("SELECT * from video where status=0 and name='outdoor'");
+        if($cmd->rowCount()>0)
+        {
+            $dados=$cmd->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            $dados=array();
+        }
+        return $dados;
+    }
+    public function buscaAllVideos()
+    {
+        $cmd= $this->pdo->query("SELECT * from video");
         if($cmd->rowCount()>0)
         {
             $dados=$cmd->fetchAll(PDO::FETCH_ASSOC);

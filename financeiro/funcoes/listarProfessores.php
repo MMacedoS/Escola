@@ -1,5 +1,7 @@
 <?php  
- require_once "../../Control/conexao.php"; 
+
+require_once "../bd/funcoes.php";
+  $select=new funcoes;
 $limite=10;
 
  
@@ -7,17 +9,18 @@ if(isset($_POST['page']) || isset($_POST['texto'])){
     $param=@$_POST['page'];
     if(@$_POST['texto']){
         $param=@$_POST['texto'];
-        $select=$pdo->query("SELECT * FROM professores where nome like '%$param%'  order by nome asc");        
+       
+        $professor=$select-> buscaProfessor($param);
     }else{
-        $select=$pdo->query("SELECT * FROM professores limit $param,$limite");
+        $professor=$select-> buscaProfessores($param,$limite);
     }
 }else{
     $param=1;
-    $select=$pdo->query("SELECT * FROM professores limit $param,$limite");
+    $professor=$select-> buscaProfessores($param,$limite);
 }
     $pagina="";
     
-    $professor=$select->fetchAll(PDO::FETCH_ASSOC);
+    
     $qTurmas=count($professor);
 
     $pagina.='<thead>

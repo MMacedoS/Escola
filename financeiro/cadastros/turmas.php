@@ -1,9 +1,8 @@
 <?php
-require_once "../Control/conexao.php";
 
-
-$select=$pdo->query("SELECT * FROM categoria order by id_categoria asc");
-$categoria=$select->fetchAll(PDO::FETCH_ASSOC);
+require_once "./bd/funcoes.php";
+  $select=new funcoes;
+$categoria=$select->buscaQtdeTurma();
 
 ?>
 <div class="container">

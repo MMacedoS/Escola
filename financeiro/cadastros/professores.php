@@ -1,10 +1,7 @@
 <?php
-require_once "../Control/conexao.php";
-
-
-$select=$pdo->query("SELECT * FROM professores order by id_professores asc");
-$professor=$select->fetchAll(PDO::FETCH_ASSOC);
-$qtde=count($professor);
+require_once "./bd/funcoes.php";
+  $select=new funcoes;
+  $professor=$select->buscaQtdeProf();
 
 ?>
 <div class="container">

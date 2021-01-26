@@ -90,20 +90,23 @@ a {
 </head>
 <body>
     <section>
-    <a href="listaOutdoor.php">Ver Todos os Outdoors</a>
+    <a href="listaVideos.php">Ver Todos os Outdoors</a>
     <form action="" enctype="multipart/form-data" method="post">
         <h1>Envio de Outdoors</h1>
-        <!-- <label for="nome">Nome do Produto</label>
-        <input type="text" name="nome" id="nome">
+        <label for="nome">Local</label>
+         <select name="name" id="">
+            <option value="">Notícias</option>
+            <option value="outdoor">Outdoor</option>
+         </select>
 
-        <label for="nome">Link</label>
+        <!-- <label for="nome">Link</label>
         <input type="text" name="link" id="link">
 
         <label for="nome">Titulo</label>
         <input type="text" name="titulo" id="titulo">
 
         <label for="des">Descrição</label>
-       <textarea name="desc" id="desc"></textarea> -->
+       <textarea name="desc" id="desc"></textarea> --> 
 
         <input type="file" name="foto"  id="foto">
         <div class="row">
@@ -119,6 +122,7 @@ a {
     <?php
        
         //     
+       
          
         if(isset($_FILES['foto']))
         {
@@ -133,8 +137,15 @@ a {
 
            
                                     # code...
-                                    $nome_foto= md5($_FILES['foto']['name'].rand(1,999)).'.mp4';
-                                    $name="../anexos/videos/".$nome_foto;
+                                    if($_POST['name']==''){
+                                        $nome_foto= md5($_FILES['foto']['name'].rand(1,999)).'.mp4';
+                                        $name="../anexos/videos/".$nome_foto;
+                                    }else{
+                                        $nome_foto= $_POST['name'];
+                                        $name="../anexos/videos/".$nome_foto.'.mp4';
+                                    }
+                                   
+                                   
                                     move_uploaded_file($_FILES['foto']['tmp_name'],"$name"); // line 21
                                     
         }//if is_upload 

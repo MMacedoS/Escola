@@ -287,46 +287,5 @@ require_once  '../../Control/conexao.php';
 
 
 
-<script>
-       (function( $ ) {
-            $(function() {
-              //$("#date").mask("99/99/9999");
-              //$("#phone").mask("(99) 999-9999");
-              //$("#cep").mask("99.999-99");
-              //$("#cpf").mask("99.999.999-99");
-              
-             
-              $("#nota4").mask("9.9");
-              
-              $("#nota4").css('background', 'write');
-              $('#nota4').attr("disabled", false);
-              $('#nota4').focus();
-
-            
-              $("#nota3").mask("9.9");
-              
-              $("#nota3").css('background', 'write');
-              $('#nota3').attr("disabled", false);
-              $('#nota3').focus();
-
-              $("#nota2").mask("9.9");
-              
-              $("#nota2").css('background', 'write');
-              $('#nota2').attr("disabled", false);
-              $('#nota2').focus();
-
-              $("#nota").mask("9.9");
-              
-              $("#nota").css('background', 'write');
-              $('#nota').attr("disabled", false);
-              $('#nota').focus();
-
-              
-            //   $('#button_'+i).attr("disabled", false);
-
-            // }
-            });
-          })(jQuery);
-        </script>
 
 

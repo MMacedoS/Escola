@@ -14,6 +14,7 @@ $dadosProduto=$p->buscarProdutosPorId($id);
 $dadosImagem=$p->ImagensEstrutura();
 $outdoor=$p->buscarOutdoors();
 $videos=$p->buscaVideos();
+$videoOut=$p->buscaVideoOutdoor();
 $qtdeVideo=count($videos);
 
 
@@ -71,6 +72,29 @@ $qtdeVideo=count($videos);
             </div>
         </div>
     </nav>
+
+
+    <!-- Portfolio Section-->
+<?php if(count($videoOut)!=0){?>
+<br><br>
+    <section class="page-section portfolio">
+   
+               
+            <div class="container-fluid">
+           
+            <video style="width:100%;" controls autoplay loop>
+                <source src="anexos/videos/<?=$videoOut[0]['name'].'.mp4'?>" type="video/mp4">
+                Your browser does not support HTML video.
+                </video>
+             <!-- </div> -->
+            <center>
+            <div class="paginacao">
+           
+                </div>
+                </center>
+            </div>
+    </section>
+    <?php } ?>
     <!-- Masthead-->
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
