@@ -6,7 +6,6 @@ foreach (glob("../../Control/conexao.php") as $filename)
 }
 
 class funcoes{ 
-    
         // turmas
         public function buscaQtdeTurma()
         {      
@@ -70,6 +69,14 @@ class funcoes{
         // 
 
 
+// ++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++
+// ++++++++++++++++++++++
+// ++++++++++++++++++++++
+// ++++++++++++++++++++++
 // funções professores
 public function buscaQtdeProf()
 {      
@@ -147,15 +154,22 @@ public function buscaIdProfessores($param)
 }
 
 
-//   fim professores 
-
+//   fim professores+
+// ++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++++++++
 
     // funções estudantes
     public function buscaQtdeEst()
     {      
         $con=new Conexao;  
         $con->executaConexao();
-        $cmd=$con->pdo->query("SELECT * FROM estudantes order by id_estudantes");        
+        $cmd=$con->pdo->query("SELECT matricula,nome,cpf,email,id_estudantes,status FROM estudantes order by id_estudantes");        
         if($cmd->rowCount()>0)
         {
             $dados=$cmd->fetchAll(PDO::FETCH_ASSOC);
@@ -168,9 +182,10 @@ public function buscaIdProfessores($param)
 
     public function buscaEstudantes($param,$limite)
     {      
-        $con=new conexao;  
+       
+        $con=new Conexao();
         $con->executaConexao();
-        $cmd=$con->pdo->query("SELECT * FROM estudantes limit $param,$limite");        
+        $cmd=$con->pdo->query("SELECT matricula,nome,cpf,email,id_estudantes,status FROM estudantes limit $param,$limite");        
         if($cmd->rowCount()>0)
         {
             $dados=$cmd->fetchAll(PDO::FETCH_ASSOC);
@@ -185,7 +200,7 @@ public function buscaIdProfessores($param)
     {      
         $con=new conexao;  
         $con->executaConexao();
-        $cmd=$con->pdo->query(" SELECT * FROM estudantes where nome like '%$param%'  order by nome asc");        
+        $cmd=$con->pdo->query(" SELECT matricula,nome,cpf,email,id_estudantes,status FROM estudantes where nome like '%$param%'  order by nome asc");        
         if($cmd->rowCount()>0)
         {
             $dados=$cmd->fetchAll(PDO::FETCH_ASSOC);
@@ -215,7 +230,7 @@ public function buscaIdProfessores($param)
     {      
         $con=new conexao;  
         $con->executaConexao();
-        $cmd=$con->pdo->query(" SELECT * FROM estudantes where id_estudantes='$param'  order by nome asc");        
+        $cmd=$con->pdo->query(" SELECT matricula,nome,cpf,email,id_estudantes,status,nascimento,endereco,celular,mensalidade,vencimento,responsavel,cpfResp FROM estudantes where id_estudantes='$param'  order by nome asc");        
         if($cmd->rowCount()>0)
         {
             $dados=$cmd->fetchAll(PDO::FETCH_ASSOC);
@@ -225,9 +240,22 @@ public function buscaIdProfessores($param)
         }
         return $dados;
     }
+
+    public function desativar_ativar_est($id){
+            
+        return $dados;
+    }
    
 
 //   fim estudantes 
+//                                   ++++
+//                                   ++++
+// ++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++            ++++
+// +++++++++++++++++++++             ++++
+// +++++++++++++++++++++             ++++
+// ++++++++++++++++++++++            ++++
+// ++++++++++++++++++++++++++++++++++++++
 
 // disicplinas
 
@@ -308,6 +336,16 @@ public function buscaNomesDis($param){
 }
 
 // fim disciplinas
+
+// ++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++          +++++
+// ++++++++++++++++++++++++         +++++
+// ++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++         +++++
+// +++++++++++++++++++++++          +++++
+// ++++++++++++++++++++++++++++++++++++++
+
+
 public function buscarCategoria(){
     $con=new Conexao;
     $con->executaConexao();

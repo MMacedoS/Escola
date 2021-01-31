@@ -101,9 +101,11 @@ class Conexao{
 
     private $conexaoSQL;
     private $charset;
+      public $pdo;
 
 
     private function MontarConexao(){
+        
         try {
             $this->charset=array(PDO::MYSQL_ATTR_INIT_COMMAND=>'SET NAMES utf8');
             $this->pdo=new PDO("mysql:host=".SERVIDOR.";dbname=".BANCO.";",USUARIO,SENHA,$this->charset);
@@ -117,9 +119,13 @@ class Conexao{
             //throw $th;
         }
     }
-
+    
     public function ExecutaConexao(){
+        if(!isset($this->pdo)){
         $this->MontarConexao();
-        return $this->pdo;
-    }
+        
+            }
+            return $this->pdo;
+        }
+
 }

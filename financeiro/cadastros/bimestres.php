@@ -11,6 +11,13 @@ $bimestre=$select->buscarBimestre();
     text-align: center;
     font-size: 25px;
 }
+.mystyle:before{
+content:"Atividades Cadastradas";
+    background: green;
+    color: white;
+    margin-left: 2%;
+
+}
 </style>
 <div class="container">
     <div class="form-group">
@@ -69,6 +76,7 @@ $bimestre=$select->buscarBimestre();
                 </button>
             </div>
             <form action="" method="POST">
+            <div id="myDIV"></div>
             <div class="modal-body" id="bimestre">                               
                    
                        
@@ -79,27 +87,6 @@ $bimestre=$select->buscarBimestre();
 </div>
 <!-- editar -->
 
-<!-- editar -->
-<div class="modal fade" id="editaBimestre2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cadastro de <?=@$_GET['tipo']?></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="" method="POST">
-            <div class="modal-body" id="bimestre">                               
-                   
-                       
-                            
-            </form>
-        </div>
-    </div>
-</div>
-<!-- editar -->
 
 
 <script>
@@ -142,7 +129,10 @@ window.turmas="";
     
   });
 
-
+  function verif(){
+    var element = document.getElementById("myDIV");
+    element.classList.add("mystyle");    
+  }
 
 function busca(busca){
   var dados={

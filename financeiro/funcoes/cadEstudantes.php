@@ -26,6 +26,8 @@ if(isset($_POST['user_id'])){
         $email=$value['email'];
         $vencimento=$value['vencimento'];
         $mensalidade=$value['mensalidade'];
+        $responsavel=$value['responsavel'];
+        $cpfResp=$value['cpfResp'];
     }
    $funcao="Atualizar";
 }
@@ -83,6 +85,20 @@ $pagina.='
 <div class="col-sm-6">
     <label for="">Salário</label>
     <input type="salario" class="form-control" id="vencimento" name="vencimento" placeholder="vencimento" required value="'.@$vencimento.'">
+</div>';
+$pagina.='</div><br>';
+// asadasdasdasd
+$pagina.='
+<div class="form-row">';
+$pagina.='
+<div class="col-sm-6">
+    <label for="">Mensalidade</label>
+    <input type="email" class="form-control" id="responsavel" name="responsavel" placeholder="responsavel" required value="'.@$responsavel.'">
+</div>';
+$pagina.='
+<div class="col-sm-6">
+    <label for="">Salário</label>
+    <input type="salario" class="form-control" id="cpfResp" name="vencimento" placeholder="cpf responsavel" required value="'.@$cpfResp.'">
 </div>';
 $pagina.='</div><br>';
 // ===============

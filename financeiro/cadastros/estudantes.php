@@ -18,8 +18,8 @@
 
     <form class="form-inline">
         <h1 class="mr-4">Lista de <?=@$_GET['tipo']?></h1>
-        <input class="form-control mr-sm-2 " type="search" placeholder="pesquisar" id="pesquisa"  aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" onclick="busca2(event);">buscar</button>
+        <input class="form-control mr-sm-2 " type="search" onkeyup="busca2(event);"; placeholder="pesquisar" id="pesquisa"  aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0"  onclick="busca2(event);">buscar</button>
     </form>
 
     <div class="table-responsive">
@@ -71,15 +71,29 @@
 
 
 <script>
-  $(document).ready(function(){
-    $.post('./funcoes/listarEstudantes.php',function(retorna){
-      $('#lista').html(retorna);
-    });
-  });
+ 
 
+$(document).ready(function(){
+  $.post('./funcoes/listarEstudantes.php',function(retorna){
+      $('#lista').html(retorna);
+     });
+  });
 
   $(document).ready(function(){
     $(document).on('click','.view_data',function(){
+    var user_id=$(this).attr("id");
+      if(user_id!==''){
+        var dados={
+        user_id:user_id
+      };
+      $.post('./funcoes/cadEstudantes.php', dados,function(retorna){
+        $('#editarProfessor').html(retorna);
+        $('#professor').modal('show');
+      });
+      }
+    });
+
+    $(document).on('click','.view_ativo',function(){
     var user_id=$(this).attr("id");
       if(user_id!==''){
         var dados={
@@ -101,23 +115,22 @@
   });
 
 
-function busca(busca){
-  var dados={
-        page:busca
-      };
-  $.post('./funcoes/listarEstudantes.php',dados,function(retorna){
-        $('#lista').html(retorna);
-      });
-}
 function busca2(event){
   event.preventDefault();
+  
    var busca=$('#pesquisa').val();
+   if(busca!=''){
   var dados={
         texto:busca
       };
   $.post('./funcoes/listarEstudantes.php',dados,function(retorna){
         $('#lista').html(retorna);
       });
+    }else{
+      $.post('./funcoes/listarEstudantes.php',function(retorna){
+      $('#lista').html(retorna);
+     });
+    }
 }
 
 </script>

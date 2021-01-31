@@ -39,16 +39,23 @@ $pagina.='
     <td>'.$value['nome'].'</td>
     <td>'.$value['cpf'].'</td>
     <td class="email">'.$value['email'].'</td>
-    <td><button type="button" class="btn btn-outline-primary view_data" id="'.$value['id_estudantes'].'" >Editar</button></td>
-    <!--<td><button type="button" class="btn btn-outline-primary view_data" id="'.$value['id_estudantes'].'" >Ativo</button></td>-->
+    <td><button type="button" class="btn btn-outline-primary view_data" id="'.$value['id_estudantes'].'" >Editar</button></td>';
+    if($value['status']=="Ativo"){
+        $pagina.='
+        <td><button type="button" class="btn btn-outline-primary view_ativo" id="'.$value['id_estudantes'].'" >Ativo</button></td>';
+    }else{
+    $pagina.='
+    <td><button type="button" class="btn btn-outline-danger view_ativo" id="'.$value['id_estudantes'].'" >Inativo</button></td>';
+    }
+
+$pagina.='
 </tr>';
  }
  $pagina.='</tbody>';
 
  echo $pagina;
 
-
-  ?>
+?>
   
      
       

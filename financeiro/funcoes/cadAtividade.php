@@ -9,7 +9,10 @@ $funcao="Criar atividades";
 $pagina.='<p>Cadastro de Atividades</p>
 <div class="form-row">
 <div class="col-sm-12">
-    <select class="form-control" id="ativ">';
+    <select class="form-control" id="ativ" onchange="verif();">
+      <option value="">Selecione um bimestre</option>
+    ';
+    
      foreach($bimestre as $key =>$value){
        $pagina.='<option value="'.$value['unidade'].'">'.$value['unidade'].' Bimestre</option>';
      }
@@ -19,6 +22,7 @@ $pagina.='
 </div>';
 
 $pagina.='
+
 </div>
 </div>
    <div class="modal-footer">
@@ -34,6 +38,8 @@ echo $pagina;
 ?>
   
 <script>
+ 
+
  $('#cadAtividade').click(function(event){
     event.preventDefault();
     // $.post('./funcoes/cadAtividade.php',function(retorna){
