@@ -9,7 +9,14 @@ $p-> ExecutaConexao();
 //     // header('location: produtos.php');
 // }
 // $outdoor=$p->buscarOutdoors();
-$dados=$p->buscarComunicado();
+if(@$_GET['titulo']){
+    $dados=$p->buscarComunicado($_GET['titulo']);
+    $titulo=$_GET['titulo'];
+}else{
+    $titulo='Comunicado';
+    $dados=$p->buscarComunicado('');
+}
+
 
 
 ?>
@@ -24,7 +31,7 @@ $dados=$p->buscarComunicado();
     <meta name="author" content="">
 
     <title>Escola IST</title>
-
+    <link rel="shortcut icon" href="image/logo.png">
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -67,7 +74,7 @@ $dados=$p->buscarComunicado();
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="post-heading">
                         <h1></h1>
-                        <h2 class="subheading">Comunicado</h2>
+                        <h2 class="subheading"><?=$titulo;?></h2>
                       
 
                     </div>

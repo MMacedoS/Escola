@@ -28,7 +28,7 @@ $qtdeVideo=count($videos);
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Escola IST</title>
-       <link rel="shortcut icon" href="image/logo.png">
+       <link rel="shortcut icon" href="image/logo_ist.png">
     <!-- Favicon-->
     <!-- <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" /> -->
     <!-- Font Awesome icons (free version)-->
@@ -40,14 +40,20 @@ $qtdeVideo=count($videos);
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
     <style>
-
+    @media (min-width:48rem){
+    .video{       
+    width: 100%;
+    height: 90vh;
+    background: #403c38;
+}
+    }
     </style>
 </head>
 <body id="page-top">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
-            <img src="image/logo.png" alt="" style="float:left;margin-right:10px;width:90px;height:40px;">
+            <img src="image/logo_ist.png" alt="" style="float:left;margin-right:10px;width:90px;height:40px;">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">Escola IST </a>
             <button
                 class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
@@ -82,7 +88,7 @@ $qtdeVideo=count($videos);
                
             <div class="container-fluid">
            
-            <video style="width:100%;" controls autoplay loop>
+            <video class="video" style="width:100%;" controls autoplay loop>
                 <source src="anexos/videos/<?=$videoOut[0]['name'].'.mp4'?>" type="video/mp4">
                 Your browser does not support HTML video.
                 </video>
@@ -130,7 +136,7 @@ $qtdeVideo=count($videos);
                     <?php 
                 // foreach($dadosImagem as $value){
                     ?>
-                    <a href="<?= $outdoor[$c]['link']?>" target="_blank" rel="noopener noreferrer">
+                    <a href="<?=$outdoor[$c]['link']?>" target="_blank" rel="noopener noreferrer">
                     <img id="image" src="anexos/outdoor/<?= $outdoor[$c]['foto_capa'];?>" alt="">
                     <!-- <div class="slide_item_desc">
                     <h1>es=< $slide." ";?>opa</h1>

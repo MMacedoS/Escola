@@ -95,9 +95,15 @@ class Produto_class{
         return $dados;
     }
 
-    public function buscarComunicado()
+    public function buscarComunicado($titulo)
     {
-        $cmd= $this->pdo->query("SELECT *,(SELECT nome_imagem from imagens i where i.id_album=album.id_album LIMIT 1) as foto_capa from album where titulo='Comunicado' and status='1'");
+        if($titulo!=''){
+            $cmd= $this->pdo->query("SELECT *,(SELECT nome_imagem from imagens i where i.id_album=album.id_album LIMIT 1) as foto_capa from album where titulo='$titulo' and status='1'");
+        }
+        else{
+            $cmd= $this->pdo->query("SELECT *,(SELECT nome_imagem from imagens i where i.id_album=album.id_album LIMIT 1) as foto_capa from album where titulo='Comunicado' and status='1'");
+        }
+        
         if($cmd->rowCount()>0)
         {
             $dados=$cmd->fetchAll(PDO::FETCH_ASSOC);
@@ -106,8 +112,7 @@ class Produto_class{
         }
         return $dados;
     }
-
-
+   
     public function buscarGaleria()
     {
         $cmd= $this->pdo->query('SELECT *,(SELECT nome_imagem from imagens i where i.id_album=album.id_album LIMIT 1) as foto_capa from album where nome_album="estrutura"');
