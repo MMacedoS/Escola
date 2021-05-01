@@ -283,6 +283,7 @@
                                         </li>
                                         <li><a class="a" href="relatorios_aluno.php?selec=<?php echo @$_GET['selec'];?>">Boletim
                                                 Aluno</a></li>
+                                                <li><a class="a" href="relatorios_ata_aluno.php?selec=<?php echo @$_GET['selec'];?>">Ata Alunos</a></li>
                                         <li><a class="a"
                                                 href="notas_geral.php?pg=notas&selec=<?php echo $_GET['selec'];?>&code=<?php echo $code;?>">Distribuição
                                                 das Notas</a></li>

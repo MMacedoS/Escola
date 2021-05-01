@@ -23,7 +23,18 @@ $ano=@$_GET['ano'];
 
 if(($disciplinas=='todos') && ($situacao=='AP'))
 { 
-      $s=$pdo->prepare("SELECT e.nome as Nome,l.nome as Disciplina,c.curso as Turma,n.bimestre as Bimestre,IF(n.nota=6.9,'7.0',n.nota) as Média from notas_bimestres n INNER JOIN estudantes e on e.matricula=n.code INNER JOIN disciplinas d ON d.id_disciplinas=n.id_disciplinas INNER JOIN lista_disc l ON d.disciplina=l.id_lista INNER JOIN cursos c on c.id_cursos=d.id_cursos WHERE n.bimestre=:bimestre and c.id_cursos=:turma and n.nota>=:nota and n.ano_letivo=:ano ORDER by e.nome asc");
+      // $s=$pdo->prepare("SELECT e.nome as Nome,l.nome as Disciplina,c.curso as Turma,n.bimestre as Bimestre,IF(n.nota=6.9,'7.0',n.nota) as Média from notas_bimestres n INNER JOIN estudantes e on e.matricula=n.code INNER JOIN disciplinas d ON d.id_disciplinas=n.id_disciplinas INNER JOIN lista_disc l ON d.disciplina=l.id_lista INNER JOIN cursos c on c.id_cursos=d.id_cursos WHERE n.bimestre=:bimestre and c.id_cursos=:turma and n.nota>=:nota and n.ano_letivo=:ano ORDER by e.nome asc");
+      $s=$pdo->prepare("SELECT e.nome as Nome,
+      COALESCE((SELECT GROUP_CONCAT(lista.nome,':',n.nota,' |') FROM notas_bimestres n 
+      INNER JOIN disciplinas dis on n.id_disciplinas=dis.id_disciplinas
+       INNER JOIN lista_disc lista on lista.id_lista=dis.disciplina 
+       where n.nota>=:nota and n.code=e.matricula AND n.ano_letivo=:ano AND n.bimestre=:bimestre),'nenhuma disciplina ') as Disciplinas,
+       COALESCE((SELECT count(n.id_disciplinas) FROM notas_bimestres n 
+       INNER JOIN disciplinas dis on n.id_disciplinas=dis.id_disciplinas
+       INNER JOIN lista_disc lista on lista.id_lista=dis.disciplina 
+       where n.nota>=:nota and n.code=e.matricula AND n.ano_letivo=:ano AND n.bimestre=:bimestre),0) as 'Total aprovado' from estudantes e 
+       INNER JOIN cursos_estudantes ce on ce.id_estudantes=e.id_estudantes INNER JOIN cursos c on c.id_cursos=ce.id_cursos 
+      WHERE c.id_cursos=:turma and ce.ano_letivo=:ano ORDER by e.nome asc");
       $s->bindValue(':turma',$turma);
       $s->bindValue(':bimestre',$bimestre);
       $s->bindValue(':ano',$ano);
@@ -98,12 +109,23 @@ elseif(($disciplinas=='todos') && ($situacao=='RP_ano'))
 }
 elseif(($disciplinas=='todos') && ($situacao=='AP_ano'))
 { 
-      $s=$pdo->prepare("SELECT e.nome as Nome,l.nome as Disciplina,c.curso as Turma,IF(n.media>=27.6 and n.media<=27.9,'28.0',n.media) as NotaFinal,
-      n.situacao as Status  from resultado_final n 
-     INNER JOIN estudantes e on e.matricula=n.code INNER JOIN disciplinas d ON d.id_disciplinas=n.id_disciplinas 
-     INNER JOIN lista_disc l ON d.disciplina=l.id_lista INNER JOIN cursos c on c.id_cursos=d.id_cursos
-      WHERE c.id_cursos=:turma and n.situacao!=:res 
-      and n.ano_letivo=:ano  ORDER by e.nome asc");
+    //   $s=$pdo->prepare("SELECT e.nome as Nome,l.nome as Disciplina,c.curso as Turma,IF(n.media>=27.6 and n.media<=27.9,'28.0',n.media) as NotaFinal,
+    //   n.situacao as Status  from resultado_final n 
+    //  INNER JOIN estudantes e on e.matricula=n.code INNER JOIN disciplinas d ON d.id_disciplinas=n.id_disciplinas 
+    //  INNER JOIN lista_disc l ON d.disciplina=l.id_lista INNER JOIN cursos c on c.id_cursos=d.id_cursos
+    //   WHERE c.id_cursos=:turma and n.situacao!=:res 
+    //   and n.ano_letivo=:ano  ORDER by e.nome asc");
+    $s=$pdo->prepare("SELECT e.nome as Nome,
+      COALESCE((SELECT GROUP_CONCAT(' ',lista.nome,':',n.media) FROM resultado_final n 
+      INNER JOIN disciplinas dis on n.id_disciplinas=dis.id_disciplinas
+       INNER JOIN lista_disc lista on lista.id_lista=dis.disciplina 
+       where n.situacao!=:res and n.code=e.matricula AND n.ano_letivo=:ano),'nenhuma disciplina ') as Disciplinas,
+       COALESCE((SELECT count(n.id_resultado) FROM resultado_final n 
+      INNER JOIN disciplinas dis on n.id_disciplinas=dis.id_disciplinas
+       INNER JOIN lista_disc lista on lista.id_lista=dis.disciplina 
+       where n.situacao!=:res and n.code=e.matricula AND n.ano_letivo=:ano),'nenhuma disciplina ') as 'Total aprovado ' from estudantes e 
+       INNER JOIN cursos_estudantes ce on ce.id_estudantes=e.id_estudantes INNER JOIN cursos c on c.id_cursos=ce.id_cursos 
+      WHERE c.id_cursos=:turma and ce.ano_letivo=:ano ORDER by e.nome asc");
       $s->bindValue(':turma',$turma);
       $s->bindValue(':ano',$ano);
       $s->bindValue(':res','reprovado');
@@ -123,9 +145,9 @@ elseif(($disciplinas=='todos') && ($situacao=='AP_ano'))
   window.itens = JSON.parse('<?=json_encode($dados)?>');
  var s='<?=$situacao?>';
  if (s=="AP" || s=="AP_ano") {
-  window.titulo="Lista de Aprovados";
+  window.titulo="Relação de Aprovados ";
  }else{
-  window.titulo="Lista de Reprovados";
+  window.titulo="Relação de Reprovados";
  }
 </script>
 <body>

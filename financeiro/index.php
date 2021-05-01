@@ -105,7 +105,19 @@ $pagina1="Contrato";
                     </div>
                 </div>
             </li>
-
+   <!-- Nav Item - Pages Collapse Menu -->
+   <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTurma" aria-expanded="true" aria-controls="collapsetree">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Turmas e Alunos</span>
+                </a>
+                <div id="collapseTurma" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="index.php?opcao=<?=$pagina3?>&tipo=turmas">Turmas</a> 
+                        <a class="collapse-item" href="index.php?opcao=<?=$pagina2?>&tipo=estudantes">Estudantes</a>  
+                    </div>
+                </div>
+            </li>
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">

@@ -104,7 +104,7 @@ $pagina.=' <th  class="nome" bgcolor="#efefef"><strong>Senha</strong></th>
 
 
 
-$chamada_aluno=$pdo->prepare("SELECT l.nome as email,l.senha,p.nome from login l inner join professores p on l.code=p.code where p.status=:status order by p.nome asc");
+$chamada_aluno=$pdo->pdo->prepare("SELECT l.nome as email,l.senha,p.nome from login l inner join professores p on l.code=p.code where p.status=:status order by p.nome asc");
 $chamada_aluno->bindValue(':status',$disc);
 $chamada_aluno->execute();
 $alunos=$chamada_aluno->fetchAll();
